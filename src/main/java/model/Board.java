@@ -22,7 +22,6 @@ public class Board {
         }
     }
 
-
     public Cell[][] getGrid() {
         return grid;
     }

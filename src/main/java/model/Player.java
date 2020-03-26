@@ -7,9 +7,9 @@ import java.awt.*;
  */
 public class Player {
 
-    private String name;
+    private final String name;
+    private final Color color;
     private int card;
-    private Color color;
 
     public Player(String name, Color color) {
         this.name = name;
@@ -20,8 +20,8 @@ public class Player {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public Color getColor() {
+        return color;
     }
 
     public Integer getCard() {
@@ -30,13 +30,5 @@ public class Player {
 
     public void setCard(Integer card) {
         this.card = card;
-    }
-
-    public Color getColor() {
-        return color;
-    }
-
-    public void setColor(Color color) {
-        this.color = color;
     }
 }

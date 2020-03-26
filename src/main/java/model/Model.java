@@ -1,5 +1,7 @@
 package model;
 
+import message.client.ClientMessage;
+import utils.Observable;
 import utils.Phase;
 
 import java.util.ArrayList;
@@ -7,18 +9,18 @@ import java.util.ArrayList;
 /**
  * Model class
  */
-public class Model {
+public class Model extends Observable<ClientMessage> {
 
     private Board board;
     private ArrayList<Player> players;
     private Player currentPlayer;
-    private Phase phase;
+    private Phase currentPhase;
 
     public Model(ArrayList<Player> players) {
         this.board = new Board();
-        this.players = new ArrayList<Player>(players);
+        this.players = new ArrayList<>(players);
         this.currentPlayer = null;
-        this.phase = Phase.START;
+        this.currentPhase = Phase.START;
     }
 
     public Board getBoard() {
@@ -45,11 +47,11 @@ public class Model {
         this.currentPlayer = currentPlayer;
     }
 
-    public Phase getPhase() {
-        return phase;
+    public Phase getCurrentPhase() {
+        return currentPhase;
     }
 
-    public void setPhase(Phase phase) {
-        this.phase = phase;
+    public void setCurrentPhase(Phase currentPhase) {
+        this.currentPhase = currentPhase;
     }
 }

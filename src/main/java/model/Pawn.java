@@ -7,7 +7,7 @@ import java.awt.*;
  */
 public class Pawn {
 
-    private Color color;
+    private final Color color;
     private int coordX;
     private int coordY;
 
@@ -19,15 +19,11 @@ public class Pawn {
         return color;
     }
 
-    public void setColor(Color color) {
-        this.color = color;
-    }
-
     public int getCoordX() {
         return coordX;
     }
 
-    public void setCoordX(Integer coordX) {
+    public void setCoordX(int coordX) {
         this.coordX = coordX;
     }
 
@@ -35,7 +31,12 @@ public class Pawn {
         return coordY;
     }
 
-    public void setCoordY(Integer coordY) {
+    public void setCoordY(int coordY) {
         this.coordY = coordY;
+    }
+
+    public void setCoords(int coordX, int coordY) {
+        setCoordX(coordX);
+        setCoordY(coordY);
     }
 }
