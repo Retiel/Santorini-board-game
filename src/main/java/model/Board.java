@@ -7,13 +7,13 @@ import java.util.ArrayList;
  */
 public class Board {
 
-    private static final int size = 5;
+    private static final int SIZE = 5;
 
     private Cell[][] grid;
     private ArrayList<Pawn> pawns;
 
     public Board(){
-        grid = new Cell[size][size];
+        grid = new Cell[SIZE][SIZE];
 
         for (Cell[] row : grid){
             for (Cell cell : row){
