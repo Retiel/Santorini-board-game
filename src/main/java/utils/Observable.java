@@ -1,10 +1,13 @@
 package utils;
 
 import message.MessageInterface;
-
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Part of the full implementation of the pattern observable-observer, used for the pattern MVC
+ *
+ * */
 public class Observable<T> {
 
     private final List<Observer<T>> observers = new ArrayList<>();
