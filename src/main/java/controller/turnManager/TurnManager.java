@@ -1,4 +1,4 @@
-package controller;
+package controller.turnManager;
 
 import model.Model;
 
