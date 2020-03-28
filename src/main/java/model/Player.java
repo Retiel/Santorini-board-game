@@ -24,11 +24,11 @@ public class Player {
         return color;
     }
 
-    public Integer getCard() {
+    public int getCard() {
         return card;
     }
 
-    public void setCard(Integer card) {
+    public void setCard(int card) {
         this.card = card;
     }
 }

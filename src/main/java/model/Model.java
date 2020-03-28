@@ -11,13 +11,13 @@ import java.util.ArrayList;
  */
 public class Model extends Observable<ClientMessage> {
 
-    private Board board;
-    private ArrayList<Player> players;
+    private final Board board;
+    private final ArrayList<Player> players;
     private Player currentPlayer;
     private Phase currentPhase;
 
     public Model(ArrayList<Player> players) {
-        this.board = new Board();
+        this.board = new Board(players);
         this.players = new ArrayList<>(players);
         this.currentPlayer = null;
         this.currentPhase = Phase.START;
@@ -27,16 +27,8 @@ public class Model extends Observable<ClientMessage> {
         return board;
     }
 
-    public void setBoard(Board board) {
-        this.board = board;
-    }
-
     public ArrayList<Player> getPlayers() {
         return players;
-    }
-
-    public void setPlayers(ArrayList<Player> players) {
-        this.players = players;
     }
 
     public Player getCurrentPlayer() {

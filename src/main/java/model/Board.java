@@ -3,22 +3,44 @@ package model;
 import java.util.ArrayList;
 
 /**
- * Board class
+ * Board class.
  */
 public class Board {
 
+    /**
+     * Constant of the board's size.
+     */
     private static final int SIZE = 5;
 
+    /**
+     * Matrix of cells used to represent the grid.
+     */
     private Cell[][] grid;
+
+    /**
+     * List of players' pawns.
+     */
     private ArrayList<Pawn> pawns;
 
-    public Board(){
-        grid = new Cell[SIZE][SIZE];
+    /**
+     * Constructor for the board class.
+     * @param players list of players used to determine how many pawns the game will need.
+     */
+    public Board(ArrayList<Player> players) {
 
-        for (Cell[] row : grid){
-            for (Cell cell : row){
-                cell = new Cell();
+        //Initialize grid
+        grid = new Cell[SIZE][SIZE];
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                grid[i][j] = new Cell();
             }
+        }
+
+        //Initialize players' pawns
+        pawns = new ArrayList<>();
+        for (Player player : players) {
+            pawns.add(new Pawn(player.getColor()));
+            pawns.add(new Pawn(player.getColor()));
         }
     }
 
@@ -26,15 +48,7 @@ public class Board {
         return grid;
     }
 
-    public void setGrid(Cell[][] grid) {
-        this.grid = grid;
-    }
-
     public ArrayList<Pawn> getPawns() {
         return pawns;
-    }
-
-    public void setPawns(ArrayList<Pawn> pawns) {
-        this.pawns = pawns;
     }
 }
