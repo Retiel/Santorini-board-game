@@ -1,25 +1,42 @@
 package model;
 
-import org.junit.*;
+import org.junit.After;
 import org.junit.Assert;
+import org.junit.Before;
+import org.junit.Test;
 
 public class CellTest {
 
-    Cell cell = null;
+    Cell cell;
 
     @Before
     public void setUp() {
-        this.cell = new Cell();
+        cell = new Cell();
     }
 
     @After
     public void tearDown() {
-        this.cell = null;
+        cell = null;
     }
 
     @Test
     public void initCell() {
-        Assert.assertEquals(this.cell.getFloor(),0);
-        Assert.assertFalse(this.cell.isRoof());
+
+        Assert.assertEquals(cell.getFloor(),0);
+        Assert.assertFalse(cell.isRoof());
+    }
+
+    @Test
+    public void setFloor_correctInput_correctOutput() {
+
+        cell.setFloor(1);
+        Assert.assertEquals(cell.getFloor(), 1);
+    }
+
+    @Test
+    public void setRoof_correctInput_correctOutput() {
+
+        cell.setRoof(true);
+        Assert.assertTrue(cell.isRoof());
     }
 }
