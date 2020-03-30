@@ -1,4 +1,4 @@
-package utils;
+package utils.patterns.observable;
 
 import message.MessageInterface;
 import java.util.ArrayList;

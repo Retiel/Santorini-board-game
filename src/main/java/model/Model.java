@@ -1,7 +1,7 @@
 package model;
 
 import message.client.ClientMessage;
-import utils.Observable;
+import utils.patterns.observable.Observable;
 import utils.Phase;
 
 import java.util.ArrayList;

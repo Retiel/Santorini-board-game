@@ -1,4 +1,4 @@
-package utils;
+package utils.patterns.observable;
 
 /**
  * Interface of the pattern observable-observer, used for the pattern MVC

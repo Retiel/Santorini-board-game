@@ -1,7 +1,7 @@
 package message;
 
 /**
- * Interface used to implement the visitor pattern for visitable messages sent to client
+ * Custom interface used to implement the visitor pattern for visitable messages sent to client
  */
 public interface VisitableClientMessageInterface {
 

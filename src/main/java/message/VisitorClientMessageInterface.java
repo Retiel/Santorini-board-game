@@ -3,7 +3,7 @@ package message;
 import message.client.ClientMessage;
 
 /**
- * Interface used to implement the visitor pattern for messages sent to client
+ * Custom interface used to implement the visitor pattern for messages sent to client
  */
 public interface VisitorClientMessageInterface {
 

@@ -3,8 +3,8 @@ package view;
 import message.VisitorClientMessageInterface;
 import message.client.ClientMessage;
 import message.server.ServerMessage;
-import utils.Observable;
-import utils.Observer;
+import utils.patterns.observable.Observable;
+import utils.patterns.observable.Observer;
 
 /**
  * Implementation of the visitor pattern
