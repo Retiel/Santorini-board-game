@@ -26,7 +26,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFw6YUJLN4k6yw="
 							},
 							"subViews": [
@@ -36,7 +36,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YUJLd4mbWw="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YUJLN4k6yw="
 									},
 									"subViews": [
@@ -117,7 +117,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YUJLd4mbWw="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YUJLN4k6yw="
 									},
 									"subViews": [
@@ -127,7 +127,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YUJLt4s4uo="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDQ4yopEmjuI="
 											},
 											"font": "Arial;13;0",
@@ -144,7 +144,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YUJLt4s4uo="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDQ6MfJHxJ0c="
 											},
 											"font": "Arial;13;0",
@@ -161,7 +161,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YUJLt4s4uo="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDQ6vKpKAWf4="
 											},
 											"font": "Arial;13;0",
@@ -185,7 +185,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YUJLd4mbWw="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YUJLN4k6yw="
 									},
 									"subViews": [
@@ -195,7 +195,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YUJLt4tItw="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDUJisa3DLGA="
 											},
 											"font": "Arial;13;0",
@@ -212,7 +212,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YUJLt4tItw="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDUKC9K4qgFE="
 											},
 											"font": "Arial;13;0",
@@ -236,7 +236,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YUJLd4mbWw="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YUJLN4k6yw="
 									},
 									"visible": false,
@@ -252,7 +252,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YUJLd4mbWw="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YUJLN4k6yw="
 									},
 									"visible": false,
@@ -291,7 +291,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFw6YUkHd5PjEg="
 							},
 							"subViews": [
@@ -301,7 +301,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YUkHd5R8AY="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YUkHd5PjEg="
 									},
 									"subViews": [
@@ -382,7 +382,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YUkHd5R8AY="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YUkHd5PjEg="
 									},
 									"subViews": [
@@ -392,7 +392,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YUkHt5XDk4="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDQgYS4vWghs="
 											},
 											"font": "Arial;13;0",
@@ -409,7 +409,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YUkHt5XDk4="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDS7nEp/zV00="
 											},
 											"font": "Arial;13;0",
@@ -433,7 +433,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YUkHd5R8AY="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YUkHd5PjEg="
 									},
 									"subViews": [
@@ -443,7 +443,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YUkHt5Y1kM="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDUK0FK6pfrM="
 											},
 											"font": "Arial;13;0",
@@ -460,7 +460,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YUkHt5Y1kM="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDULXy68oqOg="
 											},
 											"font": "Arial;13;0",
@@ -484,7 +484,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YUkHd5R8AY="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YUkHd5PjEg="
 									},
 									"visible": false,
@@ -500,7 +500,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YUkHd5R8AY="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YUkHd5PjEg="
 									},
 									"visible": false,
@@ -539,7 +539,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFw6YVRw957RMM="
 							},
 							"subViews": [
@@ -549,7 +549,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YVRxN59+3c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YVRw957RMM="
 									},
 									"subViews": [
@@ -630,7 +630,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YVRxN59+3c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YVRw957RMM="
 									},
 									"subViews": [
@@ -640,7 +640,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YVRxN6Dxt4="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDQ/F85PmEC0="
 											},
 											"font": "Arial;13;0",
@@ -657,7 +657,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YVRxN6Dxt4="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDQ/0TZRabcs="
 											},
 											"font": "Arial;13;0",
@@ -681,7 +681,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YVRxN59+3c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YVRw957RMM="
 									},
 									"subViews": [
@@ -691,7 +691,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YVRxN6EuhA="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDT+GKqo46yU="
 											},
 											"font": "Arial;13;0",
@@ -708,7 +708,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YVRxN6EuhA="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDT+klaqqOpk="
 											},
 											"font": "Arial;13;0",
@@ -732,7 +732,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YVRxN59+3c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YVRw957RMM="
 									},
 									"visible": false,
@@ -748,7 +748,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YVRxN59+3c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YVRw957RMM="
 									},
 									"visible": false,
@@ -787,7 +787,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFw6YZAs9+UzIQ="
 							},
 							"subViews": [
@@ -797,7 +797,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YZAtN+Y6s4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YZAs9+UzIQ="
 									},
 									"visible": false,
@@ -818,7 +818,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YZAtN+Y6s4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YZAs9+UzIQ="
 									},
 									"visible": null,
@@ -839,7 +839,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YZAtN+Y6s4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YZAs9+UzIQ="
 									},
 									"visible": false,
@@ -860,7 +860,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YZAtN+Y6s4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YZAs9+VumY="
 									},
 									"visible": false,
@@ -881,7 +881,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YZAtN+Y6s4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YZAs9+VumY="
 									},
 									"visible": false,
@@ -902,7 +902,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YZAtN+Y6s4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YZAs9+VumY="
 									},
 									"font": "Arial;13;0",
@@ -924,7 +924,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YZAtN+Y6s4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YZAs9+WEfE="
 									},
 									"visible": false,
@@ -944,7 +944,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YZAtN+Y6s4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YZAs9+WEfE="
 									},
 									"visible": false,
@@ -964,7 +964,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YZAtN+Y6s4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YZAs9+WEfE="
 									},
 									"font": "Arial;13;0",
@@ -985,7 +985,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YZAtN+Y6s4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YZAs9+VumY="
 									},
 									"visible": false,
@@ -1001,7 +1001,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YZAtN+Y6s4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YZAs9+WEfE="
 									},
 									"visible": false,
@@ -1061,7 +1061,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFw6YbPceHEikQ="
 							},
 							"subViews": [
@@ -1071,7 +1071,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YbPcuHG65E="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YbPceHEikQ="
 									},
 									"subViews": [
@@ -1152,7 +1152,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YbPcuHG65E="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YbPceHEikQ="
 									},
 									"subViews": [
@@ -1162,7 +1162,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YbPcuHMbHE="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDSVIEZmxdtw="
 											},
 											"font": "Arial;13;0",
@@ -1179,7 +1179,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YbPcuHMbHE="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDS2j5p6+RXo="
 											},
 											"font": "Arial;13;0",
@@ -1203,7 +1203,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YbPcuHG65E="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YbPceHEikQ="
 									},
 									"subViews": [
@@ -1213,7 +1213,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YbPcuHNcUQ="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDUM186+/dBg="
 											},
 											"font": "Arial;13;0",
@@ -1230,7 +1230,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YbPcuHNcUQ="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDUNX5rAmzZs="
 											},
 											"font": "Arial;13;0",
@@ -1254,7 +1254,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YbPcuHG65E="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YbPceHEikQ="
 									},
 									"visible": false,
@@ -1270,7 +1270,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YbPcuHG65E="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YbPceHEikQ="
 									},
 									"visible": false,
@@ -1309,7 +1309,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFw6YcWo+JY6JY="
 							},
 							"subViews": [
@@ -1319,7 +1319,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YcWo+Jcm5I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YcWo+JY6JY="
 									},
 									"visible": false,
@@ -1340,7 +1340,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YcWo+Jcm5I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YcWo+JY6JY="
 									},
 									"visible": null,
@@ -1361,7 +1361,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YcWo+Jcm5I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YcWo+JY6JY="
 									},
 									"visible": false,
@@ -1382,7 +1382,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YcWo+Jcm5I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YcWo+JZQB4="
 									},
 									"visible": false,
@@ -1403,7 +1403,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YcWo+Jcm5I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YcWo+JZQB4="
 									},
 									"visible": false,
@@ -1424,7 +1424,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YcWo+Jcm5I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YcWo+JZQB4="
 									},
 									"font": "Arial;13;0",
@@ -1446,7 +1446,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YcWo+Jcm5I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YcWo+JaKVI="
 									},
 									"visible": false,
@@ -1466,7 +1466,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YcWo+Jcm5I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YcWo+JaKVI="
 									},
 									"visible": false,
@@ -1486,7 +1486,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YcWo+Jcm5I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YcWo+JaKVI="
 									},
 									"font": "Arial;13;0",
@@ -1507,7 +1507,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YcWo+Jcm5I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YcWo+JZQB4="
 									},
 									"visible": false,
@@ -1523,7 +1523,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YcWo+Jcm5I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YcWo+JaKVI="
 									},
 									"visible": false,
@@ -1583,7 +1583,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFw6YwkeG8K7gY="
 							},
 							"subViews": [
@@ -1593,7 +1593,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YwkeW8MeFw="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YwkeG8K7gY="
 									},
 									"subViews": [
@@ -1674,7 +1674,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YwkeW8MeFw="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YwkeG8K7gY="
 									},
 									"subViews": [
@@ -1684,7 +1684,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YwkeW8S/Cg="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDIO+1X8WPgs="
 											},
 											"font": "Arial;13;0",
@@ -1701,7 +1701,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YwkeW8S/Cg="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDIOXTn6nvQ4="
 											},
 											"font": "Arial;13;0",
@@ -1725,7 +1725,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YwkeW8MeFw="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YwkeG8K7gY="
 									},
 									"subViews": [
@@ -1735,7 +1735,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YwkeW8TomY="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDUN3qbClTuM="
 											},
 											"font": "Arial;13;0",
@@ -1752,7 +1752,7 @@
 											"_parent": {
 												"$ref": "AAAAAAFw6YwkeW8TomY="
 											},
-											"model": {
+											"it.polimi.ingsw.PSP33.model": {
 												"$ref": "AAAAAAFxDUOaWrEM2M0="
 											},
 											"font": "Arial;13;0",
@@ -1776,7 +1776,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YwkeW8MeFw="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YwkeG8K7gY="
 									},
 									"visible": false,
@@ -1792,7 +1792,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFw6YwkeW8MeFw="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFw6YwkeG8K7gY="
 									},
 									"visible": false,
@@ -1831,7 +1831,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxC9uptzsJrY4="
 							},
 							"subViews": [
@@ -1841,7 +1841,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9uptzsNs9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9uptzsJrY4="
 									},
 									"visible": false,
@@ -1862,7 +1862,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9uptzsNs9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9uptzsJrY4="
 									},
 									"visible": null,
@@ -1883,7 +1883,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9uptzsNs9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9uptzsJrY4="
 									},
 									"visible": false,
@@ -1904,7 +1904,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9uptzsNs9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9uptzsKWUQ="
 									},
 									"visible": false,
@@ -1925,7 +1925,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9uptzsNs9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9uptzsKWUQ="
 									},
 									"visible": false,
@@ -1946,7 +1946,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9uptzsNs9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9uptzsKWUQ="
 									},
 									"font": "Arial;13;0",
@@ -1968,7 +1968,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9uptzsNs9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9uptzsLnqM="
 									},
 									"visible": false,
@@ -1988,7 +1988,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9uptzsNs9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9uptzsLnqM="
 									},
 									"visible": false,
@@ -2008,7 +2008,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9uptzsNs9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9uptzsLnqM="
 									},
 									"font": "Arial;13;0",
@@ -2029,7 +2029,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9uptzsNs9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9uptzsKWUQ="
 									},
 									"visible": false,
@@ -2045,7 +2045,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9uptzsNs9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9uptzsLnqM="
 									},
 									"visible": false,
@@ -2105,7 +2105,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxC9xzUj6dOyE="
 							},
 							"subViews": [
@@ -2115,7 +2115,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9xzUj6hUp8="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9xzUj6dOyE="
 									},
 									"visible": false,
@@ -2136,7 +2136,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9xzUj6hUp8="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9xzUj6dOyE="
 									},
 									"visible": null,
@@ -2157,7 +2157,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9xzUj6hUp8="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9xzUj6dOyE="
 									},
 									"visible": false,
@@ -2178,7 +2178,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9xzUj6hUp8="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9xzUj6eisQ="
 									},
 									"visible": false,
@@ -2201,7 +2201,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9xzUj6hUp8="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9xzUj6eisQ="
 									},
 									"visible": false,
@@ -2222,7 +2222,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9xzUj6hUp8="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9xzUj6eisQ="
 									},
 									"font": "Arial;13;0",
@@ -2244,7 +2244,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9xzUj6hUp8="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9xzUj6fOW4="
 									},
 									"visible": false,
@@ -2266,7 +2266,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9xzUj6hUp8="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9xzUj6fOW4="
 									},
 									"visible": false,
@@ -2286,7 +2286,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9xzUj6hUp8="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9xzUj6fOW4="
 									},
 									"font": "Arial;13;0",
@@ -2307,7 +2307,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9xzUj6hUp8="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9xzUj6eisQ="
 									},
 									"visible": false,
@@ -2323,7 +2323,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC9xzUj6hUp8="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC9xzUj6fOW4="
 									},
 									"visible": false,
@@ -2407,7 +2407,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxC/opMGshtv4="
 							},
 							"subViews": [
@@ -2417,7 +2417,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/opMGsjtz4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/opMGshtv4="
 									},
 									"subViews": [
@@ -2498,7 +2498,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/opMGsjtz4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/opMGshtv4="
 									},
 									"font": "Arial;13;0",
@@ -2513,7 +2513,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/opMGsjtz4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/opMGshtv4="
 									},
 									"font": "Arial;13;0",
@@ -2528,7 +2528,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/opMGsjtz4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/opMGshtv4="
 									},
 									"visible": false,
@@ -2544,7 +2544,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/opMGsjtz4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/opMGshtv4="
 									},
 									"visible": false,
@@ -2583,7 +2583,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxC/sNCWwfV48="
 							},
 							"subViews": [
@@ -2593,7 +2593,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/sNCmwhIqo="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/sNCWwfV48="
 									},
 									"subViews": [
@@ -2674,7 +2674,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/sNCmwhIqo="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/sNCWwfV48="
 									},
 									"font": "Arial;13;0",
@@ -2689,7 +2689,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/sNCmwhIqo="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/sNCWwfV48="
 									},
 									"font": "Arial;13;0",
@@ -2704,7 +2704,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/sNCmwhIqo="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/sNCWwfV48="
 									},
 									"visible": false,
@@ -2720,7 +2720,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/sNCmwhIqo="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/sNCWwfV48="
 									},
 									"visible": false,
@@ -2759,7 +2759,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxC/tBt2yFJkA="
 							},
 							"subViews": [
@@ -2769,7 +2769,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/tBuGyHi9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/tBt2yFJkA="
 									},
 									"subViews": [
@@ -2850,7 +2850,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/tBuGyHi9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/tBt2yFJkA="
 									},
 									"font": "Arial;13;0",
@@ -2865,7 +2865,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/tBuGyHi9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/tBt2yFJkA="
 									},
 									"font": "Arial;13;0",
@@ -2880,7 +2880,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/tBuGyHi9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/tBt2yFJkA="
 									},
 									"visible": false,
@@ -2896,7 +2896,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/tBuGyHi9c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/tBt2yFJkA="
 									},
 									"visible": false,
@@ -2935,7 +2935,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxC/uQQW3eaMs="
 							},
 							"subViews": [
@@ -2945,7 +2945,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/uQQm3gqYQ="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/uQQW3eaMs="
 									},
 									"subViews": [
@@ -3026,7 +3026,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/uQQm3gqYQ="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/uQQW3eaMs="
 									},
 									"font": "Arial;13;0",
@@ -3041,7 +3041,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/uQQm3gqYQ="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/uQQW3eaMs="
 									},
 									"font": "Arial;13;0",
@@ -3056,7 +3056,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/uQQm3gqYQ="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/uQQW3eaMs="
 									},
 									"visible": false,
@@ -3072,7 +3072,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/uQQm3gqYQ="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/uQQW3eaMs="
 									},
 									"visible": false,
@@ -3111,7 +3111,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxC/wyzHBpFuw="
 							},
 							"subViews": [
@@ -3121,7 +3121,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/wyzHBr07c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/wyzHBpFuw="
 									},
 									"visible": false,
@@ -3142,7 +3142,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/wyzHBr07c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/wyzHBpFuw="
 									},
 									"visible": null,
@@ -3163,7 +3163,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/wyzHBr07c="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/wyzHBpFuw="
 									},
 									"visible": false,
@@ -3204,7 +3204,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxC/xOTnDjDX8="
 							},
 							"subViews": [
@@ -3214,7 +3214,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/xOTnDlEys="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/xOTnDjDX8="
 									},
 									"visible": false,
@@ -3235,7 +3235,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/xOTnDlEys="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/xOTnDjDX8="
 									},
 									"visible": null,
@@ -3256,7 +3256,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/xOTnDlEys="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/xOTnDjDX8="
 									},
 									"visible": false,
@@ -3297,7 +3297,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxC/xY8nEh92k="
 							},
 							"subViews": [
@@ -3307,7 +3307,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/xY8nEjp2M="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/xY8nEh92k="
 									},
 									"visible": false,
@@ -3328,7 +3328,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/xY8nEjp2M="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/xY8nEh92k="
 									},
 									"visible": null,
@@ -3349,7 +3349,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxC/xY8nEjp2M="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxC/xY8nEh92k="
 									},
 									"visible": false,
@@ -3403,7 +3403,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxDAjBIngQosA="
 							},
 							"subViews": [
@@ -3413,7 +3413,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAjBI3gS7a4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAjBIngQosA="
 									},
 									"subViews": [
@@ -3496,7 +3496,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAjBI3gS7a4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAjBIngQosA="
 									},
 									"visible": false,
@@ -3512,7 +3512,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAjBI3gS7a4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAjBIngQosA="
 									},
 									"visible": false,
@@ -3528,7 +3528,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAjBI3gS7a4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAjBIngQosA="
 									},
 									"visible": false,
@@ -3544,7 +3544,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAjBI3gS7a4="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAjBIngQosA="
 									},
 									"visible": false,
@@ -3586,7 +3586,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxDAkzeHkvOU8="
 							},
 							"subViews": [
@@ -3596,7 +3596,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAkzeXkxFpk="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAkzeHkvOU8="
 									},
 									"visible": false,
@@ -3617,7 +3617,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAkzeXkxFpk="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAkzeHkvOU8="
 									},
 									"visible": null,
@@ -3638,7 +3638,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAkzeXkxFpk="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAkzeHkvOU8="
 									},
 									"visible": false,
@@ -3679,7 +3679,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxDAk+bXltkHk="
 							},
 							"subViews": [
@@ -3689,7 +3689,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAk+bXlvDPE="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAk+bXltkHk="
 									},
 									"visible": false,
@@ -3710,7 +3710,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAk+bXlvDPE="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAk+bXltkHk="
 									},
 									"visible": null,
@@ -3731,7 +3731,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAk+bXlvDPE="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAk+bXltkHk="
 									},
 									"visible": false,
@@ -3772,7 +3772,7 @@
 							"_parent": {
 								"$ref": "AAAAAAFF+qBtyKM79qY="
 							},
-							"model": {
+							"it.polimi.ingsw.PSP33.model": {
 								"$ref": "AAAAAAFxDAlPLXmrybU="
 							},
 							"subViews": [
@@ -3782,7 +3782,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAlPLXmt87I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAlPLXmrybU="
 									},
 									"visible": false,
@@ -3803,7 +3803,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAlPLXmt87I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAlPLXmrybU="
 									},
 									"visible": null,
@@ -3824,7 +3824,7 @@
 									"_parent": {
 										"$ref": "AAAAAAFxDAlPLXmt87I="
 									},
-									"model": {
+									"it.polimi.ingsw.PSP33.model": {
 										"$ref": "AAAAAAFxDAlPLXmrybU="
 									},
 									"visible": false,
@@ -3870,7 +3870,7 @@
 							"top": 72,
 							"width": 241,
 							"height": 49,
-							"text": "Solo getter e setter, le regole sono spostate tutte sul controller"
+							"text": "Solo getter e setter, le regole sono spostate tutte sul it.polimi.ingsw.PSP33.controller"
 						}
 					]
 				},
