@@ -27,4 +27,5 @@ public interface GodsDefinitions extends
         HephaestusDefinition,
         HermesDefinition,
         MinotaurDefinition,
-        PrometheusDefinition{}
+        PrometheusDefinition
+{}

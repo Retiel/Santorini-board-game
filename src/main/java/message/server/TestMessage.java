@@ -1,6 +1,6 @@
 package message.server;
 
-import message.VisitorServerMessageInterface;
+import utils.patterns.visitor.Visitor;
 
 /**
  * Basic implementation of the text from client to server
@@ -8,7 +8,7 @@ import message.VisitorServerMessageInterface;
 public class TestMessage extends ServerMessage {
 
     @Override
-    public void accept(VisitorServerMessageInterface visitorServerMessageInterface) {
+    public void accept(Visitor visitorServerMessageInterface) {
         visitorServerMessageInterface.visit(this);
     }
 }

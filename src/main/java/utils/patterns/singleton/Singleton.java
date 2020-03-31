@@ -1,7 +1,7 @@
 package utils.patterns.singleton;
 
 /**
- * Class extendable to all classes to make their istance unique
+ * Class sample to make istance unique
  *
  * */
 public class Singleton{
