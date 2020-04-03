@@ -31,16 +31,9 @@ public class PawnTest {
     @Test
     public void setCoordinates_correctInput_correctOutput() {
 
-        pawn.setCoords(0,0);
+        pawn.setCoordX(0);
+        pawn.setCoordY(0);
         Assert.assertEquals(pawn.getCoordX(), 0);
         Assert.assertEquals(pawn.getCoordY(), 0);
-    }
-
-
-    //FIXME: Exception for Pawn.setCoords()
-    @Test (expected = ArrayIndexOutOfBoundsException.class)
-    public void setCoordinates_wrongInput_throwsArrayIndexOutOfBoundsException() {
-
-        pawn.setCoords(-1,6);
     }
 }

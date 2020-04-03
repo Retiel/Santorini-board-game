@@ -1,27 +1,43 @@
 package it.polimi.ingsw.PSP33.controller.rules;
 
 import it.polimi.ingsw.PSP33.model.Cell;
+import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
 /**
  * TurnAction class, a list of the basic action a player can do in his turn.
- * @author Marco Mascheroni
+ *
  */
 public class TurnAction {
+
+    private Model model;
 
     /**
      * TurnAction Constructor
      */
-    private TurnAction() {}
+    public TurnAction(Model model) {
+        this.model = model;
+    }
+
+
+    /**
+     * The method initialize the game
+     *
+     */
+    public static void SetUpGame() {
+
+    }
 
     /**
      * The method a player can use to move a worker on the Board
      * @param x the new x coordinate
      * @param y the new y coordinate
-     * @param p the pawn the player wants to move
      */
-    public static void MovePawn(int x, int y, Pawn p){
-        p.setCoords(x,y);
+    public static void MovePawn(int x, int y, Pawn p) {
+
+        //FIXME: needs modification
+        p.setCoordX(x);
+        p.setCoordY(y);
     }
 
     /**

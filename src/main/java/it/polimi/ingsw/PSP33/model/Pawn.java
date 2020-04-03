@@ -34,14 +34,4 @@ public class Pawn {
     public void setCoordY(int coordY) {
         this.coordY = coordY;
     }
-
-    public void setCoords(int coordX, int coordY) throws ArrayIndexOutOfBoundsException{
-
-        if ((coordX < 5 && coordX >= 0) && (coordY < 5 && coordY >= 0)) {
-            setCoordX(coordX);
-            setCoordY(coordY);
-        }else {
-            throw new ArrayIndexOutOfBoundsException();
-        }
-    }
 }

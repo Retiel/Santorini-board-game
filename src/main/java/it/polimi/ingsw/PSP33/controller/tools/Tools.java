@@ -18,6 +18,8 @@ public class Tools {
      */
     public void getAdjacentCells(Pawn pawn){
         //todo: cycle through the cells in the board and save the position of the adjacent cells
+
+
     }
 
     /**
@@ -26,6 +28,8 @@ public class Tools {
      */
     public void getMovableCells(Pawn pawn){
         //todo: cycle through the adjacent cells and se where the pawn can be moved or not
+
+
     }
 
     /**
@@ -34,6 +38,8 @@ public class Tools {
      */
     public void getBuildableCells(Pawn pawn){
         //todo: cycle through the adjacent cells and se where the block or dome can be built or not
+
+
     }
 
     /*other possibilities:
