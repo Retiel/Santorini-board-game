@@ -1,14 +1,9 @@
 package it.polimi.ingsw.PSP33.model;
 
-<<<<<<< HEAD:src/main/java/model/Model.java
-import message.client.ClientMessage;
-import utils.patterns.observable.Observable;
-import utils.Phase;
-=======
 import it.polimi.ingsw.PSP33.message.client.ClientMessage;
+import it.polimi.ingsw.PSP33.message.client.ClientTestMessage;
 import it.polimi.ingsw.PSP33.utils.Observable;
 import it.polimi.ingsw.PSP33.utils.Phase;
->>>>>>> temp:src/main/java/it/polimi/ingsw/PSP33/model/Model.java
 
 import java.util.ArrayList;
 
@@ -43,6 +38,7 @@ public class Model extends Observable<ClientMessage> {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+        notifyObservers(new ClientTestMessage());
     }
 
     public Phase getCurrentPhase() {
