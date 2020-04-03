@@ -20,7 +20,7 @@ public class TurnAction {
      * @param y the new y coordinate
      * @param p the pawn the player wants to move
      */
-    public void MovePawn(int x, int y, Pawn p){
+    public static void MovePawn(int x, int y, Pawn p){
         p.setCoords(x,y);
     }
 
@@ -28,7 +28,7 @@ public class TurnAction {
      * the method a player can use to Build a Block (or a Dome) on a Cell
      * @param c the Cell where the player wants to Build
      */
-    public void BuildBlock(Cell c){
+    public static void BuildBlock(Cell c){
         if(c.getFloor()==2){
             c.setFloor(c.getFloor()+1);
             c.setRoof(true);

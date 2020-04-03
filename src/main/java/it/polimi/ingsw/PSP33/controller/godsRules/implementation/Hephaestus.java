@@ -1,11 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.godsRules.implementation;
 
-import it.polimi.ingsw.PSP33.controller.godsRules.interfaces.HephaestusDefinition;
+import it.polimi.ingsw.PSP33.controller.godsRules.AbstractGod;
 
-public class Hephaestus implements HephaestusDefinition {
+public class Hephaestus extends AbstractGod{
 
-    @Override
-    public void visit(Hephaestus god) {
-        /* HERE DEFINE THE EFFECT  */
-    }
 }

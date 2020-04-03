@@ -1,11 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.godsRules.implementation;
 
-import it.polimi.ingsw.PSP33.controller.godsRules.interfaces.AtlasDefinition;
+import it.polimi.ingsw.PSP33.controller.godsRules.AbstractGod;
 
-public class Atlas implements AtlasDefinition {
+public class Atlas extends AbstractGod{
 
-    @Override
-    public void visit(Atlas atlas) {
-        /* HERE DEFINE THE EFFECT  */
-    }
 }

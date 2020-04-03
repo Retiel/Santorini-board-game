@@ -1,11 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.godsRules.implementation;
 
-import it.polimi.ingsw.PSP33.controller.godsRules.interfaces.MinotaurDefinition;
+import it.polimi.ingsw.PSP33.controller.godsRules.AbstractGod;
 
-public class Minotaur implements MinotaurDefinition {
+public class Minotaur extends AbstractGod{
 
-    @Override
-    public void visit(Minotaur god) {
-        /* HERE DEFINE THE EFFECT  */
-    }
 }

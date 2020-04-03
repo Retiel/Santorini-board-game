@@ -1,11 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.godsRules.implementation;
 
-import it.polimi.ingsw.PSP33.controller.godsRules.interfaces.HermesDefinition;
+import it.polimi.ingsw.PSP33.controller.godsRules.AbstractGod;
 
-public class Hermes implements HermesDefinition {
+public class Hermes extends AbstractGod{
 
-    @Override
-    public void visit(Hermes god) {
-        /* HERE DEFINE THE EFFECT  */
-    }
 }

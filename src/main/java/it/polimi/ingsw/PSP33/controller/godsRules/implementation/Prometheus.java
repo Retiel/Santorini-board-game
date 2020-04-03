@@ -1,11 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.godsRules.implementation;
 
-import it.polimi.ingsw.PSP33.controller.godsRules.interfaces.PrometheusDefinition;
+import it.polimi.ingsw.PSP33.controller.godsRules.AbstractGod;
 
-public class Prometheus implements PrometheusDefinition {
+public class Prometheus extends AbstractGod{
 
-    @Override
-    public void visit(Prometheus god) {
-        /* HERE DEFINE THE EFFECT  */
-    }
 }

@@ -1,11 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.godsRules.implementation;
 
-import it.polimi.ingsw.PSP33.controller.godsRules.interfaces.ApolloDefinition;
+import it.polimi.ingsw.PSP33.controller.godsRules.AbstractGod;
 
-public class Apollo implements ApolloDefinition {
+public class Apollo extends AbstractGod{
 
-    @Override
-    public void visit(Apollo apollo) {
-        /* HERE DEFINE THE EFFECT  */
-    }
 }

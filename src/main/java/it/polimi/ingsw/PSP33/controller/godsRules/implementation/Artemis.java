@@ -1,11 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.godsRules.implementation;
 
-import it.polimi.ingsw.PSP33.controller.godsRules.interfaces.ArtemisDefinition;
+import it.polimi.ingsw.PSP33.controller.godsRules.AbstractGod;
 
-public class Artemis implements ArtemisDefinition {
+public class Artemis extends AbstractGod{
 
-    @Override
-    public void visit(Artemis artemis) {
-        /* HERE DEFINE THE EFFECT  */
-    }
 }

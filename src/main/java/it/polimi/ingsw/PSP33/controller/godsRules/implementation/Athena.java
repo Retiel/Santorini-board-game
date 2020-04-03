@@ -1,11 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.godsRules.implementation;
 
-import it.polimi.ingsw.PSP33.controller.godsRules.interfaces.AthenaDefinition;
+import it.polimi.ingsw.PSP33.controller.godsRules.AbstractGod;
 
-public class Athena implements AthenaDefinition {
+public class Athena extends AbstractGod{
 
-    @Override
-    public void visit(Athena god) {
-        /* HERE DEFINE THE EFFECT  */
-    }
 }
