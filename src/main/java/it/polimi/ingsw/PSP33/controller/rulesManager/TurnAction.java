@@ -4,25 +4,25 @@ import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
+import java.awt.*;
+
 /**
  * TurnAction class, a list of the basic action a player can do in his turn.
- *
  */
 public class TurnAction {
 
-    private Model model;
+    private static Model model;
 
     /**
      * TurnAction Constructor
      */
-    public TurnAction(Model model) {
-        this.model = model;
+    public TurnAction(Model inModel) {
+        model = inModel;
     }
 
 
     /**
      * The method initialize the game
-     *
      */
     public static void SetUpGame() {
 
@@ -33,11 +33,13 @@ public class TurnAction {
      * @param x the new x coordinate
      * @param y the new y coordinate
      */
-    public static void MovePawn(int x, int y, Pawn p) {
+    public static void MovePawn(int x, int y, int number) {
 
-        //FIXME: needs modification
-        p.setCoordX(x);
-        p.setCoordY(y);
+        Color color = model.getCurrentPlayer().getColor();
+        Pawn pawn = model.getBoard().getPlayerPawn(color, number);
+
+        pawn.setCoordX(x);
+        pawn.setCoordY(y);
     }
 
     /**
@@ -51,6 +53,5 @@ public class TurnAction {
         }
         else c.setFloor(c.getFloor()+1);
     }
-
 
 }
