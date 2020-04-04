@@ -1,6 +1,10 @@
 package it.polimi.ingsw.PSP33.model;
 
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Board class.
@@ -20,13 +24,13 @@ public class Board {
     /**
      * List of players' pawns.
      */
-    private ArrayList<Pawn> pawns;
+    private List<Pawn> pawns;
 
     /**
      * Constructor for the board class.
      * @param players list of players used to determine how many pawns the game will need.
      */
-    public Board(ArrayList<Player> players) {
+    public Board(List<Player> players) {
 
         //Initialize grid
         grid = new Cell[SIZE][SIZE];
@@ -48,7 +52,16 @@ public class Board {
         return grid;
     }
 
-    public ArrayList<Pawn> getPawns() {
-        return pawns;
+    public List<Pawn> getPawns() {
+        return new ArrayList<>(pawns);
     }
+
+    public Pawn getPlayerPawn(Color color, int pawnNumber){
+        return getPawnsByColor(color).get(pawnNumber - 1);
+    }
+
+    public List<Pawn> getPawnsByColor(Color color){
+        return getPawns().stream().filter(p -> p.getColor() == color).collect(Collectors.toList());
+    }
+
 }

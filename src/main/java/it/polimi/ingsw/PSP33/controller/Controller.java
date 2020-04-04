@@ -4,7 +4,7 @@ import it.polimi.ingsw.PSP33.controller.turnManager.TurnManager;
 import it.polimi.ingsw.PSP33.message.VisitorServerMessageInterface;
 import it.polimi.ingsw.PSP33.message.server.ServerMessage;
 import it.polimi.ingsw.PSP33.model.Model;
-import it.polimi.ingsw.PSP33.utils.Observer;
+import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
 
 
 public class Controller implements Observer<ServerMessage>, VisitorServerMessageInterface {

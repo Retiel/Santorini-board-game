@@ -1,5 +1,6 @@
 package it.polimi.ingsw.PSP33.model;
 
+import it.polimi.ingsw.PSP33.model.Cell;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;

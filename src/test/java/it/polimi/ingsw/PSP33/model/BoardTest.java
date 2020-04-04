@@ -7,6 +7,7 @@ import org.junit.Test;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class BoardTest {
 
@@ -41,7 +42,7 @@ public class BoardTest {
         }
         Assert.assertEquals(numberOfCells, 25);
 
-        ArrayList<Pawn> pawns = board.getPawns();
+        List<Pawn> pawns = board.getPawns();
         Assert.assertEquals(pawns.size(), players.size() * 2);
         Assert.assertEquals(players.get(0).getColor(), pawns.get(0).getColor());
         Assert.assertEquals(players.get(0).getColor(), pawns.get(1).getColor());
@@ -67,7 +68,7 @@ public class BoardTest {
         }
         Assert.assertEquals(numberOfCells, 25);
 
-        ArrayList<Pawn> pawns = board.getPawns();
+        List<Pawn> pawns = board.getPawns();
         Assert.assertEquals(pawns.size(), players.size() * 2);
         Assert.assertEquals(players.get(0).getColor(), pawns.get(0).getColor());
         Assert.assertEquals(players.get(0).getColor(), pawns.get(1).getColor());

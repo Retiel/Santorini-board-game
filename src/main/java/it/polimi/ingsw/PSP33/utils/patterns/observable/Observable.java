@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.utils;
+package it.polimi.ingsw.PSP33.utils.patterns.observable;
 
 import it.polimi.ingsw.PSP33.message.MessageInterface;
 import java.util.ArrayList;

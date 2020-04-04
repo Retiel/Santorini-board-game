@@ -1,11 +1,11 @@
 package it.polimi.ingsw.PSP33.model;
 
+import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
 import it.polimi.ingsw.PSP33.message.client.ClientMessage;
-import it.polimi.ingsw.PSP33.message.client.ClientTestMessage;
-import it.polimi.ingsw.PSP33.utils.Observable;
 import it.polimi.ingsw.PSP33.utils.Phase;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Model class
@@ -13,11 +13,11 @@ import java.util.ArrayList;
 public class Model extends Observable<ClientMessage> {
 
     private final Board board;
-    private final ArrayList<Player> players;
+    private List<Player> players;
     private Player currentPlayer;
     private Phase currentPhase;
 
-    public Model(ArrayList<Player> players) {
+    public Model(List<Player> players) {
         this.board = new Board(players);
         this.players = new ArrayList<>(players);
         this.currentPlayer = null;
@@ -29,7 +29,7 @@ public class Model extends Observable<ClientMessage> {
     }
 
     public ArrayList<Player> getPlayers() {
-        return players;
+        return new ArrayList<>(players);
     }
 
     public Player getCurrentPlayer() {
@@ -38,7 +38,6 @@ public class Model extends Observable<ClientMessage> {
 
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
-        notifyObservers(new ClientTestMessage());
     }
 
     public Phase getCurrentPhase() {

@@ -4,7 +4,7 @@ import it.polimi.ingsw.PSP33.message.MessageInterface;
 import it.polimi.ingsw.PSP33.message.VisitableClientMessageInterface;
 
 /**
- * Abstract class for a generic it.polimi.ingsw.PSP33.message from server to client
+ * Abstract class for a generic message from server to client
  */
 public abstract class ClientMessage implements MessageInterface, VisitableClientMessageInterface {
 }
