@@ -1,11 +1,12 @@
 package it.polimi.ingsw.PSP33.controller.tools;
 
-import com.sun.tools.javac.util.Pair;
 import it.polimi.ingsw.PSP33.model.Board;
+import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
 
@@ -29,23 +30,23 @@ public class Tools {
     /**
      * get all the coordinates of the adjacent cells to the one where the pawn stands in
      * @param pawn the pawn that create the reference for the initial coordinate
-     * @param board the board of the game
+     * @param grid the bidimentional grid that represent the board
      *
      * @return List of coordinates adiacent to the pawn
      */
-    public static List<Pair<Integer,Integer>> getAdjacentCells(Pawn pawn, Board board){
+    public static List<Cell> getAdjacentCells(Pawn pawn, Cell[][] grid, int size){
 
         int ix, iy;
-        List<Pair<Integer,Integer>> coordinates = new ArrayList<>();
+        List<Cell> coordinates = new ArrayList<>();
 
-        for(ix = 0; ix < Board.getSIZE(); ix++){
-            for(iy = 0; iy < Board.getSIZE(); iy++){
+        for(ix = 0; ix < size; ix++){
+            for(iy = 0; iy < size; iy++){
 
                 int dX = abs(pawn.getCoordX() - ix);
                 int dY = abs(pawn.getCoordY() - iy);
 
                 if(AreAdiacent(dX,dY)){
-                    coordinates.add(new Pair<>(ix, iy));
+                    coordinates.add(grid[ix][iy]);
                 }
             }
         }
@@ -56,10 +57,14 @@ public class Tools {
     /**
      * get all the coordinates of the adjacent cells where the player is allowed to move his pawn
      * @param pawn the pawn which the player wants to move
+     * @param board the game board
      */
-    public static void getMovableCells(Pawn pawn){
-        //todo: cycle through the adjacent cells and se where the pawn can be moved or not
+    public static List<Cell> getMovableCells(Pawn pawn, Board board){
 
+        List<Cell> adiacent = getAdjacentCells(pawn, board.getGrid(), board.getSIZE());
+        Cell current = board.getGrid()[pawn.getCoordX()][pawn.getCoordY()];
+
+         return adiacent.stream().filter(c -> abs(c.getFloor() - current.getFloor()) < 2).collect(Collectors.toList());
     }
 
     /**

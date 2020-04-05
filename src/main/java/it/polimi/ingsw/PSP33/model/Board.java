@@ -13,7 +13,7 @@ public class Board {
     /**
      * Constant of the board's size.
      */
-    private static final int SIZE = 5;
+    private final int SIZE = 5;
 
     /**
      * Matrix of cells used to represent the grid.
@@ -52,7 +52,7 @@ public class Board {
      *
      * @return Integer value
      */
-    public static int getSIZE() {
+    public int getSIZE() {
         return SIZE;
     }
 

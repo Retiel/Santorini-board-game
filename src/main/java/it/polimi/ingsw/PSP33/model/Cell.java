@@ -15,7 +15,10 @@ public class Cell {
      */
     private boolean roof;
 
-
+    /**
+     * Reference to the pawn object that occupies the cell
+     */
+    private Pawn occupied;
 
     /**
      * Constructor of the class
@@ -23,6 +26,7 @@ public class Cell {
     public Cell() {
         this.floor = 0;
         this.roof = false;
+        this.occupied = null;
     }
 
     /**
@@ -57,5 +61,22 @@ public class Cell {
      */
     public void setRoof(boolean roof) {
         this.roof = roof;
+    }
+
+    /**
+     * Method to get the pawn that occupies the cell
+     *
+     * @return Pawn object
+     */
+    public Pawn getOccupied() {
+        return occupied;
+    }
+
+    /**
+     * Method to set the pawn that occupies the cell
+     * @param occupied pawn that occupies the object
+     */
+    public void setOccupied(Pawn occupied) {
+        this.occupied = occupied;
     }
 }

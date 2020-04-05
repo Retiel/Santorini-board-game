@@ -37,9 +37,11 @@ public class TurnAction {
 
         Color color = model.getCurrentPlayer().getColor();
         Pawn pawn = model.getBoard().getPlayerPawn(color, number);
+        Cell newCell = model.getBoard().getGrid()[x][y];
 
         pawn.setCoordX(x);
         pawn.setCoordY(y);
+        newCell.setOccupied(pawn);
     }
 
     /**
