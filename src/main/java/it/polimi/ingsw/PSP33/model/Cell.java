@@ -26,7 +26,7 @@ public class Cell {
     /**
      * Method to get number of building in the cell
      *
-     * @return Integer value
+     * @return Integer value between 0 and 3 (both included)
      */
     public int getFloor() {
         return floor;
@@ -43,7 +43,7 @@ public class Cell {
     /**
      * Method to verify if there is a roof in the building
      *
-     * @return Boolean
+     * @return Boolean value (true ='there is a roof', false = 'no roof still')
      */
     public boolean isRoof() {
         return roof;
@@ -51,7 +51,7 @@ public class Cell {
 
     /**
      * Method to set if that someone build a roof in the cell
-     * @param roof boolean value (true ='there is a roof', false = 'no roof still')
+     * @param roof Boolean value (true ='there is a roof', false = 'no roof still')
      */
     public void setRoof(boolean roof) {
         this.roof = roof;

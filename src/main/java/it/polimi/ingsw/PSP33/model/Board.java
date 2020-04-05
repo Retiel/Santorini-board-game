@@ -27,7 +27,7 @@ public class Board {
 
     /**
      * Constructor for the board class.
-     * @param players list of players used to determine how many pawns the game will need.
+     * @param players List of players class object playing th game.
      */
     public Board(List<Player> players) {
 
@@ -50,7 +50,7 @@ public class Board {
     /**
      * Method to get the defined size of the board
      *
-     * @return Integer value
+     * @return Integer value 5
      */
     public static int getSIZE() {
         return SIZE;
@@ -59,27 +59,27 @@ public class Board {
     /**
      * Method to get the grid of the board
      *
-     * @return return a bidimensional array of Cell (list of Object)
+     * @return bidimensional array of Cell class object
      */
     public Cell[][] getGrid() {
         return grid;
     }
 
     /**
-     * method to get the list of all pawn
+     * Method to get the list of all pawn
      *
-     * @return List of Pawns (list of Object)
+     * @return List of pawn class object
      */
     public List<Pawn> getPawns() {
         return new ArrayList<>(pawns);
     }
 
     /**
-     * Method to get one of the pawn of the player
+     * Method to get one specific pawn of the player
      * @param color the color that identifiy the player
      * @param pawnNumber number of the selected pawn
      *
-     * @return object Pawn
+     * @return Pawn class object
      */
     public Pawn getPlayerPawn(Color color, int pawnNumber){
         return getPawnsByColor(color).get(pawnNumber - 1);
@@ -89,7 +89,7 @@ public class Board {
      * Method to get all pawns of the player
      * @param color the color that identifiy the player
      *
-     * @return List of Pawns (list of Object)
+     * @return List of pawns class object
      */
     public List<Pawn> getPawnsByColor(Color color){
         return getPawns().stream().filter(p -> p.getColor() == color).collect(Collectors.toList());

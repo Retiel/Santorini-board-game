@@ -55,7 +55,7 @@ public class Player {
     /**
      * Method to get the card refence
      *
-     * @return God object
+     * @return God class object
      */
     public God getCard() {
         return card;
@@ -63,7 +63,7 @@ public class Player {
 
     /**
      * Method to set the card
-     * @param card god card
+     * @param card God class object
      */
     public void setCard(God card) {
         this.card = card;

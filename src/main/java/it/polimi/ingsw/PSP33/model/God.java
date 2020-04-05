@@ -30,7 +30,7 @@ public class God {
     /**
      * Method to get the name of the card
      *
-     * @return String
+     * @return String type
      */
     public String getName() {
         return name;
@@ -39,7 +39,7 @@ public class God {
     /**
      * Method to get the description of the card
      *
-     * @return String
+     * @return String type
      */
     public String getDescription() {
         return description;

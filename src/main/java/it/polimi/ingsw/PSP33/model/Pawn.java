@@ -33,7 +33,7 @@ public class Pawn {
     /**
      * Method to get the color of the pawn
      *
-     * @return color of the pawn
+     * @return color of the pawn (java.awt.Color type)
      */
     public Color getColor() {
         return color;
@@ -42,7 +42,7 @@ public class Pawn {
     /**
      * Method to get the value x of the position
      *
-     * @return Integer value
+     * @return Integer value between 0 and 4 (both included)
      */
     public int getCoordX() {
         return coordX;
@@ -50,7 +50,7 @@ public class Pawn {
 
     /**
      * Method to set the x value of the position
-     * @param coordX Integer value
+     * @param coordX Integer value between 0 and 4 (both included)
      */
     public void setCoordX(int coordX) {
         this.coordX = coordX;
@@ -59,7 +59,7 @@ public class Pawn {
     /**
      * Method to get the value y of the position
      *
-     * @return Integer value
+     * @return Integer value between 0 and 4 (both included)
      */
     public int getCoordY() {
         return coordY;
@@ -67,7 +67,7 @@ public class Pawn {
 
     /**
      * Method to set the y value of the position
-     * @param coordY Integer value
+     * @param coordY Integer value between 0 and 4 (both included)
      */
     public void setCoordY(int coordY) {
         this.coordY = coordY;
