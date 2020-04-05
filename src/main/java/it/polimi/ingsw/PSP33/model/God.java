@@ -7,18 +7,40 @@ package it.polimi.ingsw.PSP33.model;
  * */
 public class God {
 
-    private String godName;
+    /**
+     * Name of the god
+     */
+    private String name;
+
+    /**
+     * Description of the effect of the god
+     */
     private String description;
 
-    public God(String godName, String description) {
-        this.godName = godName;
+    /**
+     * Constructor of the class
+     * @param name name of teh god
+     * @param description descriptio of the effect of the card
+     */
+    public God(String name, String description) {
+        this.name = name;
         this.description = description;
     }
 
+    /**
+     * Method to get the name of the card
+     *
+     * @return String
+     */
     public String getName() {
-        return godName;
+        return name;
     }
 
+    /**
+     * Method to get the description of the card
+     *
+     * @return String
+     */
     public String getDescription() {
         return description;
     }

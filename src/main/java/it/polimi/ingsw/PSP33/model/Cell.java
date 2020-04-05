@@ -15,8 +15,6 @@ public class Cell {
      */
     private boolean roof;
 
-
-
     /**
      * Constructor of the class
      */
