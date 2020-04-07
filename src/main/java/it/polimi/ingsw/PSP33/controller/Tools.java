@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.controller.tools;
+package it.polimi.ingsw.PSP33.controller;
 
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
@@ -21,18 +21,18 @@ public class Tools {
     /**
      * Method to get the instace of the class
      *
-     * @return instance
+     * @return instance fo the class
      * */
     public static Tools getInstance() {
         return instance;
     }
 
     /**
-     * get all the coordinates of the adjacent cells to the one where the pawn stands in
+     * Method to get all the adjacent cells to the one where the pawn stands in
      * @param pawn the pawn that create the reference for the initial coordinate
      * @param grid the bidimentional grid that represent the board
      *
-     * @return List of coordinates adiacent to the pawn
+     * @return List of Cell class object
      */
     public static List<Cell> getAdjacentCells(Pawn pawn, Cell[][] grid, int size){
 
@@ -42,10 +42,7 @@ public class Tools {
         for(ix = 0; ix < size; ix++){
             for(iy = 0; iy < size; iy++){
 
-                int dX = abs(pawn.getCoordX() - ix);
-                int dY = abs(pawn.getCoordY() - iy);
-
-                if(AreAdiacent(dX,dY)){
+                if(AreAdiacent(pawn.getCoordX(), pawn.getCoordY(), ix, iy)){
                     coordinates.add(grid[ix][iy]);
                 }
             }
@@ -55,35 +52,52 @@ public class Tools {
     }
 
     /**
-     * get all the coordinates of the adjacent cells where the player is allowed to move his pawn
+     * Method to get all the adjacent cells where the player is allowed to move his pawn
      * @param pawn the pawn which the player wants to move
      * @param board the game board
+     *
+     * @return List of Cell class object
      */
     public static List<Cell> getMovableCells(Pawn pawn, Board board){
 
         List<Cell> adiacent = getAdjacentCells(pawn, board.getGrid(), board.getSIZE());
         Cell current = board.getGrid()[pawn.getCoordX()][pawn.getCoordY()];
 
-         return adiacent.stream().filter(c -> abs(c.getFloor() - current.getFloor()) < 2).collect(Collectors.toList());
+         return adiacent.stream().filter(c -> (current.getFloor() - c.getFloor()) < 2 && c.getOccupied() == null && !c.isRoof()).collect(Collectors.toList());
     }
 
     /**
      * get all the coordinates of the adjacent cells where the player is allowed to build  his Block or Domes
      * @param pawn the pawn that player wants to use for the building action
+     * @param board the game board
+     *
+     * @return List of Cell class object
      */
-    public static void getBuildableCells(Pawn pawn){
-        //todo: cycle through the adjacent cells and se where the block or dome can be built or not
+    public static List<Cell> getBuildableCells(Pawn pawn, Board board){
 
+        List<Cell> adiacent = getAdjacentCells(pawn, board.getGrid(), board.getSIZE());
+
+        return adiacent.stream().filter(c -> c.getOccupied() == null && !c.isRoof()).collect(Collectors.toList());
     }
 
     /**
      * the method verify if the coordinates are adiacent
-     * @param deltaX absolute difference of x between the coordinate
-     * @param deltaY absolute difference of y between the coordinate
+     * @param x1 coordinate x of the first
+     * @param y1 coordinate y of the first
+     * @param x2 coordinate x of the second
+     * @param y2 coordinate y of the second
+     *
+     * @return Boolean
      */
-    public static boolean AreAdiacent(int deltaX, int deltaY){
+    public static boolean AreAdiacent(int x1, int y1, int x2, int y2){
+
+        int deltaX = abs(x1 - x2);
+        int deltaY =  abs(y1 - y2);
+
         return deltaX <= 1 && deltaY <= 1;
     }
+
+
 
     /*other possibilities:
         -   check the change in level after the move to check a possilbe victory

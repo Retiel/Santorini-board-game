@@ -29,6 +29,7 @@ public class TurnManager implements TurnManagerInterface {
             model.setCurrentPlayer(model.getPlayers().get(0));
         }else {
             model.setCurrentPlayer(model.getPlayers().get(model.getPlayers().indexOf(model.getCurrentPlayer()) + 1));
+
         }
     }
 

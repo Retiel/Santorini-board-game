@@ -72,4 +72,10 @@ public class Pawn {
     public void setCoordY(int coordY) {
         this.coordY = coordY;
     }
+
+
+    public void setCoords(int coordX, int coordY){
+        setCoordX(coordX);
+        setCoordY(coordY);
+    }
 }

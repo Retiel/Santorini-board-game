@@ -1,10 +1,8 @@
-package it.polimi.ingsw.PSP33.controller.rulesManager;
+package it.polimi.ingsw.PSP33.controller;
 
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Pawn;
-
-import java.awt.*;
 
 /**
  * TurnAction class, a list of the basic action a player can do in his turn.
@@ -32,16 +30,17 @@ public class TurnAction {
      * The method a player can use to move a worker on the Board
      * @param x the new x coordinate
      * @param y the new y coordinate
+     * @param p the pawn
      */
-    public static void MovePawn(int x, int y, int number) {
+    public static void MovePawn(int x, int y, Pawn p) {
 
-        Color color = model.getCurrentPlayer().getColor();
-        Pawn pawn = model.getBoard().getPlayerPawn(color, number);
+
         Cell newCell = model.getBoard().getGrid()[x][y];
+        Cell oldCell = model.getBoard().getGrid()[p.getCoordX()][p.getCoordY()];
 
-        pawn.setCoordX(x);
-        pawn.setCoordY(y);
-        newCell.setOccupied(pawn);
+        p.setCoords(x,y);
+        oldCell.setOccupied(null);
+        newCell.setOccupied(p);
     }
 
     /**
@@ -49,8 +48,7 @@ public class TurnAction {
      * @param c the Cell where the player wants to Build
      */
     public static void BuildBlock(Cell c){
-        if(c.getFloor()==2){
-            c.setFloor(c.getFloor()+1);
+        if(c.getFloor()==3){
             c.setRoof(true);
         }
         else c.setFloor(c.getFloor()+1);
