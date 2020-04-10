@@ -1,31 +1,29 @@
 package it.polimi.ingsw.PSP33.controller;
 
-import it.polimi.ingsw.PSP33.controller.rulesManager.TurnAction;
-import it.polimi.ingsw.PSP33.controller.turnManager.TurnManager;
-import it.polimi.ingsw.PSP33.message.VisitorServerMessageInterface;
-import it.polimi.ingsw.PSP33.message.server.ServerMessage;
+import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
+import it.polimi.ingsw.PSP33.message.VCEventVisitor;
+import it.polimi.ingsw.PSP33.message.server.VCEvent;
+import it.polimi.ingsw.PSP33.message.server.VCEventSample;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
 
 
-public class Controller implements Observer<ServerMessage>, VisitorServerMessageInterface {
+public class Controller implements Observer<VCEvent>, VCEventVisitor {
 
     private TurnManager turnManager;
-    private TurnAction turnAction;
 
     public Controller(Model model) {
         this.turnManager = new TurnManager(model);
-        this.turnAction = new TurnAction(model);
 
     }
 
     @Override
-    public void visit(ServerMessage serverMessage) {
+    public void visit(VCEventSample vcEventSample) {
 
     }
 
     @Override
-    public void update(ServerMessage serverMessage) {
+    public void update(VCEvent serverMessage) {
         serverMessage.accept(this);
     }
 }

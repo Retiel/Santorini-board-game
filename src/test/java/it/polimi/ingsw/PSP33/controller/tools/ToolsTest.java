@@ -1,5 +1,6 @@
 package it.polimi.ingsw.PSP33.controller.tools;
 
+import it.polimi.ingsw.PSP33.controller.rules.Tools;
 import org.junit.*;
 
 public class ToolsTest {

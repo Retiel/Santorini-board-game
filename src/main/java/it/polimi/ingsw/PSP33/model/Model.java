@@ -1,16 +1,16 @@
 package it.polimi.ingsw.PSP33.model;
 
+import it.polimi.ingsw.PSP33.message.client.MVEvent;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
-import it.polimi.ingsw.PSP33.message.client.ClientMessage;
 import it.polimi.ingsw.PSP33.utils.Phase;
 
 import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Model class that hold all information related to the state of the game
+ * Model class that holds all information related to the state of the game
  */
-public class Model extends Observable<ClientMessage> {
+public class Model extends Observable<MVEvent> {
 
     /**
      * Board variable
@@ -34,11 +34,10 @@ public class Model extends Observable<ClientMessage> {
 
     /**
      * Constructor of the class
-     * @param players List of players playing
      */
-    public Model(List<Player> players) {
-        this.board = new Board(players);
-        this.players = new ArrayList<>(players);
+    public Model() {
+        this.board = new Board();
+        this.players = new ArrayList<>();
         this.currentPlayer = null;
         this.currentPhase = Phase.START;
     }
@@ -59,6 +58,14 @@ public class Model extends Observable<ClientMessage> {
      */
     public List<Player> getPlayers() {
         return new ArrayList<>(players);
+    }
+
+    /**
+     * Method to add a new player to the players' list
+     * @param player new player to add
+     */
+    public void addPlayer(Player player) {
+        this.players.add(player);
     }
 
     /**

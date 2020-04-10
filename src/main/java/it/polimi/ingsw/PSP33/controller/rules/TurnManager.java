@@ -1,10 +1,10 @@
-package it.polimi.ingsw.PSP33.controller.turnManager;
+package it.polimi.ingsw.PSP33.controller.rules;
 
 import it.polimi.ingsw.PSP33.model.Model;
 
 import java.util.Random;
 
-public class TurnManager implements TurnManagerInterface {
+public class TurnManager {
 
     private Model model;
 
@@ -12,7 +12,6 @@ public class TurnManager implements TurnManagerInterface {
         this.model = model;
     }
 
-    @Override
     public void setStartingPlayer() {
 
         Random random = new Random();
@@ -22,7 +21,6 @@ public class TurnManager implements TurnManagerInterface {
         model.setCurrentPlayer(model.getPlayers().get(randomInteger));
     }
 
-    @Override
     public void nextPlayer() {
 
         if (model.getPlayers().get(model.getPlayers().size() - 1) == model.getCurrentPlayer()) {
@@ -32,7 +30,6 @@ public class TurnManager implements TurnManagerInterface {
         }
     }
 
-    @Override
     public void nextPhase() {
 
     }

@@ -1,19 +1,15 @@
 package it.polimi.ingsw.PSP33.model;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 /**
- * Board class that hold all information related to the state of the board
+ * Board class that holds all information related to the state of the board
  */
 public class Board {
 
     /**
      * Constant of the board's size.
      */
-    private static final int SIZE = 5;
+    private final int SIZE = 5;
 
     /**
      * Matrix of cells used to represent the grid.
@@ -21,15 +17,9 @@ public class Board {
     private Cell[][] grid;
 
     /**
-     * List of players' pawns.
-     */
-    private List<Pawn> pawns;
-
-    /**
      * Constructor for the board class.
-     * @param players List of players class object playing th game.
      */
-    public Board(List<Player> players) {
+    public Board() {
 
         //Initialize grid
         grid = new Cell[SIZE][SIZE];
@@ -38,13 +28,6 @@ public class Board {
                 grid[i][j] = new Cell();
             }
         }
-
-        //Initialize players' pawns
-        pawns = new ArrayList<>();
-        for (Player player : players) {
-            pawns.add(new Pawn(player.getColor()));
-            pawns.add(new Pawn(player.getColor()));
-        }
     }
 
     /**
@@ -52,7 +35,7 @@ public class Board {
      *
      * @return Integer value 5
      */
-    public static int getSIZE() {
+    public int getSIZE() {
         return SIZE;
     }
 
@@ -65,34 +48,7 @@ public class Board {
         return grid;
     }
 
-    /**
-     * Method to get the list of all pawn
-     *
-     * @return List of pawn class object
-     */
-    public List<Pawn> getPawns() {
-        return new ArrayList<>(pawns);
+    public Cell getCellByCoordinates(int coordX, int coordY) {
+        return this.grid[coordX][coordY];
     }
-
-    /**
-     * Method to get one specific pawn of the player
-     * @param color the color that identifiy the player
-     * @param pawnNumber number of the selected pawn
-     *
-     * @return Pawn class object
-     */
-    public Pawn getPlayerPawn(Color color, int pawnNumber){
-        return getPawnsByColor(color).get(pawnNumber - 1);
-    }
-
-    /**
-     * Method to get all pawns of the player
-     * @param color the color that identifiy the player
-     *
-     * @return List of pawns class object
-     */
-    public List<Pawn> getPawnsByColor(Color color){
-        return getPawns().stream().filter(p -> p.getColor() == color).collect(Collectors.toList());
-    }
-
 }

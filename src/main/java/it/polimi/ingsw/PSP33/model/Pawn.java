@@ -3,7 +3,7 @@ package it.polimi.ingsw.PSP33.model;
 import java.awt.*;
 
 /**
- * Pawn class that hold all information related to the state a pawn piece
+ * Pawn class that holds all information related to the state of a pawn piece
  */
 public class Pawn {
 
@@ -71,5 +71,16 @@ public class Pawn {
      */
     public void setCoordY(int coordY) {
         this.coordY = coordY;
+    }
+
+    /**
+     * Method to set both pawn's coordinates
+     * @param coordX x coordinate
+     * @param coordY y coordinate
+     */
+    public void setCoords(int coordX, int coordY) {
+
+        setCoordX(coordX);
+        setCoordY(coordY);
     }
 }

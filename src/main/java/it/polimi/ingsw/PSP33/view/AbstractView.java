@@ -1,9 +1,9 @@
 package it.polimi.ingsw.PSP33.view;
 
 
-import it.polimi.ingsw.PSP33.message.VisitorClientMessageInterface;
-import it.polimi.ingsw.PSP33.message.client.ClientMessage;
-import it.polimi.ingsw.PSP33.message.server.ServerMessage;
+import it.polimi.ingsw.PSP33.message.MVEventVisitor;
+import it.polimi.ingsw.PSP33.message.client.MVEvent;
+import it.polimi.ingsw.PSP33.message.server.VCEvent;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
 
@@ -11,15 +11,15 @@ import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
 /**
  * Implementation of the visitor pattern
  * */
-public abstract class AbstractView extends Observable<ServerMessage> implements Observer<ClientMessage>, VisitorClientMessageInterface {
+public abstract class AbstractView extends Observable<VCEvent> implements Observer<MVEvent>, MVEventVisitor {
 
     @Override
-    public void update(ClientMessage clientMessage) {
+    public void update(MVEvent clientMessage) {
         clientMessage.accept(this);
     }
 
     @Override
-    public void visit(ClientMessage clientMessage) {
+    public void visit(MVEvent mvEvent) {
 
     }
 }
