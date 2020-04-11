@@ -14,13 +14,21 @@ public class MoveContext {
 
         switch (godName){
             case "Apollo": this.move = new MoveApollo();
+            case "Artemis": this.move = new MoveArtemis();
+            case "Minotaur": this.move = new MoveMinotaur();
             default:
-                throw new IllegalStateException("Unexpected value: " + godName);
+                this.move = new MoveBasic();
         }
 
     }
 
-    public List<Cell> execute(Pawn p, Board b){
+    public List<Cell> checkMove(Pawn p, Board b){
         return  move.checkMove(p,b);
     }
+
+    public void execMove(int coordX, int coordY, Pawn p, Board b){
+        move.executeMove(coordX, coordY, p, b);
+    }
+
+
 }

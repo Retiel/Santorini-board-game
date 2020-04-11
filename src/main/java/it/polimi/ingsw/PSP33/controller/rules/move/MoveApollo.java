@@ -12,7 +12,7 @@ public class MoveApollo implements Move{
 
     @Override
     public List<Cell> checkMove(Pawn p, Board b) {
-        List<Cell> adiacent = Tools.getAdjacentCells(p, b.getGrid(), b.getSIZE());
+        List<Cell> adiacent = Tools.getAdjacentCells(p, b);
         Cell current = b.getGrid()[p.getCoordX()][p.getCoordY()];
 
         return adiacent.stream().filter(c -> (current.getFloor() - c.getFloor()) < 2 && !c.isRoof()).collect(Collectors.toList());

@@ -13,7 +13,7 @@ public class BuildBasic implements Build {
 
     @Override
     public List<Cell> checkBuild(Pawn p, Board b) {
-        List<Cell> adiacent = Tools.getAdjacentCells(p, b.getGrid(), b.getSIZE());
+        List<Cell> adiacent = Tools.getAdjacentCells(p, b);
 
         return adiacent.stream().filter(c -> c.getOccupied() == null && !c.isRoof()).collect(Collectors.toList());
     }

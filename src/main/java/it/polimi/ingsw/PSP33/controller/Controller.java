@@ -25,7 +25,7 @@ public class Controller implements Observer<ServerMessage>, VisitorServerMessage
 
     public void moveCheck(){
         MoveContext moveContext = new MoveContext("yolo");
-        List<Cell> cellList1 = moveContext.execute(null, null);
+        List<Cell> cellList1 = moveContext.checkMove(null, null);
 
     }
 
