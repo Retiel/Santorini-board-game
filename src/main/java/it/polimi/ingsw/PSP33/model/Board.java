@@ -35,7 +35,7 @@ public class Board {
         grid = new Cell[SIZE][SIZE];
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
-                grid[i][j] = new Cell();
+                grid[i][j] = new Cell(i,j);
             }
         }
 
@@ -47,7 +47,7 @@ public class Board {
             Pawn p2 = new Pawn(player.getColor());
 
             player.setPawn1(p1);
-            player.setPawn1(p2);
+            player.setPawn2(p2);
             
             pawns.add(p1);
             pawns.add(p2);
