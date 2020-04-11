@@ -1,7 +1,8 @@
 package it.polimi.ingsw.PSP33.controller;
 
-import it.polimi.ingsw.PSP33.controller.godsRules.MoveContext;
-import it.polimi.ingsw.PSP33.controller.turnManager.TurnManager;
+import it.polimi.ingsw.PSP33.controller.rules.TurnAction;
+import it.polimi.ingsw.PSP33.controller.rules.move.MoveContext;
+import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
 import it.polimi.ingsw.PSP33.message.VisitorServerMessageInterface;
 import it.polimi.ingsw.PSP33.message.server.ServerMessage;
 import it.polimi.ingsw.PSP33.model.Cell;

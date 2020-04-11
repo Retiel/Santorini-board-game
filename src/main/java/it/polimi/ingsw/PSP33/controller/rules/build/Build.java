@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.controller.godsRules;
+package it.polimi.ingsw.PSP33.controller.rules.build;
 
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;

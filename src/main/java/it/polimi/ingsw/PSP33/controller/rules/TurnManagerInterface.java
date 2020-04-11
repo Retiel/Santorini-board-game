@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.controller.turnManager;
+package it.polimi.ingsw.PSP33.controller.rules;
 
 /**
  * Interface for TurnManager

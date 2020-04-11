@@ -42,8 +42,15 @@ public class Board {
         //Initialize players' pawns
         pawns = new ArrayList<>();
         for (Player player : players) {
-            pawns.add(new Pawn(player.getColor()));
-            pawns.add(new Pawn(player.getColor()));
+
+            Pawn p1 = new Pawn(player.getColor());
+            Pawn p2 = new Pawn(player.getColor());
+
+            player.setPawn1(p1);
+            player.setPawn1(p2);
+            
+            pawns.add(p1);
+            pawns.add(p2);
         }
     }
 
