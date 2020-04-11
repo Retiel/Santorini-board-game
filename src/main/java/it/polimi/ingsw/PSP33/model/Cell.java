@@ -6,6 +6,16 @@ package it.polimi.ingsw.PSP33.model;
 public class Cell {
 
     /**
+     * Integer coordinate X
+     */
+    private int coordX;
+
+    /**
+     * Integer coordinate Y
+     */
+    private int coordY;
+
+    /**
      * Integer that represent the pieces of contruction, except the roof
      */
     private int floor;
@@ -23,10 +33,12 @@ public class Cell {
     /**
      * Constructor of the class
      */
-    public Cell() {
+    public Cell(int coordX, int coordY) {
         this.floor = 0;
         this.roof = false;
         this.occupied = null;
+        this.coordX = coordX;
+        this.coordY = coordY;
     }
 
     /**
@@ -78,5 +90,23 @@ public class Cell {
      */
     public void setOccupied(Pawn occupied) {
         this.occupied = occupied;
+    }
+
+    /**
+     * Method to get the value x of the position
+     *
+     * @return Integer value
+     */
+    public int getCoordX() {
+        return coordX;
+    }
+
+    /**
+     * Method to get the value y of the position
+     *
+     * @return Integer value
+     */
+    public int getCoordY() {
+        return coordY;
     }
 }
