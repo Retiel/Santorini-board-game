@@ -8,12 +8,12 @@ public class Cell {
     /**
      * Integer coordinate X
      */
-    private int coordX;
+    private final int coordX;
 
     /**
      * Integer coordinate Y
      */
-    private int coordY;
+    private final int coordY;
 
     /**
      * Integer that represent the pieces of contruction, except the roof

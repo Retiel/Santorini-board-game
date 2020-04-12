@@ -8,12 +8,13 @@ import it.polimi.ingsw.PSP33.utils.Phase;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 public class ModelTest {
 
     Model model;
 
-    ArrayList<Player> players;
+    List<Player> players;
 
     BoardTest boardTest = new BoardTest();
 
@@ -28,6 +29,28 @@ public class ModelTest {
     public void tearDown() {
         model = null;
         players = null;
+    }
+
+    @Test
+    public void setListPlayer_correctInput_correctOutput() {
+
+        model = new Model(players);
+
+        Player newEntry = new Player("testPlayer", Color.BLUE);
+
+        List<Player> testList = new ArrayList<>(model.getPlayers());
+        testList.add(newEntry);
+        model.setPlayers(testList);
+
+        Assert.assertEquals(3, model.getPlayers().size());
+        Assert.assertEquals(newEntry, model.getPlayers().get(2));
+
+        testList = model.getPlayers();
+        testList.remove(newEntry);
+        model.setPlayers(testList);
+
+        Assert.assertEquals(2, model.getPlayers().size());
+        Assert.assertEquals(players, model.getPlayers());
     }
 
     @Test

@@ -6,10 +6,27 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 
 import java.util.List;
 
+/**
+ * Interface that define the move of the pawns and using pattern stategy it differenciate base on the gods effect
+ *
+ */
 public interface Move {
 
-    List<Cell> checkMove(Pawn p, Board b);
+    /**
+     * Mehtod to get le list of the possible cell to move the pawn
+     * @param board board from model folder
+     * @param pawn the pawn selected for the action
+     *
+     * @return list of Cell object
+     */
+    List<Cell> checkMove(Pawn pawn, Board board);
 
-    void executeMove(int x, int y, Pawn p, Board b);
+    /**
+     * Method to execute the move once selected the cell
+     * @param newCell new position where the pawns go
+     * @param pawn the pawn in question
+     * @param board board from model folder
+     */
+    void executeMove(Cell newCell, Pawn pawn, Board board);
 
 }

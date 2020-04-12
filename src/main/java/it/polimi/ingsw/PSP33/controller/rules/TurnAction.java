@@ -28,17 +28,13 @@ public class TurnAction {
 
     /**
      * The method a player can use to move a worker on the Board
-     * @param x the new x coordinate
-     * @param y the new y coordinate
+     * @param oldCell position of the pawn
+     * @param newCell new position of the pawn
      * @param p the pawn
      */
-    public static void MovePawn(int x, int y, Pawn p) {
+    public static void MovePawn(Cell oldCell, Cell newCell, Pawn p) {
 
-
-        Cell newCell = model.getBoard().getGrid()[x][y];
-        Cell oldCell = model.getBoard().getGrid()[p.getCoordX()][p.getCoordY()];
-
-        p.setCoords(x,y);
+        p.setCoords(newCell.getCoordX(), newCell.getCoordY());
         oldCell.setOccupied(null);
         newCell.setOccupied(p);
     }

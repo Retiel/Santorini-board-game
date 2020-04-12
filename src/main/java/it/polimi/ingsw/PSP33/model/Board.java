@@ -82,6 +82,14 @@ public class Board {
     }
 
     /**
+     * method to set the list of all pawn
+     * @param pawns modified list of pawns
+     */
+    public void setPawns(List<Pawn> pawns) {
+        this.pawns = pawns;
+    }
+
+    /**
      * Method to get one of the pawn of the player
      * @param color the color that identifiy the player
      * @param pawnNumber number of the selected pawn

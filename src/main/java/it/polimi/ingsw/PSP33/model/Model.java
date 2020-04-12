@@ -62,6 +62,14 @@ public class Model extends Observable<ClientMessage> {
     }
 
     /**
+     * Method to set the list of players
+     * @param players modified list of players
+     */
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    /**
      * Method to get the player of the current turn
      *
      * @return Player object

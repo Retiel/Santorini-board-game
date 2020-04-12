@@ -27,7 +27,7 @@ public class MoveContext {
     }
 
     public void execMove(int coordX, int coordY, Pawn p, Board b){
-        move.executeMove(coordX, coordY, p, b);
+        move.executeMove(, coordX, p, b);
     }
 
 

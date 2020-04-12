@@ -1,6 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.rules.move;
 
 import it.polimi.ingsw.PSP33.controller.rules.Tools;
+import it.polimi.ingsw.PSP33.controller.rules.TurnAction;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
@@ -8,34 +9,49 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static java.lang.Math.abs;
-
+/**
+ * Movement with the rule of Minotaur
+ *
+ */
 public class MoveMinotaur implements Move {
 
     @Override
-    public List<Cell> checkMove(Pawn p, Board b) {
-        List<Cell> adiacent = Tools.getAdjacentCells(p, b);
-        Cell current = b.getGrid()[p.getCoordX()][p.getCoordY()];
+    public List<Cell> checkMove(Pawn pawn, Board board) {
 
-        return adiacent.stream().filter(c -> (current.getFloor() - c.getFloor()) < 2 && !c.isRoof()).collect(Collectors.toList());
+        /* Duplicated code ref. -> MoveApollo*/
+        List<Cell> movableCells = Tools.getMovableCells(pawn, board);
+
+        List<Cell> movableByGod = Tools.getAdjacentCells(pawn, board);
+        Cell current = board.getGrid()[pawn.getCoordX()][pawn.getCoordY()];
+        movableByGod = movableByGod.stream().filter(c -> (current.getFloor() - c.getFloor()) < 2 && !c.isRoof() && !movableCells.contains(c)).collect(Collectors.toList());
+
+        return movableByGod;
     }
 
     @Override
-    public void executeMove(int x, int y, Pawn p, Board b) {
+    public void executeMove(Cell newCell, Pawn pawn, Board board) {
 
-        Cell newCell = b.getGrid()[x][y];
-        Cell oldCell = b.getGrid()[p.getCoordX()][p.getCoordY()];
+        Cell oldCell = board.getGrid()[pawn.getCoordX()][pawn.getCoordY()];
 
-        int dX = x - p.getCoordX();
-        int dY = y - p.getCoordY();
+        int x = newCell.getCoordX();
+        int y = newCell.getCoordY();
+        int dX = x - pawn.getCoordX();
+        int dY = y - pawn.getCoordY();
+        int i = 0;
 
-        Pawn other = newCell.getOccupied();
-        Cell otherCell = b.getGrid()[x + dX][y + dY];
+        Pawn otherPawn = newCell.getOccupied();
+        Cell otherCell = null;
 
-        p.setCoords(x,y);
-        newCell.setOccupied(p);
-        oldCell.setOccupied(null);
+        do {
+            i++;
+            if (board.getGrid()[x + dX*i][y + dY*i].getOccupied() == null && !board.getGrid()[x + dX*i][y + dY*i].isRoof()){
+                otherCell = board.getGrid()[x + dX*i][y + dY*i];
+                break;
+            }
+        }while (!(dX*(i+1) > 4 || dY*(i+1) > 4 ) );
 
-        //TODO
+        TurnAction.MovePawn(oldCell, newCell, pawn);
+        otherCell.setOccupied(otherPawn);
+
     }
 }

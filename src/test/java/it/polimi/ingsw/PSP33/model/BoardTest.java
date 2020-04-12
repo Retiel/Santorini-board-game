@@ -11,9 +11,9 @@ import java.util.List;
 
 public class BoardTest {
 
-    Board board;
+    private Board board;
 
-    ArrayList<Player> players;
+    private ArrayList<Player> players;
 
     @Before
     public void setUp() {
@@ -23,6 +23,36 @@ public class BoardTest {
     @After
     public void tearDown() {
         board = null;
+    }
+
+    @Test
+    public void setPawns_correctInput_correctOutput(){
+
+        Player testPlayer1 = new Player("player1", Color.BLACK);
+        Player testPlayer2 = new Player("player2", Color.WHITE);
+
+        players.add(testPlayer1);
+        players.add(testPlayer2);
+
+        board = new Board(players);
+
+        List<Pawn> testSample = board.getPawns();
+
+        Assert.assertEquals(4, testSample.size());
+
+        Assert.assertEquals(testPlayer1.getPawn1(), testSample.get(0));
+        Assert.assertEquals(testPlayer1.getPawn2(), testSample.get(1));
+        Assert.assertEquals(testPlayer2.getPawn1(), testSample.get(2));
+        Assert.assertEquals(testPlayer2.getPawn2(), testSample.get(3));
+
+        testSample.remove(testPlayer2.getPawn1());
+        board.setPawns(testSample);
+
+        Assert.assertEquals(3, board.getPawns().size());
+
+        Assert.assertEquals(testPlayer1.getPawn1(), board.getPawns().get(0));
+        Assert.assertEquals(testPlayer1.getPawn2(), board.getPawns().get(1));
+        Assert.assertEquals(testPlayer2.getPawn2(), board.getPawns().get(2));
     }
 
     @Test
