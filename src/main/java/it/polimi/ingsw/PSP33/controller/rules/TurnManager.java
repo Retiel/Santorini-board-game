@@ -1,10 +1,10 @@
-package it.polimi.ingsw.PSP33.controller.turnManager;
+package it.polimi.ingsw.PSP33.controller.rules;
 
 import it.polimi.ingsw.PSP33.model.Model;
 
 import java.util.Random;
 
-public class TurnManager implements TurnManagerInterface {
+public class TurnManager {
 
     private Model model;
 

@@ -14,8 +14,8 @@ public class PlayerTest {
 
     @Before
     public void setUp() {
-        player = new Player("test", Color.BLACK);
-    }
+        player = new Player("test", Color.BLACK, null);
+    } //FIXME
 
     @After
     public void tearDown() {
@@ -24,7 +24,7 @@ public class PlayerTest {
 
     @Test
     public void initPlayer_correctInput_correctOutput() {
-
+        //FIXME
         Assert.assertEquals(player.getName(), "test");
         Assert.assertEquals(player.getColor(), Color.BLACK);
     }
@@ -32,7 +32,7 @@ public class PlayerTest {
     @Test
     public void setCard_correctInput_correctOutput() {
 
-        this.player.setCard(1);
+        this.player.setCard(null); //FIXME
         Assert.assertEquals(player.getCard(), 1);
     }
 }

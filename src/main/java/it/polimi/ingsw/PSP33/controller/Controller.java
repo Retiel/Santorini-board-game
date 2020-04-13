@@ -1,9 +1,12 @@
 package it.polimi.ingsw.PSP33.controller;
 
-import it.polimi.ingsw.PSP33.controller.rulesManager.TurnAction;
-import it.polimi.ingsw.PSP33.controller.turnManager.TurnManager;
-import it.polimi.ingsw.PSP33.message.VisitorServerMessageInterface;
-import it.polimi.ingsw.PSP33.message.server.ServerMessage;
+import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
+import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
+import it.polimi.ingsw.PSP33.controller.rules.move.MoveContext;
+import it.polimi.ingsw.PSP33.message.VCEventVisitor;
+import it.polimi.ingsw.PSP33.message.server.VCEvent;
+import it.polimi.ingsw.PSP33.message.server.VCEventSample;
+import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
 
