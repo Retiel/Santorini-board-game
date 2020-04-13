@@ -10,6 +10,7 @@ public class WinContext {
 
     private WinCondition winCondition;
 
+
     public WinContext(String godName) {
 
         switch (godName){
@@ -25,8 +26,8 @@ public class WinContext {
         return cellList.size() == 0;
     }
 
-    public void checkWinCondition(Board board, Pawn pawn, Cell newCell){
-        winCondition.verifyWin(newCell, board, pawn);
+    public boolean checkWinCondition(Board board, Pawn pawn, Cell newCell){
+        return winCondition.verifyWin(newCell, board, pawn);
     }
 
 

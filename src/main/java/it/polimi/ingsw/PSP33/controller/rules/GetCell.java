@@ -13,17 +13,17 @@ import static java.lang.Math.abs;
 /**
  * Unique class for methods used by rules' classes
  */
-public class Tools {
+public class GetCell {
 
-    private static Tools instance = new Tools();
-    private Tools() {}
+    private static GetCell instance = new GetCell();
+    private GetCell() {}
 
     /**
      * Method to get the instace of the class
      *
      * @return instance of the class
      * */
-    public static Tools getInstance() {
+    public static GetCell getInstance() {
         return instance;
     }
 

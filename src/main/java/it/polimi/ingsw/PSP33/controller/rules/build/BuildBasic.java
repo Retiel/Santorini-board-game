@@ -1,25 +1,26 @@
 package it.polimi.ingsw.PSP33.controller.rules.build;
 
-import it.polimi.ingsw.PSP33.controller.rules.TurnAction;
-import it.polimi.ingsw.PSP33.controller.rules.Tools;
+import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
+import it.polimi.ingsw.PSP33.controller.rules.GetCell;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
+/**
+ * Build basic without gods effect
+ *
+ */
 public class BuildBasic implements Build {
 
     @Override
-    public List<Cell> checkBuild(Pawn p, Board b) {
-        List<Cell> adiacent = Tools.getAdjacentCells(p, b);
-
-        return adiacent.stream().filter(c -> c.getOccupied() == null && !c.isRoof()).collect(Collectors.toList());
+    public List<Cell> checkBuild(Pawn pawn, Board board) {
+        return GetCell.getBuildableCells(pawn, board);
     }
 
     @Override
-    public void executeBuild(int x, int y, Board b) {
-        TurnAction.BuildBlock(b.getGrid()[x][y]);
+    public void executeBuild(Cell cellToBuild, boolean trigger) {
+        BasicAction.BuildBlock(cellToBuild);
     }
 }

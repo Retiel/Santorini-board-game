@@ -1,13 +1,11 @@
 package it.polimi.ingsw.PSP33.controller.rules.move;
 
-import it.polimi.ingsw.PSP33.controller.rules.Tools;
-import it.polimi.ingsw.PSP33.controller.rules.TurnAction;
+import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 /**
  * Movement with the rule of Minotaur
@@ -19,18 +17,15 @@ public class MoveMinotaur implements Move {
     public List<Cell> checkMove(Pawn pawn, Board board) {
 
         /* Duplicated code ref. -> MoveApollo*/
-        List<Cell> movableCells = Tools.getMovableCells(pawn, board);
+        MoveApollo checkMove = new MoveApollo();
 
-        List<Cell> movableByGod = Tools.getAdjacentCells(pawn, board);
-        Cell current = board.getGrid()[pawn.getCoordX()][pawn.getCoordY()];
-        movableByGod = movableByGod.stream().filter(c -> (current.getFloor() - c.getFloor()) < 2 && !c.isRoof() && !movableCells.contains(c)).collect(Collectors.toList());
-
-        return movableByGod;
+        return checkMove.checkMove(pawn, board);
     }
 
     @Override
     public void executeMove(Cell newCell, Pawn pawn, Board board) {
 
+        //TODO: confront with the others for changes
         Cell oldCell = board.getGrid()[pawn.getCoordX()][pawn.getCoordY()];
 
         int x = newCell.getCoordX();
@@ -50,8 +45,7 @@ public class MoveMinotaur implements Move {
             }
         }while (!(dX*(i+1) > 4 || dY*(i+1) > 4 ) );
 
-        TurnAction.MovePawn(oldCell, newCell, pawn);
+        BasicAction.MovePawn(oldCell, newCell, pawn);
         otherCell.setOccupied(otherPawn);
-
     }
 }
