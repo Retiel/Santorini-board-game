@@ -1,7 +1,11 @@
 package it.polimi.ingsw.PSP33.controller.rules;
 
+import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
+import it.polimi.ingsw.PSP33.model.Pawn;
+import it.polimi.ingsw.PSP33.model.Player;
 
+import java.util.List;
 import java.util.Random;
 
 public class TurnManager {
@@ -12,6 +16,9 @@ public class TurnManager {
         this.model = model;
     }
 
+    /**
+     * Method to decide the the starting player
+     */
     public void setStartingPlayer() {
 
         Random random = new Random();
@@ -21,16 +28,36 @@ public class TurnManager {
         model.setCurrentPlayer(model.getPlayers().get(randomInteger));
     }
 
-    public void nextPlayer() {
-
-        if (model.getPlayers().get(model.getPlayers().size() - 1) == model.getCurrentPlayer()) {
-            model.setCurrentPlayer(model.getPlayers().get(0));
-        }else {
-            model.setCurrentPlayer(model.getPlayers().get(model.getPlayers().indexOf(model.getCurrentPlayer()) + 1));
-        }
+    /**
+     * Method to get the available cell where to place the pawn
+     */
+    public List<Cell> GetAvailableBoard(){
+        return GetCell.getPlaceableCells(model.getBoard());
     }
 
-    public void nextPhase() {
-
+    /**
+     * Method to
+     */
+    public void PlacePlayerPawn(int coordX, int coordY, int pawn){
+        Cell startingCell = model.getBoard().getGrid()[coordX][coordY];
+        Pawn pawn1 = model.getCurrentPlayer().getPawns()[pawn];
+        BasicAction.SetUpPawnPosition(startingCell, pawn1);
     }
+
+    /**
+     * Method to move the game to the next player turn
+     */
+    public void nextTurn() {
+        Player current = model.getCurrentPlayer();
+
+        int next = model.getPlayers().indexOf(current);
+        next++;
+
+        Player nextPlayer;
+        if(next < model.getPlayers().size()) nextPlayer = model.getPlayers().get(next);
+        else nextPlayer = model.getPlayers().get(0);
+
+        model.setCurrentPlayer(nextPlayer);
+    }
+
 }

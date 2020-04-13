@@ -1,5 +1,6 @@
 package it.polimi.ingsw.PSP33.controller.rules.build;
 
+import it.polimi.ingsw.PSP33.controller.rules.turn.TurnPrometheus;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
@@ -13,9 +14,10 @@ public class BuildContext {
     public BuildContext(String godName) {
 
         switch (godName){
-            case "Atlas": this.build = new BuildBasic();
-            case "Demeter": this.build = new BuildBasic();
-            case "Hephaestus": this.build = new BuildBasic();
+            case "Atlas": this.build = new BuildAtlas();
+            case "Demeter": this.build = new BuildDemeter();
+            case "Hephaestus": this.build = new BuildHephaestus();
+            case "Prometheus": this.build = new TurnPrometheus();
             default:
                 this.build = new BuildBasic();
         }

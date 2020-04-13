@@ -22,7 +22,7 @@ public class GetCellTest {
         Player testPlayer1 = new Player("testPlayer1", Color.BLACK);
         testPlayers.add(testPlayer1);
 
-        testBoard = new Board(testPlayers);
+        testBoard = new Board();
 /*
 Graphical set up rappresentation
 legend:
@@ -59,10 +59,10 @@ legend:
         testBoard.getGrid()[1][2].setFloor(3);
         testBoard.getGrid()[1][2].setRoof(true);
 
-        testPlayer1.getPawn2().setCoords(3,2);
-        testBoard.getGrid()[3][2].setOccupied(testPlayer1.getPawn2());
+        testPlayer1.getPawns()[1].setCoords(3,2);
+        testBoard.getGrid()[3][2].setOccupied(testPlayer1.getPawns()[0]);
 
-        testPawn = testPlayer1.getPawn1();
+        testPawn = testPlayer1.getPawns()[0];
 
         GetCell testSample = GetCell.getInstance();
         Assert.assertEquals(testSample, GetCell.getInstance());

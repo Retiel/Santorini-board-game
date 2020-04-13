@@ -1,5 +1,6 @@
 package it.polimi.ingsw.PSP33.controller.rules.move;
 
+import it.polimi.ingsw.PSP33.controller.rules.turn.TurnPrometheus;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
@@ -16,6 +17,7 @@ public class MoveContext {
             case "Apollo": this.move = new MoveApollo();
             case "Artemis": this.move = new MoveArtemis();
             case "Minotaur": this.move = new MoveMinotaur();
+            case "Prometheus": this.move = new TurnPrometheus();
             default:
                 this.move = new MoveBasic();
         }

@@ -36,7 +36,7 @@ public class Model extends Observable<MVEvent> {
      * Constructor of the class
      */
     public Model(List<Player> players) {
-        this.board = new Board(players);
+        this.board = new Board();
         this.players = new ArrayList<>(players);
         this.currentPlayer = null;
         this.currentPhase = Phase.START;
@@ -101,4 +101,5 @@ public class Model extends Observable<MVEvent> {
     public void setCurrentPhase(Phase currentPhase) {
         this.currentPhase = currentPhase;
     }
+
 }

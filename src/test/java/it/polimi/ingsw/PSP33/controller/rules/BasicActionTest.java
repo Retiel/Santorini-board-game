@@ -81,7 +81,7 @@ public class BasicActionTest {
     @Test
     public void setPawnStartingPoint_correctInput_onePawnSet() {
 
-        BasicAction.SetUpPawnPosition(testCell, testPlayer1.getPawn1());
+        BasicAction.SetUpPawnPosition(testCell, testPlayer1.getPawns()[0]);
         allGridMoveCheck(1,1);
     }
 
@@ -90,14 +90,14 @@ public class BasicActionTest {
 
         Cell testOldCell = testModel.getBoard().getGrid()[1][1];
         Cell testNewCell = testModel.getBoard().getGrid()[1][3];
-        BasicAction.MovePawn(testOldCell, testNewCell, testPlayer1.getPawn1());
+        BasicAction.MovePawn(testOldCell, testNewCell, testPlayer1.getPawns()[0]);
 
         allGridMoveCheck(1,3);
 
         testOldCell = testNewCell;
         testNewCell = testModel.getBoard().getGrid()[3][3];
-        BasicAction.MovePawn(testOldCell, testNewCell, testPlayer1.getPawn1());
-        BasicAction.MovePawn(testOldCell, testNewCell, testPlayer1.getPawn1());
+        BasicAction.MovePawn(testOldCell, testNewCell, testPlayer1.getPawns()[0]);
+        BasicAction.MovePawn(testOldCell, testNewCell, testPlayer1.getPawns()[0]);
 
         allGridMoveCheck(3,3);
     }
@@ -109,8 +109,8 @@ public class BasicActionTest {
         for (Cell[] rowCell : testGrid){
             for (Cell cell: rowCell){
                 if (cell.getOccupied() != null){
-                    assertEquals(cell.getOccupied(), testPlayer1.getPawn1());
-                    assertNotEquals(cell.getOccupied(), testPlayer1.getPawn2());
+                    assertEquals(cell.getOccupied(), testPlayer1.getPawns()[0]);
+                    assertNotEquals(cell.getOccupied(), testPlayer1.getPawns()[1]);
                     assertEquals(coordX, cell.getCoordX());
                     assertEquals(coordY, cell.getCoordY());
                 }

@@ -14,7 +14,7 @@ public class PlayerTest {
 
     @Before
     public void setUp() {
-        player = new Player("test", Color.BLACK, null);
+        player = new Player("test", Color.BLACK);
     } //FIXME
 
     @After

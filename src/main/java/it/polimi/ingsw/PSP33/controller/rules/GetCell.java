@@ -54,6 +54,25 @@ public class GetCell {
     }
 
     /**
+     * Method to get all cells where the player is allowed to place his pawn
+     * @param board the game board onject
+     *
+     * @return List of Cell class object
+     */
+    public  static List<Cell> getPlaceableCells(Board board){
+
+        List<Cell> cellList = new ArrayList<>();
+
+        for (Cell[] row : board.getGrid()){
+            for (Cell cell : row){
+                if(cell.getOccupied() == null) cellList.add(cell);
+            }
+        }
+
+        return cellList;
+    }
+
+    /**
      * Method to get all the adjacent cells where the player is allowed to move his pawn
      * @param pawn the pawn which the player wants to move
      * @param board the game board onject

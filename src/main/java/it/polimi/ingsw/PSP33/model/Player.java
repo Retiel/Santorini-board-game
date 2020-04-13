@@ -31,12 +31,10 @@ public class Player {
      * Constructor of the class
      * @param name name fo the player
      * @param color color of the player
-     * @param card god card choose by the player
      */
-    public Player(String name, Color color, God card) {
+    public Player(String name, Color color) {
         this.name = name;
         this.color = color;
-        this.card = card;
 
         this.pawns = new Pawn[2];
         this.pawns[0] = new Pawn(color);
