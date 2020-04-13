@@ -1,10 +1,10 @@
-package it.polimi.ingsw.PSP33.controller.rules;
+package it.polimi.ingsw.PSP33.controller.turnManager;
 
 import it.polimi.ingsw.PSP33.model.Model;
 
 import java.util.Random;
 
-public class TurnManager {
+public class TurnManager implements TurnManagerInterface {
 
     private Model model;
 
@@ -27,7 +27,6 @@ public class TurnManager {
             model.setCurrentPlayer(model.getPlayers().get(0));
         }else {
             model.setCurrentPlayer(model.getPlayers().get(model.getPlayers().indexOf(model.getCurrentPlayer()) + 1));
-
         }
     }
 

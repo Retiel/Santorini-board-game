@@ -11,21 +11,25 @@ public class MoveContext {
     private Move move;
 
     public MoveContext(String godName) {
+
         switch (godName){
-            case "APOLLO":
-                break;
-
+            case "Apollo": this.move = new MoveApollo();
+            case "Artemis": this.move = new MoveArtemis();
+            case "Minotaur": this.move = new MoveMinotaur();
             default:
-                this.move = new MoveDefault();
-                throw new IllegalStateException("Unexpected value: " + godName);
+                this.move = new MoveBasic();
         }
+
     }
 
-    public List<Cell> check(Pawn pawn, Board board) {
-        return move.checkMove(pawn, board);
+    public List<Cell> checkMove(Pawn p, Board b){
+        return  move.checkMove(p,b);
     }
 
-    public void execute(Pawn pawn, Board board, int x, int y) {
-        move.executeMove(pawn, board, x, y);
+    public void execMove(int coordX, int coordY, Pawn p, Board b){
+        Cell newCell = b.getGrid()[coordX][coordY];
+        move.executeMove(newCell, p, b);
     }
+
+
 }
