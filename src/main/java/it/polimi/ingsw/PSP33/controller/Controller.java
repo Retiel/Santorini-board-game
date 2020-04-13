@@ -1,6 +1,6 @@
 package it.polimi.ingsw.PSP33.controller;
 
-import it.polimi.ingsw.PSP33.controller.rules.TurnAction;
+import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.move.MoveContext;
 import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
 import it.polimi.ingsw.PSP33.message.VisitorServerMessageInterface;
@@ -15,11 +15,11 @@ import java.util.List;
 public class Controller implements Observer<ServerMessage>, VisitorServerMessageInterface {
 
     private TurnManager turnManager;
-    private TurnAction turnAction;
+    private BasicAction basicAction;
 
     public Controller(Model model) {
         this.turnManager = new TurnManager(model);
-        this.turnAction = new TurnAction(model);
+        this.basicAction = new BasicAction(model);
 
     }
 

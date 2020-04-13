@@ -13,17 +13,17 @@ import static java.lang.Math.abs;
 /**
  * Unique class for all the checks, constraints and methods for the Action a Player or god card can do
  */
-public class Tools {
+public class GetCell {
 
-    private static Tools instance = new Tools();
-    private Tools() {}
+    private static GetCell instance = new GetCell();
+    private GetCell() {}
 
     /**
      * Method to get the instace of the class
      *
      * @return instance fo the class
      * */
-    public static Tools getInstance() {
+    public static GetCell getInstance() {
         return instance;
     }
 

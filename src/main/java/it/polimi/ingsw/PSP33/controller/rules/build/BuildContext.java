@@ -25,7 +25,8 @@ public class BuildContext {
         return  build.checkBuild(p,b);
     }
 
-    public void execBuild(int coordX, int coordY, Pawn p, Board b){
-        build.executeBuild(coordX, coordY, b);
+    public void execBuild(int coordX, int coordY, Board b, boolean trigger){
+        Cell cellBuild = b.getGrid()[coordX][coordY];
+        build.executeBuild(cellBuild, trigger);
     }
 }

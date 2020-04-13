@@ -27,7 +27,8 @@ public class MoveContext {
     }
 
     public void execMove(int coordX, int coordY, Pawn p, Board b){
-        move.executeMove(, coordX, p, b);
+        Cell newCell = b.getGrid()[coordX][coordY];
+        move.executeMove(newCell, p, b);
     }
 
 

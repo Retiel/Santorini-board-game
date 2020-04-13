@@ -1,7 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.rules.move;
 
-import it.polimi.ingsw.PSP33.controller.rules.Tools;
-import it.polimi.ingsw.PSP33.controller.rules.TurnAction;
+import it.polimi.ingsw.PSP33.controller.rules.GetCell;
+import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
@@ -18,10 +18,9 @@ public class MoveApollo implements Move{
     @Override
     public List<Cell> checkMove(Pawn pawn, Board board) {
 
-        /* Duplicated code ref. -> MoveMinotaur*/
-        List<Cell> movableCells = Tools.getMovableCells(pawn, board);
+        List<Cell> movableCells = GetCell.getMovableCells(pawn, board);
 
-        List<Cell> movableByGod = Tools.getAdjacentCells(pawn, board);
+        List<Cell> movableByGod = GetCell.getAdjacentCells(pawn, board);
         Cell current = board.getGrid()[pawn.getCoordX()][pawn.getCoordY()];
         movableByGod = movableByGod.stream().filter(c -> (current.getFloor() - c.getFloor()) < 2 && !c.isRoof() && !movableCells.contains(c)).collect(Collectors.toList());
 
@@ -34,7 +33,7 @@ public class MoveApollo implements Move{
         Cell oldCell = board.getGrid()[pawn.getCoordX()][pawn.getCoordY()];
         Pawn other = newCell.getOccupied();
 
-        TurnAction.MovePawn(oldCell, newCell, pawn);
+        BasicAction.MovePawn(oldCell, newCell, pawn);
         oldCell.setOccupied(other);
     }
 

@@ -6,12 +6,11 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 import it.polimi.ingsw.PSP33.model.Player;
 import org.junit.*;
 
-import javax.tools.Tool;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ToolsTest {
+public class GetCellTest {
 
     private static Board testBoard;
     private static Pawn testPawn;
@@ -65,8 +64,8 @@ legend:
 
         testPawn = testPlayer1.getPawn1();
 
-        Tools testSample = Tools.getInstance();
-        Assert.assertEquals(testSample, Tools.getInstance());
+        GetCell testSample = GetCell.getInstance();
+        Assert.assertEquals(testSample, GetCell.getInstance());
     }
 
     @Test
@@ -82,7 +81,7 @@ legend:
 
         testPawn.setCoords(1,1);
 
-        List<Cell> resultSample = Tools.getAdjacentCells(testPawn, testBoard);
+        List<Cell> resultSample = GetCell.getAdjacentCells(testPawn, testBoard);
 
         Assert.assertEquals(8, resultSample.size());
 
@@ -104,7 +103,7 @@ legend:
 
         testPawn.setCoords(2,1);
 
-        List<Cell> resultSample2 = Tools.getAdjacentCells(testPawn, testBoard);
+        List<Cell> resultSample2 = GetCell.getAdjacentCells(testPawn, testBoard);
 
         Assert.assertEquals(8, resultSample2.size());
 
@@ -126,7 +125,7 @@ legend:
 
         testPawn.setCoords(2,0);
 
-        List<Cell> resultSample3 = Tools.getAdjacentCells(testPawn, testBoard);
+        List<Cell> resultSample3 = GetCell.getAdjacentCells(testPawn, testBoard);
 
         Assert.assertEquals(5, resultSample3.size());
 
@@ -155,7 +154,7 @@ legend:
 
         testPawn.setCoords(1,1);
 
-        List<Cell> resultSample = Tools.getMovableCells(testPawn, testBoard);
+        List<Cell> resultSample = GetCell.getMovableCells(testPawn, testBoard);
 
         Assert.assertEquals(5, resultSample.size());
 
@@ -174,7 +173,7 @@ legend:
 
         testPawn.setCoords(2,1);
 
-        List<Cell> resultSample2 = Tools.getMovableCells(testPawn, testBoard);
+        List<Cell> resultSample2 = GetCell.getMovableCells(testPawn, testBoard);
 
         Assert.assertEquals(5, resultSample2.size());
 
@@ -193,7 +192,7 @@ legend:
 
         testPawn.setCoords(2,0);
 
-        List<Cell> resultSample3 = Tools.getMovableCells(testPawn, testBoard);
+        List<Cell> resultSample3 = GetCell.getMovableCells(testPawn, testBoard);
 
         Assert.assertEquals(2, resultSample3.size());
 
@@ -219,7 +218,7 @@ legend:
 
         testPawn.setCoords(1,1);
 
-        List<Cell> resultSample = Tools.getBuildableCells(testPawn, testBoard);
+        List<Cell> resultSample = GetCell.getBuildableCells(testPawn, testBoard);
 
         Assert.assertEquals(6, resultSample.size());
 
@@ -239,7 +238,7 @@ legend:
 
         testPawn.setCoords(2,1);
 
-        List<Cell> resultSample = Tools.getBuildableCells(testPawn, testBoard);
+        List<Cell> resultSample = GetCell.getBuildableCells(testPawn, testBoard);
 
         Assert.assertEquals(5, resultSample.size());
 
@@ -258,7 +257,7 @@ legend:
 
         testPawn.setCoords(2,0);
 
-        List<Cell> resultSample = Tools.getBuildableCells(testPawn, testBoard);
+        List<Cell> resultSample = GetCell.getBuildableCells(testPawn, testBoard);
 
         Assert.assertEquals(4, resultSample.size());
 
@@ -276,12 +275,12 @@ legend:
     @Test
     public void areAdiacent() {
 
-        Assert.assertTrue(Tools.AreAdiacent(1,1,1,2));
-        Assert.assertTrue(Tools.AreAdiacent(1,1,0,0));
-        Assert.assertTrue(Tools.AreAdiacent(1,1,2,0));
+        Assert.assertTrue(GetCell.AreAdiacent(1,1,1,2));
+        Assert.assertTrue(GetCell.AreAdiacent(1,1,0,0));
+        Assert.assertTrue(GetCell.AreAdiacent(1,1,2,0));
 
-        Assert.assertFalse(Tools.AreAdiacent(1,1,3,0));
-        Assert.assertFalse(Tools.AreAdiacent(1,1,1,3));
-        Assert.assertFalse(Tools.AreAdiacent(1,1,1,1));
+        Assert.assertFalse(GetCell.AreAdiacent(1,1,3,0));
+        Assert.assertFalse(GetCell.AreAdiacent(1,1,1,3));
+        Assert.assertFalse(GetCell.AreAdiacent(1,1,1,1));
     }
 }
