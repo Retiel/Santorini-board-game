@@ -1,6 +1,5 @@
 package it.polimi.ingsw.PSP33.model;
 
-import it.polimi.ingsw.PSP33.model.Player;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,7 +14,7 @@ public class PlayerTest {
     @Before
     public void setUp() {
         player = new Player("test", Color.BLACK);
-    } //FIXME
+    }
 
     @After
     public void tearDown() {
@@ -32,7 +31,9 @@ public class PlayerTest {
     @Test
     public void setCard_correctInput_correctOutput() {
 
-        this.player.setCard(null); //FIXME
-        Assert.assertEquals(player.getCard(), 1);
+        this.player.setCard(new God("fame", "seems legit all the way, maybe a god will arrive"));
+        Assert.assertNotNull(player.getCard());
+        Assert.assertEquals("fame", player.getCard().getName());
+        Assert.assertEquals("seems legit all the way, maybe a god will arrive", player.getCard().getDescription());
     }
 }

@@ -18,8 +18,4 @@ public abstract class AbstractView extends Observable<VCEvent> implements Observ
         clientMessage.accept(this);
     }
 
-    @Override
-    public void visit(MVEvent mvEvent) {
-
-    }
 }

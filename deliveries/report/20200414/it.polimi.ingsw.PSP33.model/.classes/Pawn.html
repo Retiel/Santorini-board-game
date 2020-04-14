@@ -1,0 +1,169 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Pawn</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Pawn (it.polimi.ingsw.PSP33.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Pawn</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (7/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (13/ 13)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.model;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import java.awt.*;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;/**
+<i>6</i>&nbsp; * Pawn class that holds all information related to the state of a pawn piece
+<i>7</i>&nbsp; */
+<i>8</i>&nbsp;public class Pawn {
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    /**
+<i>11</i>&nbsp;     * Value that represent the affiliated player
+<i>12</i>&nbsp;     */
+<i>13</i>&nbsp;    private final Color color;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    /**
+<i>16</i>&nbsp;     * Value of the coordinate x of the position of the palyer
+<i>17</i>&nbsp;     */
+<i>18</i>&nbsp;    private int coordX;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    /**
+<i>21</i>&nbsp;     * Value of the coordinate y of the position of the palyer
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    private int coordY;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    /**
+<i>26</i>&nbsp;     * Constructor of the class
+<i>27</i>&nbsp;     * @param color color of the related player
+<i>28</i>&nbsp;     */
+<b class="fc"><i>29</i>&nbsp;    public Pawn(Color color) {</b>
+<b class="fc"><i>30</i>&nbsp;        this.color = color;</b>
+<b class="fc"><i>31</i>&nbsp;    }</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    /**
+<i>34</i>&nbsp;     * Method to get the color of the pawn
+<i>35</i>&nbsp;     *
+<i>36</i>&nbsp;     * @return color of the pawn (java.awt.Color type)
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    public Color getColor() {
+<b class="fc"><i>39</i>&nbsp;        return color;</b>
+<i>40</i>&nbsp;    }
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    /**
+<i>43</i>&nbsp;     * Method to get the value x of the position
+<i>44</i>&nbsp;     *
+<i>45</i>&nbsp;     * @return Integer value between 0 and 4 (both included)
+<i>46</i>&nbsp;     */
+<i>47</i>&nbsp;    public int getCoordX() {
+<b class="fc"><i>48</i>&nbsp;        return coordX;</b>
+<i>49</i>&nbsp;    }
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    /**
+<i>52</i>&nbsp;     * Method to set the x value of the position
+<i>53</i>&nbsp;     * @param coordX Integer value between 0 and 4 (both included)
+<i>54</i>&nbsp;     */
+<i>55</i>&nbsp;    public void setCoordX(int coordX) {
+<b class="fc"><i>56</i>&nbsp;        this.coordX = coordX;</b>
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    /**
+<i>60</i>&nbsp;     * Method to get the value y of the position
+<i>61</i>&nbsp;     *
+<i>62</i>&nbsp;     * @return Integer value between 0 and 4 (both included)
+<i>63</i>&nbsp;     */
+<i>64</i>&nbsp;    public int getCoordY() {
+<b class="fc"><i>65</i>&nbsp;        return coordY;</b>
+<i>66</i>&nbsp;    }
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    /**
+<i>69</i>&nbsp;     * Method to set the y value of the position
+<i>70</i>&nbsp;     * @param coordY Integer value between 0 and 4 (both included)
+<i>71</i>&nbsp;     */
+<i>72</i>&nbsp;    public void setCoordY(int coordY) {
+<b class="fc"><i>73</i>&nbsp;        this.coordY = coordY;</b>
+<b class="fc"><i>74</i>&nbsp;    }</b>
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    /**
+<i>77</i>&nbsp;     * Method to set both pawn&#39;s coordinates
+<i>78</i>&nbsp;     * @param coordX x coordinate
+<i>79</i>&nbsp;     * @param coordY y coordinate
+<i>80</i>&nbsp;     */
+<i>81</i>&nbsp;    public void setCoords(int coordX, int coordY) {
+<i>82</i>&nbsp;
+<b class="fc"><i>83</i>&nbsp;        setCoordX(coordX);</b>
+<b class="fc"><i>84</i>&nbsp;        setCoordY(coordY);</b>
+<b class="fc"><i>85</i>&nbsp;    }</b>
+<i>86</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-04-14 11:58</div>
+</div>
+</body>
+</html>
