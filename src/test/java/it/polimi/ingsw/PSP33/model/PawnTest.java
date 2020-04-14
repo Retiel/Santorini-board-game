@@ -28,6 +28,7 @@ public class PawnTest {
         Assert.assertEquals(pawn.getColor(), Color.BLACK);
     }
 
+    /**
     @Test
     public void setCoordinates_correctInput_correctOutput() {
 
@@ -36,4 +37,5 @@ public class PawnTest {
         Assert.assertEquals(pawn.getCoordX(), 0);
         Assert.assertEquals(pawn.getCoordY(), 0);
     }
+    */
 }

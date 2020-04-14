@@ -16,7 +16,6 @@ public class BoardTest {
     private ArrayList<Player> players;
 
 
-
     @Before
     public void setUp() {
         players = new ArrayList<>();

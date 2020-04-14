@@ -1,10 +1,10 @@
 package it.polimi.ingsw.PSP33.view;
 
-import it.polimi.ingsw.PSP33.message.client.MVEvent;
-import it.polimi.ingsw.PSP33.message.client.MVEventSample;
+import it.polimi.ingsw.PSP33.events.mvevents.MVEvent;
+import it.polimi.ingsw.PSP33.events.mvevents.MVEventSample;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
-import it.polimi.ingsw.PSP33.message.MVEventVisitor;
-import it.polimi.ingsw.PSP33.message.server.VCEvent;
+import it.polimi.ingsw.PSP33.events.MVEventVisitor;
+import it.polimi.ingsw.PSP33.events.vcevent.VCEvent;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
 
 /**

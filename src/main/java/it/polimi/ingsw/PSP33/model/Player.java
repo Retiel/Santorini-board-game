@@ -85,4 +85,14 @@ public class Player {
         return pawns;
     }
 
+    /**
+     * Method to get the player's pawn by number
+     * @param pawnNumber number of pawn (1 or 2)
+     *
+     * @return player's pawn related to pawnNumber
+     */
+    public Pawn getPawnByNumber(int pawnNumber) {
+        return pawns[pawnNumber - 1];
+    }
+
 }

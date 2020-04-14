@@ -1,6 +1,6 @@
-package it.polimi.ingsw.PSP33.message.server;
+package it.polimi.ingsw.PSP33.events.vcevent;
 
-import it.polimi.ingsw.PSP33.message.VCEventVisitor;
+import it.polimi.ingsw.PSP33.events.VCEventVisitor;
 
 /**
  * Basic implementation of the text from client to server

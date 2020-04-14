@@ -1,10 +1,5 @@
 package it.polimi.ingsw.PSP33.model;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
-
 /**
  * Board class that hold all information related to the state of the board
  */

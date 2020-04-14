@@ -1,5 +1,7 @@
 package it.polimi.ingsw.PSP33.model;
 
+import it.polimi.ingsw.PSP33.utils.Coord;
+
 import java.awt.*;
 
 /**
@@ -12,15 +14,7 @@ public class Pawn {
      */
     private final Color color;
 
-    /**
-     * Value of the coordinate x of the position of the palyer
-     */
-    private int coordX;
-
-    /**
-     * Value of the coordinate y of the position of the palyer
-     */
-    private int coordY;
+    private Coord coord;
 
     /**
      * Constructor of the class
@@ -28,6 +22,7 @@ public class Pawn {
      */
     public Pawn(Color color) {
         this.color = color;
+        this.coord = null;
     }
 
     /**
@@ -45,16 +40,9 @@ public class Pawn {
      * @return Integer value between 0 and 4 (both included)
      */
     public int getCoordX() {
-        return coordX;
+        return coord.getX();
     }
 
-    /**
-     * Method to set the x value of the position
-     * @param coordX Integer value between 0 and 4 (both included)
-     */
-    public void setCoordX(int coordX) {
-        this.coordX = coordX;
-    }
 
     /**
      * Method to get the value y of the position
@@ -62,16 +50,9 @@ public class Pawn {
      * @return Integer value between 0 and 4 (both included)
      */
     public int getCoordY() {
-        return coordY;
+        return coord.getY();
     }
 
-    /**
-     * Method to set the y value of the position
-     * @param coordY Integer value between 0 and 4 (both included)
-     */
-    public void setCoordY(int coordY) {
-        this.coordY = coordY;
-    }
 
     /**
      * Method to set both pawn's coordinates
@@ -80,7 +61,10 @@ public class Pawn {
      */
     public void setCoords(int coordX, int coordY) {
 
-        setCoordX(coordX);
-        setCoordY(coordY);
+        this.coord = new Coord(coordX, coordY);
+    }
+
+    public Coord getCoord() {
+        return coord;
     }
 }

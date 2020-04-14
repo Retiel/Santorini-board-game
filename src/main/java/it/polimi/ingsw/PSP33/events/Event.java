@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.message;
+package it.polimi.ingsw.PSP33.events;
 
 /**
  * Interface for a generic message

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.PSP33.model;
 
-import it.polimi.ingsw.PSP33.message.client.MVEvent;
+import it.polimi.ingsw.PSP33.events.mvevents.MVEvent;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
 import it.polimi.ingsw.PSP33.utils.Phase;
 

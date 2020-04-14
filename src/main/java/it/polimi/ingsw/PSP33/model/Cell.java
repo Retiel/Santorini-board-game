@@ -1,5 +1,7 @@
 package it.polimi.ingsw.PSP33.model;
 
+import it.polimi.ingsw.PSP33.utils.Coord;
+
 /**
  * Cell class that holds all information related to the state of the single cell in the board
  */
@@ -14,6 +16,8 @@ public class Cell {
      * Integer coordinate Y
      */
     private final int coordY;
+
+    private Coord coord;
 
     /**
      * Integer that represent the pieces of contruction, except the roof
@@ -39,6 +43,7 @@ public class Cell {
         this.occupied = null;
         this.coordX = coordX;
         this.coordY = coordY;
+        this.coord = new Coord(coordX, coordY);
     }
 
     /**
@@ -98,7 +103,7 @@ public class Cell {
      * @return Integer value
      */
     public int getCoordX() {
-        return coordX;
+        return coord.getX();
     }
 
     /**
@@ -107,6 +112,10 @@ public class Cell {
      * @return Integer value
      */
     public int getCoordY() {
-        return coordY;
+        return coord.getY();
+    }
+
+    public Coord getCoord() {
+        return coord.getLocation();
     }
 }

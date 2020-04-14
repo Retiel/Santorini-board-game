@@ -58,6 +58,8 @@ public class TurnManager {
         else nextPlayer = model.getPlayers().get(0);
 
         model.setCurrentPlayer(nextPlayer);
+
+
     }
 
 }

@@ -1,7 +1,6 @@
-package it.polimi.ingsw.PSP33.message;
+package it.polimi.ingsw.PSP33.events;
 
-import it.polimi.ingsw.PSP33.message.client.MVEvent;
-import it.polimi.ingsw.PSP33.message.client.MVEventSample;
+import it.polimi.ingsw.PSP33.events.mvevents.MVEventSample;
 
 /**
  * Custom interface used to implement the visitor pattern for messages sent to client

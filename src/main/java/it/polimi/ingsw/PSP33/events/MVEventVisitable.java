@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.message;
+package it.polimi.ingsw.PSP33.events;
 
 /**
  * Custom interface used to implement the visitor pattern for visitable messages sent to client
