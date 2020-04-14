@@ -46,6 +46,6 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
     @Override
     public void visit(PlacePawn placePawn) {
         Coord coord = placePawn.getCoord();
-
+        Coord coord1 = new Coord();
     }
 }
