@@ -47,4 +47,11 @@ public class Board {
         return grid;
     }
 
+    public void notifyAllplayer(){
+
+    }
+
+    public void notifyCurrentPlayer(){
+
+    }
 }

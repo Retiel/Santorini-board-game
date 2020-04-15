@@ -15,7 +15,8 @@ import static java.lang.Math.abs;
  */
 public class GetCell {
 
-    private static GetCell instance = new GetCell();
+    private static final GetCell instance = new GetCell();
+
     private GetCell() {}
 
     /**

@@ -102,4 +102,12 @@ public class Model extends Observable<MVEvent> {
         this.currentPhase = currentPhase;
     }
 
+    public void notifyAllplayer(){
+
+    }
+
+    public void notifyCurrentPlayer(){
+
+    }
+
 }
