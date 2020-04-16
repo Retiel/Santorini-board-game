@@ -1,7 +1,7 @@
-package it.polimi.ingsw.PSP33.events.mvevents.setup;
+package it.polimi.ingsw.PSP33.events.toClient.setup;
 
 import it.polimi.ingsw.PSP33.events.MVEventVisitor;
-import it.polimi.ingsw.PSP33.events.mvevents.MVEvent;
+import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 
 public class SetUpPawn extends MVEvent {
 

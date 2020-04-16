@@ -1,5 +1,7 @@
 package it.polimi.ingsw.PSP33.model;
 
+import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
+
 /**
  * Board class that hold all information related to the state of the board
  */
@@ -47,11 +49,4 @@ public class Board {
         return grid;
     }
 
-    public void notifyAllplayer(){
-
-    }
-
-    public void notifyCurrentPlayer(){
-
-    }
 }

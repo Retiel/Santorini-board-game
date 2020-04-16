@@ -4,9 +4,10 @@ import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
 import it.polimi.ingsw.PSP33.controller.rules.move.MoveContext;
 import it.polimi.ingsw.PSP33.events.VCEventVisitor;
-import it.polimi.ingsw.PSP33.events.vcevent.setup.PlacePawn;
-import it.polimi.ingsw.PSP33.events.vcevent.VCEvent;
-import it.polimi.ingsw.PSP33.events.vcevent.VCEventSample;
+import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
+import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
+import it.polimi.ingsw.PSP33.events.toServer.VCEventSample;
+import it.polimi.ingsw.PSP33.events.toServer.turn.*;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.utils.Coord;
@@ -27,12 +28,6 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
         //TODO: turnManage.setStartingPlayer()
     }
 
-    public void moveCheck(){
-        MoveContext moveContext = new MoveContext("yolo");
-        List<Cell> cellList1 = moveContext.checkMove(null, null);
-
-    }
-
     @Override
     public void visit(VCEventSample vcEventSample) {
 
@@ -46,6 +41,31 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
     @Override
     public void visit(PlacePawn placePawn) {
         Coord coord = placePawn.getCoord();
+
+    }
+
+    @Override
+    public void visit(BuildAction buildAction) {
+
+    }
+
+    @Override
+    public void visit(MoveAction moveAction) {
+
+    }
+
+    @Override
+    public void visit(RequestExtraAction requestExtraAction) {
+
+    }
+
+    @Override
+    public void visit(RequestPossibleMove requestPossibleMove) {
+
+    }
+
+    @Override
+    public void visit(RequestPossibleBuild requestPossibleBuild) {
 
     }
 }

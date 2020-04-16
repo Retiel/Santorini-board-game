@@ -1,7 +1,7 @@
-package it.polimi.ingsw.PSP33.events.mvevents.turn;
+package it.polimi.ingsw.PSP33.events.toClient.turn;
 
 import it.polimi.ingsw.PSP33.events.MVEventVisitor;
-import it.polimi.ingsw.PSP33.events.mvevents.MVEvent;
+import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 
 
 /**

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.PSP33.view.cli;
 
-import it.polimi.ingsw.PSP33.events.mvevents.MVEventSample;
+import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 
 /**

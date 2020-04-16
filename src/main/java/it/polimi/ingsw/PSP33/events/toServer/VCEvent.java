@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.events.vcevent;
+package it.polimi.ingsw.PSP33.events.toServer;
 
 import it.polimi.ingsw.PSP33.events.Event;
 import it.polimi.ingsw.PSP33.events.VCEventVisitable;

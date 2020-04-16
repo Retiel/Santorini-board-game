@@ -1,6 +1,6 @@
 package it.polimi.ingsw.PSP33.model;
 
-import it.polimi.ingsw.PSP33.events.mvevents.MVEvent;
+import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
 import it.polimi.ingsw.PSP33.utils.Phase;
 
@@ -102,12 +102,20 @@ public class Model extends Observable<MVEvent> {
         this.currentPhase = currentPhase;
     }
 
-    public void notifyAllplayer(){
-
+    /**
+     * Method to notify all client
+     * @param event message to send to all players
+     */
+    public void notifyAllplayer(MVEvent event){
+        notifyAllplayer(event);
     }
 
-    public void notifyCurrentPlayer(){
-
+    /**
+     * Method to notify all client
+     * @param event message to send the current player
+     */
+    public void notifyCurrentPlayer(MVEvent event){
+        notifyCurrentPlayer(event);
     }
 
 }
