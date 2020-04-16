@@ -4,7 +4,7 @@ import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
 import it.polimi.ingsw.PSP33.controller.rules.move.MoveContext;
 import it.polimi.ingsw.PSP33.events.VCEventVisitor;
-import it.polimi.ingsw.PSP33.events.vcevent.PlacePawn;
+import it.polimi.ingsw.PSP33.events.vcevent.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.vcevent.VCEvent;
 import it.polimi.ingsw.PSP33.events.vcevent.VCEventSample;
 import it.polimi.ingsw.PSP33.model.Cell;

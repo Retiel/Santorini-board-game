@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.controller.rules.turn;
+package it.polimi.ingsw.PSP33.controller.rules._implementation;
 
 import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.GetCell;
@@ -11,7 +11,7 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TurnPrometheus implements Move, Build {
+public class Prometheus implements Move, Build {
 
     private boolean effectOn = false;
 

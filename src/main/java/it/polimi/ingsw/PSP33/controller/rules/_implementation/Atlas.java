@@ -1,7 +1,8 @@
-package it.polimi.ingsw.PSP33.controller.rules.build;
+package it.polimi.ingsw.PSP33.controller.rules._implementation;
 
 import it.polimi.ingsw.PSP33.controller.rules.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
+import it.polimi.ingsw.PSP33.controller.rules.build.Build;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
@@ -12,7 +13,7 @@ import java.util.List;
  * Build with Atlas rules
  *
  */
-public class BuildAtlas implements Build {
+public class Atlas implements Build {
 
     @Override
     public List<Cell> checkBuild(Pawn pawn, Board board) {

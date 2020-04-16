@@ -1,13 +1,14 @@
-package it.polimi.ingsw.PSP33.events.vcevent;
+package it.polimi.ingsw.PSP33.events.vcevent.turn;
 
 import it.polimi.ingsw.PSP33.events.VCEventVisitor;
+import it.polimi.ingsw.PSP33.events.vcevent.VCEvent;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
-public class PlacePawn extends VCEvent {
+public class BuildAction extends VCEvent {
 
-    private Coord coord;
+    private final Coord coord;
 
-    public PlacePawn(Coord coord) {
+    public BuildAction(Coord coord) {
         this.coord = coord;
     }
 
@@ -17,6 +18,6 @@ public class PlacePawn extends VCEvent {
 
     @Override
     public void accept(VCEventVisitor VCEventVisitor) {
-        VCEventVisitor.visit(this);
+
     }
 }

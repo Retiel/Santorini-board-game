@@ -1,6 +1,6 @@
 package it.polimi.ingsw.PSP33.events;
 
-import it.polimi.ingsw.PSP33.events.vcevent.PlacePawn;
+import it.polimi.ingsw.PSP33.events.vcevent.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.vcevent.VCEventSample;
 
 /**

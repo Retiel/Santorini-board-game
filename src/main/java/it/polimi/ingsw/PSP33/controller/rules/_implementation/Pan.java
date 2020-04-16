@@ -1,10 +1,11 @@
-package it.polimi.ingsw.PSP33.controller.rules.win;
+package it.polimi.ingsw.PSP33.controller.rules._implementation;
 
+import it.polimi.ingsw.PSP33.controller.rules.win.WinCondition;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
-public class WinPan implements WinCondition {
+public class Pan implements WinCondition {
 
     @Override
     public boolean verifyWin(Cell newCell, Board board, Pawn pawn) {

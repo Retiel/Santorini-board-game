@@ -1,5 +1,6 @@
 package it.polimi.ingsw.PSP33.controller.rules.win;
 
+import it.polimi.ingsw.PSP33.controller.rules._implementation.Pan;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
@@ -14,7 +15,7 @@ public class WinContext {
     public WinContext(String godName) {
 
         switch (godName){
-            case "Pan": this.winCondition = new WinPan();
+            case "Pan": this.winCondition = new Pan();
             case "": this.winCondition = new WinBasic();
             default:
                 this.winCondition = new WinBasic();

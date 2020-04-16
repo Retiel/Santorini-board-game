@@ -1,7 +1,8 @@
-package it.polimi.ingsw.PSP33.controller.rules.move;
+package it.polimi.ingsw.PSP33.controller.rules._implementation;
 
 import it.polimi.ingsw.PSP33.controller.rules.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
+import it.polimi.ingsw.PSP33.controller.rules.move.Move;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
@@ -13,7 +14,7 @@ import java.util.stream.Collectors;
  * Movement with the rule of Apollo
  *
  */
-public class MoveApollo implements Move{
+public class Apollo implements Move {
 
     @Override
     public List<Cell> checkMove(Pawn pawn, Board board) {

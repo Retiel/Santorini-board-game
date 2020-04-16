@@ -1,6 +1,7 @@
-package it.polimi.ingsw.PSP33.controller.rules.move;
+package it.polimi.ingsw.PSP33.controller.rules._implementation;
 
 import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
+import it.polimi.ingsw.PSP33.controller.rules.move.Move;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
@@ -11,13 +12,13 @@ import java.util.List;
  * Movement with the rule of Minotaur
  *
  */
-public class MoveMinotaur implements Move {
+public class Minotaur implements Move {
 
     @Override
     public List<Cell> checkMove(Pawn pawn, Board board) {
 
         /* Duplicated code ref. -> MoveApollo*/
-        MoveApollo checkMove = new MoveApollo();
+        Apollo checkMove = new Apollo();
 
         return checkMove.checkMove(pawn, board);
     }

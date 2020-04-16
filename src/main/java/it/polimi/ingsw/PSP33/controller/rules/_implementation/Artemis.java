@@ -1,7 +1,9 @@
-package it.polimi.ingsw.PSP33.controller.rules.move;
+package it.polimi.ingsw.PSP33.controller.rules._implementation;
 
 import it.polimi.ingsw.PSP33.controller.rules.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
+import it.polimi.ingsw.PSP33.controller.rules.move.Move;
+import it.polimi.ingsw.PSP33.controller.rules.turn.ExtraAction;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
@@ -12,7 +14,7 @@ import java.util.List;
  * Movement with the rule of Artemis
  *
  */
-public class MoveArtemis implements Move {
+public class Artemis implements Move, ExtraAction {
 
     private Cell previousPosition;
 
@@ -29,5 +31,10 @@ public class MoveArtemis implements Move {
         Cell oldCell = board.getGrid()[pawn.getCoordX()][pawn.getCoordY()];
         if (previousPosition == null) previousPosition = oldCell;
         BasicAction.MovePawn(oldCell, newCell, pawn);
+    }
+
+    @Override
+    public List<Cell> executePlusAction(Pawn pawn, Board board) {
+        return checkMove(pawn, board);
     }
 }

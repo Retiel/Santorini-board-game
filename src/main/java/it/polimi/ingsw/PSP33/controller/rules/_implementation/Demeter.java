@@ -1,7 +1,9 @@
-package it.polimi.ingsw.PSP33.controller.rules.build;
+package it.polimi.ingsw.PSP33.controller.rules._implementation;
 
 import it.polimi.ingsw.PSP33.controller.rules.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
+import it.polimi.ingsw.PSP33.controller.rules.build.Build;
+import it.polimi.ingsw.PSP33.controller.rules.turn.ExtraAction;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
@@ -12,9 +14,9 @@ import java.util.List;
  * Build with Demeter rules
  *
  */
-public class BuildDemeter implements Build {
+public class Demeter implements Build, ExtraAction {
 
-    private Cell oldCell;
+    private Cell oldCell = null;
 
     @Override
     public List<Cell> checkBuild(Pawn pawn, Board board) {
@@ -26,8 +28,12 @@ public class BuildDemeter implements Build {
 
     @Override
     public void executeBuild(Cell cellToBuild, boolean trigger) {
-        if (trigger) oldCell = cellToBuild;
-        else oldCell = null;
+        if (oldCell == null) oldCell = cellToBuild;
         BasicAction.BuildBlock(cellToBuild);
+    }
+
+    @Override
+    public List<Cell> executePlusAction(Pawn pawn, Board board) {
+        return checkBuild(pawn, board);
     }
 }
