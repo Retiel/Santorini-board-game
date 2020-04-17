@@ -1,11 +1,10 @@
 package it.polimi.ingsw.PSP33.utils;
 
 /**
- * Turn's phases enum
+ * Phases enum
  */
 public enum Phase {
-    START,
-    MOVE,
-    BUILD,
+    SETUP,
+    PLAY,
     END
 }

@@ -6,7 +6,7 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 
 public class PlacePawn extends VCEvent {
 
-    private Coord coord;
+    private final Coord coord;
 
     public PlacePawn(Coord coord) {
         this.coord = coord;

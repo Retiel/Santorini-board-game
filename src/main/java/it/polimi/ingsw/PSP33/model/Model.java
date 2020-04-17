@@ -39,7 +39,7 @@ public class Model extends Observable<MVEvent> {
         this.board = new Board();
         this.players = new ArrayList<>(players);
         this.currentPlayer = null;
-        this.currentPhase = Phase.START;
+        this.currentPhase = Phase.SETUP;
     }
 
     /**
@@ -102,20 +102,5 @@ public class Model extends Observable<MVEvent> {
         this.currentPhase = currentPhase;
     }
 
-    /**
-     * Method to notify all client
-     * @param event message to send to all players
-     */
-    public void notifyAllplayer(MVEvent event){
-        notifyAllplayer(event);
-    }
-
-    /**
-     * Method to notify all client
-     * @param event message to send the current player
-     */
-    public void notifyCurrentPlayer(MVEvent event){
-        notifyCurrentPlayer(event);
-    }
 
 }

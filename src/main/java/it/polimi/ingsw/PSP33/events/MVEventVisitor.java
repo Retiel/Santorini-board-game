@@ -1,7 +1,8 @@
 package it.polimi.ingsw.PSP33.events;
 
 import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
-import it.polimi.ingsw.PSP33.events.toClient.setup.SetUpPawn;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
+import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewTurn;
 import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleBuild;
 import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleExtraAction;
@@ -17,9 +18,13 @@ public interface MVEventVisitor {
     void visit(MVEventSample mvEventSample);
 
     /**
-     * Message to request the player where to put their pawns during the set up
+     * Message to send to the player all inital data of the board
      */
-    void visit(SetUpPawn setUpPawn);
+    void visit(DataModel dataModel);
+    /**
+     * Message to send to the player all inital data of the board
+     */
+    void visit(PossiblePlacement possiblePlacement);
 
     /**
      * Message to request the player what to do at the star of his turn

@@ -1,31 +1,31 @@
 package it.polimi.ingsw.PSP33.controller;
 
-import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
+import it.polimi.ingsw.PSP33.controller.rules.SetUpTurn;
+import it.polimi.ingsw.PSP33.controller.rules.TurnChange;
 import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
-import it.polimi.ingsw.PSP33.controller.rules.move.MoveContext;
 import it.polimi.ingsw.PSP33.events.VCEventVisitor;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
+import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.events.toServer.VCEventSample;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
-import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
-import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
-
-import java.util.List;
 
 
 public class Controller implements Observer<VCEvent>, VCEventVisitor {
 
+    private SetUpTurn setUpTurn;
+    private TurnChange turnChange;
     private TurnManager turnManager;
-    private BasicAction basicAction;
 
     public Controller(Model model) {
+        this.setUpTurn = new SetUpTurn(model);
+        this.turnChange = new TurnChange(model);
         this.turnManager = new TurnManager(model);
-        this.basicAction = new BasicAction(model);
 
-        //TODO: turnManage.setStartingPlayer()
+        this.setUpTurn.SetStartingPlayer();
     }
 
     @Override
@@ -40,8 +40,19 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
 
     @Override
     public void visit(PlacePawn placePawn) {
-        Coord coord = placePawn.getCoord();
 
+        int coordX = placePawn.getCoord().getX();
+        int coordY = placePawn.getCoord().getY();
+
+        setUpTurn.PlacePlayerPawn(coordX, coordY);
+
+        if(setUpTurn.CheckEndTurn()) turnChange.nextTurn();
+
+        if (setUpTurn.CheckEndSetUp()){
+
+        }else{
+            setUpTurn.AskPlayers();
+        }
     }
 
     @Override

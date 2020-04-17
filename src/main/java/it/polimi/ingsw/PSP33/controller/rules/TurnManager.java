@@ -1,43 +1,43 @@
 package it.polimi.ingsw.PSP33.controller.rules;
 
+import it.polimi.ingsw.PSP33.controller.rules.build.BuildContext;
+import it.polimi.ingsw.PSP33.controller.rules.move.MoveContext;
+import it.polimi.ingsw.PSP33.controller.rules.turn.ExtraContext;
+import it.polimi.ingsw.PSP33.controller.rules.win.WinContext;
+import it.polimi.ingsw.PSP33.events.toClient.turn.NewTurn;
 import it.polimi.ingsw.PSP33.model.Model;
-import it.polimi.ingsw.PSP33.model.Player;
 
-import java.util.Random;
-
+/**
+ * Class that manage everything related to how execute a player turn
+ */
 public class TurnManager {
 
     private final Model model;
+
+    private MoveContext moveContext;
+    private BuildContext buildContext;
+    private WinContext winContext;
+    private ExtraContext extraContext;
 
     public TurnManager(Model model) {
         this.model = model;
     }
 
     /**
-     * Method to decide the the starting player
+     * Method that starts every players turn, it reset context and change it to the current
      */
-    public void setStartingPlayer() {
+    public void NewTurnContext(){
 
-        Random random = new Random();
-        int numberOfPlayers = model.getPlayers().size();
-        int randomInteger = random.nextInt(numberOfPlayers);
+        String god = model.getCurrentPlayer().getCard().getName();
 
-        model.setCurrentPlayer(model.getPlayers().get(randomInteger));
+        this.moveContext = new MoveContext(god);
+        this.buildContext = new BuildContext(god);
+        this.winContext = new WinContext(god);
+        this.extraContext = new ExtraContext(god);
+
+        if (god.equals("Prometheus")) model.notifyObservers(new NewTurn(true, true));
+        else model.notifyObservers(new NewTurn(true, false));
     }
 
-    /**
-     * Method to move the game to the next player turn
-     */
-    public void nextTurn() {
-        Player current = model.getCurrentPlayer();
 
-        int next = model.getPlayers().indexOf(current);
-        next++;
-
-        Player nextPlayer;
-        if(next < model.getPlayers().size()) nextPlayer = model.getPlayers().get(next);
-        else nextPlayer = model.getPlayers().get(0);
-
-        model.setCurrentPlayer(nextPlayer);
-    }
 }

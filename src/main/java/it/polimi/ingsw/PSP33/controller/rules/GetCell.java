@@ -3,6 +3,7 @@ package it.polimi.ingsw.PSP33.controller.rules;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
+import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 import static java.lang.Math.abs;
 
 /**
- * Unique class for all the checks, constraints and methods for the Action a Player or god card can do
+ * Unique class for all the checks, constraints and methods utilities
  */
 public class GetCell {
 
@@ -89,7 +90,7 @@ public class GetCell {
     }
 
     /**
-     * get all the coordinates of the adjacent cells where the player is allowed to build  his Block or Domes
+     * Methods that get all the coordinates of the adjacent cells where the player is allowed to build his Block or Domes
      * @param pawn the pawn that player wants to use for the building action
      * @param board the game board object
      *
@@ -103,7 +104,7 @@ public class GetCell {
     }
 
     /**
-     * the method verify if the coordinates are adiacent
+     * The method verify if the coordinates are adiacent
      * @param x1 coordinate x of the first
      * @param y1 coordinate y of the first
      * @param x2 coordinate x of the second
@@ -119,12 +120,21 @@ public class GetCell {
         return deltaX <= 1 && deltaY <= 1 && !(deltaX == 0 && deltaY == 0);
     }
 
+    /**
+     * Method to convert a list of cell in a list of coordinates
+     * @param cellList list of cell to convert
+     *
+     * @return List of Coord class object
+     */
+    public static List<Coord> getListAdapter(List<Cell> cellList){
 
+        List<Coord> coordList = new ArrayList<>();
 
-    /*other possibilities:
-        -   check the change in level after the move to check a possilbe victory
-        -   check and constrains obtained due to the god effects (other unique methods? or consider in the same basic method?)
-        -   implement with model elements to see if there could be a better solution.
-    */
+        for (Cell cell : cellList){
+            coordList.add(cell.getCoord());
+        }
+
+        return coordList;
+    }
 
 }
