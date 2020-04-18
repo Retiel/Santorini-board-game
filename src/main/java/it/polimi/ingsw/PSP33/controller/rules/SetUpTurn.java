@@ -1,6 +1,5 @@
 package it.polimi.ingsw.PSP33.controller.rules;
 
-import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.model.Cell;
@@ -50,6 +49,8 @@ public class SetUpTurn {
 
     /**
      * Method to place the pawn once
+     * @param coordX coordinate x of the cell
+     * @param coordY coordinate y of the cell
      */
     public void PlacePlayerPawn(int coordX, int coordY){
         Cell startingCell = model.getBoard().getGrid()[coordX][coordY];
@@ -78,13 +79,24 @@ public class SetUpTurn {
         List<Player> playerList =  model.getPlayers();
 
         for (Player player : playerList){
-            if (player.getPawns()[0] != null) return false;
-            if (player.getPawns()[1] != null) return false;
+            if (player.getPawns()[0].getCoord() == null) return false;
+            if (player.getPawns()[1].getCoord() == null) return false;
         }
         return true;
     }
 
     public void AskPlayers(){
         model.notifyObservers(new PossiblePlacement(GetAvailablePlacement()));
+    }
+
+
+    /* Methods generated for testing purpose */
+
+    public Model getModel() {
+        return model;
+    }
+
+    public int getPawn() {
+        return pawn;
     }
 }

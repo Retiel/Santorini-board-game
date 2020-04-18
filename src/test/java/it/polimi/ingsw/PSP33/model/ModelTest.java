@@ -61,7 +61,7 @@ public class ModelTest {
         Assert.assertNotNull(model.getBoard());
         Assert.assertEquals(model.getPlayers().size(), 2);
         Assert.assertNull(model.getCurrentPlayer());
-        Assert.assertEquals(model.getCurrentPhase(), Phase.START);
+        Assert.assertEquals(model.getCurrentPhase(), Phase.SETUP);
     }
 
     @Test
@@ -73,7 +73,7 @@ public class ModelTest {
         Assert.assertNotNull(model.getBoard());
         Assert.assertEquals(model.getPlayers().size(), 3);
         Assert.assertNull(model.getCurrentPlayer());
-        Assert.assertEquals(model.getCurrentPhase(), Phase.START);
+        Assert.assertEquals(model.getCurrentPhase(), Phase.SETUP);
     }
 
     @Test

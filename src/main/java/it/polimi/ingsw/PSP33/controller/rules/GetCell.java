@@ -137,4 +137,19 @@ public class GetCell {
         return coordList;
     }
 
+    /**
+     * Method to convert a list of cell in a list of coordinates
+     * @param coord coordinates to convert
+     * @param board board of the game
+     *
+     * @return List of Coord class object
+     */
+    public static Cell getCellAdapter(Coord coord, Board board){
+
+        int coordX = coord.getX();
+        int coordY = coord.getY();
+
+        return board.getGrid()[coordX][coordY];
+    }
+
 }
