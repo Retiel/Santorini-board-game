@@ -4,7 +4,7 @@ import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
-import it.polimi.ingsw.PSP33.events.toClient.turn.NewTurn;
+import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleBuild;
 import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleExtraAction;
 import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleMove;
@@ -39,7 +39,7 @@ public class View extends Observable<VCEvent> implements Observer<MVEvent>, MVEv
     }
 
     @Override
-    public void visit(NewTurn newTurn) {
+    public void visit(NewAction newAction) {
 
     }
 

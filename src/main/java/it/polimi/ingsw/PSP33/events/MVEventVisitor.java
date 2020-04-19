@@ -3,7 +3,7 @@ package it.polimi.ingsw.PSP33.events;
 import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
-import it.polimi.ingsw.PSP33.events.toClient.turn.NewTurn;
+import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleBuild;
 import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleExtraAction;
 import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleMove;
@@ -29,7 +29,7 @@ public interface MVEventVisitor {
     /**
      * Message to request the player what to do at the star of his turn
      */
-    void visit(NewTurn newTurn);
+    void visit(NewAction newAction);
 
     /**
      * Message to request the player to select a cell for his move

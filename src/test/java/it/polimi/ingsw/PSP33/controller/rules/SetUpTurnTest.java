@@ -4,7 +4,6 @@ import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
 import it.polimi.ingsw.PSP33.utils.Coord;
-import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -17,7 +16,7 @@ import static org.junit.Assert.*;
 public class SetUpTurnTest {
 
     private static SetUpTurn testSample;
-    private static TurnChange sampleTurn;
+    private static TurnControl sampleTurn;
     private static Model testModel;
 
     @BeforeClass
@@ -33,16 +32,12 @@ public class SetUpTurnTest {
 
         testModel = new Model(testPlayers);
         testSample = new SetUpTurn(testModel);
-        sampleTurn = new TurnChange(testModel);
+        sampleTurn = new TurnControl(testModel);
 
         assertNull(testModel.getCurrentPlayer());
     }
 
-    @AfterClass
-    public static void afterClass(){
-
-    }
-
+    /* Test to simulate a setup turn */
     @Test
     public void SetUpTurn(){
 

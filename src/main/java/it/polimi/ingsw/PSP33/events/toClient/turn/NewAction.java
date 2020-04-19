@@ -7,14 +7,16 @@ import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 /**
  * First Message received by the client
  */
-public class NewTurn extends MVEvent {
+public class NewAction extends MVEvent {
 
     private final boolean move;
     private final boolean build;
+    private final boolean extra;
 
-    public NewTurn(boolean move, boolean build) {
+    public NewAction(boolean move, boolean build, boolean extra) {
         this.move = move;
         this.build = build;
+        this.extra = extra;
     }
 
     public boolean isMove() {
@@ -23,6 +25,10 @@ public class NewTurn extends MVEvent {
 
     public boolean isBuild() {
         return build;
+    }
+
+    public boolean isExtra() {
+        return extra;
     }
 
     @Override

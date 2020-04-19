@@ -130,8 +130,10 @@ public class GetCell {
 
         List<Coord> coordList = new ArrayList<>();
 
-        for (Cell cell : cellList){
-            coordList.add(cell.getCoord());
+        if(cellList != null){
+            for (Cell cell : cellList){
+                coordList.add(cell.getCoord());
+            }
         }
 
         return coordList;

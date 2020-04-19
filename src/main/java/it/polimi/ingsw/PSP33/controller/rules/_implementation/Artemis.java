@@ -37,4 +37,9 @@ public class Artemis implements Move, ExtraAction {
     public List<Cell> executePlusAction(Pawn pawn, Board board) {
         return checkMove(pawn, board);
     }
+
+    @Override
+    public void applyAction(Cell cell, Pawn pawn, Board board) {
+        executeMove(cell, pawn, board);
+    }
 }

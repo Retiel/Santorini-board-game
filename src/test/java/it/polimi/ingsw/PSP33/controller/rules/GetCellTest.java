@@ -17,6 +17,35 @@ public class GetCellTest {
     private static Board testBoard;
     private static Pawn testPawn;
 
+    /*
+        NOTE! use this legend as a reference for the diffent test cases
+
+      legend:
+      * -> roof = true
+      0,...,3 -> floor number
+      p -> pawn position in the test
+      e -> other pawn position
+
+      -> Graphical rappresentation of the board state:
+                 _______ _______ _______ _______ _______
+                |       |       |       |       |       |
+                |   0   |   1   |   0   |   0   |   0   |
+                |_______|_______|_______|_______|_______|
+                | *     | p     |   *   |       |       |
+                |   0   |   1   |   3   |   0   |   0   |
+                |_______|_______|_______|_______|_______|
+                | p     | p     |       |       |       |
+                |   0   |   3   |   0   |   0   |   0   |
+                |_______|_______|_______|_______|_______|
+                |   *   |       | e     |       |       |
+                |   0   |   2   |   2   |   0   |   0   |
+                |_______|_______|_______|_______|_______|
+                |       |       |       |       |       |
+                |   0   |   1   |   0   |   0   |   0   |
+                |_______|_______|_______|_______|_______|
+
+    */
+
     @BeforeClass
     public static void setUp(){
 
@@ -25,30 +54,6 @@ public class GetCellTest {
         testPlayers.add(testPlayer1);
 
         testBoard = new Board();
-/*
-Graphical set up rappresentation
-legend:
- * -> roof = true
- 0,...,3 -> floor number
- P -> pawn position in the test
- e -> other pawn position
-         _______ _______ _______ _______ _______
-        |       |       |       |       |       |
-        |   0   |   1   |   0   |   0   |   0   |
-        |_______|_______|_______|_______|_______|
-        | *     | p     |   *   |       |       |
-        |   0   |   1   |   3   |   0   |   0   |
-        |_______|_______|_______|_______|_______|
-        | p     | p     |       |       |       |
-        |   0   |   3   |   0   |   0   |   0   |
-        |_______|_______|_______|_______|_______|
-        |   *   |       | e     |       |       |
-        |   0   |   2   |   2   |   0   |   0   |
-        |_______|_______|_______|_______|_______|
-        |       |       |       |       |       |
-        |   0   |   1   |   0   |   0   |   0   |
-        |_______|_______|_______|_______|_______|
- */
 
         testBoard.getGrid()[0][1].setFloor(1);
         testBoard.getGrid()[1][1].setFloor(1);
@@ -69,6 +74,8 @@ legend:
         GetCell testSample = GetCell.getInstance();assertEquals(testSample, GetCell.getInstance());
     }
 
+
+    /* Test case simulating a situation described in position (1,1) */
     @Test
     public void testPosition_1_1() {
 
@@ -136,6 +143,7 @@ legend:
         }
     }
 
+    /* Test case simulating a situation described in position (2,1) */
     @Test
     public void testPosition_2_1() {
 
@@ -194,6 +202,7 @@ legend:
         }
     }
 
+    /* Test case simulating a situation described in position (2,0) */
     @Test
     public void testPosition_2_0() {
 
@@ -255,12 +264,14 @@ legend:
         }
     }
 
+    /* test case for method AreAdiacent */
     @Test
     public void areAdiacent() {
         assertTrue(GetCell.AreAdiacent(1,1,1,2));assertTrue(GetCell.AreAdiacent(1,1,0,0));assertTrue(GetCell.AreAdiacent(1,1,2,0));
         assertFalse(GetCell.AreAdiacent(1,1,3,0));assertFalse(GetCell.AreAdiacent(1,1,1,3));assertFalse(GetCell.AreAdiacent(1,1,1,1));
     }
 
+    /* test case for method getListAdapte */
     @Test
     public void ConvertionListTest() {
 
@@ -277,6 +288,7 @@ legend:
         assertEquals(1, test.get(0).getY());
     }
 
+    /* test case for method getCellAdapter */
     @Test
     public void ConvertionTest() {
 
@@ -287,6 +299,7 @@ legend:
         assertEquals(testBoard.getGrid()[3][3], test);
     }
 
+    /* test case for method getPlaceableCells */
     @Test
     public void SetUp_placeableCell() {
 

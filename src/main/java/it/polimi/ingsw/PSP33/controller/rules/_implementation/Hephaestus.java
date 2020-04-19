@@ -39,4 +39,9 @@ public class Hephaestus implements Build, ExtraAction {
     public List<Cell> executePlusAction(Pawn pawn, Board board) {
         return checkBuild(pawn, board);
     }
+
+    @Override
+    public void applyAction(Cell cell, Pawn pawn, Board board) {
+        executeBuild(cell, false);
+    }
 }
