@@ -5,6 +5,7 @@ import it.polimi.ingsw.PSP33.controller.rules.__implementation.Minotaur;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Prometheus;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
+import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
 import java.util.List;
@@ -30,9 +31,9 @@ public class MoveContext {
         return  move.checkMove(p,b);
     }
 
-    public void execMove(int coordX, int coordY, Pawn p, Board b){
-        Cell newCell = b.getGrid()[coordX][coordY];
-        move.executeMove(newCell, p, b);
+    public void execMove(int coordX, int coordY, Pawn p, Model m){
+        Cell newCell = m.getBoard().getGrid()[coordX][coordY];
+        move.executeMove(newCell, p, m);
     }
 
 

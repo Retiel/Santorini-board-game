@@ -3,6 +3,7 @@ package it.polimi.ingsw.PSP33.controller.rules._build;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Atlas;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
+import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
 import java.util.List;
@@ -24,8 +25,8 @@ public class BuildContext {
         return  build.checkBuild(p,b);
     }
 
-    public void execBuild(int coordX, int coordY, Board b, boolean trigger){
-        Cell cellBuild = b.getGrid()[coordX][coordY];
-        build.executeBuild(cellBuild, trigger);
+    public void execBuild(int coordX, int coordY, boolean trigger, Model model){
+        Cell cellBuild = model.getBoard().getGrid()[coordX][coordY];
+        build.executeBuild(cellBuild, trigger, model);
     }
 }

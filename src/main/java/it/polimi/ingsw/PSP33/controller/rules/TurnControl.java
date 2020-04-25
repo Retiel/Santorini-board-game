@@ -1,6 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.rules;
 
 import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
+import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
 

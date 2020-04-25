@@ -2,6 +2,7 @@ package it.polimi.ingsw.PSP33.controller.rules._move;
 
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
+import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
 import java.util.List;
@@ -14,8 +15,8 @@ public interface Move {
 
     /**
      * Method to get le list of the cell unlocked by the gods power
-     * @param board board from model folder
      * @param pawn the pawn selected for the action
+     * @param board board from model folder
      *
      * @return list of Cell object
      */
@@ -25,8 +26,8 @@ public interface Move {
      * Method to execute the move once selected the cell
      * @param newCell new position where the pawns go
      * @param pawn the pawn in question
-     * @param board board from model folder
+     * @param model used for notify
      */
-    void executeMove(Cell newCell, Pawn pawn, Board board);
+    void executeMove(Cell newCell, Pawn pawn, Model model);
 
 }

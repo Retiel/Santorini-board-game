@@ -47,42 +47,48 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
         if(setUpTurn.CheckEndTurn()) turnControl.nextTurn();
 
         if (setUpTurn.CheckEndSetUp()){
-            turnFlow.NewTurnContext();
+            turnFlow.newTurnContext();
         }else{
             setUpTurn.AskPlayers();
         }
     }
 
     @Override
+    public void visit(NewTurn newTurn) {
+        turnControl.nextTurn();
+        turnFlow.newTurnContext();
+    }
+
+    @Override
     public void visit(MoveAction moveAction) {
-        turnFlow.ExecMove(moveAction.getCoord());
+        turnFlow.execMove(moveAction.getCoord());
 
     }
 
     @Override
     public void visit(BuildAction buildAction) {
-        turnFlow.ExecBuild(buildAction.getCoord(), buildAction.isRoof());
+        turnFlow.execBuild(buildAction.getCoord(), buildAction.isRoof());
 
     }
 
     @Override
     public void visit(ExtraAction extraAction) {
-        turnFlow.ExecExtra(extraAction.getCoord());
+        turnFlow.execExtra(extraAction.getCoord());
     }
 
     @Override
     public void visit(RequestPossibleMove requestPossibleMove) {
-        turnFlow.MoveFlow(requestPossibleMove.getPawn());
+        turnFlow.moveFlow(requestPossibleMove.getPawn());
     }
 
     @Override
     public void visit(RequestPossibleBuild requestPossibleBuild) {
-        turnFlow.BuildFlow(requestPossibleBuild.getPawn());
+        turnFlow.buildFlow(requestPossibleBuild.getPawn());
     }
 
     @Override
     public void visit(RequestExtraAction requestExtraAction) {
-        turnFlow.ExtraActionFlow(requestExtraAction.getPawn());
+        turnFlow.extraActionFlow(requestExtraAction.getPawn());
     }
 
 

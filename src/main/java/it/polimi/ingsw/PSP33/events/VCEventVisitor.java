@@ -19,6 +19,11 @@ public interface VCEventVisitor {
     void visit(PlacePawn placePawn);
 
     /**
+     * Message to send the server to set a new turn
+     */
+    void visit(NewTurn newTurn);
+
+    /**
      * Message to send the server where to place the pawn diuring set up phase
      */
     void visit(ExtraAction extraAction);

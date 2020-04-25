@@ -2,8 +2,10 @@ package it.polimi.ingsw.PSP33.controller.rules.__implementation;
 
 import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules._move.Move;
+import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
+import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
 import java.util.List;
@@ -24,9 +26,9 @@ public class Minotaur implements Move {
     }
 
     @Override
-    public void executeMove(Cell newCell, Pawn pawn, Board board) {
+    public void executeMove(Cell newCell, Pawn pawn, Model model) {
 
-        Cell oldCell = board.getGrid()[pawn.getCoordX()][pawn.getCoordY()];
+        Cell oldCell = model.getBoard().getGrid()[pawn.getCoordX()][pawn.getCoordY()];
 
         int x = newCell.getCoordX();
         int y = newCell.getCoordY();
@@ -39,7 +41,7 @@ public class Minotaur implements Move {
 
         do {
             i++;
-            otherCell = board.getGrid()[x + dX*i][y + dY*i];
+            otherCell = model.getBoard().getGrid()[x + dX*i][y + dY*i];
             if (otherCell.getOccupied() == null && !otherCell.isRoof()) break;
 
         }while (!(dX*(i+1) > 4 || dY*(i+1) > 4 ) );
@@ -47,5 +49,7 @@ public class Minotaur implements Move {
         BasicAction.MovePawn(oldCell, newCell, pawn);
         BasicAction.MovePawn(newCell, otherCell, otherPawn);
         newCell.setOccupied(pawn);
+
+        model.notifyObservers(new NewAction(false, true, false));
     }
 }

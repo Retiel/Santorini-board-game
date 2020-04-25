@@ -1,0 +1,265 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TurnFlow</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.controller.rules</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TurnFlow (it.polimi.ingsw.PSP33.controller.rules)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TurnFlow</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 43)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.controller.rules;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules._build.BuildContext;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules._enemyTurn.LimiterContext;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules._move.MoveContext;
+<i>6</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules._extraTurn.ExtraContext;
+<i>7</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules._win.WinContext;
+<i>8</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataBuffer;
+<i>9</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.buffer_control.FlagControl;
+<i>10</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
+<i>11</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
+<i>12</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
+<i>13</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleBuild;
+<i>14</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleExtraAction;
+<i>15</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleMove;
+<i>16</i>&nbsp;import it.polimi.ingsw.PSP33.model.Board;
+<i>17</i>&nbsp;import it.polimi.ingsw.PSP33.model.Cell;
+<i>18</i>&nbsp;import it.polimi.ingsw.PSP33.model.Model;
+<i>19</i>&nbsp;import it.polimi.ingsw.PSP33.utils.Coord;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;import java.util.ArrayList;
+<i>22</i>&nbsp;import java.util.List;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;/**
+<i>25</i>&nbsp; * Class that manage everything related to how execute a player turn
+<i>26</i>&nbsp; */
+<i>27</i>&nbsp;public class TurnFlow {
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    private final Model model;
+<i>30</i>&nbsp;    private final Board board;
+<i>31</i>&nbsp;    private String godName;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    private MoveContext moveContext;
+<i>34</i>&nbsp;    private BuildContext buildContext;
+<i>35</i>&nbsp;    private WinContext winContext;
+<i>36</i>&nbsp;    private ExtraContext extraContext;
+<i>37</i>&nbsp;    private LimiterContext limiterContext;
+<i>38</i>&nbsp;    private DataBuffer dataBuffer;
+<i>39</i>&nbsp;
+<b class="nc"><i>40</i>&nbsp;    public TurnFlow(Model model) {</b>
+<b class="nc"><i>41</i>&nbsp;        this.model = model;</b>
+<b class="nc"><i>42</i>&nbsp;        this.board = model.getBoard();</b>
+<i>43</i>&nbsp;    }
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    /**
+<i>46</i>&nbsp;     * Method that starts every players turn, it reset context and change it to the current
+<i>47</i>&nbsp;     */
+<i>48</i>&nbsp;    public void NewTurnContext(){
+<i>49</i>&nbsp;
+<b class="nc"><i>50</i>&nbsp;        this.godName = model.getCurrentPlayer().getCard().getName();</b>
+<i>51</i>&nbsp;
+<b class="nc"><i>52</i>&nbsp;        this.moveContext = new MoveContext(godName);</b>
+<b class="nc"><i>53</i>&nbsp;        this.buildContext = new BuildContext(godName);</b>
+<b class="nc"><i>54</i>&nbsp;        this.winContext = new WinContext(godName);</b>
+<b class="nc"><i>55</i>&nbsp;        this.extraContext = new ExtraContext(godName);</b>
+<b class="nc"><i>56</i>&nbsp;        this.limiterContext = new LimiterContext();</b>
+<b class="nc"><i>57</i>&nbsp;        this.dataBuffer = new DataBuffer();</b>
+<i>58</i>&nbsp;
+<b class="nc"><i>59</i>&nbsp;        model.notifyObservers(new NewAction(true, false, FlagControl.checkStart(godName)));</b>
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    /**
+<i>63</i>&nbsp;     * Method that controls the move choice option
+<i>64</i>&nbsp;     * @param pawnNumber the pawn involved in the action
+<i>65</i>&nbsp;     */
+<i>66</i>&nbsp;    public void MoveFlow(int pawnNumber){
+<i>67</i>&nbsp;
+<b class="nc"><i>68</i>&nbsp;        if (dataBuffer.getCurrentPawn() == null) dataBuffer.setCurrentPawn(model.getCurrentPlayer().getPawnByNumber(pawnNumber));</b>
+<i>69</i>&nbsp;
+<b class="nc"><i>70</i>&nbsp;        List&lt;Coord&gt; basicMove = GetCell.getListAdapter(getCellsBasic(&quot;move&quot;));</b>
+<b class="nc"><i>71</i>&nbsp;        List&lt;Coord&gt; godsMove = GetCell.getListAdapter(getCellsContext(&quot;move&quot;));</b>
+<i>72</i>&nbsp;
+<b class="nc"><i>73</i>&nbsp;        model.notifyObservers(new PossibleMove(basicMove, godsMove));</b>
+<i>74</i>&nbsp;    }
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    /**
+<i>77</i>&nbsp;     * Method that controls the build choice option
+<i>78</i>&nbsp;     * @param pawnNumber the pawn involved in the action
+<i>79</i>&nbsp;     */
+<i>80</i>&nbsp;    public void BuildFlow(int pawnNumber){
+<i>81</i>&nbsp;
+<b class="nc"><i>82</i>&nbsp;        if (dataBuffer.getCurrentPawn() == null) dataBuffer.setCurrentPawn(model.getCurrentPlayer().getPawnByNumber(pawnNumber));</b>
+<i>83</i>&nbsp;
+<b class="nc"><i>84</i>&nbsp;        List&lt;Coord&gt; basicBuild = GetCell.getListAdapter(getCellsBasic(&quot;build&quot;));</b>
+<b class="nc"><i>85</i>&nbsp;        List&lt;Coord&gt; godsBuild = GetCell.getListAdapter(getCellsContext(&quot;build&quot;));</b>
+<i>86</i>&nbsp;
+<b class="nc"><i>87</i>&nbsp;        model.notifyObservers(new PossibleBuild(basicBuild, godsBuild, FlagControl.checkbuild(godName)));</b>
+<i>88</i>&nbsp;    }
+<i>89</i>&nbsp;
+<i>90</i>&nbsp;    /**
+<i>91</i>&nbsp;     * Method that controls the extra action option, it activates only if there is a extra option dictated by the god card
+<i>92</i>&nbsp;     * @param pawnNumber the pawn involved in the action
+<i>93</i>&nbsp;     */
+<i>94</i>&nbsp;    public void ExtraActionFlow(int pawnNumber){
+<i>95</i>&nbsp;
+<b class="nc"><i>96</i>&nbsp;        if (dataBuffer.getCurrentPawn() == null) dataBuffer.setCurrentPawn(model.getCurrentPlayer().getPawnByNumber(pawnNumber));</b>
+<i>97</i>&nbsp;
+<b class="nc"><i>98</i>&nbsp;        List&lt;Cell&gt; cellListBasic = getCellsBasic(FlagControl.checkStringExtra(godName));</b>
+<b class="nc"><i>99</i>&nbsp;        List&lt;Cell&gt; cellListContext = getCellsContext(FlagControl.checkStringExtra(godName));</b>
+<i>100</i>&nbsp;
+<b class="nc"><i>101</i>&nbsp;        List&lt;Coord&gt; basic = GetCell.getListAdapter(cellListBasic);</b>
+<b class="nc"><i>102</i>&nbsp;        List&lt;Coord&gt; gods = GetCell.getListAdapter(cellListContext);</b>
+<i>103</i>&nbsp;
+<b class="nc"><i>104</i>&nbsp;        if(checkList(basic, gods)) model.notifyObservers(new PossibleExtraAction(basic, gods));</b>
+<i>105</i>&nbsp;
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    /**
+<i>109</i>&nbsp;     * Method to apply the move change
+<i>110</i>&nbsp;     * @param coord coordinates of the new position
+<i>111</i>&nbsp;     */
+<i>112</i>&nbsp;    public void ExecMove(Coord coord){
+<b class="nc"><i>113</i>&nbsp;        winContext.checkWinCondition(board, dataBuffer.getCurrentPawn(), GetCell.getCellAdapter(coord,board));</b>
+<b class="nc"><i>114</i>&nbsp;        moveContext.execMove(coord.getX(), coord.getY(), dataBuffer.getCurrentPawn(), board);</b>
+<b class="nc"><i>115</i>&nbsp;        model.notifyObservers(new DataModel(model));</b>
+<i>116</i>&nbsp;    }
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;    /**
+<i>119</i>&nbsp;     * Method to apply the build change
+<i>120</i>&nbsp;     * @param coord coordinates of the build position
+<i>121</i>&nbsp;     */
+<i>122</i>&nbsp;    public void ExecBuild(Coord coord, boolean roof) {
+<b class="nc"><i>123</i>&nbsp;        buildContext.execBuild(coord.getX(), coord.getY(), board, roof);</b>
+<b class="nc"><i>124</i>&nbsp;        model.notifyObservers(new DataModel(model));</b>
+<i>125</i>&nbsp;    }
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;    /**
+<i>128</i>&nbsp;     * Method to apply the extra action change
+<i>129</i>&nbsp;     * @param coord coordinates where to apply the extra action
+<i>130</i>&nbsp;     */
+<i>131</i>&nbsp;    public void ExecExtra(Coord coord){
+<b class="nc"><i>132</i>&nbsp;        extraContext.ExecAction(coord, dataBuffer.getCurrentPawn(), board);</b>
+<b class="nc"><i>133</i>&nbsp;        model.notifyObservers(new DataModel(model));</b>
+<i>134</i>&nbsp;    }
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;    /**
+<i>137</i>&nbsp;     * Method gets the list of cell based on the basic action
+<i>138</i>&nbsp;     * @param action the action context
+<i>139</i>&nbsp;     *
+<i>140</i>&nbsp;     * @return List of Cell class object
+<i>141</i>&nbsp;     */
+<i>142</i>&nbsp;    private List&lt;Cell&gt; getCellsBasic(String action){
+<i>143</i>&nbsp;
+<b class="nc"><i>144</i>&nbsp;        switch (action){</b>
+<b class="nc"><i>145</i>&nbsp;            case &quot;move&quot;: return GetCell.getMovableCells(dataBuffer.getCurrentPawn(), board);</b>
+<b class="nc"><i>146</i>&nbsp;            case &quot;build&quot;: return GetCell.getBuildableCells(dataBuffer.getCurrentPawn(), board);</b>
+<i>147</i>&nbsp;            default:
+<b class="nc"><i>148</i>&nbsp;                return new ArrayList&lt;&gt;();</b>
+<i>149</i>&nbsp;        }
+<i>150</i>&nbsp;    }
+<i>151</i>&nbsp;
+<i>152</i>&nbsp;    /**
+<i>153</i>&nbsp;     * Method gets the list of cell based on the gods
+<i>154</i>&nbsp;     * @param action the action context
+<i>155</i>&nbsp;     *
+<i>156</i>&nbsp;     * @return List of Cell class object
+<i>157</i>&nbsp;     */
+<i>158</i>&nbsp;    private List&lt;Cell&gt; getCellsContext(String action){
+<b class="nc"><i>159</i>&nbsp;        switch (action){</b>
+<b class="nc"><i>160</i>&nbsp;            case &quot;move&quot;: return moveContext.checkMove(dataBuffer.getCurrentPawn(), board);</b>
+<b class="nc"><i>161</i>&nbsp;            case &quot;build&quot;: return buildContext.checkBuild(dataBuffer.getCurrentPawn(), board);</b>
+<b class="nc"><i>162</i>&nbsp;            case &quot;extra&quot;: return extraContext.extraRequest(dataBuffer.getCurrentPawn(), board, null);</b>
+<i>163</i>&nbsp;            default:
+<b class="nc"><i>164</i>&nbsp;                return new ArrayList&lt;&gt;();</b>
+<i>165</i>&nbsp;        }
+<i>166</i>&nbsp;    }
+<i>167</i>&nbsp;
+<i>168</i>&nbsp;    /**
+<i>169</i>&nbsp;     * Method check if the list in input are empty
+<i>170</i>&nbsp;     * @param coordList1 first list to control
+<i>171</i>&nbsp;     * @param coordList2 second list to control
+<i>172</i>&nbsp;     *
+<i>173</i>&nbsp;     * @return Boolean
+<i>174</i>&nbsp;     */
+<i>175</i>&nbsp;    private boolean checkList(List&lt;Coord&gt; coordList1, List&lt;Coord&gt; coordList2){
+<b class="nc"><i>176</i>&nbsp;        return coordList1.isEmpty() &amp;&amp; coordList2.isEmpty();</b>
+<i>177</i>&nbsp;    }
+<i>178</i>&nbsp;
+<i>179</i>&nbsp;    public void notifyTurn(MVEvent message){
+<b class="nc"><i>180</i>&nbsp;        model.notifyObservers(message);</b>
+<i>181</i>&nbsp;    }
+<i>182</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-04-25 18:21</div>
+</div>
+</body>
+</html>

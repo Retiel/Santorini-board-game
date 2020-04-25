@@ -32,7 +32,6 @@ public class BasicActionTest {
 
         testModel = new Model(testPlayers);
         testCell = testModel.getBoard().getGrid()[1][1];
-        new BasicAction(testModel);
 
 
         Cell[][] testGrid = testModel.getBoard().getGrid();
@@ -60,10 +59,6 @@ public class BasicActionTest {
 
         testModel = new Model(testPlayers);
 
-        assertNotEquals(BasicAction.getModel(), testModel);
-
-        new BasicAction(testModel);
-
         Cell[][] testGrid = testModel.getBoard().getGrid();
 
         for (Cell[] rowCell : testGrid){
@@ -75,7 +70,6 @@ public class BasicActionTest {
             }
         }
 
-        assertEquals(BasicAction.getModel(), testModel);
     }
 
     @Test

@@ -7,6 +7,7 @@ import it.polimi.ingsw.PSP33.controller.rules.__implementation.Prometheus;
 import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataBuffer;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
+import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Pawn;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
@@ -28,13 +29,13 @@ public class ExtraContext {
         }
     }
 
-    public List<Cell> extraRequest(Pawn pawn, Board board, Cell cell){
-        if (this.extraAction != null) return extraAction.executePlusAction(pawn, board, cell);
+    public List<Cell> extraRequest(Pawn pawn, Board board, DataBuffer dataBuffer){
+        if (this.extraAction != null) return extraAction.checkPlusAction(pawn, board, dataBuffer);
         return null;
     }
 
-    public void ExecAction(Coord coord, Pawn pawn, Board board){
-        Cell cell =  board.getGrid()[coord.getX()][coord.getY()];
-        extraAction.applyAction(cell, pawn, board);
+    public void ExecAction(Coord coord, Pawn pawn, Model model){
+        Cell cell =  model.getBoard().getGrid()[coord.getX()][coord.getY()];
+        extraAction.applyAction(cell, pawn, model);
     }
 }

@@ -7,7 +7,12 @@ public class FlagControl {
         return false;
     }
 
-    public static boolean checkbuild(String name){
+    public static boolean checkMove(String name){
+        if (name.equals("Prometheus")) return true;
+        return false;
+    }
+
+    public static boolean checkBuild(String name){
         if (name.equals("Atlas")) return true;
         return false;
     }
@@ -19,14 +24,6 @@ public class FlagControl {
             case "Hephaestus":
                 return "build";
             default: return "nil";
-        }
-    }
-
-    public static boolean checkExtra(String action){
-        switch (action){
-            case "move": return true;
-            case "build": return true;
-            default: return false;
         }
     }
 

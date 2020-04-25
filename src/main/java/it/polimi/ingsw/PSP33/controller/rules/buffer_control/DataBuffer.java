@@ -2,19 +2,23 @@ package it.polimi.ingsw.PSP33.controller.rules.buffer_control;
 
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
+import it.polimi.ingsw.PSP33.utils.Coord;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class DataBuffer {
 
     private Cell oldPosition;
-    private Cell newPosition;
-
     private Cell oldBuild;
-    private Cell newBuild;
-
     private Cell oldExtra;
-    private Cell newExtra;
+
+    private String action;
+    private List<Coord> coordList;
+    private List<Coord> coordListGods;
 
     private Pawn currentPawn;
+    private String godName;
 
     public Cell getOldPosition() {
         return oldPosition;
@@ -22,14 +26,6 @@ public class DataBuffer {
 
     public void setOldPosition(Cell oldPosition) {
         this.oldPosition = oldPosition;
-    }
-
-    public Cell getNewPosition() {
-        return newPosition;
-    }
-
-    public void setNewPosition(Cell newPosition) {
-        this.newPosition = newPosition;
     }
 
     public Cell getOldBuild() {
@@ -40,14 +36,6 @@ public class DataBuffer {
         this.oldBuild = oldBuild;
     }
 
-    public Cell getNewBuild() {
-        return newBuild;
-    }
-
-    public void setNewBuild(Cell newBuild) {
-        this.newBuild = newBuild;
-    }
-
     public Cell getOldExtra() {
         return oldExtra;
     }
@@ -56,12 +44,28 @@ public class DataBuffer {
         this.oldExtra = oldExtra;
     }
 
-    public Cell getNewExtra() {
-        return newExtra;
+    public String getAction() {
+        return action;
     }
 
-    public void setNewExtra(Cell newExtra) {
-        this.newExtra = newExtra;
+    public void setAction(String action) {
+        this.action = action;
+    }
+
+    public List<Coord> getCoordList() {
+        return new ArrayList<>(coordList);
+    }
+
+    public void setCoordList(List<Coord> coordList) {
+        this.coordList = coordList;
+    }
+
+    public List<Coord> getCoordListGods() {
+        return coordListGods;
+    }
+
+    public void setCoordListGods(List<Coord> coordListGods) {
+        this.coordListGods = coordListGods;
     }
 
     public Pawn getCurrentPawn() {
@@ -70,5 +74,13 @@ public class DataBuffer {
 
     public void setCurrentPawn(Pawn currentPawn) {
         this.currentPawn = currentPawn;
+    }
+
+    public String getGodName() {
+        return godName;
+    }
+
+    public void setGodName(String godName) {
+        this.godName = godName;
     }
 }

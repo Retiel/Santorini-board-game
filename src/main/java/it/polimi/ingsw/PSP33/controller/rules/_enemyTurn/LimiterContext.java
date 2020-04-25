@@ -3,13 +3,14 @@ package it.polimi.ingsw.PSP33.controller.rules._enemyTurn;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Athena;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
+import it.polimi.ingsw.PSP33.model.Pawn;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class LimiterContext {
 
-    private EnemyLimiter enemyLimiter;
+    private Limiter limiter;
     private List<String> allEnemyEffect;
 
     public LimiterContext() {
@@ -17,13 +18,15 @@ public class LimiterContext {
         allEnemyEffect.add("Athena");
     }
 
-    public List<Cell> applyLimit(List<Cell> cellList, Cell position, Board board, String godName){
+    public List<Cell> applyAllLimit(List<Cell> cellList, Pawn pawn, Board board, String godName){
 
         List<Cell> afterEffectList = cellList;
 
         for (String effect : allEnemyEffect){
-            ChangeLimiter(effect);
-            afterEffectList = enemyLimiter.Limit(afterEffectList, position, board);
+            if (!godName.equals(effect)){
+                ChangeLimiter(effect);
+                afterEffectList = limiter.Limit(afterEffectList, pawn, board);
+            }
             if(afterEffectList.isEmpty()) break;
         }
         return afterEffectList;
@@ -31,7 +34,7 @@ public class LimiterContext {
 
     private void ChangeLimiter(String godName){
         switch (godName){
-            case "Athena": enemyLimiter = new Athena(); break;
+            case "Athena": limiter = new Athena(); break;
         }
     }
 }
