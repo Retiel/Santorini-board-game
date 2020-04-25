@@ -1,9 +1,12 @@
 package it.polimi.ingsw.PSP33.controller.rules;
 
-import it.polimi.ingsw.PSP33.controller.rules.build.BuildContext;
-import it.polimi.ingsw.PSP33.controller.rules.move.MoveContext;
-import it.polimi.ingsw.PSP33.controller.rules.turn.ExtraContext;
-import it.polimi.ingsw.PSP33.controller.rules.win.WinContext;
+import it.polimi.ingsw.PSP33.controller.rules._build.BuildContext;
+import it.polimi.ingsw.PSP33.controller.rules._enemyTurn.LimiterContext;
+import it.polimi.ingsw.PSP33.controller.rules._move.MoveContext;
+import it.polimi.ingsw.PSP33.controller.rules._extraTurn.ExtraContext;
+import it.polimi.ingsw.PSP33.controller.rules._win.WinContext;
+import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataBuffer;
+import it.polimi.ingsw.PSP33.controller.rules.buffer_control.FlagControl;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
@@ -33,6 +36,8 @@ public class TurnFlow {
     private BuildContext buildContext;
     private WinContext winContext;
     private ExtraContext extraContext;
+    private LimiterContext limiterContext;
+    private DataBuffer dataBuffer;
 
     public TurnFlow(Model model) {
         this.model = model;
@@ -51,6 +56,7 @@ public class TurnFlow {
         this.buildContext = new BuildContext(godName);
         this.winContext = new WinContext(godName);
         this.extraContext = new ExtraContext(godName);
+        this.limiterContext = new LimiterContext();
 
         model.notifyObservers(new NewAction(true, false, FlagControl.checkStart(godName)));
     }
@@ -106,6 +112,7 @@ public class TurnFlow {
      * @param coord coordinates of the new position
      */
     public void ExecMove(Coord coord){
+        winContext.checkWinCondition(board, pawn, GetCell.getCellAdapter(coord,board));
         moveContext.execMove(coord.getX(), coord.getY(), pawn, board);
         model.notifyObservers(new DataModel(model));
     }
@@ -154,7 +161,7 @@ public class TurnFlow {
         switch (action){
             case "move": return moveContext.checkMove(pawn, board);
             case "build": return buildContext.checkBuild(pawn, board);
-            case "extra": return extraContext.extraRequest(pawn, board);
+            case "extra": return extraContext.extraRequest(pawn, board, null);
             default:
                 return new ArrayList<>();
         }

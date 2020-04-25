@@ -6,6 +6,7 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -41,23 +42,23 @@ public class GetCell {
         int ix, iy;
         int size = board.getSIZE();
         Cell[][] grid = board.getGrid();
-        List<Cell> coordinates = new ArrayList<>();
+        List<Cell> cellList = new ArrayList<>();
 
         for(ix = 0; ix < size; ix++){
             for(iy = 0; iy < size; iy++){
 
                 if(AreAdiacent(pawn.getCoordX(), pawn.getCoordY(), ix, iy)){
-                    coordinates.add(grid[ix][iy]);
+                    cellList.add(grid[ix][iy]);
                 }
             }
         }
 
-        return coordinates;
+        return cellList;
     }
 
     /**
      * Method to get all cells where the player is allowed to place his pawn
-     * @param board the game board onject
+     * @param board the game board object
      *
      * @return List of Cell class object
      */
@@ -72,6 +73,23 @@ public class GetCell {
         }
 
         return cellList;
+    }
+
+    /**
+     * Method to get all cells of the board
+     * @param board the game board object
+     *
+     * @return List of Cell class object
+     */
+    public  static List<Cell> getAllCells(Board board){
+        List<Cell> allCells = new ArrayList<>();
+        Cell[][] grid = board.getGrid();
+
+        for (Cell[] row : grid){
+            allCells.addAll(Arrays.asList(row));
+        }
+
+        return allCells;
     }
 
     /**
