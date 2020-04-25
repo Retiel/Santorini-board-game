@@ -1,6 +1,5 @@
 package it.polimi.ingsw.PSP33.controller.rules.__implementation;
 
-import it.polimi.ingsw.PSP33.controller.rules.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules._extraTurn.ExtraAction;
 import it.polimi.ingsw.PSP33.model.Board;

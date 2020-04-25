@@ -16,10 +16,6 @@ public class DataBuffer {
 
     private Pawn currentPawn;
 
-    public DataBuffer(Pawn currentPawn) {
-        this.currentPawn = currentPawn;
-    }
-
     public Cell getOldPosition() {
         return oldPosition;
     }

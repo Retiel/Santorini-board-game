@@ -16,7 +16,6 @@ import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleMove;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
-import it.polimi.ingsw.PSP33.model.Pawn;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.ArrayList;
@@ -29,7 +28,6 @@ public class TurnFlow {
 
     private final Model model;
     private final Board board;
-    private Pawn pawn;
     private String godName;
 
     private MoveContext moveContext;
@@ -50,13 +48,13 @@ public class TurnFlow {
     public void NewTurnContext(){
 
         this.godName = model.getCurrentPlayer().getCard().getName();
-        this.pawn = null;
 
         this.moveContext = new MoveContext(godName);
         this.buildContext = new BuildContext(godName);
         this.winContext = new WinContext(godName);
         this.extraContext = new ExtraContext(godName);
         this.limiterContext = new LimiterContext();
+        this.dataBuffer = new DataBuffer();
 
         model.notifyObservers(new NewAction(true, false, FlagControl.checkStart(godName)));
     }
@@ -67,7 +65,7 @@ public class TurnFlow {
      */
     public void MoveFlow(int pawnNumber){
 
-        if (pawn == null) pawn = model.getCurrentPlayer().getPawnByNumber(pawnNumber);
+        if (dataBuffer.getCurrentPawn() == null) dataBuffer.setCurrentPawn(model.getCurrentPlayer().getPawnByNumber(pawnNumber));
 
         List<Coord> basicMove = GetCell.getListAdapter(getCellsBasic("move"));
         List<Coord> godsMove = GetCell.getListAdapter(getCellsContext("move"));
@@ -81,7 +79,7 @@ public class TurnFlow {
      */
     public void BuildFlow(int pawnNumber){
 
-        if (pawn == null) pawn = model.getCurrentPlayer().getPawnByNumber(pawnNumber);
+        if (dataBuffer.getCurrentPawn() == null) dataBuffer.setCurrentPawn(model.getCurrentPlayer().getPawnByNumber(pawnNumber));
 
         List<Coord> basicBuild = GetCell.getListAdapter(getCellsBasic("build"));
         List<Coord> godsBuild = GetCell.getListAdapter(getCellsContext("build"));
@@ -95,7 +93,7 @@ public class TurnFlow {
      */
     public void ExtraActionFlow(int pawnNumber){
 
-        if (pawn == null) pawn = model.getCurrentPlayer().getPawnByNumber(pawnNumber);
+        if (dataBuffer.getCurrentPawn() == null) dataBuffer.setCurrentPawn(model.getCurrentPlayer().getPawnByNumber(pawnNumber));
 
         List<Cell> cellListBasic = getCellsBasic(FlagControl.checkStringExtra(godName));
         List<Cell> cellListContext = getCellsContext(FlagControl.checkStringExtra(godName));
@@ -112,8 +110,8 @@ public class TurnFlow {
      * @param coord coordinates of the new position
      */
     public void ExecMove(Coord coord){
-        winContext.checkWinCondition(board, pawn, GetCell.getCellAdapter(coord,board));
-        moveContext.execMove(coord.getX(), coord.getY(), pawn, board);
+        winContext.checkWinCondition(board, dataBuffer.getCurrentPawn(), GetCell.getCellAdapter(coord,board));
+        moveContext.execMove(coord.getX(), coord.getY(), dataBuffer.getCurrentPawn(), board);
         model.notifyObservers(new DataModel(model));
     }
 
@@ -131,7 +129,7 @@ public class TurnFlow {
      * @param coord coordinates where to apply the extra action
      */
     public void ExecExtra(Coord coord){
-        extraContext.ExecAction(coord, pawn, board);
+        extraContext.ExecAction(coord, dataBuffer.getCurrentPawn(), board);
         model.notifyObservers(new DataModel(model));
     }
 
@@ -144,8 +142,8 @@ public class TurnFlow {
     private List<Cell> getCellsBasic(String action){
 
         switch (action){
-            case "move": return GetCell.getMovableCells(pawn, board);
-            case "build": return GetCell.getBuildableCells(pawn, board);
+            case "move": return GetCell.getMovableCells(dataBuffer.getCurrentPawn(), board);
+            case "build": return GetCell.getBuildableCells(dataBuffer.getCurrentPawn(), board);
             default:
                 return new ArrayList<>();
         }
@@ -159,9 +157,9 @@ public class TurnFlow {
      */
     private List<Cell> getCellsContext(String action){
         switch (action){
-            case "move": return moveContext.checkMove(pawn, board);
-            case "build": return buildContext.checkBuild(pawn, board);
-            case "extra": return extraContext.extraRequest(pawn, board, null);
+            case "move": return moveContext.checkMove(dataBuffer.getCurrentPawn(), board);
+            case "build": return buildContext.checkBuild(dataBuffer.getCurrentPawn(), board);
+            case "extra": return extraContext.extraRequest(dataBuffer.getCurrentPawn(), board, null);
             default:
                 return new ArrayList<>();
         }
