@@ -3,10 +3,7 @@ package it.polimi.ingsw.PSP33.events;
 import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
-import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
-import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleBuild;
-import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleExtraAction;
-import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleMove;
+import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
 /**
  * Custom interface used to implement the visitor pattern for messages sent to client
@@ -25,6 +22,11 @@ public interface MVEventVisitor {
      * Message to send to the player all inital data of the board
      */
     void visit(PossiblePlacement possiblePlacement);
+
+    /**
+     * Message to comunicate to the losing statement
+     */
+    void visit(YouLose youLose);
 
     /**
      * Message to request the player what to do at the star of his turn

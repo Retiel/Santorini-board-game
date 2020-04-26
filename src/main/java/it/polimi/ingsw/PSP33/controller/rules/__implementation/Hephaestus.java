@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Build with Hephaestus rules
+ * Extra action with Hephaestus rules
  *
  */
 public class Hephaestus implements ExtraAction {

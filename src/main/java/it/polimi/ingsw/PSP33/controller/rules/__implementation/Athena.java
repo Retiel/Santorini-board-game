@@ -9,12 +9,22 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Limiter by Athena
+ *
+ */
 public class Athena implements Limiter {
 
     @Override
-    public List<Cell> Limit(List<Cell> cellList, Pawn pawn, Board board) {
+    public boolean activation(Pawn pawn, Cell newCell, Board board) {
+        Cell oldCell = GetCell.getCellAdapter(pawn.getCoord(), board);
+        return newCell.getFloor() > oldCell.getFloor();
+    }
 
-        Cell position = GetCell.getCellAdapter(pawn.getCoord(), board);
-        return cellList.stream().filter(c -> c.getFloor() < position.getFloor()).collect(Collectors.toList());
+    @Override
+    public List<Cell> limit(List<Cell> cellList, Pawn enemyPawn, Board board) {
+
+        Cell position = GetCell.getCellAdapter(enemyPawn.getCoord(), board);
+        return cellList.stream().filter(c -> c.getFloor() >= position.getFloor()).collect(Collectors.toList());
     }
 }

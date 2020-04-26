@@ -8,5 +8,7 @@ import java.util.List;
 
 public interface Limiter {
 
-    List<Cell> Limit(List<Cell> cellList, Pawn pawn, Board board);
+    boolean activation(Pawn pawn, Cell cell, Board board);
+
+    List<Cell> limit(List<Cell> cellList, Pawn enemyPawn, Board board);
 }

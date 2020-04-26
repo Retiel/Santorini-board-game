@@ -7,15 +7,13 @@ import it.polimi.ingsw.PSP33.controller.rules._extraTurn.ExtraContext;
 import it.polimi.ingsw.PSP33.controller.rules._win.WinContext;
 import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataBuffer;
 import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataControl;
-import it.polimi.ingsw.PSP33.controller.rules.buffer_control.FlagControl;
+import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataControl;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
-import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
-import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleBuild;
-import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleExtraAction;
-import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleMove;
+import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
+import it.polimi.ingsw.PSP33.model.Player;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.ArrayList;
@@ -39,6 +37,7 @@ public class TurnFlow {
     public TurnFlow(Model model) {
         this.model = model;
         this.board = model.getBoard();
+        this.limiterContext = new LimiterContext();
     }
 
     /**
@@ -53,9 +52,10 @@ public class TurnFlow {
         this.buildContext = new BuildContext(dataBuffer.getGodName());
         this.winContext = new WinContext(dataBuffer.getGodName());
         this.extraContext = new ExtraContext(dataBuffer.getGodName());
-        this.limiterContext = new LimiterContext();
-
-        model.notifyObservers(new NewAction(true, false, FlagControl.checkStart(dataBuffer.getGodName())));
+        String name = dataBuffer.getGodName();
+        limiterContext.resetGodTrigger(name, DataControl.limitReset(name));
+        
+        model.notifyObservers(new NewAction(true, false, DataControl.checkStart(dataBuffer.getGodName())));
     }
 
     /**
@@ -66,20 +66,20 @@ public class TurnFlow {
 
         if (dataBuffer.getCurrentPawn() == null) dataBuffer.setCurrentPawn(model.getCurrentPlayer().getPawnByNumber(pawnNumber));
 
-        /* NOTE! the list have to be excluse to unless the effect afflict the basic list by shrinking it*/
+        /* NOTE! the list have to be excluse to unless the effect afflict the basic list by shrinking it */
         List<Coord> basicMove = getBasicFlow("move");
         List<Coord> godsMove = getContextFlow("move");
 
         if (noActionAvailable(basicMove, godsMove)){
 
             setData(basicMove, godsMove);
-            if(DataControl.ExclusiveList(basicMove, godsMove)){
+            if(DataControl.exclusiveList(basicMove, godsMove)){
                 model.notifyObservers(new PossibleMove(basicMove, godsMove));
             }
             else {
-                model.notifyObservers(new PossibleMove(new ArrayList<>(), godsMove)); // only Prometheus might use this branch
+                model.notifyObservers(new PossibleMove(godsMove, new ArrayList<>())); // only Prometheus might use this branch
             }
-        }else model.notifyObservers(null/* MISSING MESSAGE YOU LOSE*/); //FIXME
+        }else loserBracket();
     }
 
     /**
@@ -94,8 +94,8 @@ public class TurnFlow {
         List<Coord> godsBuild = getContextFlow("build");
 
         setData(basicBuild, godsBuild);
-        if (noActionAvailable(basicBuild, godsBuild)) model.notifyObservers(new PossibleBuild(basicBuild, godsBuild, FlagControl.checkBuild(dataBuffer.getGodName())));
-        else model.notifyObservers(null/* MISSING MESSAGE YOU LOSE*/); //FIXME
+        if (noActionAvailable(basicBuild, godsBuild)) model.notifyObservers(new PossibleBuild(basicBuild, godsBuild, DataControl.checkBuild(dataBuffer.getGodName())));
+        else loserBracket();
     }
 
     /**
@@ -106,7 +106,7 @@ public class TurnFlow {
 
         if (dataBuffer.getCurrentPawn() == null) dataBuffer.setCurrentPawn(model.getCurrentPlayer().getPawnByNumber(pawnNumber));
 
-        List<Coord> gods = getContextFlow(FlagControl.checkStringExtra(dataBuffer.getGodName()));
+        List<Coord> gods = getContextFlow("extra");
 
         setData(null, gods);
         model.notifyObservers(new PossibleExtraAction(null, gods));
@@ -140,7 +140,7 @@ public class TurnFlow {
             model.notifyObservers(new DataModel(model));
         }
 
-        model.notifyObservers(new PossibleBuild(dataBuffer.getCoordList(), dataBuffer.getCoordListGods(), FlagControl.checkBuild(dataBuffer.getGodName())));
+        model.notifyObservers(new PossibleBuild(dataBuffer.getCoordList(), dataBuffer.getCoordListGods(), DataControl.checkBuild(dataBuffer.getGodName())));
     }
 
     /**
@@ -156,6 +156,28 @@ public class TurnFlow {
         }
 
         model.notifyObservers(new PossibleExtraAction(dataBuffer.getCoordList(), dataBuffer.getCoordListGods()));
+    }
+
+    /**
+     * Method to comunicate and chage the state of the game cause losing player
+     */
+    private void loserBracket(){
+        model.notifyObservers(new YouLose());
+
+        List<Player> players = model.getPlayers();
+        players.remove(model.getCurrentPlayer());
+
+        if (players.size() > 1) model.setPlayers(players);
+        else {
+            //TODO: /* Missing default win definition */
+        }
+    }
+
+    /**
+     * Method to comunicate and chage the state of the game cause win condition met
+     */
+    private void winningBracket(){
+      //TODO:  /* Missing implementation */
     }
 
     /**
@@ -191,7 +213,7 @@ public class TurnFlow {
     }
 
     /**
-     * Method check if the list in input are empty
+     * Method check if the list in input are empty (Losing condition)
      * @param coordList1 first list to control
      * @param coordList2 second list to control
      *
@@ -254,6 +276,8 @@ public class TurnFlow {
                 dataBuffer.setOldExtra(cell);
                 break;
         }
+        
+        limiterContext.activateGodLimiter(dataBuffer.getCurrentPawn(), coord, board);
     }
 
     /**

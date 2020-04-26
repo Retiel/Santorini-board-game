@@ -10,6 +10,9 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 
 import java.util.List;
 
+/**
+ * Class that manage the move context
+ */
 public class MoveContext {
 
     private Move move;
@@ -27,14 +30,27 @@ public class MoveContext {
 
     }
 
+    /**
+     * Method to check available move based on the god effect
+     * @param p pawn involved
+     * @param b board of the game
+     *
+     * @return List of Cell object
+     */
     public List<Cell> checkMove(Pawn p, Board b){
         return  move.checkMove(p,b);
     }
 
+    /**
+     * Method to execute move based on the god effect
+     * @param coordX coordinate x
+     * @param coordY coordinate y
+     * @param p pawn involved
+     * @param m model used also for notify
+     */
     public void execMove(int coordX, int coordY, Pawn p, Model m){
         Cell newCell = m.getBoard().getGrid()[coordX][coordY];
         move.executeMove(newCell, p, m);
     }
-
 
 }

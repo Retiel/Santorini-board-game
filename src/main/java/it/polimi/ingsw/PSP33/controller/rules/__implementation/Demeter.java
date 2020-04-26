@@ -13,7 +13,7 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 import java.util.List;
 
 /**
- * Build with Demeter rules
+ * Extra action with Demeter rules
  *
  */
 public class Demeter implements ExtraAction {

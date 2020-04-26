@@ -13,6 +13,9 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.List;
 
+/**
+ * Class that manage the extra action context
+ */
 public class ExtraContext {
 
     private ExtraAction extraAction;
@@ -29,11 +32,25 @@ public class ExtraContext {
         }
     }
 
+    /**
+     * Method to check available move based on the god effect
+     * @param pawn pawn involved
+     * @param board board of the game
+     * @param dataBuffer data bank for all necessities
+     *
+     * @return List of Cell object
+     */
     public List<Cell> extraRequest(Pawn pawn, Board board, DataBuffer dataBuffer){
         if (this.extraAction != null) return extraAction.checkPlusAction(pawn, board, dataBuffer);
         return null;
     }
 
+    /**
+     * Method to execute move based on the god effect
+     * @param coord coordinates
+     * @param pawn pawn involved
+     * @param model model used also for notify
+     */
     public void ExecAction(Coord coord, Pawn pawn, Model model){
         Cell cell =  model.getBoard().getGrid()[coord.getX()][coord.getY()];
         extraAction.applyAction(cell, pawn, model);

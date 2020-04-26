@@ -5,6 +5,10 @@ import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
+/**
+ * Win condition by Pan
+ *
+ */
 public class Pan implements WinCondition {
 
     @Override

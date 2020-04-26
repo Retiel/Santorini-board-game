@@ -7,6 +7,10 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class to bank data for different usage in the TurnFlow, simple version of data memory
+ *
+ */
 public class DataBuffer {
 
     private Cell oldPosition;

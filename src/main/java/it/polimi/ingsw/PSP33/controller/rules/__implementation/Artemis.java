@@ -13,7 +13,7 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 import java.util.List;
 
 /**
- * Movement with the rule of Artemis
+ * Extra action with the rule of Artemis
  *
  */
 public class Artemis implements ExtraAction {

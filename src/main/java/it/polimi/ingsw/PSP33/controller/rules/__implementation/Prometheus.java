@@ -14,9 +14,11 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Extra action nad movement with the rule of Prometheus
+ *
+ */
 public class Prometheus implements Move, ExtraAction {
-
-    //FIXME: check
 
     @Override
     public List<Cell> checkMove(Pawn pawn, Board board) {
