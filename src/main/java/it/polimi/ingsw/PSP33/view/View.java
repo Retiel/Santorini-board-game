@@ -13,7 +13,7 @@ import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
 /**
  * Implementation of the visitor pattern
  * */
-public class View extends Observable<VCEvent> implements Observer<MVEvent>, MVEventVisitor {
+public class View extends AbstractView{
 
     @Override
     public void update(MVEvent mvEvent) {
@@ -22,7 +22,7 @@ public class View extends Observable<VCEvent> implements Observer<MVEvent>, MVEv
 
     @Override
     public void visit(MVEventSample mvEventSample) {
-
+        System.out.print("Success\n");
     }
 
     @Override

@@ -1,5 +1,6 @@
 package it.polimi.ingsw.PSP33.controller.rules;
 
+import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.model.Model;
@@ -11,6 +12,7 @@ import it.polimi.ingsw.PSP33.model.Player;
 public class TurnControl {
 
     private final Model model;
+
     public TurnControl(Model model) {
         this.model = model;
     }
@@ -31,4 +33,8 @@ public class TurnControl {
         model.notifyObservers(new DataModel(model));
     }
 
+    /* method used for testing */
+    public void notifyView(MVEvent mvEvent){
+        model.notifyObservers(mvEvent);
+    }
 }

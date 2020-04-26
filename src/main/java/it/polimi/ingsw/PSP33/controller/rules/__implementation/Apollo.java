@@ -39,10 +39,11 @@ public class Apollo implements Move {
         Pawn other = newCell.getOccupied();
 
         BasicAction.MovePawn(oldCell, newCell, pawn);
-        BasicAction.MovePawn(newCell, oldCell, other);
-
-        oldCell.setOccupied(other);
-        newCell.setOccupied(pawn);
+        if(other != null) {
+            BasicAction.MovePawn(newCell, oldCell, other);
+            oldCell.setOccupied(other);
+            newCell.setOccupied(pawn);
+        }
 
         model.notifyObservers(new NewAction(false, true, false));
     }

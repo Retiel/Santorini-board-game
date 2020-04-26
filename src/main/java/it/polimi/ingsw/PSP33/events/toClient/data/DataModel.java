@@ -18,6 +18,6 @@ public class DataModel extends MVEvent {
 
     @Override
     public void accept(MVEventVisitor MVEventVisitor) {
-
+        MVEventVisitor.visit(this);
     }
 }

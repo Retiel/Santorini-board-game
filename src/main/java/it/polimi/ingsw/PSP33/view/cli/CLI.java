@@ -3,10 +3,7 @@ package it.polimi.ingsw.PSP33.view.cli;
 import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
-import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
-import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleBuild;
-import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleExtraAction;
-import it.polimi.ingsw.PSP33.events.toClient.turn.PossibleMove;
+import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 
 /**
@@ -33,6 +30,11 @@ public class CLI extends AbstractView {
 
     @Override
     public void visit(PossiblePlacement possiblePlacement) {
+
+    }
+
+    @Override
+    public void visit(YouLose youLose) {
 
     }
 

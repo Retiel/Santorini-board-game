@@ -20,6 +20,6 @@ public class PossiblePlacement extends MVEvent{
 
     @Override
     public void accept(MVEventVisitor MVEventVisitor) {
-
+        MVEventVisitor.visit(this);
     }
 }

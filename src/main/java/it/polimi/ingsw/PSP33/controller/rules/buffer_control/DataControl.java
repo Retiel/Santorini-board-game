@@ -64,8 +64,8 @@ public class DataControl {
      */
     public static boolean limitReset(String name){
         switch (name){
-            case "Athena": return false;
-            default: return true;
+            case "Athena":
+            default: return false;
         }
     }
 

@@ -26,6 +26,6 @@ public class PossibleMove extends MVEvent {
 
     @Override
     public void accept(MVEventVisitor MVEventVisitor) {
-
+        MVEventVisitor.visit(this);
     }
 }

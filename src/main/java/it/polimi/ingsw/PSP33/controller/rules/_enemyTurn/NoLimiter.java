@@ -10,7 +10,7 @@ public class NoLimiter implements Limiter{
 
     @Override
     public boolean activation(Pawn pawn, Cell cell, Board board) {
-
+        return true;
     }
 
     @Override

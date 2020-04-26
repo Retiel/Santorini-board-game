@@ -7,6 +7,6 @@ public class YouLose extends MVEvent {
 
     @Override
     public void accept(MVEventVisitor MVEventVisitor) {
-
+        MVEventVisitor.visit(this);
     }
 }

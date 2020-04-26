@@ -54,14 +54,16 @@ public class LimiterContext {
 
     /**
      * Method to activate a god effect limit
-     * @param c coordinates
+     * @param godName
      * @param p pawn involved
+     * @param c coordinates
      * @param b board
      */
-    public void activateGodLimiter(Pawn p, Coord c, Board b){
+    public void activateGodLimiter(String godName, Pawn p, Coord c, Board b){
         Cell cell = GetCell.getCellAdapter(c, b);
+        ChangeLimiter(godName);
         for (ActiveGods gods : allEffect){
-            gods.setEnable(limiter.activation(p,cell,b));
+            if (godName.equals(gods.getName())) gods.setEnable(limiter.activation(p,cell,b));
         }
     }
 

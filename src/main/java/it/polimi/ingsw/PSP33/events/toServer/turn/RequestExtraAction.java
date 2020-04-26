@@ -17,6 +17,6 @@ public class RequestExtraAction extends VCEvent {
 
     @Override
     public void accept(VCEventVisitor VCEventVisitor) {
-
+        VCEventVisitor.visit(this);
     }
 }

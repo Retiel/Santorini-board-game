@@ -7,7 +7,6 @@ import it.polimi.ingsw.PSP33.controller.rules._extraTurn.ExtraContext;
 import it.polimi.ingsw.PSP33.controller.rules._win.WinContext;
 import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataBuffer;
 import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataControl;
-import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataControl;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.model.Board;
@@ -34,9 +33,13 @@ public class TurnFlow {
     private LimiterContext limiterContext;
     private DataBuffer dataBuffer;
 
+    /**
+     * Constructor
+     */
     public TurnFlow(Model model) {
         this.model = model;
         this.board = model.getBoard();
+        this.dataBuffer = new DataBuffer();
         this.limiterContext = new LimiterContext();
     }
 
@@ -46,13 +49,14 @@ public class TurnFlow {
     public void newTurnContext(){
 
         this.dataBuffer = new DataBuffer();
-        dataBuffer.setGodName(model.getCurrentPlayer().getCard().getName());
+        String name = model.getCurrentPlayer().getCard().getName();
+        dataBuffer.setGodName(name);
 
-        this.moveContext = new MoveContext(dataBuffer.getGodName());
-        this.buildContext = new BuildContext(dataBuffer.getGodName());
-        this.winContext = new WinContext(dataBuffer.getGodName());
-        this.extraContext = new ExtraContext(dataBuffer.getGodName());
-        String name = dataBuffer.getGodName();
+        this.moveContext = new MoveContext(name);
+        this.buildContext = new BuildContext(name);
+        this.winContext = new WinContext(name);
+        this.extraContext = new ExtraContext(name);
+
         limiterContext.resetGodTrigger(name, DataControl.limitReset(name));
         
         model.notifyObservers(new NewAction(true, false, DataControl.checkStart(dataBuffer.getGodName())));
@@ -124,8 +128,7 @@ public class TurnFlow {
             moveContext.execMove(coord.getX(), coord.getY(), dataBuffer.getCurrentPawn(), model);
             model.notifyObservers(new DataModel(model));
         }
-
-        model.notifyObservers(new PossibleMove(dataBuffer.getCoordList(), dataBuffer.getCoordListGods()));
+        else model.notifyObservers(new PossibleMove(dataBuffer.getCoordList(), dataBuffer.getCoordListGods()));
     }
 
     /**
@@ -139,8 +142,7 @@ public class TurnFlow {
             buildContext.execBuild(coord.getX(), coord.getY(), roof, model);
             model.notifyObservers(new DataModel(model));
         }
-
-        model.notifyObservers(new PossibleBuild(dataBuffer.getCoordList(), dataBuffer.getCoordListGods(), DataControl.checkBuild(dataBuffer.getGodName())));
+        else model.notifyObservers(new PossibleBuild(dataBuffer.getCoordList(), dataBuffer.getCoordListGods(), DataControl.checkBuild(dataBuffer.getGodName())));
     }
 
     /**
@@ -154,8 +156,7 @@ public class TurnFlow {
             extraContext.ExecAction(coord, dataBuffer.getCurrentPawn(), model);
             model.notifyObservers(new DataModel(model));
         }
-
-        model.notifyObservers(new PossibleExtraAction(dataBuffer.getCoordList(), dataBuffer.getCoordListGods()));
+        else model.notifyObservers(new PossibleExtraAction(dataBuffer.getCoordList(), dataBuffer.getCoordListGods()));
     }
 
     /**
@@ -277,7 +278,7 @@ public class TurnFlow {
                 break;
         }
         
-        limiterContext.activateGodLimiter(dataBuffer.getCurrentPawn(), coord, board);
+        limiterContext.activateGodLimiter(dataBuffer.getGodName(), dataBuffer.getCurrentPawn(), coord, board);
     }
 
     /**

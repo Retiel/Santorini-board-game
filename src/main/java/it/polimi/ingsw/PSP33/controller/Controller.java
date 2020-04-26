@@ -4,6 +4,7 @@ import it.polimi.ingsw.PSP33.controller.rules.SetUpTurn;
 import it.polimi.ingsw.PSP33.controller.rules.TurnControl;
 import it.polimi.ingsw.PSP33.controller.rules.TurnFlow;
 import it.polimi.ingsw.PSP33.events.VCEventVisitor;
+import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.events.toServer.VCEventSample;
@@ -28,12 +29,7 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
 
     @Override
     public void visit(VCEventSample vcEventSample) {
-
-    }
-
-    @Override
-    public void update(VCEvent serverMessage) {
-        serverMessage.accept(this);
+        turnControl.notifyView(new MVEventSample());
     }
 
     @Override
@@ -62,13 +58,11 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
     @Override
     public void visit(MoveAction moveAction) {
         turnFlow.execMove(moveAction.getCoord());
-
     }
 
     @Override
     public void visit(BuildAction buildAction) {
         turnFlow.execBuild(buildAction.getCoord(), buildAction.isRoof());
-
     }
 
     @Override
@@ -89,6 +83,11 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
     @Override
     public void visit(RequestExtraAction requestExtraAction) {
         turnFlow.extraActionFlow(requestExtraAction.getPawn());
+    }
+
+    @Override
+    public void update(VCEvent serverMessage) {
+        serverMessage.accept(this);
     }
 
 

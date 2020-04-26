@@ -4,7 +4,6 @@ import it.polimi.ingsw.PSP33.controller.rules.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules._build.BuildContext;
 import it.polimi.ingsw.PSP33.model.*;
 import org.junit.Before;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.awt.*;
@@ -16,6 +15,7 @@ import static org.junit.Assert.*;
 
 public class MoveContextTest {
 
+    private static Model testModel;
     private static Board testBoard;
     private static Player testPlayer1;
     private static Player testPlayer2;
@@ -62,7 +62,7 @@ public class MoveContextTest {
         testPlayers.add(testPlayer1);
         testPlayers.add(testPlayer2);
 
-        Model testModel = new Model(testPlayers);
+        testModel = new Model(testPlayers);
         testBoard = testModel.getBoard();
 
         testBoard.getGrid()[0][1].setFloor(1);
@@ -119,8 +119,8 @@ public class MoveContextTest {
 
         testExecMethod(testSample,3,1, testPawn);
 
-        testSampleBuild.execBuild(4,1, testBoard, true);
-        testSampleBuild.execBuild(4,1, testBoard, true);
+        testSampleBuild.execBuild(4,1,  true, testModel);
+        testSampleBuild.execBuild(4,1, true, testModel);
         assertEquals(3, testBoard.getGrid()[4][1].getFloor());
 
         List<Cell> sample2 = new ArrayList<>();
@@ -189,7 +189,7 @@ public class MoveContextTest {
 
     private void testExecMethod(MoveContext moveContext, int x, int y, Pawn pawn){
 
-        moveContext.execMove(x, y, pawn, testBoard);
+        moveContext.execMove(x, y, pawn, testModel);
         Cell newPos = testBoard.getGrid()[x][y];
 
         assertThat(newPos.getOccupied(), is(pawn));

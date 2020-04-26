@@ -32,6 +32,6 @@ public class PossibleBuild extends MVEvent {
 
     @Override
     public void accept(MVEventVisitor MVEventVisitor) {
-
+        MVEventVisitor.visit(this);
     }
 }
