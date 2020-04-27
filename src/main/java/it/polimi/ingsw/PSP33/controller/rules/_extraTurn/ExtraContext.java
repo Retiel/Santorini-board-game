@@ -41,8 +41,7 @@ public class ExtraContext {
      * @return List of Cell object
      */
     public List<Cell> extraRequest(Pawn pawn, Board board, DataBuffer dataBuffer){
-        if (this.extraAction != null) return extraAction.checkPlusAction(pawn, board, dataBuffer);
-        return null;
+        return extraAction.checkPlusAction(pawn, board, dataBuffer);
     }
 
     /**

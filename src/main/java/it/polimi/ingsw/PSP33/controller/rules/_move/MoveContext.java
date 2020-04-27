@@ -1,6 +1,8 @@
 package it.polimi.ingsw.PSP33.controller.rules._move;
 
+import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Apollo;
+import it.polimi.ingsw.PSP33.controller.rules.__implementation.Artemis;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Minotaur;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Prometheus;
 import it.polimi.ingsw.PSP33.model.Board;
@@ -22,6 +24,7 @@ public class MoveContext {
         this.context = godName;
         switch (godName){
             case "Apollo": this.move = new Apollo(); break;
+            case "Artemis": this.move = new Artemis(); break;
             case "Minotaur": this.move = new Minotaur(); break;
             case "Prometheus": this.move = new Prometheus(); break;
             default:

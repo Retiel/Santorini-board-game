@@ -97,9 +97,17 @@ public class TurnFlow {
         List<Coord> basicBuild = getBasicFlow("build");
         List<Coord> godsBuild = getContextFlow("build");
 
-        setData(basicBuild, godsBuild);
-        if (noActionAvailable(basicBuild, godsBuild)) model.notifyObservers(new PossibleBuild(basicBuild, godsBuild, DataControl.checkBuild(dataBuffer.getGodName())));
-        else loserBracket();
+
+        if (noActionAvailable(basicBuild, godsBuild)){
+
+            setData(basicBuild, godsBuild);
+            if(DataControl.exclusiveList(basicBuild, godsBuild)){
+                model.notifyObservers(new PossibleBuild(basicBuild, godsBuild, DataControl.checkBuild(dataBuffer.getGodName())));
+            }
+            else {
+                model.notifyObservers(new PossibleBuild(godsBuild, new ArrayList<>(), DataControl.checkBuild(dataBuffer.getGodName())));
+            }
+        }else loserBracket();
     }
 
     /**
@@ -113,7 +121,7 @@ public class TurnFlow {
         List<Coord> gods = getContextFlow("extra");
 
         setData(null, gods);
-        model.notifyObservers(new PossibleExtraAction(null, gods));
+        model.notifyObservers(new PossibleExtraAction(new ArrayList<>(), gods));
     }
 
     /**

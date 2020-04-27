@@ -1,6 +1,8 @@
 package it.polimi.ingsw.PSP33.controller.rules._build;
 
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Atlas;
+import it.polimi.ingsw.PSP33.controller.rules.__implementation.Demeter;
+import it.polimi.ingsw.PSP33.controller.rules.__implementation.Hephaestus;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
@@ -19,6 +21,8 @@ public class BuildContext {
 
         switch (godName){
             case "Atlas": this.build = new Atlas(); break;
+            case "Demeter": this.build = new Demeter(); break;
+            case "Hephaestus": this.build = new Hephaestus(); break;
             default:
                 this.build = new BuildBasic();
         }

@@ -59,6 +59,9 @@ public class testView extends AbstractView {
 
     @Override
     public void visit(PossibleExtraAction possibleExtraAction) {
-
+        System.out.print("Possible extra action update...\n");
+        System.out.print(possibleExtraAction.getCoordList().toString()+"\n");
+        System.out.print(possibleExtraAction.getGodsList().toString()+"\n");
+        System.out.print("Possible extra action update finished\n");
     }
 }

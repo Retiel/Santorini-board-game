@@ -43,13 +43,12 @@ public class testClient {
 
         view.notifyObservers(new NewTurn()); /* test new turn branch message */
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        view.notifyObservers(new RequestPossibleMove(2)); /* test Move branch message */
-        view.notifyObservers(new MoveAction(new Coord(2,2)));
+        view.notifyObservers(new RequestPossibleMove(1)); /* test Move branch message */
+        view.notifyObservers(new MoveAction(new Coord(0,1)));
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        view.notifyObservers(new RequestPossibleBuild(2)); /* test Build branch message */
-        view.notifyObservers(new BuildAction(new Coord(2,3), false));
+        //view.notifyObservers(new RequestPossibleBuild(1)); /* test Build branch message */
+        //view.notifyObservers(new BuildAction(new Coord(2,3), false));
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        //changeGod(testPlayer1, testPlayer2);
         //view.notifyObservers(new RequestExtraAction(1)); /* test Extra Action branch message */
 
         //TODO : test extra action
@@ -89,8 +88,8 @@ public class testClient {
     private static void modelScenario(Model model, Player testPlayer1,Player testPlayer2){
 
         model.setCurrentPlayer(testPlayer2);
-        testPlayer1.setCard(new God("Apollo", "Eminem - Berzerk (Official Music Video) (Explicit)"));
-        testPlayer2.setCard(new God("Athena", "Amazing Trees"));
+        testPlayer1.setCard(new God("Artemis", "Eminem - Berzerk (Official Music Video) (Explicit)"));
+        testPlayer2.setCard(new God("Pan", "Amazing Trees"));
 
         Board board = model.getBoard();
 
@@ -126,7 +125,7 @@ public class testClient {
     }
 
     private static void changeGod(Player testPlayer1,Player testPlayer2){
-        testPlayer1.setCard(new God("Artemis", "Eminem - Berzerk (Official Music Video) (Explicit)"));
+        testPlayer1.setCard(new God("Apollo", "Eminem - Berzerk (Official Music Video) (Explicit)"));
         testPlayer2.setCard(new God("Pan", "Amazing Trees"));
     }
 }

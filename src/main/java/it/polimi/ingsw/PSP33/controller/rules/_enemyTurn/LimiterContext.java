@@ -26,7 +26,7 @@ public class LimiterContext {
 
         this.allEffect =  new ArrayList<>();
         allEffect.add(new ActiveGods("Athena", false));
-        allEffect.add(new ActiveGods("noLimit", true));
+        allEffect.add(new ActiveGods("noLimit", false));
     }
 
     /**
@@ -54,7 +54,7 @@ public class LimiterContext {
 
     /**
      * Method to activate a god effect limit
-     * @param godName
+     * @param godName name of the god to enable
      * @param p pawn involved
      * @param c coordinates
      * @param b board
