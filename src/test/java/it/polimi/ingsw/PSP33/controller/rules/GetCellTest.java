@@ -4,6 +4,8 @@ import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
 import it.polimi.ingsw.PSP33.model.Player;
+import it.polimi.ingsw.PSP33.utils.Coord;
+import static org.junit.Assert.*;
 import org.junit.*;
 
 import java.awt.*;
@@ -15,6 +17,35 @@ public class GetCellTest {
     private static Board testBoard;
     private static Pawn testPawn;
 
+    /*
+        NOTE! use this legend as a reference for the diffent test cases
+
+      legend:
+      * -> roof = true
+      0,...,3 -> floor number
+      p -> pawn position in the test
+      e -> other pawn position
+
+      -> Graphical rappresentation of the board state:
+                 _______ _______ _______ _______ _______
+                |       |       |       |       |       |
+                |   0   |   1   |   0   |   0   |   0   |
+                |_______|_______|_______|_______|_______|
+                | *     | p     |   *   |       |       |
+                |   0   |   1   |   3   |   0   |   0   |
+                |_______|_______|_______|_______|_______|
+                | p     | p     |       |       |       |
+                |   0   |   3   |   0   |   0   |   0   |
+                |_______|_______|_______|_______|_______|
+                |   *   |       | e     |       |       |
+                |   0   |   2   |   2   |   0   |   0   |
+                |_______|_______|_______|_______|_______|
+                |       |       |       |       |       |
+                |   0   |   1   |   0   |   0   |   0   |
+                |_______|_______|_______|_______|_______|
+
+    */
+
     @BeforeClass
     public static void setUp(){
 
@@ -23,30 +54,6 @@ public class GetCellTest {
         testPlayers.add(testPlayer1);
 
         testBoard = new Board();
-/*
-Graphical set up rappresentation
-legend:
- * -> roof = true
- 0,...,3 -> floor number
- P -> pawn position in the test
- e -> other pawn position
-         _______ _______ _______ _______ _______
-        |       |       |       |       |       |
-        |   0   |   1   |   0   |   0   |   0   |
-        |_______|_______|_______|_______|_______|
-        | *     | p     |   *   |       |       |
-        |   0   |   1   |   3   |   0   |   0   |
-        |_______|_______|_______|_______|_______|
-        | p     | p     |       |       |       |
-        |   0   |   3   |   0   |   0   |   0   |
-        |_______|_______|_______|_______|_______|
-        |   *   |       | e     |       |       |
-        |   0   |   2   |   2   |   0   |   0   |
-        |_______|_______|_______|_______|_______|
-        |       |       |       |       |       |
-        |   0   |   1   |   0   |   0   |   0   |
-        |_______|_______|_______|_______|_______|
- */
 
         testBoard.getGrid()[0][1].setFloor(1);
         testBoard.getGrid()[1][1].setFloor(1);
@@ -64,10 +71,11 @@ legend:
 
         testPawn = testPlayer1.getPawns()[0];
 
-        GetCell testSample = GetCell.getInstance();
-        Assert.assertEquals(testSample, GetCell.getInstance());
+        GetCell testSample = GetCell.getInstance();assertEquals(testSample, GetCell.getInstance());
     }
 
+
+    /* Test case simulating a situation described in position (1,1) */
     @Test
     public void testPosition_1_1() {
 
@@ -82,8 +90,7 @@ legend:
         testPawn.setCoords(1,1);
 
         List<Cell> resultSample = GetCell.getAdjacentCells(testPawn, testBoard);
-
-        Assert.assertEquals(8, resultSample.size());
+        assertEquals(8, resultSample.size());
 
         List<Cell> expectedList = new ArrayList<>();
         expectedList.add(testBoard.getGrid()[0][0]);
@@ -95,8 +102,7 @@ legend:
         expectedList.add(testBoard.getGrid()[2][1]);
         expectedList.add(testBoard.getGrid()[2][2]);
 
-        for(Cell sample : resultSample){
-            Assert.assertTrue(expectedList.contains(sample));
+        for(Cell sample : resultSample){ assertTrue(expectedList.contains(sample));
         }
     }
     private void getAdjacentCells_testPosition_2_1(){
@@ -104,8 +110,7 @@ legend:
         testPawn.setCoords(2,1);
 
         List<Cell> resultSample2 = GetCell.getAdjacentCells(testPawn, testBoard);
-
-        Assert.assertEquals(8, resultSample2.size());
+        assertEquals(8, resultSample2.size());
 
         List<Cell> expectedList2 = new ArrayList<>();
         expectedList2.add(testBoard.getGrid()[1][0]);
@@ -117,8 +122,7 @@ legend:
         expectedList2.add(testBoard.getGrid()[3][1]);
         expectedList2.add(testBoard.getGrid()[3][2]);
 
-        for(Cell sample : resultSample2){
-            Assert.assertTrue(expectedList2.contains(sample));
+        for(Cell sample : resultSample2){ assertTrue(expectedList2.contains(sample));
         }
     }
     private void getAdjacentCells_testPosition_2_0(){
@@ -126,8 +130,7 @@ legend:
         testPawn.setCoords(2,0);
 
         List<Cell> resultSample3 = GetCell.getAdjacentCells(testPawn, testBoard);
-
-        Assert.assertEquals(5, resultSample3.size());
+        assertEquals(5, resultSample3.size());
 
         List<Cell> expectedList3 = new ArrayList<>();
         expectedList3.add(testBoard.getGrid()[1][0]);
@@ -136,11 +139,11 @@ legend:
         expectedList3.add(testBoard.getGrid()[3][0]);
         expectedList3.add(testBoard.getGrid()[3][1]);
 
-        for(Cell sample : resultSample3){
-            Assert.assertTrue(expectedList3.contains(sample));
+        for(Cell sample : resultSample3){ assertTrue(expectedList3.contains(sample));
         }
     }
 
+    /* Test case simulating a situation described in position (2,1) */
     @Test
     public void testPosition_2_1() {
 
@@ -155,8 +158,7 @@ legend:
         testPawn.setCoords(1,1);
 
         List<Cell> resultSample = GetCell.getMovableCells(testPawn, testBoard);
-
-        Assert.assertEquals(5, resultSample.size());
+        assertEquals(5, resultSample.size());
 
         List<Cell> expectedList = new ArrayList<>();
         expectedList.add(testBoard.getGrid()[0][0]);
@@ -165,8 +167,7 @@ legend:
         expectedList.add(testBoard.getGrid()[2][0]);
         expectedList.add(testBoard.getGrid()[2][2]);
 
-        for(Cell sample : resultSample){
-            Assert.assertTrue(expectedList.contains(sample));
+        for(Cell sample : resultSample){ assertTrue(expectedList.contains(sample));
         }
     }
     private void getMovableCell_testPosition_2_1(){
@@ -174,8 +175,7 @@ legend:
         testPawn.setCoords(2,1);
 
         List<Cell> resultSample2 = GetCell.getMovableCells(testPawn, testBoard);
-
-        Assert.assertEquals(5, resultSample2.size());
+        assertEquals(5, resultSample2.size());
 
         List<Cell> expectedList2 = new ArrayList<>();
         expectedList2.add(testBoard.getGrid()[1][1]);
@@ -184,8 +184,7 @@ legend:
         expectedList2.add(testBoard.getGrid()[3][0]);
         expectedList2.add(testBoard.getGrid()[3][1]);
 
-        for(Cell sample : resultSample2){
-            Assert.assertTrue(expectedList2.contains(sample));
+        for(Cell sample : resultSample2){ assertTrue(expectedList2.contains(sample));
         }
     }
     private void getMovableCell_testPosition_2_0(){
@@ -193,18 +192,17 @@ legend:
         testPawn.setCoords(2,0);
 
         List<Cell> resultSample3 = GetCell.getMovableCells(testPawn, testBoard);
-
-        Assert.assertEquals(2, resultSample3.size());
+        assertEquals(2, resultSample3.size());
 
         List<Cell> expectedList3 = new ArrayList<>();
         expectedList3.add(testBoard.getGrid()[1][1]);
         expectedList3.add(testBoard.getGrid()[3][0]);
 
-        for(Cell sample : resultSample3){
-            Assert.assertTrue(expectedList3.contains(sample));
+        for(Cell sample : resultSample3){ assertTrue(expectedList3.contains(sample));
         }
     }
 
+    /* Test case simulating a situation described in position (2,0) */
     @Test
     public void testPosition_2_0() {
 
@@ -219,8 +217,7 @@ legend:
         testPawn.setCoords(1,1);
 
         List<Cell> resultSample = GetCell.getBuildableCells(testPawn, testBoard);
-
-        Assert.assertEquals(6, resultSample.size());
+        assertEquals(6, resultSample.size());
 
         List<Cell> expectedList = new ArrayList<>();
         expectedList.add(testBoard.getGrid()[0][0]);
@@ -230,8 +227,7 @@ legend:
         expectedList.add(testBoard.getGrid()[2][1]);
         expectedList.add(testBoard.getGrid()[2][2]);
 
-        for(Cell sample : resultSample){
-            Assert.assertTrue(expectedList.contains(sample));
+        for(Cell sample : resultSample){ assertTrue(expectedList.contains(sample));
         }
     }
     private void getBuildableCell_testPosition_2_1(){
@@ -239,8 +235,7 @@ legend:
         testPawn.setCoords(2,1);
 
         List<Cell> resultSample = GetCell.getBuildableCells(testPawn, testBoard);
-
-        Assert.assertEquals(5, resultSample.size());
+        assertEquals(5, resultSample.size());
 
         List<Cell> expectedList = new ArrayList<>();
         expectedList.add(testBoard.getGrid()[1][1]);
@@ -249,8 +244,7 @@ legend:
         expectedList.add(testBoard.getGrid()[3][0]);
         expectedList.add(testBoard.getGrid()[3][1]);
 
-        for(Cell sample : resultSample){
-            Assert.assertTrue(expectedList.contains(sample));
+        for(Cell sample : resultSample){ assertTrue(expectedList.contains(sample));
         }
     }
     private void getBuildableCell_testPosition_2_0(){
@@ -258,8 +252,7 @@ legend:
         testPawn.setCoords(2,0);
 
         List<Cell> resultSample = GetCell.getBuildableCells(testPawn, testBoard);
-
-        Assert.assertEquals(4, resultSample.size());
+        assertEquals(4, resultSample.size());
 
         List<Cell> expectedList = new ArrayList<>();
         expectedList.add(testBoard.getGrid()[1][1]);
@@ -267,20 +260,56 @@ legend:
         expectedList.add(testBoard.getGrid()[3][0]);
         expectedList.add(testBoard.getGrid()[3][1]);
 
-        for(Cell sample : resultSample){
-            Assert.assertTrue(expectedList.contains(sample));
+        for(Cell sample : resultSample){ assertTrue(expectedList.contains(sample));
         }
     }
 
+    /* test case for method AreAdiacent */
     @Test
     public void areAdiacent() {
+        assertTrue(GetCell.AreAdiacent(1,1,1,2));assertTrue(GetCell.AreAdiacent(1,1,0,0));assertTrue(GetCell.AreAdiacent(1,1,2,0));
+        assertFalse(GetCell.AreAdiacent(1,1,3,0));assertFalse(GetCell.AreAdiacent(1,1,1,3));assertFalse(GetCell.AreAdiacent(1,1,1,1));
+    }
 
-        Assert.assertTrue(GetCell.AreAdiacent(1,1,1,2));
-        Assert.assertTrue(GetCell.AreAdiacent(1,1,0,0));
-        Assert.assertTrue(GetCell.AreAdiacent(1,1,2,0));
+    /* test case for method getListAdapte */
+    @Test
+    public void ConvertionListTest() {
 
-        Assert.assertFalse(GetCell.AreAdiacent(1,1,3,0));
-        Assert.assertFalse(GetCell.AreAdiacent(1,1,1,3));
-        Assert.assertFalse(GetCell.AreAdiacent(1,1,1,1));
+        List<Cell> testList = new ArrayList<>();
+
+        testList.add(testBoard.getGrid()[1][1]);
+        testList.add(testBoard.getGrid()[1][1]);
+        testList.add(testBoard.getGrid()[1][1]);
+
+        List<Coord> test = GetCell.getListAdapter(testList);
+
+        assertEquals(3, test.size());
+        assertEquals(1, test.get(0).getX());
+        assertEquals(1, test.get(0).getY());
+    }
+
+    /* test case for method getCellAdapter */
+    @Test
+    public void ConvertionTest() {
+
+        Coord testCoord1 = new Coord(3,3);
+
+        Cell test = GetCell.getCellAdapter(testCoord1, testBoard);
+
+        assertEquals(testBoard.getGrid()[3][3], test);
+    }
+
+    /* test case for method getPlaceableCells */
+    @Test
+    public void SetUp_placeableCell() {
+
+        List<Cell> cellList = GetCell.getPlaceableCells(testBoard);
+        List<Coord> testList = GetCell.getListAdapter(cellList);
+
+        for (Coord coord : testList){
+            assertTrue(cellList.contains(GetCell.getCellAdapter(coord, testBoard)));
+        }
+
+
     }
 }

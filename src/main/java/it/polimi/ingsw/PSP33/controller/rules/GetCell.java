@@ -3,19 +3,22 @@ package it.polimi.ingsw.PSP33.controller.rules;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
+import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import static java.lang.Math.abs;
 
 /**
- * Unique class for all the checks, constraints and methods for the Action a Player or god card can do
+ * Unique class for all the checks, constraints and methods utilities
  */
 public class GetCell {
 
-    private static GetCell instance = new GetCell();
+    private static final GetCell instance = new GetCell();
+
     private GetCell() {}
 
     /**
@@ -39,23 +42,23 @@ public class GetCell {
         int ix, iy;
         int size = board.getSIZE();
         Cell[][] grid = board.getGrid();
-        List<Cell> coordinates = new ArrayList<>();
+        List<Cell> cellList = new ArrayList<>();
 
         for(ix = 0; ix < size; ix++){
             for(iy = 0; iy < size; iy++){
 
                 if(AreAdiacent(pawn.getCoordX(), pawn.getCoordY(), ix, iy)){
-                    coordinates.add(grid[ix][iy]);
+                    cellList.add(grid[ix][iy]);
                 }
             }
         }
 
-        return coordinates;
+        return cellList;
     }
 
     /**
      * Method to get all cells where the player is allowed to place his pawn
-     * @param board the game board onject
+     * @param board the game board object
      *
      * @return List of Cell class object
      */
@@ -70,6 +73,23 @@ public class GetCell {
         }
 
         return cellList;
+    }
+
+    /**
+     * Method to get all cells of the board
+     * @param board the game board object
+     *
+     * @return List of Cell class object
+     */
+    public  static List<Cell> getAllCells(Board board){
+        List<Cell> allCells = new ArrayList<>();
+        Cell[][] grid = board.getGrid();
+
+        for (Cell[] row : grid){
+            allCells.addAll(Arrays.asList(row));
+        }
+
+        return allCells;
     }
 
     /**
@@ -88,7 +108,7 @@ public class GetCell {
     }
 
     /**
-     * get all the coordinates of the adjacent cells where the player is allowed to build  his Block or Domes
+     * Methods that get all the coordinates of the adjacent cells where the player is allowed to build his Block or Domes
      * @param pawn the pawn that player wants to use for the building action
      * @param board the game board object
      *
@@ -102,7 +122,7 @@ public class GetCell {
     }
 
     /**
-     * the method verify if the coordinates are adiacent
+     * The method verify if the coordinates are adiacent
      * @param x1 coordinate x of the first
      * @param y1 coordinate y of the first
      * @param x2 coordinate x of the second
@@ -118,12 +138,38 @@ public class GetCell {
         return deltaX <= 1 && deltaY <= 1 && !(deltaX == 0 && deltaY == 0);
     }
 
+    /**
+     * Method to convert a list of cell in a list of coordinates
+     * @param cellList list of cell to convert
+     *
+     * @return List of Coord class object
+     */
+    public static List<Coord> getListAdapter(List<Cell> cellList){
 
+        List<Coord> coordList = new ArrayList<>();
 
-    /*other possibilities:
-        -   check the change in level after the move to check a possilbe victory
-        -   check and constrains obtained due to the god effects (other unique methods? or consider in the same basic method?)
-        -   implement with model elements to see if there could be a better solution.
-    */
+        if(cellList != null){
+            for (Cell cell : cellList){
+                coordList.add(cell.getCoord());
+            }
+        }
+
+        return coordList;
+    }
+
+    /**
+     * Method to convert a list of cell in a list of coordinates
+     * @param coord coordinates to convert
+     * @param board board of the game
+     *
+     * @return List of Coord class object
+     */
+    public static Cell getCellAdapter(Coord coord, Board board){
+
+        int coordX = coord.getX();
+        int coordY = coord.getY();
+
+        return board.getGrid()[coordX][coordY];
+    }
 
 }

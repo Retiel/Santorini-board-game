@@ -1,6 +1,6 @@
 package it.polimi.ingsw.PSP33.model;
 
-import it.polimi.ingsw.PSP33.events.mvevents.MVEvent;
+import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
 import it.polimi.ingsw.PSP33.utils.Phase;
 
@@ -39,7 +39,7 @@ public class Model extends Observable<MVEvent> {
         this.board = new Board();
         this.players = new ArrayList<>(players);
         this.currentPlayer = null;
-        this.currentPhase = Phase.START;
+        this.currentPhase = Phase.SETUP;
     }
 
     /**
@@ -101,5 +101,6 @@ public class Model extends Observable<MVEvent> {
     public void setCurrentPhase(Phase currentPhase) {
         this.currentPhase = currentPhase;
     }
+
 
 }

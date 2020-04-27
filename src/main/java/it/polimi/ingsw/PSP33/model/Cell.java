@@ -8,16 +8,9 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 public class Cell {
 
     /**
-     * Integer coordinate X
+     * Coordinates of the cell
      */
-    private final int coordX;
-
-    /**
-     * Integer coordinate Y
-     */
-    private final int coordY;
-
-    private Coord coord;
+    private final Coord coord;
 
     /**
      * Integer that represent the pieces of contruction, except the roof
@@ -41,8 +34,6 @@ public class Cell {
         this.floor = 0;
         this.roof = false;
         this.occupied = null;
-        this.coordX = coordX;
-        this.coordY = coordY;
         this.coord = new Coord(coordX, coordY);
     }
 
@@ -115,6 +106,11 @@ public class Cell {
         return coord.getY();
     }
 
+    /**
+     * Method to get the coortinates
+     *
+     * @return Coord class object
+     */
     public Coord getCoord() {
         return coord.getLocation();
     }

@@ -1,9 +1,12 @@
 package it.polimi.ingsw.PSP33.model;
 
+import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
+import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
+
 /**
  * Board class that hold all information related to the state of the board
  */
-public class Board {
+public class Board extends Observable<MVEvent> {
 
     /**
      * Constant of the board's size.

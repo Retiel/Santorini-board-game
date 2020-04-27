@@ -15,7 +15,7 @@
         testPlayers.add(testPlayer1);
         testPlayers.add(testPlayer2);
 
-        Board testBoard = new Board(testPlayers);
+        Board testBoard = new Board();
 
         Pawn testPawn1P1 = testPlayer1.getPawn1();
         Pawn testPawn2P1 = testPlayer1.getPawn2();

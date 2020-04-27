@@ -9,19 +9,6 @@ import it.polimi.ingsw.PSP33.model.Pawn;
  */
 public class BasicAction {
 
-    private static Model model;
-
-    /**
-     * TurnAction Constructor
-     */
-    public BasicAction(Model inModel) {
-        model = inModel;
-    }
-
-    public static Model getModel() {
-        return model;
-    }
-
     /**
      * The method initialize the pawn position
      * @param pawn pawn to put in the board
