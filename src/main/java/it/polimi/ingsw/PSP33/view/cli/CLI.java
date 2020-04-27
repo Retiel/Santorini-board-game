@@ -12,10 +12,8 @@ import it.polimi.ingsw.PSP33.view.AbstractView;
 public class CLI extends AbstractView {
 
     private InOutCLI consoleCLI;
-    private MenuManager menuManager;
     public CLI(InOutCLI io, MenuManager menuManager){
         this.consoleCLI = io;
-        this.menuManager = menuManager;
     }
 
     @Override

@@ -2,10 +2,10 @@ package it.polimi.ingsw.PSP33.view.cli;
 
 public class MenuManager {
 
-    private InOutCLI console;
+    private InOutCLI iomanager;
     private PrintOutput printer;
     public MenuManager(InOutCLI io, PrintOutput printer){
-        this.console = io;
+        this.iomanager = io;
         this.printer = printer;
     }
 
