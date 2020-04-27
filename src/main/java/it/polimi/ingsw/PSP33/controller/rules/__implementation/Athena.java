@@ -25,6 +25,6 @@ public class Athena implements Limiter {
     public List<Cell> limit(List<Cell> cellList, Pawn enemyPawn, Board board) {
 
         Cell position = GetCell.getCellAdapter(enemyPawn.getCoord(), board);
-        return cellList.stream().filter(c -> c.getFloor() >= position.getFloor()).collect(Collectors.toList());
+        return cellList.stream().filter(c -> c.getFloor() <= position.getFloor()).collect(Collectors.toList());
     }
 }

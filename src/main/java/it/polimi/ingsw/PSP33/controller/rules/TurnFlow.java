@@ -120,8 +120,8 @@ public class TurnFlow {
 
         List<Coord> gods = getContextFlow("extra");
 
-        setData(null, gods);
-        model.notifyObservers(new PossibleExtraAction(new ArrayList<>(), gods));
+        setData(gods, gods);
+        model.notifyObservers(new PossibleExtraAction(gods));
     }
 
     /**
@@ -164,7 +164,7 @@ public class TurnFlow {
             extraContext.ExecAction(coord, dataBuffer.getCurrentPawn(), model);
             model.notifyObservers(new DataModel(model));
         }
-        else model.notifyObservers(new PossibleExtraAction(dataBuffer.getCoordList(), dataBuffer.getCoordListGods()));
+        else model.notifyObservers(new PossibleExtraAction(dataBuffer.getCoordList()));
     }
 
     /**

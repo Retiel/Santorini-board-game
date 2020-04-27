@@ -33,6 +33,11 @@ public class testView extends AbstractView {
     }
 
     @Override
+    public void visit(YouWin youWin) {
+
+    }
+
+    @Override
     public void visit(NewAction newAction) {
         System.out.print("New action update...\n");
         System.out.print(newAction.isMove()+"\n");
@@ -61,7 +66,6 @@ public class testView extends AbstractView {
     public void visit(PossibleExtraAction possibleExtraAction) {
         System.out.print("Possible extra action update...\n");
         System.out.print(possibleExtraAction.getCoordList().toString()+"\n");
-        System.out.print(possibleExtraAction.getGodsList().toString()+"\n");
         System.out.print("Possible extra action update finished\n");
     }
 }

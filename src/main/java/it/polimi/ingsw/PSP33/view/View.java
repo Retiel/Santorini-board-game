@@ -41,6 +41,11 @@ public class View extends AbstractView{
     }
 
     @Override
+    public void visit(YouWin youWin) {
+
+    }
+
+    @Override
     public void visit(NewAction newAction) {
 
     }

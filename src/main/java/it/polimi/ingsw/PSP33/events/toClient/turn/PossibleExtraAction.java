@@ -9,19 +9,13 @@ import java.util.List;
 public class PossibleExtraAction extends MVEvent {
 
     private final List<Coord> coordList;
-    private final List<Coord> godsList;
 
-    public PossibleExtraAction(List<Coord> coordList, List<Coord> godsList) {
+    public PossibleExtraAction(List<Coord> coordList) {
         this.coordList = coordList;
-        this.godsList = godsList;
     }
 
     public List<Coord> getCoordList() {
         return coordList;
-    }
-
-    public List<Coord> getGodsList() {
-        return godsList;
     }
 
     @Override

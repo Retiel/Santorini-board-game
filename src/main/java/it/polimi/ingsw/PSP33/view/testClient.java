@@ -46,12 +46,13 @@ public class testClient {
         view.notifyObservers(new RequestPossibleMove(1)); /* test Move branch message */
         view.notifyObservers(new MoveAction(new Coord(0,1)));
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        //view.notifyObservers(new RequestPossibleBuild(1)); /* test Build branch message */
-        //view.notifyObservers(new BuildAction(new Coord(2,3), false));
+        view.notifyObservers(new RequestPossibleBuild(1)); /* test Build branch message */
+        view.notifyObservers(new BuildAction(new Coord(0,0), false));
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        //view.notifyObservers(new RequestExtraAction(1)); /* test Extra Action branch message */
+        view.notifyObservers(new RequestExtraAction(1)); /* test Extra Action branch message */
+        view.notifyObservers(new ExtraAction(new Coord(1,1)));
+        System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
-        //TODO : test extra action
     }
 
 /*
@@ -71,7 +72,7 @@ public class testClient {
                         |   0   |   1   |   0   |   0   |   1   |
                         |_______|_______|_______|_______|_______|
                         | *     |       |   *   |       |       |
-                        |   0   |   1   |   3   |   1   |   1   |
+                        |   0   |   2   |   3   |   1   |   1   |
                         |_______|_______|_______|_______|_______|
                         | e     |       |       | p     |       |
                         |   0   |   3   |   0   |   0   |   2   |
@@ -89,13 +90,15 @@ public class testClient {
 
         model.setCurrentPlayer(testPlayer2);
         testPlayer1.setCard(new God("Artemis", "Eminem - Berzerk (Official Music Video) (Explicit)"));
-        testPlayer2.setCard(new God("Pan", "Amazing Trees"));
+        testPlayer2.setCard(new God("Athena", "Amazing Trees"));
 
         Board board = model.getBoard();
 
+        board.getGrid()[0][0].setOccupied(null); /* reset setup modification */
+
         board.getGrid()[0][1].setFloor(1);
         board.getGrid()[0][4].setFloor(1);
-        board.getGrid()[1][1].setFloor(1);
+        board.getGrid()[1][1].setFloor(2);
         board.getGrid()[1][2].setFloor(3);
         board.getGrid()[1][3].setFloor(1);
         board.getGrid()[1][4].setFloor(1);

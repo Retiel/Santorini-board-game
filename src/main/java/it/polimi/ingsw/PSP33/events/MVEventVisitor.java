@@ -29,6 +29,11 @@ public interface MVEventVisitor {
     void visit(YouLose youLose);
 
     /**
+     * Message to comunicate to the winning statement
+     */
+    void visit(YouWin youWin);
+
+    /**
      * Message to request the player what to do at the star of his turn
      */
     void visit(NewAction newAction);

@@ -16,13 +16,9 @@ import java.util.List;
 public class LimiterContext {
 
     private Limiter limiter;
-    private final List<String> allGods;
     private final List<ActiveGods> allEffect;
 
     public LimiterContext() {
-        this.allGods = new ArrayList<>();
-        allGods.add("Athena");
-        allGods.add("noLimit");
 
         this.allEffect =  new ArrayList<>();
         allEffect.add(new ActiveGods("Athena", false));
@@ -43,7 +39,7 @@ public class LimiterContext {
         List<Cell> afterEffectList = cellList;
 
         for (ActiveGods gods : allEffect){
-            if (godName.equals(gods.getName()) && gods.isEnable()){
+            if (!godName.equals(gods.getName()) && gods.isEnable()){
                 ChangeLimiter(gods.getName());
                 afterEffectList = limiter.limit(afterEffectList, enemyPawn, board);
             }

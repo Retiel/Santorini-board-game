@@ -66,31 +66,29 @@ public class MoveContextTest {
         testBoard = testModel.getBoard();
 
         testBoard.getGrid()[0][1].setFloor(1);
+        testBoard.getGrid()[1][1].setFloor(1);
+        testBoard.getGrid()[1][2].setFloor(3);
+        testBoard.getGrid()[2][1].setFloor(3);
+        testBoard.getGrid()[3][1].setFloor(2);
+        testBoard.getGrid()[3][2].setFloor(2);
+        testBoard.getGrid()[4][1].setFloor(1);
+
         testBoard.getGrid()[1][0].setRoof(true);
+        testBoard.getGrid()[1][2].setRoof(true);
+        testBoard.getGrid()[3][0].setRoof(true);
+
 
         testPlayer1.getPawns()[0].setCoords(1,1);
         testBoard.getGrid()[1][1].setOccupied(testPlayer1.getPawns()[0]);
-        testBoard.getGrid()[1][1].setFloor(1);
-
-        testBoard.getGrid()[1][2].setFloor(3);
-        testBoard.getGrid()[1][2].setRoof(true);
-
-        testPlayer2.getPawns()[0].setCoords(2,0);
-        testBoard.getGrid()[2][0].setOccupied(testPlayer2.getPawns()[0]);
-        testBoard.getGrid()[2][0].setFloor(3);
 
         testPlayer1.getPawns()[1].setCoords(2,1);
         testBoard.getGrid()[2][1].setOccupied(testPlayer1.getPawns()[1]);
-        testBoard.getGrid()[2][1].setFloor(3);
 
-        testBoard.getGrid()[3][0].setRoof(true);
-
-        testBoard.getGrid()[3][1].setFloor(2);
-        testBoard.getGrid()[4][1].setFloor(1);
+        testPlayer2.getPawns()[0].setCoords(2,0);
+        testBoard.getGrid()[2][0].setOccupied(testPlayer2.getPawns()[0]);
 
         testPlayer2.getPawns()[1].setCoords(3,2);
         testBoard.getGrid()[3][2].setOccupied(testPlayer2.getPawns()[1]);
-
 
         testSample = new MoveContext("");
         assertTrue(testSample.checkMove(testPlayer1.getPawns()[0], testBoard).isEmpty());
@@ -141,7 +139,6 @@ public class MoveContextTest {
 
         List<Cell> sample = new ArrayList<>();
         sample.add(testBoard.getGrid()[1][1]);
-        sample.add(testBoard.getGrid()[2][1]);
 
         testCheckMethod(testSample, testPawn, sample);
         testExecMethod(testSample, 2,1 ,testPawn);
