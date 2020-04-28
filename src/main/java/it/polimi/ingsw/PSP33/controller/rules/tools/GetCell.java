@@ -171,5 +171,4 @@ public class GetCell {
 
         return board.getGrid()[coordX][coordY];
     }
-
 }

@@ -1,18 +1,19 @@
 package it.polimi.ingsw.PSP33.model;
 
+import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import org.junit.*;
 
 
 public class GodTest {
 
     private static God testSample;
-    private static String name;
+    private static Gods name;
     private static String description;
 
     @BeforeClass
     public static void setUp() {
 
-        name = "Tilt";
+        name = Gods.NOGOD;
         description = "On steroid never bath with juice and cornflakes, neither swim in the bed with red light";
 
         testSample =  new God(name,description);

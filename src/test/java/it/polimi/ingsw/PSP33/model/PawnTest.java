@@ -1,6 +1,5 @@
 package it.polimi.ingsw.PSP33.model;
 
-import it.polimi.ingsw.PSP33.model.Pawn;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -14,7 +13,7 @@ public class PawnTest {
 
     @Before
     public void setUp() {
-        pawn = new Pawn(Color.BLACK);
+        pawn = new Pawn(Color.BLACK, 1);
     }
 
     @After
@@ -26,6 +25,7 @@ public class PawnTest {
     public void initPawn() {
 
         Assert.assertEquals(pawn.getColor(), Color.BLACK);
+        Assert.assertEquals(pawn.getNumber(), 1);
     }
 
     /**

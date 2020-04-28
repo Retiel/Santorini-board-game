@@ -1,8 +1,8 @@
 package it.polimi.ingsw.PSP33.model;
 
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
+import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
-import it.polimi.ingsw.PSP33.utils.Phase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,9 +28,14 @@ public class Model extends Observable<MVEvent> {
     private Player currentPlayer;
 
     /**
-     * Current phase of the turn
+     * Pawn used by the current player
      */
-    private Phase currentPhase;
+    private Pawn currentPawn;
+
+    /**
+     * God's name used by the current player
+     */
+    private Gods currentGodName;
 
     /**
      * Constructor of the class
@@ -39,7 +44,6 @@ public class Model extends Observable<MVEvent> {
         this.board = new Board();
         this.players = new ArrayList<>(players);
         this.currentPlayer = null;
-        this.currentPhase = Phase.SETUP;
     }
 
     /**
@@ -86,21 +90,36 @@ public class Model extends Observable<MVEvent> {
     }
 
     /**
-     * Method to get the current phase of the turn
+     * Method to get the pawn used in the current turn by the player
      *
-     * @return Phase enum
+     * @return current pawn
      */
-    public Phase getCurrentPhase() {
-        return currentPhase;
+    public Pawn getCurrentPawn() {
+        return currentPawn;
     }
 
     /**
-     * Method to set the current phase of the turn
-     * @param currentPhase Phase of the turn
+     * Method to set the pawn used in the current turn by the player
+     * @param currentPawn current pawn
      */
-    public void setCurrentPhase(Phase currentPhase) {
-        this.currentPhase = currentPhase;
+    public void setCurrentPawn(Pawn currentPawn) {
+        this.currentPawn = currentPawn;
     }
 
+    /**
+     * Method to get the god's name used in the current turn by the player
+     *
+     * @return current god's name
+     */
+    public Gods getCurrentGodName() {
+        return currentGodName;
+    }
 
+    /**
+     * Method to set the god's name used in the current turn by the player
+     * @param currentGodName current god's name
+     */
+    public void setCurrentGodName(Gods currentGodName) {
+        this.currentGodName = currentGodName;
+    }
 }

@@ -4,7 +4,6 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import it.polimi.ingsw.PSP33.utils.Phase;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -61,7 +60,6 @@ public class ModelTest {
         Assert.assertNotNull(model.getBoard());
         Assert.assertEquals(model.getPlayers().size(), 2);
         Assert.assertNull(model.getCurrentPlayer());
-        Assert.assertEquals(model.getCurrentPhase(), Phase.SETUP);
     }
 
     @Test
@@ -73,17 +71,8 @@ public class ModelTest {
         Assert.assertNotNull(model.getBoard());
         Assert.assertEquals(model.getPlayers().size(), 3);
         Assert.assertNull(model.getCurrentPlayer());
-        Assert.assertEquals(model.getCurrentPhase(), Phase.SETUP);
     }
 
-    @Test
-    public void setCurrentPhase_correctInput_correctOutput() {
-
-        model = new Model(players);
-
-        model.setCurrentPhase(Phase.END);
-        Assert.assertEquals(model.getCurrentPhase(), Phase.END);
-    }
 
     @Test
     public void setCurrentPlayer_correctInput_correctOutput() {
