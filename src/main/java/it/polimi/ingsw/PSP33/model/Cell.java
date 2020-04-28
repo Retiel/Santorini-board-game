@@ -8,19 +8,9 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 public class Cell {
 
     /**
-     * Coordinates of the cell
+     * Light version of the class Cell
      */
-    private final Coord coord;
-
-    /**
-     * Integer that represent the pieces of contruction, except the roof
-     */
-    private int floor;
-
-    /**
-     * Boolean that represent the roof piece in the game
-     */
-    private boolean roof;
+    private final LightCell lightCell;
 
     /**
      * Reference to the pawn object that occupies the cell
@@ -31,10 +21,9 @@ public class Cell {
      * Constructor of the class
      */
     public Cell(int coordX, int coordY) {
-        this.floor = 0;
-        this.roof = false;
+
+        this.lightCell = new LightCell(new Coord(coordX, coordY), 0, false);
         this.occupied = null;
-        this.coord = new Coord(coordX, coordY);
     }
 
     /**
@@ -43,7 +32,7 @@ public class Cell {
      * @return Integer value between 0 and 3 (both included)
      */
     public int getFloor() {
-        return floor;
+        return lightCell.getFloor();
     }
 
     /**
@@ -51,7 +40,7 @@ public class Cell {
      * @param floor number fo buildings (excluded the roof)
      */
     public void setFloor(int floor) {
-        this.floor = floor;
+        this.lightCell.setFloor(floor);
     }
 
     /**
@@ -60,7 +49,7 @@ public class Cell {
      * @return Boolean value (true ='there is a roof', false = 'no roof still')
      */
     public boolean isRoof() {
-        return roof;
+        return lightCell.isRoof();
     }
 
     /**
@@ -68,7 +57,7 @@ public class Cell {
      * @param roof Boolean value (true ='there is a roof', false = 'no roof still')
      */
     public void setRoof(boolean roof) {
-        this.roof = roof;
+        this.lightCell.setRoof(roof);
     }
 
     /**
@@ -86,6 +75,7 @@ public class Cell {
      */
     public void setOccupied(Pawn occupied) {
         this.occupied = occupied;
+        this.lightCell.setLightPawn(occupied.getLightPawn());
     }
 
     /**
@@ -94,7 +84,7 @@ public class Cell {
      * @return Integer value
      */
     public int getCoordX() {
-        return coord.getX();
+        return lightCell.getCoord().getX();
     }
 
     /**
@@ -103,7 +93,7 @@ public class Cell {
      * @return Integer value
      */
     public int getCoordY() {
-        return coord.getY();
+        return lightCell.getCoord().getY();
     }
 
     /**
@@ -112,6 +102,105 @@ public class Cell {
      * @return Coord class object
      */
     public Coord getCoord() {
-        return coord.getLocation();
+        return lightCell.getCoord().getLocation();
+    }
+
+    /**
+     * Coordinates of the Cell light version
+     */
+    public LightCell getLightCell() {
+        return lightCell;
+    }
+
+    public class LightCell{
+
+        /**
+         * Coordinates of the cell
+         */
+        private final Coord coord;
+
+        /**
+         * Integer that represent the pieces of contruction, except the roof
+         */
+        private int floor;
+
+        /**
+         * Boolean that represent the roof piece in the game
+         */
+        private boolean roof;
+
+        /**
+         * Data of the LightPawn
+         */
+        private Pawn.LightPawn lightPawn;
+
+        /**
+         * Constructor
+         */
+        public LightCell(Coord coord, int floor, boolean roof) {
+            this.coord = coord;
+            this.floor = floor;
+            this.roof = roof;
+        }
+
+        /**
+         * Method to get number of building in the cell
+         *
+         * @return Integer value between 0 and 3 (both included)
+         */
+        public int getFloor() {
+            return floor;
+        }
+
+        /**
+         * Method to modify the number of the building
+         * @param floor number fo buildings (excluded the roof)
+         */
+        public void setFloor(int floor) {
+            this.floor = floor;
+        }
+
+        /**
+         * Method to verify if there is a roof in the building
+         *
+         * @return Boolean value (true ='there is a roof', false = 'no roof still')
+         */
+        public boolean isRoof() {
+            return roof;
+        }
+
+        /**
+         * Method to set if that someone build a roof in the cell
+         * @param roof Boolean value (true ='there is a roof', false = 'no roof still')
+         */
+        public void setRoof(boolean roof) {
+            this.roof = roof;
+        }
+
+        /**
+         * Method to get the coortinates
+         *
+         * @return Coord class object
+         */
+        public Coord getCoord() {
+            return coord.getLocation();
+        }
+
+        /**
+         * Method to get the Light Pawn
+         *
+         * @return LightPawn class object
+         */
+        public Pawn.LightPawn getLightPawn() {
+            return lightPawn;
+        }
+
+        /**
+         * Method to get the Light Pawn
+         * @param lightPawn light version of the pawn
+         */
+        public void setLightPawn(Pawn.LightPawn lightPawn) {
+            this.lightPawn = lightPawn;
+        }
     }
 }
