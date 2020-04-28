@@ -27,8 +27,8 @@ public class Player {
         this.lightPlayer = new LightPlayer(name, color);
 
         this.pawns = new Pawn[2];
-        this.pawns[0] = new Pawn(color, 0);
-        this.pawns[1] = new Pawn(color, 1);
+        this.pawns[0] = new Pawn(color, 1);
+        this.pawns[1] = new Pawn(color, 2);
     }
 
     /**

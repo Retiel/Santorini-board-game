@@ -1,5 +1,6 @@
 package it.polimi.ingsw.PSP33.model;
 
+import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
@@ -31,9 +32,9 @@ public class PlayerTest {
     @Test
     public void setCard_correctInput_correctOutput() {
 
-        this.player.setCard(new God("fame", "seems legit all the way, maybe a god will arrive"));
+        this.player.setCard(new God(Gods.NOGOD, "seems legit all the way, maybe a god will arrive"));
         Assert.assertNotNull(player.getCard());
-        Assert.assertEquals("fame", player.getCard().getName());
+        Assert.assertEquals(Gods.NOGOD, player.getCard().getName());
         Assert.assertEquals("seems legit all the way, maybe a god will arrive", player.getCard().getDescription());
     }
 }

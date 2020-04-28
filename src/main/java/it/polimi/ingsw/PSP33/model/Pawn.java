@@ -19,6 +19,12 @@ public class Pawn {
      */
     private Coord coord;
 
+    private Coord oldMove;
+
+    private Coord oldBuild;
+
+    private Coord oldExtra;
+
     /**
      * Constructor of the class
      * @param color color of the related player
@@ -128,5 +134,30 @@ public class Pawn {
         public int getNumber() {
             return number;
         }
+    }
+
+
+    public Coord getOldMove() {
+        return oldMove;
+    }
+
+    public void setOldMove(Coord oldMove) {
+        this.oldMove = oldMove;
+    }
+
+    public Coord getOldBuild() {
+        return oldBuild;
+    }
+
+    public void setOldBuild(Coord oldBuild) {
+        this.oldBuild = oldBuild;
+    }
+
+    public Coord getOldExtra() {
+        return oldExtra;
+    }
+
+    public void setOldExtra(Coord oldExtra) {
+        this.oldExtra = oldExtra;
     }
 }

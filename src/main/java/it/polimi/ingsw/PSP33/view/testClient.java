@@ -10,6 +10,7 @@ import it.polimi.ingsw.PSP33.model.God;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
 import it.polimi.ingsw.PSP33.utils.Coord;
+import it.polimi.ingsw.PSP33.utils.enums.Gods;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -89,8 +90,8 @@ public class testClient {
     private static void modelScenario(Model model, Player testPlayer1,Player testPlayer2){
 
         model.setCurrentPlayer(testPlayer2);
-        testPlayer1.setCard(new God("Artemis", "Eminem - Berzerk (Official Music Video) (Explicit)"));
-        testPlayer2.setCard(new God("Athena", "Amazing Trees"));
+        testPlayer1.setCard(new God(Gods.ARTEMIS, "Eminem - Berzerk (Official Music Video) (Explicit)"));
+        testPlayer2.setCard(new God(Gods.ATHENA, "Amazing Trees"));
 
         Board board = model.getBoard();
 
@@ -128,7 +129,7 @@ public class testClient {
     }
 
     private static void changeGod(Player testPlayer1,Player testPlayer2){
-        testPlayer1.setCard(new God("Apollo", "Eminem - Berzerk (Official Music Video) (Explicit)"));
-        testPlayer2.setCard(new God("Pan", "Amazing Trees"));
+        testPlayer1.setCard(new God(Gods.APOLLO, "Eminem - Berzerk (Official Music Video) (Explicit)"));
+        testPlayer2.setCard(new God(Gods.PAN, "Amazing Trees"));
     }
 }

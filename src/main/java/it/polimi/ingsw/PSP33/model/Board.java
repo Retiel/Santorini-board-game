@@ -1,12 +1,10 @@
 package it.polimi.ingsw.PSP33.model;
 
-import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
 
 /**
  * Board class that hold all information related to the state of the board
  */
-public class Board extends Observable<MVEvent> {
+public class Board {
 
     /**
      * Constant of the board's size.
@@ -28,13 +26,15 @@ public class Board extends Observable<MVEvent> {
      */
     public Board() {
 
+        lightBoard = new LightBoard(new Cell.LightCell[SIZE][SIZE]);
+
         //Initialize grid
         grid = new Cell[SIZE][SIZE];
 
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 grid[i][j] = new Cell(i,j);
-                lightBoard.getLightGrid()[i][j] =  grid[i][j].getLightCell();
+                lightBoard.getLightGrid()[i][j] = grid[i][j].getLightCell();
             }
         }
     }

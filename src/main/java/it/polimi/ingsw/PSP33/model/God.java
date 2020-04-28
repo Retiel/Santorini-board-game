@@ -1,6 +1,8 @@
 package it.polimi.ingsw.PSP33.model;
 
 
+import it.polimi.ingsw.PSP33.utils.enums.Gods;
+
 /**
  * Class God that defines a generic god card, class used to hold name and description
  *
@@ -10,7 +12,7 @@ public class God {
     /**
      * Name of the god
      */
-    private String name;
+    private Gods name;
 
     /**
      * Description of the effect of the god
@@ -22,7 +24,7 @@ public class God {
      * @param name name of teh god
      * @param description descriptio of the effect of the card
      */
-    public God(String name, String description) {
+    public God(Gods name, String description) {
         this.name = name;
         this.description = description;
     }
@@ -32,7 +34,7 @@ public class God {
      *
      * @return String type
      */
-    public String getName() {
+    public Gods getName() {
         return name;
     }
 

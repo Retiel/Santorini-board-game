@@ -13,40 +13,9 @@ import java.util.List;
  */
 public class DataBuffer {
 
-    private Cell oldPosition;
-    private Cell oldBuild;
-    private Cell oldExtra;
-
     private String action;
     private List<Coord> coordList;
     private List<Coord> coordListGods;
-
-    private Pawn currentPawn;
-    private String godName;
-
-    public Cell getOldPosition() {
-        return oldPosition;
-    }
-
-    public void setOldPosition(Cell oldPosition) {
-        this.oldPosition = oldPosition;
-    }
-
-    public Cell getOldBuild() {
-        return oldBuild;
-    }
-
-    public void setOldBuild(Cell oldBuild) {
-        this.oldBuild = oldBuild;
-    }
-
-    public Cell getOldExtra() {
-        return oldExtra;
-    }
-
-    public void setOldExtra(Cell oldExtra) {
-        this.oldExtra = oldExtra;
-    }
 
     public String getAction() {
         return action;
@@ -72,19 +41,4 @@ public class DataBuffer {
         this.coordListGods = coordListGods;
     }
 
-    public Pawn getCurrentPawn() {
-        return currentPawn;
-    }
-
-    public void setCurrentPawn(Pawn currentPawn) {
-        this.currentPawn = currentPawn;
-    }
-
-    public String getGodName() {
-        return godName;
-    }
-
-    public void setGodName(String godName) {
-        this.godName = godName;
-    }
 }

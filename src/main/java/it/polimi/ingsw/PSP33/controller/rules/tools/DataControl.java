@@ -1,6 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.rules.tools;
 
 import it.polimi.ingsw.PSP33.utils.Coord;
+import it.polimi.ingsw.PSP33.utils.enums.Gods;
 
 import java.util.List;
 
@@ -40,9 +41,8 @@ public class DataControl {
      *
      * @return Boolean
      */
-    public static boolean checkStart(String name){
-        if (name.equals("Prometheus")) return true;
-        return false;
+    public static boolean checkStart(Gods name){
+        return name.equals(Gods.PROMETHEUS);
     }
 
     /**
@@ -51,9 +51,8 @@ public class DataControl {
      *
      * @return Boolean
      */
-    public static boolean checkBuild(String name){
-        if (name.equals("Atlas")) return true;
-        return false;
+    public static boolean checkBuild(Gods name){
+        return name.equals(Gods.ATLAS);
     }
 
     /**
@@ -62,9 +61,9 @@ public class DataControl {
      *
      * @return Boolean
      */
-    public static boolean limitReset(String name){
+    public static boolean limitReset(Gods name){
         switch (name){
-            case "Athena":
+            case ATHENA:
             default: return false;
         }
     }
