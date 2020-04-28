@@ -1,10 +1,10 @@
 package it.polimi.ingsw.PSP33.controller.rules.__implementation;
 
-import it.polimi.ingsw.PSP33.controller.rules.GetCell;
-import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
+import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
+import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules._build.Build;
 import it.polimi.ingsw.PSP33.controller.rules._extraTurn.ExtraAction;
-import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataBuffer;
+import it.polimi.ingsw.PSP33.controller.rules.tools.DataBuffer;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;

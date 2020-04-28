@@ -8,24 +8,14 @@ import java.awt.*;
 public class Player {
 
     /**
-     * Name of the player
+     * Light version of the class Player
      */
-    private final String name;
-
-    /**
-     * Color fo the player (unique to each player)
-     */
-    private final Color color;
-
-    /**
-     * God card the player choose
-     */
-    private God card;
+    private final LightPlayer lightPlayer;
 
     /**
      * Player's pawns
      */
-    private Pawn[] pawns;
+    private final Pawn[] pawns;
 
     /**
      * Constructor of the class
@@ -33,12 +23,12 @@ public class Player {
      * @param color color of the player
      */
     public Player(String name, Color color) {
-        this.name = name;
-        this.color = color;
+
+        this.lightPlayer = new LightPlayer(name, color);
 
         this.pawns = new Pawn[2];
-        this.pawns[0] = new Pawn(color);
-        this.pawns[1] = new Pawn(color);
+        this.pawns[0] = new Pawn(color, 0);
+        this.pawns[1] = new Pawn(color, 1);
     }
 
     /**
@@ -47,7 +37,7 @@ public class Player {
      * @return String
      */
     public String getName() {
-        return name;
+        return lightPlayer.getName();
     }
 
     /**
@@ -56,7 +46,7 @@ public class Player {
      * @return java.awt.Color type
      */
     public Color getColor() {
-        return color;
+        return lightPlayer.getColor();
     }
 
     /**
@@ -65,7 +55,7 @@ public class Player {
      * @return God class object
      */
     public God getCard() {
-        return card;
+        return lightPlayer.getCard();
     }
 
     /**
@@ -73,7 +63,7 @@ public class Player {
      * @param card God class object
      */
     public void setCard(God card) {
-        this.card = card;
+        this.lightPlayer.setCard(card);
     }
 
     /**
@@ -95,4 +85,70 @@ public class Player {
         return pawns[pawnNumber - 1];
     }
 
+    /**
+     * Method to get the player light version
+     *
+     * @return LightPlayer object
+     */
+    public LightPlayer getLightPlayer() {
+        return lightPlayer;
+    }
+
+    public class LightPlayer {
+
+        /**
+         * Name of the player
+         */
+        private final String name;
+
+        /**
+         * Color fo the player (unique to each player)
+         */
+        private final Color color;
+
+        /**
+         * God card the player choose
+         */
+        private God card;
+
+        public LightPlayer(String name, Color color) {
+            this.name = name;
+            this.color = color;
+        }
+
+        /**
+         * Method to get the name of the player
+         *
+         * @return String
+         */
+        public String getName() {
+            return name;
+        }
+
+        /**
+         * Method to get the color of the player
+         *
+         * @return java.awt.Color type
+         */
+        public Color getColor() {
+            return color;
+        }
+
+        /**
+         * Method to get the card refence
+         *
+         * @return God class object
+         */
+        public God getCard() {
+            return card;
+        }
+
+        /**
+         * Method to set the card
+         * @param card God class object
+         */
+        public void setCard(God card) {
+            this.card = card;
+        }
+    }
 }

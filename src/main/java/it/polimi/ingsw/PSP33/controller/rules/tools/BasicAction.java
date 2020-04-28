@@ -1,7 +1,6 @@
-package it.polimi.ingsw.PSP33.controller.rules;
+package it.polimi.ingsw.PSP33.controller.rules.tools;
 
 import it.polimi.ingsw.PSP33.model.Cell;
-import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
 /**

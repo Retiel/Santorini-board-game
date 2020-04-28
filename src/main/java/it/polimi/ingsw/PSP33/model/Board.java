@@ -16,7 +16,12 @@ public class Board extends Observable<MVEvent> {
     /**
      * Matrix of cells used to represent the grid.
      */
-    private Cell[][] grid;
+    private final Cell[][] grid;
+
+    /**
+     * Light version of the board
+     */
+    private LightBoard lightBoard;
 
     /**
      * Constructor for the board class.
@@ -25,9 +30,11 @@ public class Board extends Observable<MVEvent> {
 
         //Initialize grid
         grid = new Cell[SIZE][SIZE];
+
         for (int i = 0; i < SIZE; i++) {
             for (int j = 0; j < SIZE; j++) {
                 grid[i][j] = new Cell(i,j);
+                lightBoard.getLightGrid()[i][j] =  grid[i][j].getLightCell();
             }
         }
     }
@@ -50,4 +57,41 @@ public class Board extends Observable<MVEvent> {
         return grid;
     }
 
+    /**
+     * Method to get the lightGrid of the board
+     *
+     * @return return a bidimensional array of LightCell (list of Object)
+     */
+    public LightBoard getLightBoard() {
+        return this.lightBoard;
+    }
+
+    /**
+     * Method to get the lightGrid of the board
+     *
+     * @return return a bidimensional array of LightCell (list of Object)
+     */
+    public class LightBoard{
+
+        /**
+         * Light version of the grid
+         */
+        private final Cell.LightCell[][] lightGrid;
+
+        /**
+         * Constructor
+         */
+        public LightBoard(Cell.LightCell[][] lightGrid) {
+            this.lightGrid = lightGrid;
+        }
+
+        /**
+         * Method to get the lightGrid of the board
+         *
+         * @return return a bidimensional array of LightCell (list of Object)
+         */
+        public Cell.LightCell[][] getLightGrid() {
+            return lightGrid;
+        }
+    }
 }
