@@ -1,7 +1,7 @@
 package it.polimi.ingsw.PSP33.view.cli;
 
 import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.view.AbstractView;
@@ -24,7 +24,7 @@ public class CLI extends AbstractView {
     }
 
     @Override
-    public void visit(DataModel dataModel) {
+    public void visit(DataGrid dataGrid) {
 
     }
 

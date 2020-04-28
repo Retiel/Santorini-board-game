@@ -1,6 +1,6 @@
 package it.polimi.ingsw.PSP33.controller.rules._enemyTurn;
 
-import it.polimi.ingsw.PSP33.controller.rules.GetCell;
+import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Athena;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;

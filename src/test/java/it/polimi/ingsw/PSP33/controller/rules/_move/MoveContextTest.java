@@ -1,6 +1,6 @@
 package it.polimi.ingsw.PSP33.controller.rules._move;
 
-import it.polimi.ingsw.PSP33.controller.rules.GetCell;
+import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules._build.BuildContext;
 import it.polimi.ingsw.PSP33.model.*;
 import org.junit.Before;

@@ -62,7 +62,7 @@ public class testClient {
               * -> roof = true
               0,...,3 -> floor number
               p -> pawn position player1
-                 god: Apollo
+                 god: Artemis
               e -> pawn position player2
                  god: Athena
 

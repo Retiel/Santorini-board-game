@@ -1,7 +1,7 @@
 package it.polimi.ingsw.PSP33.events;
 
 import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
@@ -17,7 +17,7 @@ public interface MVEventVisitor {
     /**
      * Message to send to the player all inital data of the board
      */
-    void visit(DataModel dataModel);
+    void visit(DataGrid dataGrid);
     /**
      * Message to send to the player all inital data of the board
      */

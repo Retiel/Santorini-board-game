@@ -1,6 +1,8 @@
 package it.polimi.ingsw.PSP33.controller.rules;
 
-import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
+import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
+import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
@@ -34,7 +36,7 @@ public class SetUpTurn {
         int randomInteger = random.nextInt(numberOfPlayers);
 
         model.setCurrentPlayer(model.getPlayers().get(randomInteger));
-        model.notifyObservers(new DataModel(model));
+        model.notifyObservers(new DataGrid(model.getBoard().getGrid()));
     }
 
     /**

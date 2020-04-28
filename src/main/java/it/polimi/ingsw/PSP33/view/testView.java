@@ -1,7 +1,7 @@
 package it.polimi.ingsw.PSP33.view;
 
 import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
@@ -14,9 +14,9 @@ public class testView extends AbstractView {
     }
 
     @Override
-    public void visit(DataModel dataModel) {
+    public void visit(DataGrid dataGrid) {
         System.out.print("Data update...\n");
-        System.out.print(dataModel.getModel().toString()+"\n");
+        System.out.print(dataGrid.getGrid().toString()+"\n");
         System.out.print("Data update finished\n");
     }
 
