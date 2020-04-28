@@ -1,6 +1,5 @@
 package it.polimi.ingsw.PSP33.controller.rules._move;
 
-import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Apollo;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Artemis;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Minotaur;

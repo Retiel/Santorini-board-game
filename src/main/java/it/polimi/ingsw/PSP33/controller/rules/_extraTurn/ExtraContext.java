@@ -4,7 +4,7 @@ import it.polimi.ingsw.PSP33.controller.rules.__implementation.Demeter;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Hephaestus;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Artemis;
 import it.polimi.ingsw.PSP33.controller.rules.__implementation.Prometheus;
-import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataBuffer;
+import it.polimi.ingsw.PSP33.controller.rules.tools.DataBuffer;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;

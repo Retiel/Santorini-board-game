@@ -2,18 +2,18 @@ package it.polimi.ingsw.PSP33.events.toClient.data;
 
 import it.polimi.ingsw.PSP33.events.MVEventVisitor;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-import it.polimi.ingsw.PSP33.model.Model;
+import it.polimi.ingsw.PSP33.model.Cell;
 
-public class DataModel extends MVEvent {
+public class DataGrid extends MVEvent {
 
-    private final Model model;
+    private final Cell[][] grid;
 
-    public DataModel(Model model) {
-        this.model = model;
+    public DataGrid(Cell[][] grid) {
+        this.grid = grid;
     }
 
-    public Model getModel() {
-        return model;
+    public Cell[][] getGrid() {
+        return grid;
     }
 
     @Override

@@ -1,8 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.rules;
 
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
-import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
 
@@ -30,7 +29,7 @@ public class TurnControl {
         else nextPlayer = model.getPlayers().get(0);
 
         model.setCurrentPlayer(nextPlayer);
-        model.notifyObservers(new DataModel(model));
+        model.notifyObservers(new DataGrid(model.getBoard().getGrid()));
     }
 
     /* method used for testing */

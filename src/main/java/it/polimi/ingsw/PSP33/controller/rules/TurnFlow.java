@@ -5,9 +5,10 @@ import it.polimi.ingsw.PSP33.controller.rules._enemyTurn.LimiterContext;
 import it.polimi.ingsw.PSP33.controller.rules._move.MoveContext;
 import it.polimi.ingsw.PSP33.controller.rules._extraTurn.ExtraContext;
 import it.polimi.ingsw.PSP33.controller.rules._win.WinContext;
-import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataBuffer;
-import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataControl;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataModel;
+import it.polimi.ingsw.PSP33.controller.rules.tools.DataBuffer;
+import it.polimi.ingsw.PSP33.controller.rules.tools.DataControl;
+import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
@@ -134,7 +135,7 @@ public class TurnFlow {
             setData("move", coord);
             winContext.checkWinCondition(board, dataBuffer.getCurrentPawn(), GetCell.getCellAdapter(coord,board));
             moveContext.execMove(coord.getX(), coord.getY(), dataBuffer.getCurrentPawn(), model);
-            model.notifyObservers(new DataModel(model));
+            model.notifyObservers(new DataGrid(model.getBoard().getGrid()));
         }
         else model.notifyObservers(new PossibleMove(dataBuffer.getCoordList(), dataBuffer.getCoordListGods()));
     }
@@ -148,7 +149,7 @@ public class TurnFlow {
         if (DataControl.controlInput(coord,dataBuffer)) {
             setData("build", coord);
             buildContext.execBuild(coord.getX(), coord.getY(), roof, model);
-            model.notifyObservers(new DataModel(model));
+            model.notifyObservers(new DataGrid(model.getBoard().getGrid()));
         }
         else model.notifyObservers(new PossibleBuild(dataBuffer.getCoordList(), dataBuffer.getCoordListGods(), DataControl.checkBuild(dataBuffer.getGodName())));
     }
@@ -162,7 +163,7 @@ public class TurnFlow {
         if (DataControl.controlInput(coord,dataBuffer)) {
             setData("extra", coord);
             extraContext.ExecAction(coord, dataBuffer.getCurrentPawn(), model);
-            model.notifyObservers(new DataModel(model));
+            model.notifyObservers(new DataGrid(model.getBoard().getGrid()));
         }
         else model.notifyObservers(new PossibleExtraAction(dataBuffer.getCoordList()));
     }

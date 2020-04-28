@@ -1,10 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.rules._extraTurn;
 
-import it.polimi.ingsw.PSP33.controller.rules.GetCell;
-import it.polimi.ingsw.PSP33.controller.rules._move.MoveContext;
-import it.polimi.ingsw.PSP33.controller.rules.buffer_control.DataBuffer;
+import it.polimi.ingsw.PSP33.controller.rules.tools.DataBuffer;
 import it.polimi.ingsw.PSP33.model.*;
-import it.polimi.ingsw.PSP33.utils.Coord;
 import org.junit.Before;
 import org.junit.Test;
 

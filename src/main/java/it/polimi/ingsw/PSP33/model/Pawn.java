@@ -10,18 +10,21 @@ import java.awt.*;
 public class Pawn {
 
     /**
-     * Value that represent the affiliated player
+     * Light version of the class Pawn
      */
-    private final Color color;
+    private final LightPawn lightPawn;
 
+    /**
+     * Coordinates of the actual position of the pawn
+     */
     private Coord coord;
 
     /**
      * Constructor of the class
      * @param color color of the related player
      */
-    public Pawn(Color color) {
-        this.color = color;
+    public Pawn(Color color, int number) {
+        this.lightPawn = new LightPawn(color, number);
         this.coord = null;
     }
 
@@ -31,7 +34,7 @@ public class Pawn {
      * @return color of the pawn (java.awt.Color type)
      */
     public Color getColor() {
-        return color;
+        return lightPawn.getColor();
     }
 
     /**
@@ -64,7 +67,66 @@ public class Pawn {
         this.coord = new Coord(coordX, coordY);
     }
 
+    /**
+     * Method to retrieve coordinates position
+     *
+     * @return Coord object
+     */
     public Coord getCoord() {
         return coord;
+    }
+
+    /**
+     * Method to get the numebrID
+     *
+     * @return Integer
+     */
+    public int getNumber() {
+        return lightPawn.getNumber();
+    }
+
+    /**
+     * Method to get pawn light version
+     *
+     * @return Integer
+     */
+    public LightPawn getLightPawn() {
+        return lightPawn;
+    }
+
+    public class LightPawn {
+
+        /**
+         * Value that represent the affiliated player
+         */
+        private final Color color;
+
+        /**
+         * Value that identify the pawn
+         */
+        private final int number;
+
+        public LightPawn(Color color, int number) {
+            this.color = color;
+            this.number = number;
+        }
+
+        /**
+         * Method to get the color of the pawn
+         *
+         * @return color of the pawn (java.awt.Color type)
+         */
+        public Color getColor() {
+            return color;
+        }
+
+        /**
+         * Method to get the numebrID
+         *
+         * @return Integer
+         */
+        public int getNumber() {
+            return number;
+        }
     }
 }

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.PSP33.controller.rules.__implementation;
 
-import it.polimi.ingsw.PSP33.controller.rules.BasicAction;
+import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules._move.Move;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.model.Board;

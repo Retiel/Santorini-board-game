@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.controller.rules.buffer_control;
+package it.polimi.ingsw.PSP33.controller.rules.tools;
 
 import it.polimi.ingsw.PSP33.utils.Coord;
 
