@@ -91,6 +91,11 @@ public class MoveContextTest {
         testPlayer2.getPawns()[1].setCoords(3,2);
         testBoard.getGrid()[3][2].setOccupied(testPlayer2.getPawns()[1]);
 
+    }
+
+    @Test
+    public void verifyBasic() {
+
         testSampleMove = new MoveContext(Gods.NOGOD);
         assertTrue(testSampleMove.checkMove(testPlayer1.getPawns()[0], testBoard).isEmpty());
 

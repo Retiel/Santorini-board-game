@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.controller.rules;
+package it.polimi.ingsw.PSP33.controller.rules.tools;
 
 import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.model.Cell;

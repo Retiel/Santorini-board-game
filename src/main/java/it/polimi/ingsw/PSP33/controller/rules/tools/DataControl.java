@@ -42,7 +42,12 @@ public class DataControl {
      * @return Boolean
      */
     public static boolean checkStart(Gods name){
-        return name.equals(Gods.PROMETHEUS);
+        switch (name){
+            case PROMETHEUS: return true;
+            case NOGOD:
+            default:
+                return false;
+        }
     }
 
     /**
@@ -64,6 +69,7 @@ public class DataControl {
     public static boolean limitReset(Gods name){
         switch (name){
             case ATHENA:
+            case NOGOD:
             default: return false;
         }
     }

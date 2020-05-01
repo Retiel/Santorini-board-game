@@ -11,17 +11,8 @@ import java.util.List;
  */
 public class DataBuffer {
 
-    private String action;
     private List<Coord> coordList;
     private List<Coord> coordListGods;
-
-    public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
-    }
 
     public List<Coord> getCoordList() {
         return new ArrayList<>(coordList);
