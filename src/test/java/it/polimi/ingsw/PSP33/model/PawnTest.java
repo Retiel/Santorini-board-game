@@ -1,7 +1,8 @@
 package it.polimi.ingsw.PSP33.model;
 
+import it.polimi.ingsw.PSP33.utils.Coord;
 import org.junit.After;
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,18 +25,32 @@ public class PawnTest {
     @Test
     public void initPawn() {
 
-        Assert.assertEquals(pawn.getColor(), Color.BLACK);
-        Assert.assertEquals(pawn.getNumber(), 1);
+        assertEquals(pawn.getColor(), Color.BLACK);
+        assertEquals(pawn.getNumber(), 1);
+
+        assertNull(pawn.getCoord());
+        assertNull(pawn.getOldMove());
+        assertNull(pawn.getOldBuild());
+        assertNull(pawn.getOldExtra());
     }
 
-    /**
     @Test
-    public void setCoordinates_correctInput_correctOutput() {
+    public void setPosition_getPosition() {
+        pawn.setCoords(1,2);
 
-        pawn.setCoordX(0);
-        pawn.setCoordY(0);
-        Assert.assertEquals(pawn.getCoordX(), 0);
-        Assert.assertEquals(pawn.getCoordY(), 0);
+        assertEquals(1, pawn.getCoordX());
+        assertEquals(2, pawn.getCoordY());
     }
-    */
+
+    @Test
+    public void setHistory_getHistory() {
+
+        pawn.setOldMove(new Coord(1,2));
+        pawn.setOldBuild(new Coord(1,2));
+        pawn.setOldExtra(new Coord(1,2));
+
+        assertNotNull(pawn.getOldMove());
+        assertNotNull(pawn.getOldBuild());
+        assertNotNull(pawn.getOldExtra());
+    }
 }

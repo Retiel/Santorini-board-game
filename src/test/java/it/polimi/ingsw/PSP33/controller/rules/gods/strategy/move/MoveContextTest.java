@@ -1,6 +1,5 @@
-package it.polimi.ingsw.PSP33.controller.rules.move;
+package it.polimi.ingsw.PSP33.controller.rules.gods.strategy.move;
 
-import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.move.MoveContext;
 import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.build.BuildContext;
 import it.polimi.ingsw.PSP33.model.*;
@@ -173,6 +172,25 @@ public class MoveContextTest {
 
         assertEquals(2, testP2.getCoordX());
         assertEquals(1, testP2.getCoordY());
+    }
+
+    @Test
+    public void verifyArtemis() {
+        testSampleMove = new MoveContext(Gods.ARTEMIS);
+
+        Pawn testPawn = testPlayer2.getPawnByNumber(2);
+
+        List<Cell> sample = new ArrayList<>();
+        sample.add(testBoard.getGrid()[2][2]);
+        sample.add(testBoard.getGrid()[2][3]);
+        sample.add(testBoard.getGrid()[3][1]);
+        sample.add(testBoard.getGrid()[3][3]);
+        sample.add(testBoard.getGrid()[4][1]);
+        sample.add(testBoard.getGrid()[4][2]);
+        sample.add(testBoard.getGrid()[4][3]);
+
+        testCheckMethod(testSampleMove, testPawn, sample);
+        testExecMethod(testSampleMove,3,3, testPawn);
     }
 
     private void testCheckMethod(MoveContext moveContext, Pawn pawn, List<Cell> sample){
