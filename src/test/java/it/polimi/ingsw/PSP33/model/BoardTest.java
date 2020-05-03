@@ -1,7 +1,7 @@
 package it.polimi.ingsw.PSP33.model;
 
 import org.junit.After;
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -13,12 +13,9 @@ public class BoardTest {
 
     private Board board;
 
-    private ArrayList<Player> players;
-
-
     @Before
     public void setUp() {
-        players = new ArrayList<>();
+        board = new Board();
     }
 
     @After
@@ -27,17 +24,17 @@ public class BoardTest {
     }
 
     @Test
-    public void setPawns_correctInput_correctOutput(){
-        //TODO
-    }
+    public void initBoards() {
+        Cell[][] grid = board.getGrid();
+        assertEquals(5, board.getSIZE());
 
-    @Test
-    public void initBoard_twoPlayers() {
-        //TODO
-    }
-
-    @Test
-    public void initBoard_threePlayers() {
-        //TODO
+        for (Cell[] rows : grid){
+            for (Cell cell : rows){
+                assertNotNull(cell);
+                assertFalse(cell.isRoof());
+                assertEquals(0, cell.getFloor());
+                assertNull(cell.getOccupied());
+            }
+        }
     }
 }

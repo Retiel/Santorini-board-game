@@ -10,19 +10,25 @@ import java.awt.*;
 public class Pawn {
 
     /**
-     * Light version of the class Pawn
+     * Value that represent the affiliated player
      */
-    private final LightPawn lightPawn;
+    private final Color color;
 
     /**
      * Coordinates of the actual position of the pawn
      */
     private Coord coord;
 
+    /**
+     * Value that identify the pawn
+     */
+    private final int number;
+
+    /**
+     * History of the pawn turn
+     */
     private Coord oldMove;
-
     private Coord oldBuild;
-
     private Coord oldExtra;
 
     /**
@@ -30,8 +36,8 @@ public class Pawn {
      * @param color color of the related player
      */
     public Pawn(Color color, int number) {
-        this.lightPawn = new LightPawn(color, number);
-        this.coord = null;
+        this.color = color;
+        this.number = number;
     }
 
     /**
@@ -40,7 +46,7 @@ public class Pawn {
      * @return color of the pawn (java.awt.Color type)
      */
     public Color getColor() {
-        return lightPawn.getColor();
+        return color;
     }
 
     /**
@@ -88,75 +94,57 @@ public class Pawn {
      * @return Integer
      */
     public int getNumber() {
-        return lightPawn.getNumber();
+        return number;
     }
+
 
     /**
-     * Method to get pawn light version
+     *Method to get history of the pawn move actions
      *
-     * @return Integer
+     * @return Coord class Object
      */
-    public LightPawn getLightPawn() {
-        return lightPawn;
-    }
-
-    public class LightPawn {
-
-        /**
-         * Value that represent the affiliated player
-         */
-        private final Color color;
-
-        /**
-         * Value that identify the pawn
-         */
-        private final int number;
-
-        public LightPawn(Color color, int number) {
-            this.color = color;
-            this.number = number;
-        }
-
-        /**
-         * Method to get the color of the pawn
-         *
-         * @return color of the pawn (java.awt.Color type)
-         */
-        public Color getColor() {
-            return color;
-        }
-
-        /**
-         * Method to get the numebrID
-         *
-         * @return Integer
-         */
-        public int getNumber() {
-            return number;
-        }
-    }
-
-
     public Coord getOldMove() {
         return oldMove;
     }
 
+    /**
+     * Method to set history of the pawn move actions
+     * @param oldMove position before the execute move action
+     */
     public void setOldMove(Coord oldMove) {
         this.oldMove = oldMove;
     }
 
+    /**
+     *Method to get history of the pawn build actions
+     *
+     * @return Coord class Object
+     */
     public Coord getOldBuild() {
         return oldBuild;
     }
 
+    /**
+     * Method to set history of the pawn nuild actions
+     * @param oldBuild target cell of the build action
+     */
     public void setOldBuild(Coord oldBuild) {
         this.oldBuild = oldBuild;
     }
 
+    /**
+     *Method to get history of the pawn extra actions
+     *
+     * @return Coord class Object
+     */
     public Coord getOldExtra() {
         return oldExtra;
     }
 
+    /**
+     * Method to set history of the pawn extra actions
+     * @param oldExtra position or target cell of the extra action
+     */
     public void setOldExtra(Coord oldExtra) {
         this.oldExtra = oldExtra;
     }

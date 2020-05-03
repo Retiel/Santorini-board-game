@@ -2,7 +2,7 @@ package it.polimi.ingsw.PSP33.model;
 
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import org.junit.After;
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -24,17 +24,25 @@ public class PlayerTest {
 
     @Test
     public void initPlayer_correctInput_correctOutput() {
-        //FIXME
-        Assert.assertEquals(player.getName(), "test");
-        Assert.assertEquals(player.getColor(), Color.BLACK);
+        assertEquals(player.getName(), "test");
+        assertEquals(player.getColor(), Color.BLACK);
+
+        assertEquals(Color.BLACK, player.getPawnByNumber(1).getColor());
+        assertEquals(Color.BLACK, player.getPawnByNumber(2).getColor());
+
+        Pawn[] pawns = player.getPawns();
+
+        assertEquals(2, pawns.length);
     }
 
     @Test
     public void setCard_correctInput_correctOutput() {
 
         this.player.setCard(new God(Gods.NOGOD, "seems legit all the way, maybe a god will arrive"));
-        Assert.assertNotNull(player.getCard());
-        Assert.assertEquals(Gods.NOGOD, player.getCard().getName());
-        Assert.assertEquals("seems legit all the way, maybe a god will arrive", player.getCard().getDescription());
+        assertNotNull(player.getCard());
+        assertEquals(Gods.NOGOD, player.getCard().getName());
+        assertEquals("seems legit all the way, maybe a god will arrive", player.getCard().getDescription());
     }
+
+
 }

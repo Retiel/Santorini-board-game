@@ -1,9 +1,11 @@
 package it.polimi.ingsw.PSP33.model;
 
 import org.junit.After;
-import org.junit.Assert;
+import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.awt.*;
 
 public class CellTest {
 
@@ -20,23 +22,43 @@ public class CellTest {
     }
 
     @Test
-    public void initCell() {
+    public void initCell_correctSetup() {
 
-        Assert.assertEquals(cell.getFloor(),0);
-        Assert.assertFalse(cell.isRoof());
+        assertEquals(cell.getFloor(),0);
+        assertFalse(cell.isRoof());
+        assertNull(cell.getOccupied());
+        assertEquals(0, cell.getCoordX());
+        assertEquals(0, cell.getCoordY());
+        assertEquals(0, cell.getCoord().getX());
+        assertEquals(0, cell.getCoord().getY());
     }
 
     @Test
     public void setFloor_correctInput_correctOutput() {
 
         cell.setFloor(1);
-        Assert.assertEquals(cell.getFloor(), 1);
+        assertEquals(cell.getFloor(), 1);
+
+        cell.setFloor(4);
+        assertEquals(cell.getFloor(), 4);
     }
 
     @Test
     public void setRoof_correctInput_correctOutput() {
 
         cell.setRoof(true);
-        Assert.assertTrue(cell.isRoof());
+        assertTrue(cell.isRoof());
+    }
+
+    @Test
+    public void setOccupied_correctInput_correctOutput() {
+
+        Pawn pawn = new Pawn(Color.WHITE, 2);
+
+        cell.setOccupied(pawn);
+        assertNotNull(cell.getOccupied());
+        assertEquals(2, cell.getOccupied().getNumber());
+        assertEquals(Color.WHITE, cell.getOccupied().getColor());
+
     }
 }

@@ -36,7 +36,7 @@ public class BasicAction {
      * @param c the Cell where the player wants to Build
      */
     public static void BuildBlock(Cell c){
-        if(c.getFloor()==3){
+        if(c.getFloor() == 3){
             c.setRoof(true);
         }
         else c.setFloor(c.getFloor()+1);

@@ -1,7 +1,5 @@
 package it.polimi.ingsw.PSP33.controller.rules.tools;
 
-import it.polimi.ingsw.PSP33.model.Cell;
-import it.polimi.ingsw.PSP33.model.Pawn;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.ArrayList;
@@ -13,17 +11,8 @@ import java.util.List;
  */
 public class DataBuffer {
 
-    private String action;
     private List<Coord> coordList;
     private List<Coord> coordListGods;
-
-    public String getAction() {
-        return action;
-    }
-
-    public void setAction(String action) {
-        this.action = action;
-    }
 
     public List<Coord> getCoordList() {
         return new ArrayList<>(coordList);
