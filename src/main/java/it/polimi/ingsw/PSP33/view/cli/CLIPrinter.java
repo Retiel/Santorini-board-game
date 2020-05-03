@@ -13,6 +13,10 @@ public class CLIPrinter {
     private StringBuilder floorInfo = new StringBuilder(50);
     private StringBuilder pawnInfo = new StringBuilder(50);
 
+    /**
+     * class that print all the info in the Board
+     * @param grid the light Board of the client
+     */
     public void printBoard(Board grid){
         String border = "+ - - - ";
         String empty = "|       ";
@@ -160,6 +164,10 @@ public class CLIPrinter {
 
     }
 
+    /**
+     * method that prints the choices from number 1
+     * @param choices the coordinates of possible moves
+     */
     public void printList(ArrayList<Coord> choices){
         for (Coord c : choices) {
             int counter = 1;
@@ -167,6 +175,12 @@ public class CLIPrinter {
             System.out.println(choices.get(counter-1).toString()+"\n");
         }
     }
+
+    /**
+     * method that prints the other possible choices continuing from the last number (previous list length)
+     * @param choices the coordinates of possible moves
+     * @param index the lenght of the previous list
+     */
     public void printSecondList(ArrayList<Coord> choices, int index){
         int counter = 0;
         for (Coord c : choices) {
