@@ -148,4 +148,9 @@ public class Pawn {
     public void setOldExtra(Coord oldExtra) {
         this.oldExtra = oldExtra;
     }
+
+    @Override
+    public String toString(){
+        return color.toString().substring(0,0);
+    }
 }

@@ -4,47 +4,57 @@ import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
+import it.polimi.ingsw.PSP33.model.Board;
+import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.view.AbstractView;
+
+import java.util.ArrayList;
 
 /**
  * the rapppresentation of the View Class for the CLI mode
  */
 public class CLI extends AbstractView {
 
-    private InOutCLI consoleCLI;
-    private MenuManager menuManager;
-    public CLI(InOutCLI io, MenuManager menuManager){
-        this.consoleCLI = io;
-        this.menuManager = menuManager;
+
+    public static void main(String[] args) {
+        Board board = new Board();
+        CLIPrinter cliPrinter = new CLIPrinter();
+
+        cliPrinter.printBoard(board);
+
     }
 
     @Override
     public void visit(MVEventSample mvEventSample) {
-
+        //update grid info in the payer's view
     }
 
     @Override
     public void visit(DataGrid dataGrid) {
-
+        //setup grid info in the payer's view
     }
 
     @Override
     public void visit(PossiblePlacement possiblePlacement) {
-
+        //print 2 times the placement for the pawn (setup phase)
     }
 
     @Override
     public void visit(YouLose youLose) {
-
+        System.out.println("You lose!");
     }
 
     @Override
     public void visit(YouWin youWin) {
-
+        System.out.println("You win!");
     }
 
     @Override
     public void visit(NewAction newAction) {
+
+        //print board
+
+        //decide action with the Boolean and send input to controller
 
     }
 
