@@ -1,7 +1,9 @@
 package it.polimi.ingsw.PSP33.controller.rules.gods.strategy.extra;
 
 import it.polimi.ingsw.PSP33.controller.rules.tools.DataBuffer;
+import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.model.*;
+import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import org.junit.Before;
 import org.junit.Test;
@@ -94,7 +96,24 @@ public class ExtraContextTest {
 
         sampleDataBuffer = new DataBuffer();
         testSample = new ExtraContext(Gods.NOGOD);
-        assertTrue(testSample.extraRequest(testPlayer1.getPawns()[0], testBoard, sampleDataBuffer).isEmpty());
+        assertTrue(testSample.extraRequest(testPlayer1.getPawns()[0], testBoard).isEmpty());
+    }
+
+    @Test
+    public void verifyBasic() {
+
+        testSample = new ExtraContext(Gods.NOGOD);
+        Pawn samplePawn = testPlayer1.getPawnByNumber(1);
+        Cell sampleOldCell = testBoard.getGrid()[1][3];
+        samplePawn.setOldMove(sampleOldCell.getCoord());
+
+        List<Cell> sample = new ArrayList<>();
+
+        testCheckMethod(testSample, samplePawn, sample);
+
+        testSample.ExecAction(new Coord(1,3), samplePawn, testModel);
+        assertEquals(1, samplePawn.getCoordX());
+        assertEquals(1, samplePawn.getCoordY());
     }
 
     @Test
@@ -104,8 +123,6 @@ public class ExtraContextTest {
         Pawn samplePawn = testPlayer2.getPawnByNumber(2);
         Cell sampleOldCell = testBoard.getGrid()[3][3];
         samplePawn.setOldMove(sampleOldCell.getCoord());
-
-        List<Cell> cellList = testSample.extraRequest(samplePawn, testBoard, sampleDataBuffer);
 
         List<Cell> sample = new ArrayList<>();
         sample.add(testBoard.getGrid()[2][2]);
@@ -117,18 +134,93 @@ public class ExtraContextTest {
 
         testCheckMethod(testSample, samplePawn, sample);
 
+        testSample.ExecAction(new Coord(3,1), samplePawn, testModel);
+        assertEquals(3, samplePawn.getCoordX());
+        assertEquals(1, samplePawn.getCoordY());
 
+        Cell cell = GetCell.getCellAdapter(new Coord(3,1), testBoard);
+        assertEquals(samplePawn, cell.getOccupied());
     }
 
     @Test
     public void verifyDemeter() {
 
-        //TODO
+        testSample = new ExtraContext(Gods.DEMETER);
+        Pawn samplePawn = testPlayer2.getPawnByNumber(1);
+        Cell sampleOldCell = testBoard.getGrid()[2][1];
+        samplePawn.setOldBuild(sampleOldCell.getCoord());
+
+        List<Cell> sample = new ArrayList<>();
+        sample.add(testBoard.getGrid()[3][1]);
+
+        testCheckMethod(testSample, samplePawn, sample);
+
+        samplePawn.setOldBuild(new Coord(3,1));
+        List<Cell> sample2 = new ArrayList<>();
+
+        testCheckMethod(testSample,samplePawn, sample2);
+
+        testSample.ExecAction(new Coord(3,1), samplePawn, testModel);
+        Cell cell = GetCell.getCellAdapter(new Coord(3,1), testBoard);
+        assertEquals(3, cell.getFloor());
+        assertFalse(cell.isRoof());
+    }
+
+    @Test
+    public void verifyHephaestus() {
+
+        testSample = new ExtraContext(Gods.HEPHAESTUS);
+        Pawn samplePawn = testPlayer1.getPawnByNumber(2);
+        Cell sampleOldCell = testBoard.getGrid()[2][2];
+        samplePawn.setOldBuild(sampleOldCell.getCoord());
+
+        List<Cell> sample = new ArrayList<>();
+        sample.add(testBoard.getGrid()[2][2]);
+
+        testCheckMethod(testSample, samplePawn, sample);
+
+        testBoard.getGrid()[2][2].setFloor(3);
+        List<Cell> sample2 = new ArrayList<>();
+
+        testCheckMethod(testSample, samplePawn, sample2);
+
+        testBoard.getGrid()[2][2].setFloor(0);
+
+        testSample.ExecAction(new Coord(2,2), samplePawn, testModel);
+        Cell cell = GetCell.getCellAdapter(new Coord(2,2), testBoard);
+        assertEquals(1, cell.getFloor());
+        assertFalse(cell.isRoof());
+
+
+        testSample.ExecAction(new Coord(2,2), samplePawn, testModel);
+        assertEquals(2, cell.getFloor());
+        assertFalse(cell.isRoof());
+
+    }
+
+    @Test
+    public void verifyPrometheus() {
+
+        testSample = new ExtraContext(Gods.PROMETHEUS);
+        Pawn samplePawn = testPlayer1.getPawnByNumber(1);
+
+        List<Cell> sample = new ArrayList<>();
+        sample.add(testBoard.getGrid()[0][0]);
+        sample.add(testBoard.getGrid()[0][1]);
+        sample.add(testBoard.getGrid()[0][2]);
+        sample.add(testBoard.getGrid()[2][2]);
+
+        testCheckMethod(testSample, samplePawn, sample);
+
+        testSample.ExecAction(new Coord(2,2), samplePawn, testModel);
+        Cell cell = GetCell.getCellAdapter(new Coord(2,2), testBoard);
+        assertEquals(1, cell.getFloor());
+        assertFalse(cell.isRoof());
     }
 
     private void testCheckMethod(ExtraContext context, Pawn pawn, List<Cell> sample){
 
-        List<Cell> test = context.extraRequest(pawn, testBoard, sampleDataBuffer);
+        List<Cell> test = context.extraRequest(pawn, testBoard);
 
         assertEquals(sample.size(), test.size());
         for (Cell cell : test){

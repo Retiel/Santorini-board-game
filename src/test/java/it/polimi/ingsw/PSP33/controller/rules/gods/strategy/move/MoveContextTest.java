@@ -1,8 +1,10 @@
 package it.polimi.ingsw.PSP33.controller.rules.gods.strategy.move;
 
+import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.extra.ExtraContext;
 import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.build.BuildContext;
 import it.polimi.ingsw.PSP33.model.*;
+import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import org.junit.Before;
 import org.junit.Test;
@@ -101,31 +103,25 @@ public class MoveContextTest {
 
         Pawn testPawnPlayer1 = testPlayer1.getPawnByNumber(2);
 
-        List<Cell> movableCells = GetCell.getMovableCells(testPawnPlayer1, testBoard);
         List<Cell> sample1 = new ArrayList<>();
-        sample1.add(testBoard.getGrid()[2][2]);
-        sample1.add(testBoard.getGrid()[3][1]);
 
-        assertEquals(2, movableCells.size());
-        for (Cell cell : movableCells){
-            assertTrue(sample1.contains(cell));
-        }
+        testCheckMethod(testSampleMove, testPawnPlayer1, sample1);
+        testExecMethod(testSampleMove, 2,2, testPawnPlayer1);
     }
 
     @Test
     public void verifyPrometheus() {
 
         testSampleMove = new MoveContext(Gods.PROMETHEUS);
-        BuildContext testSampleBuild = new BuildContext(Gods.PROMETHEUS);
+        ExtraContext extraContext = new ExtraContext(Gods.PROMETHEUS);
 
         /* pawn position ()*/
         Pawn testPawn = testPlayer1.getPawnByNumber(2);
 
         testExecMethod(testSampleMove,3,1, testPawn);
+        testBoard.getGrid()[4][1].setFloor(3);
 
-        testSampleBuild.execBuild(4,1,  true, testModel);
-        testSampleBuild.execBuild(4,1, true, testModel);
-        assertEquals(3, testBoard.getGrid()[4][1].getFloor());
+        extraContext.ExecAction(new Coord(2,2), testPawn, testModel);
 
         List<Cell> sample2 = new ArrayList<>();
         sample2.add(testBoard.getGrid()[2][2]);

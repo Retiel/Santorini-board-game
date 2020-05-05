@@ -108,17 +108,17 @@ public class BuildContextTest {
 
         Pawn testPawnPlayer1 = testPlayer1.getPawnByNumber(1);
 
-        List<Cell> buildCells = GetCell.getBuildableCells(testPawnPlayer1, testBoard);
         List<Cell> sample1 = new ArrayList<>();
-        sample1.add(testBoard.getGrid()[0][0]);
-        sample1.add(testBoard.getGrid()[0][1]);
-        sample1.add(testBoard.getGrid()[0][2]);
-        sample1.add(testBoard.getGrid()[2][2]);
 
-        assertEquals(4, buildCells.size());
-        for (Cell cell : buildCells){
-            assertTrue(sample1.contains(cell));
-        }
+        testCheckMethod(testBuildContext, testPawnPlayer1, sample1);
+
+        Cell cell = GetCell.getCellAdapter(new Coord(0,0), testBoard);
+        testBuildContext.execBuild(0,0,false, testModel);
+        assertEquals(1, cell.getFloor());
+
+        testBuildContext.execBuild(0,0,true, testModel);
+        assertEquals(2, cell.getFloor());
+        assertFalse(cell.isRoof());
     }
 
     @Test

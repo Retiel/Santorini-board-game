@@ -4,7 +4,6 @@ import it.polimi.ingsw.PSP33.controller.rules.gods.Demeter;
 import it.polimi.ingsw.PSP33.controller.rules.gods.Hephaestus;
 import it.polimi.ingsw.PSP33.controller.rules.gods.Artemis;
 import it.polimi.ingsw.PSP33.controller.rules.gods.Prometheus;
-import it.polimi.ingsw.PSP33.controller.rules.tools.DataBuffer;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
@@ -37,12 +36,10 @@ public class ExtraContext {
      * Method to check available move based on the god effect
      * @param pawn pawn involved
      * @param board board of the game
-     * @param dataBuffer data bank for all necessities
-     *
      * @return List of Cell object
      */
-    public List<Cell> extraRequest(Pawn pawn, Board board, DataBuffer dataBuffer){
-        return extraAction.checkPlusAction(pawn, board, dataBuffer);
+    public List<Cell> extraRequest(Pawn pawn, Board board){
+        return extraAction.checkPlusAction(pawn, board);
     }
 
     /**

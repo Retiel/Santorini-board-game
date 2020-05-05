@@ -18,7 +18,6 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.utils.enums.Actions;
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -226,7 +225,7 @@ public class TurnManager extends AbstractManager {
         switch (action){
             case MOVE: return moveContext.checkMove(getModel().getCurrentPawn(), getBoard());
             case BUILD: return buildContext.checkBuild(getModel().getCurrentPawn(), getBoard());
-            case EXTRA: return extraContext.extraRequest(getModel().getCurrentPawn(), getBoard(), dataBuffer);
+            case EXTRA: return extraContext.extraRequest(getModel().getCurrentPawn(), getBoard());
             default:
                 return new ArrayList<>();
         }
