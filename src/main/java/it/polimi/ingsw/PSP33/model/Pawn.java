@@ -1,8 +1,7 @@
 package it.polimi.ingsw.PSP33.model;
 
 import it.polimi.ingsw.PSP33.utils.Coord;
-
-import java.awt.*;
+import it.polimi.ingsw.PSP33.utils.enums.Color;
 
 /**
  * Pawn class that holds all information related to the state of a pawn piece

@@ -1,6 +1,6 @@
 package it.polimi.ingsw.PSP33.model;
 
-import java.awt.*;
+import it.polimi.ingsw.PSP33.utils.enums.Color;
 
 /**
  * Player class that holds the data related to the player
