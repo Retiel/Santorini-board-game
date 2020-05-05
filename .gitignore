@@ -5,9 +5,8 @@
  .idea/
  *.iml
  *.iws
-/target/
 
+/target/
 target/classes/
-
 target/test-classes/
-/target/
+

@@ -99,7 +99,15 @@ public class Lobby {
     }
 
     public boolean checkColor(Color color) {
-        return colorList.contains(color);
+        synchronized (colorList) {
+            for (Color color1 : colorList) {
+                if (color.equals(color1)) {
+                    return true;
+                }
+            }
+
+            return false;
+        }
     }
 
     public void fillColorList() {
@@ -118,6 +126,8 @@ public class Lobby {
                         .append(color.name())
                         .append("\n");
             }
+
+            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
         }
 
         return stringBuilder.toString();

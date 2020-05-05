@@ -134,16 +134,13 @@ public class ClientHandler implements Runnable {
             }
 
             if(num > 0 && num <= colorList.size()) {
-                Color color = Color.getColorByIndex(num);
+            Color color = Color.getColorByIndex(num);
                 if(lobby.checkColor(color)) {
                     lobby.removeColor(color);
                     clientColor = color;
                     break;
                 }
             }
-
-            string = "Color already taken.";
-            output.writeObject(string);
         }
     }
 
