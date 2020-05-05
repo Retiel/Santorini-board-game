@@ -1,12 +1,12 @@
 package it.polimi.ingsw.PSP33.model;
 
+import it.polimi.ingsw.PSP33.utils.enums.Color;
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class ModelTest {
     public void setUp() {
         players = new ArrayList<>();
 
-        Player testPlayer1 = new Player("testPlayer1", Color.BLACK);
+        Player testPlayer1 = new Player("testPlayer1", Color.BLUE);
         Player testPlayer2 = new Player("testPlayer2", Color.GREEN);
 
         players.add(testPlayer1);
@@ -68,7 +68,7 @@ public class ModelTest {
     @Test
     public void initModel_threePlayers() {
 
-        players.add(new Player("player3", Color.GRAY));
+        players.add(new Player("player3", Color.RED));
         model = new Model(players);
 
         assertNotNull(model.getBoard());
@@ -92,7 +92,7 @@ public class ModelTest {
         model = new Model(players);
 
         assertNull(model.getCurrentPawn());
-        model.setCurrentPawn(new Pawn(Color.WHITE, 1));
+        model.setCurrentPawn(new Pawn(Color.RED, 1));
         assertNotNull(model.getCurrentPawn());
     }
 

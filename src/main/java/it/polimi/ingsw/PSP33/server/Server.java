@@ -37,9 +37,9 @@ public class Server implements Runnable {
         //Debug
         int i = 1;
 
-        Lobby lobby = new Lobby(i);
-
         while (true) {
+
+            Lobby lobby = new Lobby(i);
 
             try {
                 //Accept new client connection

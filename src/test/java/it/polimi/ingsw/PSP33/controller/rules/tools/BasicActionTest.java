@@ -1,14 +1,13 @@
 package it.polimi.ingsw.PSP33.controller.rules.tools;
 
-import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
+import it.polimi.ingsw.PSP33.utils.enums.Color;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +24,7 @@ public class BasicActionTest {
 
         List<Player> testPlayers = new ArrayList<>();
 
-        testPlayer1 = new Player("testPlayer1", Color.BLACK);
+        testPlayer1 = new Player("testPlayer1", Color.BLUE);
         Player testPlayer2 = new Player("testPlayer2", Color.GREEN);
 
         testPlayers.add(testPlayer1);
@@ -53,7 +52,7 @@ public class BasicActionTest {
         List<Player> testPlayers = new ArrayList<>();
 
         Player testPlayer3 = new Player("testPlayer3", Color.BLUE);
-        Player testPlayer4 = new Player("testPlayer4", Color.YELLOW);
+        Player testPlayer4 = new Player("testPlayer4", Color.RED);
 
         testPlayers.add(testPlayer3);
         testPlayers.add(testPlayer4);

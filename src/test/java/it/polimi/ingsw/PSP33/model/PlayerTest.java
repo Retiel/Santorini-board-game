@@ -1,12 +1,12 @@
 package it.polimi.ingsw.PSP33.model;
 
+import it.polimi.ingsw.PSP33.utils.enums.Color;
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
 
 public class PlayerTest {
 
@@ -14,7 +14,7 @@ public class PlayerTest {
 
     @Before
     public void setUp() {
-        player = new Player("test", Color.BLACK);
+        player = new Player("test", Color.BLUE);
     }
 
     @After
@@ -25,10 +25,10 @@ public class PlayerTest {
     @Test
     public void initPlayer_correctInput_correctOutput() {
         assertEquals(player.getName(), "test");
-        assertEquals(player.getColor(), Color.BLACK);
+        assertEquals(player.getColor(), Color.BLUE);
 
-        assertEquals(Color.BLACK, player.getPawnByNumber(1).getColor());
-        assertEquals(Color.BLACK, player.getPawnByNumber(2).getColor());
+        assertEquals(Color.BLUE, player.getPawnByNumber(1).getColor());
+        assertEquals(Color.BLUE, player.getPawnByNumber(2).getColor());
 
         Pawn[] pawns = player.getPawns();
 

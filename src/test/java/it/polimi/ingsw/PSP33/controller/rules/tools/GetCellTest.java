@@ -1,15 +1,15 @@
 package it.polimi.ingsw.PSP33.controller.rules.tools;
 
-import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
 import it.polimi.ingsw.PSP33.model.Player;
 import it.polimi.ingsw.PSP33.utils.Coord;
 import static org.junit.Assert.*;
+
+import it.polimi.ingsw.PSP33.utils.enums.Color;
 import org.junit.*;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,7 +51,7 @@ public class GetCellTest {
     public static void setUp(){
 
         List<Player> testPlayers = new ArrayList<>();
-        Player testPlayer1 = new Player("testPlayer1", Color.BLACK);
+        Player testPlayer1 = new Player("testPlayer1", Color.BLUE);
         testPlayers.add(testPlayer1);
 
         testBoard = new Board();

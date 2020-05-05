@@ -1,12 +1,11 @@
 package it.polimi.ingsw.PSP33.model;
 
 import it.polimi.ingsw.PSP33.utils.Coord;
+import it.polimi.ingsw.PSP33.utils.enums.Color;
 import org.junit.After;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.awt.*;
 
 public class PawnTest {
 
@@ -14,7 +13,7 @@ public class PawnTest {
 
     @Before
     public void setUp() {
-        pawn = new Pawn(Color.BLACK, 1);
+        pawn = new Pawn(Color.BLUE, 1);
     }
 
     @After
@@ -25,7 +24,7 @@ public class PawnTest {
     @Test
     public void initPawn() {
 
-        assertEquals(pawn.getColor(), Color.BLACK);
+        assertEquals(pawn.getColor(), Color.BLUE);
         assertEquals(pawn.getNumber(), 1);
 
         assertNull(pawn.getCoord());

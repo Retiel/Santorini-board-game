@@ -4,15 +4,14 @@ import it.polimi.ingsw.PSP33.controller.rules.tools.DataBuffer;
 import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.model.*;
 import it.polimi.ingsw.PSP33.utils.Coord;
+import it.polimi.ingsw.PSP33.utils.enums.Color;
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
 
 public class ExtraContextTest {
@@ -60,7 +59,7 @@ public class ExtraContextTest {
 
         List<Player> testPlayers = new ArrayList<>();
 
-        testPlayer1 = new Player("testPlayer1", Color.BLACK);
+        testPlayer1 = new Player("testPlayer1", Color.BLUE);
         testPlayer2 = new Player("testPlayer2", Color.GREEN);
 
         testPlayers.add(testPlayer1);
