@@ -40,10 +40,11 @@ public class LimiterContext {
         List<Cell> afterEffectList = cellList;
 
         for (ActiveGods gods : allEffect){
-            if (!godName.equals(gods.getName()) && gods.isEnable()){
-                ChangeLimiter(gods.getName());
-                afterEffectList = limiter.limit(afterEffectList, enemyPawn, board);
-            }
+            if (gods.isEnable())
+                if (!godName.equals(gods.getName())) {
+                    ChangeLimiter(gods.getName());
+                    afterEffectList = limiter.limit(afterEffectList, enemyPawn, board);
+                }
             if(afterEffectList.isEmpty()) break;
         }
         return afterEffectList;
@@ -53,7 +54,7 @@ public class LimiterContext {
      * Method to activate a god effect limit
      * @param godName name of the god to enable
      * @param p pawn involved
-     * @param c coordinates
+     * @param c coordinates needed
      * @param b board
      */
     public void activateGodLimiter(Gods godName, Pawn p, Coord c, Board b){
@@ -65,9 +66,9 @@ public class LimiterContext {
     }
 
     /**
-     * Method to reset god effecto to his default state
+     * Method to reset god effect to a default state
      * @param name name of the god
-     * @param value default value
+     * @param value default state
      */
     public void resetGodTrigger(Gods name, boolean value){
         for (ActiveGods gods : allEffect){

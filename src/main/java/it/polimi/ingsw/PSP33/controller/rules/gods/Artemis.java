@@ -4,7 +4,6 @@ import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.extra.ExtraAction;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.move.Move;
-import it.polimi.ingsw.PSP33.controller.rules.tools.DataBuffer;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
@@ -20,7 +19,7 @@ import java.util.List;
 public class Artemis implements Move, ExtraAction {
 
     @Override
-    public List<Cell> checkPlusAction(Pawn pawn, Board board, DataBuffer dataBuffer) {
+    public List<Cell> checkPlusAction(Pawn pawn, Board board) {
         List<Cell> cellList = GetCell.getMovableCells(pawn, board);
         cellList.remove(GetCell.getCellAdapter(pawn.getOldMove(), board));
         return cellList;
