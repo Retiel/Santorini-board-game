@@ -1,10 +1,11 @@
 package it.polimi.ingsw.PSP33.server;
 
+import com.google.gson.Gson;
+import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
+import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.utils.enums.Color;
 
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.net.Socket;
 import java.util.List;
 
@@ -45,7 +46,7 @@ public class ClientHandler implements Runnable {
      * List of clients' names
      */
 
-    public ClientHandler(Socket client, Lobby lobby) {
+    public ClientHandler(Socket client, Lobby lobby){
         this.client = client;
         this.input = null;
         this.output = null;
@@ -144,7 +145,24 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Method to send message over web
+     * @throws IOException
+     */
+    public void sendMessage(MVEvent mvEvent) throws IOException {
+        Gson gson = new Gson();
+        String toSend =  gson.toJson(mvEvent, MVEvent.class);
+        output.writeUTF(toSend);
+    }
 
+    /**
+     * Method to receive message over web
+     * @throws IOException
+     */
+    public VCEvent readMessage() throws IOException {
+        Gson gson = new Gson();
+        return gson.fromJson(input.readUTF(), VCEvent.class);
+    }
 
 
     /**

@@ -1,0 +1,102 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: VCEventVisitor</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.events</a> ]
+</div>
+
+<h1>Coverage Summary for Class: VCEventVisitor (it.polimi.ingsw.PSP33.events)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">VCEventVisitor</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.events;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.events.toServer.VCEventSample;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.events.toServer.turn.*;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;/**
+<i>8</i>&nbsp; * Custom interface used to implement the visitor pattern for messages sent to server
+<i>9</i>&nbsp; */
+<i>10</i>&nbsp;public interface VCEventVisitor {
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;    /* add visit method for each VCEvent */
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    void visit(VCEventSample vcEventSample);
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    /**
+<i>17</i>&nbsp;     * Message to send the server where to place the pawn diuring set up phase
+<i>18</i>&nbsp;     */
+<i>19</i>&nbsp;    void visit(PlacePawn placePawn);
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * Message to send the server to set a new turn
+<i>23</i>&nbsp;     */
+<i>24</i>&nbsp;    void visit(NewTurn newTurn);
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    /**
+<i>27</i>&nbsp;     * Message to send the server where to place the pawn diuring set up phase
+<i>28</i>&nbsp;     */
+<i>29</i>&nbsp;    void visit(ExtraAction extraAction);
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    /**
+<i>32</i>&nbsp;     * Message to send the server where to build
+<i>33</i>&nbsp;     */
+<i>34</i>&nbsp;    void visit(BuildAction buildAction);
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    /**
+<i>37</i>&nbsp;     * Message to send the server where to move the pawn
+<i>38</i>&nbsp;     */
+<i>39</i>&nbsp;    void visit(MoveAction moveAction);
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    /**
+<i>42</i>&nbsp;     * Message to send the server to activate their gods power
+<i>43</i>&nbsp;     */
+<i>44</i>&nbsp;    void visit(RequestExtraAction requestExtraAction);
+<i>45</i>&nbsp;
+<i>46</i>&nbsp;    /**
+<i>47</i>&nbsp;     * Message to send the server to request the possible move
+<i>48</i>&nbsp;     */
+<i>49</i>&nbsp;    void visit(RequestPossibleMove requestPossibleMove);
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;    /**
+<i>52</i>&nbsp;     * Message to send the sever to request the possible build
+<i>53</i>&nbsp;     */
+<i>54</i>&nbsp;    void visit(RequestPossibleBuild requestPossibleBuild);
+<i>55</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-07 14:12</div>
+</div>
+</body>
+</html>

@@ -3,6 +3,7 @@ package it.polimi.ingsw.PSP33.server;
 import it.polimi.ingsw.PSP33.controller.Controller;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
+import it.polimi.ingsw.PSP33.events.toServer.VCEventSample;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
@@ -37,10 +38,17 @@ public class GameHandler extends Observable<VCEvent> implements Observer<MVEvent
         model.addObserver(this);
         this.addObserver(controller);
 
+        this.notifyObservers(new VCEventSample());
+
+        System.out.println("finished set MVC");
+
+        //new Model
+        //new Controller
+        //new VirtualView
     }
 
     @Override
     public void update(MVEvent message) {
-
+        System.out.println("Eminem - Berzerk (Official Music Video) (Explicit)");
     }
 }

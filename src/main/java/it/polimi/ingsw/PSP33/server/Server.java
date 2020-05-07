@@ -15,7 +15,7 @@ public class Server implements Runnable {
     /**
      * Server's socket port
      */
-    public final static int SOCKET_PORT = 7777;
+    public final static int SOCKET_PORT = 11212;
 
     public static void main(String[] args) {
         Server server = new Server();

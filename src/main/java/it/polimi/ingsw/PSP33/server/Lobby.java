@@ -136,7 +136,7 @@ public class Lobby {
     public void startGame() {
 
         GameHandler gameHandler = new GameHandler(clientHandlers);
-
+        System.out.println("F U : " + lobbyID);
         Thread thread = new Thread(gameHandler, "game_handler_" + lobbyID);
         thread.start();
     }

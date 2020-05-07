@@ -1,0 +1,227 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Lobby</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.server</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Lobby (it.polimi.ingsw.PSP33.server)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Lobby</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 50)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.server;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.utils.enums.Color;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;import java.util.ArrayList;
+<i>6</i>&nbsp;import java.util.Arrays;
+<i>7</i>&nbsp;import java.util.List;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;public class Lobby {
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    //Debug
+<i>12</i>&nbsp;    private final int lobbyID;
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    /**
+<i>15</i>&nbsp;     * List of client handlers of the lobby
+<i>16</i>&nbsp;     */
+<i>17</i>&nbsp;    private final List&lt;ClientHandler&gt; clientHandlers;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    /**
+<i>20</i>&nbsp;     * List of client names of the lobby
+<i>21</i>&nbsp;     */
+<i>22</i>&nbsp;    private final List&lt;String&gt; clientNames;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    /**
+<i>25</i>&nbsp;     * List of available colors for clients
+<i>26</i>&nbsp;     */
+<i>27</i>&nbsp;    private final List&lt;Color&gt; colorList;
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    /**
+<i>30</i>&nbsp;     * Number of players
+<i>31</i>&nbsp;     */
+<i>32</i>&nbsp;    private int numberOfPlayers;
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    /**
+<i>35</i>&nbsp;     * Volatile boolean to check if all player selections are over
+<i>36</i>&nbsp;     */
+<i>37</i>&nbsp;    private volatile boolean selectionOver;
+<i>38</i>&nbsp;
+<b class="nc"><i>39</i>&nbsp;    public Lobby(int lobbyID) {</b>
+<b class="nc"><i>40</i>&nbsp;        this.lobbyID = lobbyID;</b>
+<b class="nc"><i>41</i>&nbsp;        this.clientHandlers = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>42</i>&nbsp;        this.clientNames = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>43</i>&nbsp;        this.colorList = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>44</i>&nbsp;        this.numberOfPlayers = 0;</b>
+<b class="nc"><i>45</i>&nbsp;        this.selectionOver = false;</b>
+<i>46</i>&nbsp;
+<b class="nc"><i>47</i>&nbsp;        fillColorList();</b>
+<i>48</i>&nbsp;    }
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;    public List&lt;ClientHandler&gt; getClientHandlers() {
+<b class="nc"><i>51</i>&nbsp;        return clientHandlers;</b>
+<i>52</i>&nbsp;    }
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;    public int getNumberOfPlayers() {
+<b class="nc"><i>55</i>&nbsp;        return numberOfPlayers;</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    public void setNumberOfPlayers(int numberOfPlayers) {
+<b class="nc"><i>59</i>&nbsp;        this.numberOfPlayers = numberOfPlayers;</b>
+<i>60</i>&nbsp;    }
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;    public List&lt;Color&gt; getColorList() {
+<b class="nc"><i>63</i>&nbsp;        return colorList;</b>
+<i>64</i>&nbsp;    }
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    boolean isSelectionOver() {
+<i>67</i>&nbsp;
+<b class="nc"><i>68</i>&nbsp;        for(ClientHandler clientHandler : clientHandlers) {</b>
+<b class="nc"><i>69</i>&nbsp;            if(clientHandler.getClientName().equals(&quot;&quot;) || clientHandler.getClientColor() == null) {</b>
+<b class="nc"><i>70</i>&nbsp;                selectionOver = false;</b>
+<b class="nc"><i>71</i>&nbsp;                return selectionOver;</b>
+<i>72</i>&nbsp;            }
+<b class="nc"><i>73</i>&nbsp;        }</b>
+<i>74</i>&nbsp;
+<b class="nc"><i>75</i>&nbsp;        selectionOver = true;</b>
+<b class="nc"><i>76</i>&nbsp;        return selectionOver;</b>
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    public void addName(String name) {
+<b class="nc"><i>80</i>&nbsp;        synchronized (clientNames) {</b>
+<b class="nc"><i>81</i>&nbsp;            clientNames.add(name);</b>
+<b class="nc"><i>82</i>&nbsp;        }</b>
+<i>83</i>&nbsp;    }
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;    /**
+<i>86</i>&nbsp;     * Check if the name already exists within the list of clients&#39; names
+<i>87</i>&nbsp;     * @param name client&#39;s name
+<i>88</i>&nbsp;     *
+<i>89</i>&nbsp;     * @return true if the client&#39;s name isn&#39;t in the list of all names
+<i>90</i>&nbsp;     */
+<i>91</i>&nbsp;    public boolean checkName(String name) {
+<b class="nc"><i>92</i>&nbsp;        return clientNames.contains(name);</b>
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    public void removeColor(Color color) {
+<b class="nc"><i>96</i>&nbsp;        synchronized (colorList) {</b>
+<b class="nc"><i>97</i>&nbsp;            colorList.remove(color);</b>
+<b class="nc"><i>98</i>&nbsp;        }</b>
+<i>99</i>&nbsp;    }
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    public boolean checkColor(Color color) {
+<b class="nc"><i>102</i>&nbsp;        synchronized (colorList) {</b>
+<b class="nc"><i>103</i>&nbsp;            for (Color color1 : colorList) {</b>
+<b class="nc"><i>104</i>&nbsp;                if (color.equals(color1)) {</b>
+<b class="nc"><i>105</i>&nbsp;                    return true;</b>
+<i>106</i>&nbsp;                }
+<b class="nc"><i>107</i>&nbsp;            }</b>
+<i>108</i>&nbsp;
+<b class="nc"><i>109</i>&nbsp;            return false;</b>
+<b class="nc"><i>110</i>&nbsp;        }</b>
+<i>111</i>&nbsp;    }
+<i>112</i>&nbsp;
+<i>113</i>&nbsp;    public void fillColorList() {
+<b class="nc"><i>114</i>&nbsp;        colorList.addAll(Arrays.asList(Color.values()));</b>
+<i>115</i>&nbsp;    }
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    public String printColorList() {
+<i>118</i>&nbsp;
+<b class="nc"><i>119</i>&nbsp;        StringBuilder stringBuilder = new StringBuilder();</b>
+<i>120</i>&nbsp;
+<b class="nc"><i>121</i>&nbsp;        synchronized (colorList) {</b>
+<b class="nc"><i>122</i>&nbsp;            for (Color color : colorList) {</b>
+<b class="nc"><i>123</i>&nbsp;                stringBuilder</b>
+<b class="nc"><i>124</i>&nbsp;                        .append(Color.getIndex(color))</b>
+<b class="nc"><i>125</i>&nbsp;                        .append(&quot;. &quot;)</b>
+<b class="nc"><i>126</i>&nbsp;                        .append(color.name())</b>
+<b class="nc"><i>127</i>&nbsp;                        .append(&quot;\n&quot;);</b>
+<b class="nc"><i>128</i>&nbsp;            }</b>
+<i>129</i>&nbsp;
+<b class="nc"><i>130</i>&nbsp;            stringBuilder.deleteCharAt(stringBuilder.length() - 1);</b>
+<b class="nc"><i>131</i>&nbsp;        }</b>
+<i>132</i>&nbsp;
+<b class="nc"><i>133</i>&nbsp;        return stringBuilder.toString();</b>
+<i>134</i>&nbsp;    }
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;    public void startGame() {
+<i>137</i>&nbsp;
+<b class="nc"><i>138</i>&nbsp;        GameHandler gameHandler = new GameHandler(clientHandlers);</b>
+<b class="nc"><i>139</i>&nbsp;        System.out.println(&quot;F U : &quot; + lobbyID);</b>
+<b class="nc"><i>140</i>&nbsp;        Thread thread = new Thread(gameHandler, &quot;game_handler_&quot; + lobbyID);</b>
+<b class="nc"><i>141</i>&nbsp;        thread.start();</b>
+<i>142</i>&nbsp;    }
+<i>143</i>&nbsp;}
+<i>144</i>&nbsp;
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-07 14:12</div>
+</div>
+</body>
+</html>
