@@ -12,12 +12,12 @@ public class God {
     /**
      * Name of the god
      */
-    private Gods name;
+    private final Gods name;
 
     /**
      * Description of the effect of the god
      */
-    private String description;
+    private final String description;
 
     /**
      * Constructor of the class
