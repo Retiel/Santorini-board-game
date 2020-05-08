@@ -63,23 +63,8 @@ public class Lobby {
         return colorList;
     }
 
-    boolean isSelectionOver() {
-
-        for(ClientHandler clientHandler : clientHandlers) {
-            if(clientHandler.getClientName().equals("") || clientHandler.getClientColor() == null) {
-                selectionOver = false;
-                return selectionOver;
-            }
-        }
-
-        selectionOver = true;
-        return selectionOver;
-    }
-
-    public void addName(String name) {
-        synchronized (clientNames) {
-            clientNames.add(name);
-        }
+    public synchronized void addName(String name) {
+        clientNames.add(name);
     }
 
     /**
@@ -88,47 +73,47 @@ public class Lobby {
      *
      * @return true if the client's name isn't in the list of all names
      */
-    public boolean checkName(String name) {
+    public synchronized boolean checkName(String name) {
         return clientNames.contains(name);
     }
 
-    public void removeColor(Color color) {
+    public synchronized void removeColor(Color color) {
         synchronized (colorList) {
             colorList.remove(color);
+
+            if(colorList.size() == 3 - numberOfPlayers) {
+                colorList.notify();
+            }
         }
     }
 
-    public boolean checkColor(Color color) {
-        synchronized (colorList) {
-            for (Color color1 : colorList) {
-                if (color.equals(color1)) {
-                    return true;
-                }
+    public synchronized boolean checkColor(Color color) {
+        for (Color color1 : colorList) {
+            if (color.equals(color1)) {
+                return true;
             }
-
-            return false;
         }
+
+        return false;
     }
 
     public void fillColorList() {
         colorList.addAll(Arrays.asList(Color.values()));
     }
 
-    public String printColorList() {
+    public synchronized String printColorList() {
 
         StringBuilder stringBuilder = new StringBuilder();
 
-        synchronized (colorList) {
-            for (Color color : colorList) {
-                stringBuilder
-                        .append(Color.getIndex(color))
-                        .append(". ")
-                        .append(color.name())
-                        .append("\n");
-            }
-
-            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
+        for (Color color : colorList) {
+            stringBuilder
+                    .append(Color.getIndex(color))
+                    .append(". ")
+                    .append(color.name())
+                    .append("\n");
         }
+
+        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
 
         return stringBuilder.toString();
     }
@@ -141,4 +126,3 @@ public class Lobby {
         thread.start();
     }
 }
-

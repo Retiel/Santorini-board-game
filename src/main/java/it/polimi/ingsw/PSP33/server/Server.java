@@ -37,6 +37,7 @@ public class Server implements Runnable {
         //Debug
         int i = 1;
 
+        //Main loop
         while (true) {
 
             Lobby lobby = new Lobby(i);
@@ -55,8 +56,9 @@ public class Server implements Runnable {
                 //Start new thread for client handler
                 Thread thread = new Thread(clientHandler, "server_" + first.getInetAddress());
                 thread.start();
-            } catch (IOException | ClassNotFoundException e) {
+            } catch (IOException e) {
                 e.printStackTrace();
+                continue;
             }
 
             while (lobby.getClientHandlers().size() < lobby.getNumberOfPlayers()) {
@@ -78,10 +80,18 @@ public class Server implements Runnable {
             }
 
             //Wait for all clients to make their selection
-            while (!lobby.isSelectionOver()) {}
+            synchronized (lobby.getColorList()) {
+                try {
+                    lobby.getColorList().wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
 
+            //Start a new game for the lobby
             lobby.startGame();
 
+            //Debug
             i++;
         }
     }

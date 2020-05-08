@@ -1,25 +1,29 @@
 package it.polimi.ingsw.PSP33.server;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.PSP33.controller.Controller;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
+import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
+import it.polimi.ingsw.PSP33.events.toClient.turn.*;
+
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
-import it.polimi.ingsw.PSP33.events.toServer.turn.NewTurn;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
-import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
-import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
+import it.polimi.ingsw.PSP33.utils.patterns.observable.Listener;
+import it.polimi.ingsw.PSP33.view.AbstractView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameHandler extends Observable<VCEvent> implements Observer<MVEvent>, Runnable {
+public class GameHandler extends AbstractView implements Runnable, Listener {
 
     /**
      * Clients list
      */
     private final List<ClientHandler> clientHandlers;
+
+    private ClientHandler currentClient;
 
     public GameHandler(List<ClientHandler> clientHandlers) {
         this.clientHandlers = clientHandlers;
@@ -40,28 +44,59 @@ public class GameHandler extends Observable<VCEvent> implements Observer<MVEvent
         model.addObserver(this);
         this.addObserver(controller);
 
-        System.out.println("finished set MVC");
+        System.out.println("kek");
+    }
 
-        ClientHandler clientHandler = clientHandlers.get(1);
-        try{
-            clientHandler.sendMessage(new NewTurn());
-        }catch (IOException e){
-            System.out.println("Error sendMessage: " + e);
-        }
+    //FIXME: deserialization
+    public synchronized void didReceiveMessage(String json) {
+        Gson gson = new Gson();
+        VCEvent vcEvent = gson.fromJson(json, VCEvent.class);
 
-        try{
-            MVEvent mvEvent = clientHandler.readMessage();
-            NewAction newAction = (NewAction) mvEvent;
-            System.out.println(newAction.isMove());
-        }catch (Exception e){
-            System.out.println("Error sendMessage: " + e);
-        }
-
-
+        notifyObservers(vcEvent);
     }
 
     @Override
     public void update(MVEvent message) {
-        System.out.println("Eminem - Berzerk (Official Music Video) (Explicit)");
+        message.accept(this);
+    }
+
+    @Override
+    public void visit(DataGrid dataGrid) {
+
+    }
+
+    @Override
+    public void visit(PossiblePlacement possiblePlacement) {
+
+    }
+
+    @Override
+    public void visit(YouLose youLose) {
+
+    }
+
+    @Override
+    public void visit(YouWin youWin) {
+
+    }
+
+    @Override
+    public void visit(NewAction newAction) {
+
+    }
+
+    @Override
+    public void visit(PossibleBuild possibleBuild) {
+
+    }
+
+    @Override
+    public void visit(PossibleMove possibleMove) {
+
+    }
+
+    @Override
+    public void visit(PossibleExtraAction possibleExtraAction) {
+
     }
 }

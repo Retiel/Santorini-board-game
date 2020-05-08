@@ -1,6 +1,7 @@
 package it.polimi.ingsw.PSP33.client;
 
 import it.polimi.ingsw.PSP33.server.Server;
+import it.polimi.ingsw.PSP33.utils.patterns.observable.Listener;
 
 import java.io.IOException;
 import java.io.ObjectInputStream;
@@ -9,27 +10,7 @@ import java.net.Socket;
 import java.util.Scanner;
 
 
-public class Client implements Runnable {
-
-    /**
-     * Client's socket
-     */
-    Socket server;
-
-    /**
-     * Socket's input stream
-     */
-    ObjectInputStream input = null;
-
-    /**
-     * Socket's output stream
-     */
-    ObjectOutputStream output = null;
-
-    /**
-     * Scanner for client's input
-     */
-    Scanner scanner = new Scanner(System.in);
+public class Client implements Runnable, Listener {
 
     public static void main(String[] args) {
         Client client = new Client();
@@ -38,6 +19,8 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
+
+        Socket server;
         try {
             server = new Socket("127.0.0.1", Server.SOCKET_PORT);
         } catch (IOException e) {
@@ -46,26 +29,37 @@ public class Client implements Runnable {
         }
         System.out.println("Connected");
 
-        try {
-            input = new ObjectInputStream(server.getInputStream());
-            output = new ObjectOutputStream(server.getOutputStream());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        ServerAdapter serverAdapter = new ServerAdapter(server);
+        serverAdapter.addListener(this);
+
+        Thread thread = new Thread(serverAdapter);
+        thread.start();
 
         while (true) {
-            try {
-                String str = (String) input.readObject();
-                System.out.println(str);
 
-                str = scanner.nextLine();
-                output.writeObject(str);
-
-            } catch (IOException | ClassNotFoundException e) {
-                System.out.println("Error");
-                e.getStackTrace();
-                break;
+            synchronized (this) {
+                try {
+                    wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
+            Scanner scanner = new Scanner(System.in);
+            String str = scanner.nextLine();
+            try {
+                serverAdapter.sendMessage(str);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    @Override
+    public void didReceiveMessage(String json) {
+        System.out.println(json);
+
+        synchronized (this) {
+            notify();
         }
     }
 }

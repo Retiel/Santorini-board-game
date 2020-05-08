@@ -1,16 +1,14 @@
 package it.polimi.ingsw.PSP33.server;
 
-import com.google.gson.Gson;
-import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.utils.enums.Color;
+import it.polimi.ingsw.PSP33.utils.patterns.observable.Listened;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.List;
 
 
-public class ClientHandler implements Runnable {
+public class ClientHandler extends Listened implements Runnable {
 
     /**
      * Client's socket
@@ -20,12 +18,12 @@ public class ClientHandler implements Runnable {
     /**
      * Socket's input stream
      */
-    private ObjectInputStream input;
+    private DataInputStream input;
 
     /**
      * Socket's output stream
      */
-    private ObjectOutputStream output;
+    private DataOutputStream output;
 
     /**
      * Client's name
@@ -42,10 +40,6 @@ public class ClientHandler implements Runnable {
      */
     private Lobby lobby;
 
-    /**
-     * List of clients' names
-     */
-
     public ClientHandler(Socket client, Lobby lobby){
         this.client = client;
         this.input = null;
@@ -58,8 +52,9 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         try {
+            handleClientSetup();
             handleClientConnection();
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
@@ -77,17 +72,23 @@ public class ClientHandler implements Runnable {
         return clientColor;
     }
 
+    public void handleClientConnection() throws IOException {
+        while (true) {
+            String json = input.readUTF();
+            notifyListener(json);
+        }
+    }
+
     /**
      * Method to handle the client connection for the lobby setup
      * @throws IOException
-     * @throws ClassNotFoundException
      */
-    public void handleClientConnection() throws IOException, ClassNotFoundException {
+    public void handleClientSetup() throws IOException {
         System.out.println("Connected to " + client.getInetAddress());
 
         if(output == null && input == null) {
-            output = new ObjectOutputStream(client.getOutputStream());
-            input = new ObjectInputStream(client.getInputStream());
+            output = new DataOutputStream(client.getOutputStream());
+            input = new DataInputStream(client.getInputStream());
         }
 
         requestPlayerName();
@@ -98,35 +99,45 @@ public class ClientHandler implements Runnable {
     /**
      * Request the client to type their name
      * @throws IOException
-     * @throws ClassNotFoundException
      */
-    public void requestPlayerName() throws IOException, ClassNotFoundException {
+    public void requestPlayerName() throws IOException {
 
         while (clientName.equals("")) {
-            String nameRequest = "Type your name: ";
-            output.writeObject(nameRequest);
 
-            Object next = input.readObject();
-            String nameSelection = (String) next;
+            //Send request
+            String string = "Type your name: ";
+            output.writeUTF(string);
 
-            if(!lobby.checkName(nameSelection)) {
-                lobby.addName(nameSelection);
-                clientName = nameSelection;
+            //Receive selection
+            string = input.readUTF();
+
+            //Check name's uniqueness
+            if(!lobby.checkName(string)) {
+                lobby.addName(string);
+                clientName = string;
             }
         }
     }
 
-
-    public void requestPlayerColor() throws IOException, ClassNotFoundException {
+    /**
+     * Request the client to select their color
+     * @throws IOException
+     */
+    public void requestPlayerColor() throws IOException {
 
         while (clientColor == null) {
+
+            //Get available colors from lobby
             List<Color> colorList = lobby.getColorList();
+
+            //Send request
             String string = "Select your color: \n" + lobby.printColorList();
-            output.writeObject(string);
+            output.writeUTF(string);
 
-            Object next = input.readObject();
-            string = (String) next;
+            //Receive selection
+            string = input.readUTF();
 
+            //Parse number
             int num;
             try {
                 num = Integer.parseInt(string);
@@ -134,6 +145,7 @@ public class ClientHandler implements Runnable {
                 num = 0;
             }
 
+            //Check selected color
             if(num > 0 && num <= colorList.size()) {
             Color color = Color.getColorByIndex(num);
                 if(lobby.checkColor(color)) {
@@ -143,27 +155,9 @@ public class ClientHandler implements Runnable {
                 }
             }
         }
-    }
 
-    /**
-     * Method to send message over web
-     * @throws IOException
-     */
-    public void sendMessage(VCEvent vcEvent) throws IOException {
-        Gson gson = new Gson();
-        String toSend =  gson.toJson(vcEvent, MVEvent.class);
-        output.writeUTF(toSend);
+        //TODO: change from setup to game on client side
     }
-
-    /**
-     * Method to receive message over web
-     * @throws IOException
-     */
-    public MVEvent readMessage() throws IOException {
-        Gson gson = new Gson();
-        return gson.fromJson(input.readUTF(), MVEvent.class);
-    }
-
 
     /**
      * Tell the client to wait for other players
@@ -171,7 +165,7 @@ public class ClientHandler implements Runnable {
      */
     public void sendWaitMessage() throws IOException {
         String str = "Waiting for players..";
-        output.writeObject(str);
+        output.writeUTF(str);
     }
 
     /**
@@ -179,12 +173,11 @@ public class ClientHandler implements Runnable {
      *
      * @return number of players
      * @throws IOException
-     * @throws ClassNotFoundException
      */
-    public int requestNumberOfPlayers() throws IOException, ClassNotFoundException {
+    public int requestNumberOfPlayers() throws IOException {
 
-        output = new ObjectOutputStream(client.getOutputStream());
-        input = new ObjectInputStream(client.getInputStream());
+        output = new DataOutputStream(client.getOutputStream());
+        input = new DataInputStream(client.getInputStream());
 
         int numberOfPlayers = 0;
 
@@ -192,11 +185,12 @@ public class ClientHandler implements Runnable {
 
             //Send request
             String string = "Select number of players: \n1. 2 players \n2. 3 players";
-            output.writeObject(string);
+            output.writeUTF(string);
 
             //Receive selection
-            Object next = input.readObject();
-            string = (String) next;
+            string = input.readUTF();
+
+            //Parse number
             int num;
             try {
                 num = Integer.parseInt(string);
