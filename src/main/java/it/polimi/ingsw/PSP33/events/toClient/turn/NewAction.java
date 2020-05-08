@@ -7,7 +7,7 @@ import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 /**
  * First Message received by the client
  */
-public class NewAction extends MVEvent {
+public class NewAction implements MVEvent {
 
     private final boolean move;
     private final boolean build;

@@ -1,6 +1,5 @@
 package it.polimi.ingsw.PSP33.events;
 
-import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
@@ -9,10 +8,6 @@ import it.polimi.ingsw.PSP33.events.toClient.turn.*;
  * Custom interface used to implement the visitor pattern for messages sent to client
  */
 public interface MVEventVisitor {
-
-    /* add visit method for each MVEvent */
-
-    void visit(MVEventSample mvEventSample);
 
     /**
      * Message to send to the player all inital data of the board

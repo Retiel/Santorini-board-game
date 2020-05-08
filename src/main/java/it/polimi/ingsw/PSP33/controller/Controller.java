@@ -3,10 +3,8 @@ package it.polimi.ingsw.PSP33.controller;
 import it.polimi.ingsw.PSP33.controller.rules.SetUpManager;
 import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
 import it.polimi.ingsw.PSP33.events.VCEventVisitor;
-import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
-import it.polimi.ingsw.PSP33.events.toServer.VCEventSample;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
@@ -22,11 +20,6 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
         this.turnManager = new TurnManager(model);
 
         this.setUpManager.SetStartingPlayer();
-    }
-
-    @Override
-    public void visit(VCEventSample vcEventSample) {
-        turnManager.notifyView(new MVEventSample());
     }
 
     @Override

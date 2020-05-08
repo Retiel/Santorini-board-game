@@ -149,9 +149,9 @@ public class ClientHandler implements Runnable {
      * Method to send message over web
      * @throws IOException
      */
-    public void sendMessage(MVEvent mvEvent) throws IOException {
+    public void sendMessage(VCEvent vcEvent) throws IOException {
         Gson gson = new Gson();
-        String toSend =  gson.toJson(mvEvent, MVEvent.class);
+        String toSend =  gson.toJson(vcEvent, MVEvent.class);
         output.writeUTF(toSend);
     }
 
@@ -159,9 +159,9 @@ public class ClientHandler implements Runnable {
      * Method to receive message over web
      * @throws IOException
      */
-    public VCEvent readMessage() throws IOException {
+    public MVEvent readMessage() throws IOException {
         Gson gson = new Gson();
-        return gson.fromJson(input.readUTF(), VCEvent.class);
+        return gson.fromJson(input.readUTF(), MVEvent.class);
     }
 
 

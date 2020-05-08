@@ -2,13 +2,15 @@ package it.polimi.ingsw.PSP33.server;
 
 import it.polimi.ingsw.PSP33.controller.Controller;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
+import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
-import it.polimi.ingsw.PSP33.events.toServer.VCEventSample;
+import it.polimi.ingsw.PSP33.events.toServer.turn.NewTurn;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -38,13 +40,24 @@ public class GameHandler extends Observable<VCEvent> implements Observer<MVEvent
         model.addObserver(this);
         this.addObserver(controller);
 
-        this.notifyObservers(new VCEventSample());
-
         System.out.println("finished set MVC");
 
-        //new Model
-        //new Controller
-        //new VirtualView
+        ClientHandler clientHandler = clientHandlers.get(1);
+        try{
+            clientHandler.sendMessage(new NewTurn());
+        }catch (IOException e){
+            System.out.println("Error sendMessage: " + e);
+        }
+
+        try{
+            MVEvent mvEvent = clientHandler.readMessage();
+            NewAction newAction = (NewAction) mvEvent;
+            System.out.println(newAction.isMove());
+        }catch (Exception e){
+            System.out.println("Error sendMessage: " + e);
+        }
+
+
     }
 
     @Override

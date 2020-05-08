@@ -1,19 +1,10 @@
 package it.polimi.ingsw.PSP33.view;
 
-import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
-import static org.junit.Assert.*;
-
 public class ViewSample extends AbstractView {
-
-
-    @Override
-    public void visit(MVEventSample mvEventSample) {
-        System.out.print("Success\n");
-    }
 
     @Override
     public void visit(DataGrid dataGrid) {

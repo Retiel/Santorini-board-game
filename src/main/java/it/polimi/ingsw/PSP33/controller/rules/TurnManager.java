@@ -181,10 +181,12 @@ public class TurnManager extends AbstractManager {
      * Method to comunicate and chage the state of the game cause losing player
      */
     private void loserBracket(){
-        getModel().notifyObservers(new YouLose());
 
+        getModel().notifyObservers(new YouLose());
         List<Player> players = getModel().getPlayers();
         players.remove(getModel().getCurrentPlayer());
+
+        nextTurn();
 
         if (players.size() > 1) getModel().setPlayers(players);
         else {
@@ -196,7 +198,7 @@ public class TurnManager extends AbstractManager {
      * Method to comunicate and chage the state of the game cause win condition met
      */
     private void winningBracket(){
-      //TODO:  /* Missing implementation */
+      getModel().notifyObservers(new YouWin());
     }
 
     /**

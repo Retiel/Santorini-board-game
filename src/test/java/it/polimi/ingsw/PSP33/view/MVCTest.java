@@ -2,7 +2,6 @@ package it.polimi.ingsw.PSP33.view;
 
 
 import it.polimi.ingsw.PSP33.controller.Controller;
-import it.polimi.ingsw.PSP33.events.toServer.VCEventSample;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
 import it.polimi.ingsw.PSP33.model.Board;
@@ -17,8 +16,6 @@ import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 public class MVCTest {
 
@@ -53,7 +50,6 @@ public class MVCTest {
     @Test
     public void coreExecution(){
 
-        view.notifyObservers(new VCEventSample()); /* test to ensure MVC functioning */
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         view.notifyObservers(new PlacePawn(new Coord(0,0))); /* test setup branch message */
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");

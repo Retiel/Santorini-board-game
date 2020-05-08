@@ -1,7 +1,6 @@
 package it.polimi.ingsw.PSP33.view;
 
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
@@ -14,11 +13,6 @@ public class View extends AbstractView{
     @Override
     public void update(MVEvent mvEvent) {
         mvEvent.accept(this);
-    }
-
-    @Override
-    public void visit(MVEventSample mvEventSample) {
-        System.out.print("Success\n");
     }
 
     @Override

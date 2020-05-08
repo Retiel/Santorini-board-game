@@ -4,7 +4,7 @@ import it.polimi.ingsw.PSP33.events.VCEventVisitor;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
-public class ExtraAction extends VCEvent {
+public class ExtraAction implements VCEvent {
 
     private final Coord coord;
 

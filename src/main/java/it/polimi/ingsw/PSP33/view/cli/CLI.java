@@ -1,14 +1,10 @@
 package it.polimi.ingsw.PSP33.view.cli;
 
-import it.polimi.ingsw.PSP33.events.toClient.MVEventSample;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.model.Board;
-import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.view.AbstractView;
-
-import java.util.ArrayList;
 
 /**
  * the rapppresentation of the View Class for the CLI mode
@@ -22,11 +18,6 @@ public class CLI extends AbstractView {
 
         cliPrinter.printBoard(board);
 
-    }
-
-    @Override
-    public void visit(MVEventSample mvEventSample) {
-        //update grid info in the payer's view
     }
 
     @Override

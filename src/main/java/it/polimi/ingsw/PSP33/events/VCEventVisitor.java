@@ -1,17 +1,12 @@
 package it.polimi.ingsw.PSP33.events;
 
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
-import it.polimi.ingsw.PSP33.events.toServer.VCEventSample;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
 
 /**
  * Custom interface used to implement the visitor pattern for messages sent to server
  */
 public interface VCEventVisitor {
-
-    /* add visit method for each VCEvent */
-
-    void visit(VCEventSample vcEventSample);
 
     /**
      * Message to send the server where to place the pawn diuring set up phase

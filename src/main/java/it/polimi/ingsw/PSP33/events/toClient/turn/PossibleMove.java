@@ -6,7 +6,7 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.List;
 
-public class PossibleMove extends MVEvent {
+public class PossibleMove implements MVEvent {
 
     private final List<Coord> coordList;
     private final List<Coord> godsList;

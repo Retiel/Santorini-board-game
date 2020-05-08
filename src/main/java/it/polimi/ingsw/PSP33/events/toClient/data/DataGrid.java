@@ -4,7 +4,7 @@ import it.polimi.ingsw.PSP33.events.MVEventVisitor;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.model.Cell;
 
-public class DataGrid extends MVEvent {
+public class DataGrid implements MVEvent {
 
     private final Cell[][] grid;
 
