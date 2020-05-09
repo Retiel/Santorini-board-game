@@ -5,7 +5,6 @@ import it.polimi.ingsw.PSP33.utils.patterns.observable.Listened;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.List;
 
 
 public class ClientHandler extends Listened implements Runnable {
@@ -40,6 +39,11 @@ public class ClientHandler extends Listened implements Runnable {
      */
     private Lobby lobby;
 
+    /**
+     * Constructor of the class
+     * @param client client's socket
+     * @param lobby client's lobby
+     */
     public ClientHandler(Socket client, Lobby lobby){
         this.client = client;
         this.input = null;
@@ -54,24 +58,17 @@ public class ClientHandler extends Listened implements Runnable {
         try {
             handleClientSetup();
             handleClientConnection();
+
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     /**
-     * Getter for the name of the client
-     *
-     * @return client's name
+     * Method to handle the client connection. It waits for a new message from the input's stream and
+     * notifies the game handler
+     * @throws IOException unable to access the socket's stream
      */
-    public String getClientName() {
-        return clientName;
-    }
-
-    public Color getClientColor() {
-        return clientColor;
-    }
-
     public void handleClientConnection() throws IOException {
         while (true) {
             String json = input.readUTF();
@@ -81,7 +78,7 @@ public class ClientHandler extends Listened implements Runnable {
 
     /**
      * Method to handle the client connection for the lobby setup
-     * @throws IOException
+     * @throws IOException unable to access the socket's stream
      */
     public void handleClientSetup() throws IOException {
         System.out.println("Connected to " + client.getInetAddress());
@@ -93,12 +90,12 @@ public class ClientHandler extends Listened implements Runnable {
 
         requestPlayerName();
         requestPlayerColor();
-        sendWaitMessage();
+        requestWait();
     }
 
     /**
      * Request the client to type their name
-     * @throws IOException
+     * @throws IOException unable to access the socket's stream
      */
     public void requestPlayerName() throws IOException {
 
@@ -121,14 +118,11 @@ public class ClientHandler extends Listened implements Runnable {
 
     /**
      * Request the client to select their color
-     * @throws IOException
+     * @throws IOException unable to access the socket's stream
      */
     public void requestPlayerColor() throws IOException {
 
         while (clientColor == null) {
-
-            //Get available colors from lobby
-            List<Color> colorList = lobby.getColorList();
 
             //Send request
             String string = "Select your color: \n" + lobby.printColorList();
@@ -137,42 +131,51 @@ public class ClientHandler extends Listened implements Runnable {
             //Receive selection
             string = input.readUTF();
 
-            //Parse number
-            int num;
-            try {
-                num = Integer.parseInt(string);
-            } catch (NumberFormatException e) {
-                num = 0;
+            Color color;
+            switch (string) {
+                case "1":
+                    color = Color.getColorByIndex(1);
+                    break;
+                case "2":
+                    color = Color.getColorByIndex(2);
+                    break;
+                case "3":
+                    color = Color.getColorByIndex(3);
+                    break;
+
+                default:
+                    continue;
             }
 
-            //Check selected color
-            if(num > 0 && num <= colorList.size()) {
-            Color color = Color.getColorByIndex(num);
-                if(lobby.checkColor(color)) {
-                    lobby.removeColor(color);
-                    clientColor = color;
-                    break;
-                }
+            if(lobby.checkColor(color)) {
+                lobby.removeColor(color);
+                clientColor = color;
+                break;
             }
         }
-
-        //TODO: change from setup to game on client side
     }
 
     /**
      * Tell the client to wait for other players
-     * @throws IOException
+     * @throws IOException unable to access the socket's stream
      */
-    public void sendWaitMessage() throws IOException {
+    public void requestWait() throws IOException {
         String str = "Waiting for players..";
         output.writeUTF(str);
+
+        str = input.readUTF();
+        if(str.equals("OK")) {
+            synchronized (this) {
+                notify();
+            }
+        }
     }
 
     /**
      * Request the client to select the number of players for the game
      *
      * @return number of players
-     * @throws IOException
+     * @throws IOException unable to access the socket's stream
      */
     public int requestNumberOfPlayers() throws IOException {
 
@@ -190,20 +193,12 @@ public class ClientHandler extends Listened implements Runnable {
             //Receive selection
             string = input.readUTF();
 
-            //Parse number
-            int num;
-            try {
-                num = Integer.parseInt(string);
-            } catch (NumberFormatException e) {
-                num = 0;
-            }
-
-            switch (num) {
-                case 1:
+            switch (string) {
+                case "1":
                     numberOfPlayers = 2;
                     break;
 
-                case 2:
+                case "2":
                     numberOfPlayers = 3;
                     break;
 
@@ -212,5 +207,23 @@ public class ClientHandler extends Listened implements Runnable {
         }
 
         return numberOfPlayers;
+    }
+
+    /**
+     * Method to get the client's name
+     *
+     * @return client's name
+     */
+    public String getClientName() {
+        return clientName;
+    }
+
+    /**
+     * Method to get the client's color
+     *
+     * @return client's color
+     */
+    public Color getClientColor() {
+        return clientColor;
     }
 }

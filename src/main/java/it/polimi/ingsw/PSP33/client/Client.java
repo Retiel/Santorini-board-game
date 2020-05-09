@@ -2,15 +2,17 @@ package it.polimi.ingsw.PSP33.client;
 
 import it.polimi.ingsw.PSP33.server.Server;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Listener;
+import it.polimi.ingsw.PSP33.view.ViewFactory;
+import it.polimi.ingsw.PSP33.view.View;
 
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.util.Scanner;
 
 
-public class Client implements Runnable, Listener {
+public class Client implements Runnable {
+
+    private View view;
+    private ServerAdapter serverAdapter;
 
     public static void main(String[] args) {
         Client client = new Client();
@@ -29,37 +31,28 @@ public class Client implements Runnable, Listener {
         }
         System.out.println("Connected");
 
-        ServerAdapter serverAdapter = new ServerAdapter(server);
-        serverAdapter.addListener(this);
+        serverAdapter = new ServerAdapter(server);
 
         Thread thread = new Thread(serverAdapter);
         thread.start();
 
-        while (true) {
-
-            synchronized (this) {
-                try {
-                    wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-            Scanner scanner = new Scanner(System.in);
-            String str = scanner.nextLine();
+        synchronized (serverAdapter) {
             try {
-                serverAdapter.sendMessage(str);
-            } catch (IOException e) {
+                serverAdapter.wait();
+            } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-    }
 
-    @Override
-    public void didReceiveMessage(String json) {
-        System.out.println(json);
+        view = ViewFactory.getView(serverAdapter.getViewSelection());
 
-        synchronized (this) {
-            notify();
+        serverAdapter.addObserver(view);
+        view.addObserver(serverAdapter);
+
+        try {
+            serverAdapter.selectionOver();
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }

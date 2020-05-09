@@ -47,7 +47,21 @@ public class GameHandler extends AbstractView implements Runnable, Listener {
         model.addObserver(this);
         this.addObserver(controller);
 
-        System.out.println("kek");
+        System.out.println("MVC setup complete.");
+
+        for(ClientHandler clientHandler : clientHandlers) {
+            synchronized (clientHandler) {
+                try {
+                    clientHandler.wait();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        System.out.println("Game real start");
+        //Start
+
     }
 
     //FIXME: deserialization
