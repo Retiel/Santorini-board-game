@@ -143,7 +143,6 @@ public class TurnManager extends AbstractManager {
             setData(Actions.MOVE, coord);
             winContext.checkWinCondition(getBoard(), getModel().getCurrentPawn(), GetCell.getCellAdapter(coord,getBoard()));
             moveContext.execMove(coord.getX(), coord.getY(), getModel().getCurrentPawn(), getModel());
-            getModel().notifyObservers(new DataGrid(getBoard().getGrid()));
         }
         else getModel().notifyObservers(new PossibleMove(dataBuffer.getCoordList(), dataBuffer.getCoordListGods()));
     }
@@ -157,7 +156,6 @@ public class TurnManager extends AbstractManager {
         if (DataControl.controlInput(coord,dataBuffer)) {
             setData(Actions.BUILD, coord);
             buildContext.execBuild(coord.getX(), coord.getY(), roof, getModel());
-            getModel().notifyObservers(new DataGrid(getBoard().getGrid()));
         }
         else getModel().notifyObservers(new PossibleBuild(
                 dataBuffer.getCoordList(), dataBuffer.getCoordListGods(), DataControl.checkBuild(getModel().getCurrentGodName())));
@@ -172,7 +170,6 @@ public class TurnManager extends AbstractManager {
         if (DataControl.controlInput(coord,dataBuffer)) {
             setData(Actions.EXTRA, coord);
             extraContext.ExecAction(coord, getModel().getCurrentPawn(), getModel());
-            getModel().notifyObservers(new DataGrid(getBoard().getGrid()));
         }
         else getModel().notifyObservers(new PossibleExtraAction(dataBuffer.getCoordList()));
     }

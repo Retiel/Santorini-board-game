@@ -2,18 +2,18 @@ package it.polimi.ingsw.PSP33.events.toClient.data;
 
 import it.polimi.ingsw.PSP33.events.MVEventVisitor;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-import it.polimi.ingsw.PSP33.model.light_version.LightBoard;
+import it.polimi.ingsw.PSP33.model.light_version.LightPawn;
 
-public class DataGrid implements MVEvent {
+public class DataPawn implements MVEvent {
 
-    private final LightBoard lightBoard;
+    private final LightPawn pawn;
 
-    public DataGrid(LightBoard lightBoard) {
-        this.lightBoard = lightBoard;
+    public DataPawn(LightPawn pawn) {
+        this.pawn = pawn;
     }
 
-    public LightBoard getGrid() {
-        return lightBoard;
+    public LightPawn getPawn() {
+        return pawn;
     }
 
     @Override

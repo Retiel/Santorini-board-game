@@ -1,7 +1,10 @@
 package it.polimi.ingsw.PSP33.view;
 
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataPawn;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
@@ -17,6 +20,21 @@ public class View extends AbstractView{
 
     @Override
     public void visit(DataGrid dataGrid) {
+
+    }
+
+    @Override
+    public void visit(DataCell dataCell) {
+
+    }
+
+    @Override
+    public void visit(DataPlayer dataPlayer) {
+
+    }
+
+    @Override
+    public void visit(DataPawn dataPawn) {
 
     }
 

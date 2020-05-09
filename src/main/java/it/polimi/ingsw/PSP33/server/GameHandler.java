@@ -3,7 +3,10 @@ package it.polimi.ingsw.PSP33.server;
 import com.google.gson.Gson;
 import it.polimi.ingsw.PSP33.controller.Controller;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataPawn;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
@@ -62,6 +65,21 @@ public class GameHandler extends AbstractView implements Runnable, Listener {
 
     @Override
     public void visit(DataGrid dataGrid) {
+
+    }
+
+    @Override
+    public void visit(DataCell dataCell) {
+
+    }
+
+    @Override
+    public void visit(DataPlayer dataPlayer) {
+
+    }
+
+    @Override
+    public void visit(DataPawn dataPawn) {
 
     }
 

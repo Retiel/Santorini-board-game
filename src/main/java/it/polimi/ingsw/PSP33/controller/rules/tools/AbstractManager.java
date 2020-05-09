@@ -38,7 +38,6 @@ public abstract class AbstractManager {
         else nextPlayer = model.getPlayers().get(0);
 
         model.setCurrentPlayer(nextPlayer);
-        model.notifyObservers(new DataGrid(getBoard().getGrid()));
     }
 
     /* method used for testing */

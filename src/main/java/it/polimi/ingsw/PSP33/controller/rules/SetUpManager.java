@@ -3,6 +3,7 @@ package it.polimi.ingsw.PSP33.controller.rules;
 import it.polimi.ingsw.PSP33.controller.rules.tools.AbstractManager;
 import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
+import it.polimi.ingsw.PSP33.controller.rules.tools.LightConvertion;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.model.Cell;
@@ -36,7 +37,7 @@ public class SetUpManager extends AbstractManager {
         int randomInteger = random.nextInt(numberOfPlayers);
 
         getModel().setCurrentPlayer(getModel().getPlayers().get(randomInteger));
-        getModel().notifyObservers(new DataGrid(getBoard().getGrid()));
+        getModel().notifyObservers( new DataGrid( LightConvertion.getLightVersion( getBoard() ) ) );
     }
 
     /**

@@ -4,11 +4,14 @@ import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.extra.ExtraAction;
 import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.move.Move;
+import it.polimi.ingsw.PSP33.controller.rules.tools.LightConvertion;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Pawn;
+import it.polimi.ingsw.PSP33.model.light_version.LightCell;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,6 +41,10 @@ public class Prometheus implements Move, ExtraAction {
         Cell oldCell = model.getBoard().getGrid()[pawn.getCoordX()][pawn.getCoordY()];
         BasicAction.MovePawn(oldCell, newCell, pawn);
 
+        LightCell lightCellOld = LightConvertion.getLightVersion(oldCell);
+        LightCell lightCellNew = LightConvertion.getLightVersion(newCell);
+
+        model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
         model.notifyObservers(new NewAction(false, true, false));
     }
 
@@ -50,6 +57,10 @@ public class Prometheus implements Move, ExtraAction {
     public void applyAction(Cell cell, Pawn pawn, Model model) {
         BasicAction.BuildBlock(cell);
         pawn.setOldExtra(cell.getCoord());
+
+        LightCell lightCellNew = LightConvertion.getLightVersion(cell);
+
+        model.notifyObservers(new DataCell(lightCellNew, null));
         model.notifyObservers(new NewAction(true, false, false));
 
     }

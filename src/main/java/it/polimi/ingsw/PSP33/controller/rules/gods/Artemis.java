@@ -4,11 +4,14 @@ import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.extra.ExtraAction;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.move.Move;
+import it.polimi.ingsw.PSP33.controller.rules.tools.LightConvertion;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Pawn;
+import it.polimi.ingsw.PSP33.model.light_version.LightCell;
 
 import java.util.List;
 
@@ -30,6 +33,10 @@ public class Artemis implements Move, ExtraAction {
         Cell oldCell = model.getBoard().getGrid()[pawn.getCoordX()][pawn.getCoordY()];
         BasicAction.MovePawn(oldCell, cell, pawn);
 
+        LightCell lightCellOld = LightConvertion.getLightVersion(oldCell);
+        LightCell lightCellNew = LightConvertion.getLightVersion(cell);
+
+        model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
         model.notifyObservers(new NewAction(false, true, false));
     }
 
@@ -44,6 +51,10 @@ public class Artemis implements Move, ExtraAction {
         Cell oldCell = model.getBoard().getGrid()[pawn.getCoordX()][pawn.getCoordY()];
         BasicAction.MovePawn(oldCell, newCell, pawn);
 
+        LightCell lightCellOld = LightConvertion.getLightVersion(oldCell);
+        LightCell lightCellNew = LightConvertion.getLightVersion(newCell);
+
+        model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
         model.notifyObservers(new NewAction(false, true, true));
     }
 }
