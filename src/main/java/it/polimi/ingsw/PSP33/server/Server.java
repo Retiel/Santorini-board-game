@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-
+/**
+ * Server class that handles the connection requests from clients and creates a lobby for them
+ */
 public class Server implements Runnable {
 
     /**
@@ -57,7 +59,7 @@ public class Server implements Runnable {
                 Thread thread = new Thread(clientHandler, "server_" + first.getInetAddress());
                 thread.start();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("First client disconnected. Accepting new client as first.");
                 continue;
             }
 

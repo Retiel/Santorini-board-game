@@ -8,7 +8,7 @@ import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 /**
  * Implementation of the visitor pattern
  * */
-public class View extends AbstractView{
+public class View extends AbstractView {
 
     @Override
     public void update(MVEvent mvEvent) {
