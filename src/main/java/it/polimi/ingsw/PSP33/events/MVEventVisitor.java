@@ -4,6 +4,7 @@ import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPawn;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
+import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
@@ -31,6 +32,12 @@ public interface MVEventVisitor {
      * Message to send to the player all inital data of the pawn
      */
     void visit(DataPawn dataPawn);
+
+    /**
+     * Message to send to the player all inital data of the pawn
+     */
+    void visit(CurrentPlayer currentPlayer);
+
     /**
      * Message to send to the player all inital data of the board
      */

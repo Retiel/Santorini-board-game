@@ -4,6 +4,7 @@ import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPawn;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
+import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.model.Board;
@@ -40,6 +41,11 @@ public class CLI extends AbstractView {
 
     @Override
     public void visit(DataPawn dataPawn) {
+
+    }
+
+    @Override
+    public void visit(CurrentPlayer currentPlayer) {
 
     }
 
