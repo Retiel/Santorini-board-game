@@ -1,5 +1,6 @@
 package it.polimi.ingsw.PSP33.client;
 
+import it.polimi.ingsw.PSP33.events.EventSerializer;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
@@ -36,13 +37,15 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
      */
     private int viewSelection;
 
+    private final EventSerializer eventSerializer;
+
     public ServerAdapter(Socket server) {
         this.server = server;
         this.input = null;
         this.output = null;
-        scanner = new Scanner(System.in);
-
-        viewSelection = 0;
+        this.scanner = new Scanner(System.in);
+        this.viewSelection = 0;
+        this.eventSerializer = new EventSerializer();
     }
 
     @Override
@@ -52,11 +55,32 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
             output = new DataOutputStream(server.getOutputStream());
 
             handleServerSetup();
-            handleServerConnection();
         } catch (IOException e) {
             System.out.println("Disconnected");
             e.printStackTrace();
         }
+
+        new Thread(() -> {
+            try {
+                receiveMessage();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+    }
+
+    public void receiveMessage() throws IOException {
+        while (true) {
+            String mvJson = input.readUTF();
+            MVEvent mvEvent = eventSerializer.deserializeMV(mvJson);
+
+            notifyObservers(mvEvent);
+        }
+    }
+
+    public void sendMessage(VCEvent vcEvent) throws IOException {
+        String vcJson = eventSerializer.serializeVC(vcEvent);
+        output.writeUTF(vcJson);
     }
 
     public void handleServerSetup() throws IOException {
@@ -108,17 +132,12 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
         return viewSelection;
     }
 
-    public void handleServerConnection() throws IOException {
-        while (true) {
-            String json = input.readUTF();
-
-            //Deserialization
-            //Send MVEvent to View with notifyObservers()
-        }
-    }
-
     @Override
     public void update(VCEvent message) {
-        //Send message to server
+        try {
+            sendMessage(message);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

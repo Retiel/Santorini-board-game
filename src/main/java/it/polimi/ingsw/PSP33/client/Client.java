@@ -49,6 +49,7 @@ public class Client implements Runnable {
         serverAdapter.addObserver(view);
         view.addObserver(serverAdapter);
 
+        System.out.println("Observer done");
         try {
             serverAdapter.selectionOver();
         } catch (IOException e) {

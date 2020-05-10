@@ -1,6 +1,10 @@
 package it.polimi.ingsw.PSP33.view;
 
+import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataPawn;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
+import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
@@ -11,6 +15,26 @@ public class ViewSample extends AbstractView {
         System.out.print("Data update...\n");
         System.out.print(dataGrid.getGrid().toString()+"\n");
         System.out.print("Data update finished\n");
+    }
+
+    @Override
+    public void visit(DataCell dataCell) {
+
+    }
+
+    @Override
+    public void visit(DataPlayer dataPlayer) {
+
+    }
+
+    @Override
+    public void visit(DataPawn dataPawn) {
+
+    }
+
+    @Override
+    public void visit(CurrentPlayer currentPlayer) {
+
     }
 
     @Override

@@ -1,5 +1,8 @@
 package it.polimi.ingsw.PSP33.server;
 
+import it.polimi.ingsw.PSP33.events.EventSerializer;
+import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
+import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.utils.enums.Color;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Listened;
 
@@ -12,7 +15,7 @@ public class ClientHandler extends Listened implements Runnable {
     /**
      * Client's socket
      */
-    private Socket client;
+    private final Socket client;
 
     /**
      * Socket's input stream
@@ -37,7 +40,9 @@ public class ClientHandler extends Listened implements Runnable {
     /**
      * Client's lobby
      */
-    private Lobby lobby;
+    private final Lobby lobby;
+
+    private final EventSerializer eventSerializer;
 
     /**
      * Constructor of the class
@@ -51,17 +56,26 @@ public class ClientHandler extends Listened implements Runnable {
         this.clientName = "";
         this.clientColor = null;
         this.lobby = lobby;
+        this.eventSerializer = new EventSerializer();
     }
 
     @Override
     public void run() {
         try {
             handleClientSetup();
-            handleClientConnection();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        //New thread to keep listening from socket
+        new Thread(() -> {
+            try {
+                receiveMessage();
+            } catch (IOException e) {
+                lobby.getClientHandlers().remove(this);
+                e.printStackTrace();
+            }
+        }, "ClientHandler_" + clientName + "_receiveMessage()").start();
     }
 
     /**
@@ -69,11 +83,23 @@ public class ClientHandler extends Listened implements Runnable {
      * notifies the game handler
      * @throws IOException unable to access the socket's stream
      */
-    public void handleClientConnection() throws IOException {
+    public void receiveMessage() throws IOException {
         while (true) {
             String json = input.readUTF();
-            notifyListener(json);
+            VCEvent vcEvent = eventSerializer.deserializeVC(json);
+
+            notifyListener(vcEvent);
         }
+    }
+
+    /**
+     * Method to send an event to the client
+     * @param mvEvent model-view event
+     * @throws IOException unable to access the socket's stream
+     */
+    public void sendMessage(MVEvent mvEvent) throws IOException {
+        String mvJson = eventSerializer.serializeMV(mvEvent);
+        output.writeUTF(mvJson);
     }
 
     /**
@@ -163,10 +189,11 @@ public class ClientHandler extends Listened implements Runnable {
         String str = "Waiting for players..";
         output.writeUTF(str);
 
-        str = input.readUTF();
-        if(str.equals("OK")) {
-            synchronized (this) {
-                notify();
+        while (true) {
+            str = input.readUTF();
+            if (str.equals("OK")) {
+                lobby.setClientReady(this);
+                break;
             }
         }
     }
@@ -225,5 +252,9 @@ public class ClientHandler extends Listened implements Runnable {
      */
     public Color getClientColor() {
         return clientColor;
+    }
+
+    public Lobby getLobby() {
+        return lobby;
     }
 }

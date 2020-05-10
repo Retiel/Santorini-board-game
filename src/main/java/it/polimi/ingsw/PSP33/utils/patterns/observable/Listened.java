@@ -1,5 +1,7 @@
 package it.polimi.ingsw.PSP33.utils.patterns.observable;
 
+import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,10 +21,10 @@ public class Listened {
         }
     }
 
-    public void notifyListener(String json) {
+    public void notifyListener(VCEvent vcEvent) {
         synchronized (listeners) {
             for (Listener listener : listeners) {
-                listener.didReceiveMessage(json);
+                listener.didReceiveMessage(vcEvent);
             }
         }
     }

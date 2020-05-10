@@ -37,6 +37,11 @@ public class Lobby {
     private int numberOfPlayers;
 
     /**
+     * Boolean list to check if all clients are ready
+     */
+    private final List<Boolean> areClientsReady;
+
+    /**
      * Construcor of the class
      * @param lobbyID looby ID used for debug
      */
@@ -46,6 +51,7 @@ public class Lobby {
         this.clientNames = new ArrayList<>();
         this.colorList = new ArrayList<>();
         this.numberOfPlayers = 0;
+        this.areClientsReady = new ArrayList<>();
 
         //Fill the list of available colors
         fillColorList();
@@ -129,13 +135,13 @@ public class Lobby {
      */
     public void startGame() {
 
-        GameHandler gameHandler = new GameHandler(clientHandlers);
+        GameHandler gameHandler = new GameHandler(this);
+
+        Thread thread = new Thread(gameHandler, "GameHandler_" + lobbyID);
+        thread.start();
 
         //Debug
-        System.out.println("Game_" + lobbyID + " starts.");
-
-        Thread thread = new Thread(gameHandler, "game_handler_" + lobbyID);
-        thread.start();
+        System.out.println("DEBUG_" + lobbyID +": set game handler over");
     }
 
     /**
@@ -162,6 +168,10 @@ public class Lobby {
      */
     public void setNumberOfPlayers(int numberOfPlayers) {
         this.numberOfPlayers = numberOfPlayers;
+
+        for(int i = 0; i < numberOfPlayers; i++) {
+            areClientsReady.add(false);
+        }
     }
 
     /**
@@ -171,5 +181,34 @@ public class Lobby {
      */
     public List<Color> getColorList() {
         return colorList;
+    }
+
+    public synchronized void setClientReady(ClientHandler clientHandler) {
+        int index = clientHandlers.indexOf(clientHandler);
+        areClientsReady.set(index, true);
+
+        if (checkClientsReady()) {
+            synchronized (areClientsReady) {
+                areClientsReady.notify();
+            }
+        }
+    }
+
+    public boolean checkClientsReady() {
+        for(Boolean b : areClientsReady) {
+            if(!b) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    public List<Boolean> getAreClientsReady() {
+        return areClientsReady;
+    }
+
+    public int getLobbyID() {
+        return lobbyID;
     }
 }
