@@ -64,6 +64,7 @@ public class ClientHandler extends Listened implements Runnable {
         try {
             handleClientSetup();
         } catch (IOException e) {
+            lobby.removeClientHandler(this);
             e.printStackTrace();
         }
 

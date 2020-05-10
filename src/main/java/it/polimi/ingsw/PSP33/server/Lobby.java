@@ -11,6 +11,8 @@ import java.util.List;
  */
 public class Lobby {
 
+
+    private final LobbyManager lobbyManager;
     /**
      * Lobby ID used for debug
      */
@@ -46,6 +48,7 @@ public class Lobby {
      * @param lobbyID looby ID used for debug
      */
     public Lobby(int lobbyID) {
+        this.lobbyManager = new LobbyManager();
         this.lobbyID = lobbyID;
         this.clientHandlers = new ArrayList<>();
         this.clientNames = new ArrayList<>();
@@ -200,7 +203,6 @@ public class Lobby {
                 return false;
             }
         }
-
         return true;
     }
 
@@ -210,5 +212,19 @@ public class Lobby {
 
     public int getLobbyID() {
         return lobbyID;
+    }
+
+    public List<String> getClientNames() {
+        return clientNames;
+    }
+
+    public synchronized void removeClientHandler(ClientHandler clientHandler) {
+        clientHandlers.remove(clientHandler);
+        if(clientHandler.getClientColor() != null) {
+            clientNames.remove(clientHandler.getClientName());
+        }
+        if(!clientHandler.getClientName().equals("")) {
+            colorList.add(clientHandler.getClientColor());
+        }
     }
 }
