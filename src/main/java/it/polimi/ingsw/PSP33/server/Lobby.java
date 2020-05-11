@@ -9,10 +9,9 @@ import java.util.List;
 /**
  * Lobby class used to save data from clients of the same lobby
  */
-public class Lobby {
+public class Lobby implements Runnable {
 
 
-    private final LobbyManager lobbyManager;
     /**
      * Lobby ID used for debug
      */
@@ -43,22 +42,25 @@ public class Lobby {
      */
     private final List<Boolean> areClientsReady;
 
-    /**
-     * Construcor of the class
-     * @param lobbyID looby ID used for debug
-     */
-    public Lobby(int lobbyID) {
-        this.lobbyManager = new LobbyManager();
+
+    public Lobby(int lobbyID, int numberOfPlayers) {
         this.lobbyID = lobbyID;
+        this.numberOfPlayers = numberOfPlayers;
         this.clientHandlers = new ArrayList<>();
         this.clientNames = new ArrayList<>();
         this.colorList = new ArrayList<>();
-        this.numberOfPlayers = 0;
         this.areClientsReady = new ArrayList<>();
 
         //Fill the list of available colors
         fillColorList();
+        setNumberOfPlayers();
     }
+
+    public int getLobbyID() {
+        return lobbyID;
+    }
+
+
 
     /**
      * Method to add a new client's name to the list of used names
@@ -144,7 +146,7 @@ public class Lobby {
         thread.start();
 
         //Debug
-        System.out.println("DEBUG_" + lobbyID +": set game handler over");
+        System.out.println("DEBUG_" + lobbyID + ": set game handler over");
     }
 
     /**
@@ -167,32 +169,22 @@ public class Lobby {
 
     /**
      * Method to set the number of players
-     * @param numberOfPlayers number of players
      */
-    public void setNumberOfPlayers(int numberOfPlayers) {
-        this.numberOfPlayers = numberOfPlayers;
+    public void setNumberOfPlayers() {
 
         for(int i = 0; i < numberOfPlayers; i++) {
             areClientsReady.add(false);
         }
     }
 
-    /**
-     * Method to get the list of available colors
-     *
-     * @return list of available colors
-     */
-    public List<Color> getColorList() {
-        return colorList;
-    }
 
     public synchronized void setClientReady(ClientHandler clientHandler) {
         int index = clientHandlers.indexOf(clientHandler);
         areClientsReady.set(index, true);
 
         if (checkClientsReady()) {
-            synchronized (areClientsReady) {
-                areClientsReady.notify();
+            synchronized (this) {
+                notify();
             }
         }
     }
@@ -210,21 +202,55 @@ public class Lobby {
         return areClientsReady;
     }
 
-    public int getLobbyID() {
-        return lobbyID;
-    }
 
-    public List<String> getClientNames() {
-        return clientNames;
-    }
-
-    public synchronized void removeClientHandler(ClientHandler clientHandler) {
+    public synchronized void removeClient(ClientHandler clientHandler) {
+        areClientsReady.set(clientHandlers.indexOf(clientHandler), false);
         clientHandlers.remove(clientHandler);
+
         if(clientHandler.getClientColor() != null) {
             clientNames.remove(clientHandler.getClientName());
         }
+
         if(!clientHandler.getClientName().equals("")) {
             colorList.add(clientHandler.getClientColor());
         }
+
+        if(clientHandlers.size() == numberOfPlayers - 1) {
+            LobbyManager.addLobby(this);
+        }
+
+        if(clientHandlers.size() == 0) {
+            LobbyManager.removeLobby(this);
+        }
+    }
+
+    public synchronized void addClient(ClientHandler clientHandler) {
+
+        clientHandlers.add(clientHandler);
+
+        if(clientHandlers.size() == numberOfPlayers) {
+            LobbyManager.removeLobby(this);
+        }
+    }
+
+    public synchronized boolean checkSize() {
+        return clientHandlers.size() < numberOfPlayers;
+    }
+
+    @Override
+    public void run() {
+
+        while (true) {
+            synchronized (this) {
+                try {
+                    wait();
+                    break;
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        startGame();
     }
 }

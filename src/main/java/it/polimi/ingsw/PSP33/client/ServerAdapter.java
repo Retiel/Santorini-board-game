@@ -85,6 +85,14 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
 
     public void handleServerSetup() throws IOException {
 
+        new Thread(() -> {
+            try {
+                getClientInput();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
         while (true) {
             String str = input.readUTF();
 
@@ -93,8 +101,12 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
             }
 
             System.out.println(str);
+        }
+    }
 
-            str = scanner.nextLine();
+    public void getClientInput() throws IOException {
+        while (true) {
+            String str = scanner.nextLine();
             output.writeUTF(str);
         }
     }

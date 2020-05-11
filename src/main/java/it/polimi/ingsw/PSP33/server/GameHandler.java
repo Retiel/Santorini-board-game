@@ -56,7 +56,7 @@ public class GameHandler extends AbstractView implements Runnable, Listener {
     @Override
     public void run() {
         setMVC();
-        waitClientsSetup();
+        System.out.println("Controller startd");
         //controller.startGame()
     }
 
@@ -76,18 +76,6 @@ public class GameHandler extends AbstractView implements Runnable, Listener {
         this.addObserver(controller);
 
         System.out.println("DEBUG_" + lobbyID +": set mvc over.");
-    }
-
-    public void waitClientsSetup() {
-        synchronized (areClientsReady) {
-            try {
-                areClientsReady.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-
-        System.out.println("DEBUG_" + lobbyID + ": wait for clients setup over.");
     }
 
     public synchronized void didReceiveMessage(VCEvent vcEvent) {

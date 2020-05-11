@@ -40,40 +40,74 @@ public class ClientHandler extends Listened implements Runnable {
     /**
      * Client's lobby
      */
-    private final Lobby lobby;
+    private Lobby lobby;
 
     private final EventSerializer eventSerializer;
 
     /**
      * Constructor of the class
      * @param client client's socket
-     * @param lobby client's lobby
      */
-    public ClientHandler(Socket client, Lobby lobby){
+    public ClientHandler(Socket client){
         this.client = client;
         this.input = null;
         this.output = null;
         this.clientName = "";
         this.clientColor = null;
-        this.lobby = lobby;
+        this.lobby = null;
         this.eventSerializer = new EventSerializer();
+    }
+
+    /**
+     * Method to get the client's name
+     *
+     * @return client's name
+     */
+    public String getClientName() {
+        return clientName;
+    }
+
+    /**
+     * Method to get the client's color
+     *
+     * @return client's color
+     */
+    public Color getClientColor() {
+        return clientColor;
+    }
+
+    public Lobby getLobby() {
+        return lobby;
+    }
+
+    public void setLobby(Lobby lobby) {
+        this.lobby = lobby;
+        lobby.addClient(this);
     }
 
     @Override
     public void run() {
         try {
+            handleConnectionSetup();
             handleClientSetup();
         } catch (IOException e) {
-            lobby.removeClientHandler(this);
+            if(lobby != null) {
+                lobby.removeClient(this);
+                return;
+            }
             e.printStackTrace();
         }
 
+        handleGame();
+
+    }
+
+    public void handleGame() {
         //New thread to keep listening from socket
         new Thread(() -> {
             try {
                 receiveMessage();
             } catch (IOException e) {
-                lobby.getClientHandlers().remove(this);
                 e.printStackTrace();
             }
         }, "ClientHandler_" + clientName + "_receiveMessage()").start();
@@ -110,11 +144,6 @@ public class ClientHandler extends Listened implements Runnable {
     public void handleClientSetup() throws IOException {
         System.out.println("Connected to " + client.getInetAddress());
 
-        if(output == null && input == null) {
-            output = new DataOutputStream(client.getOutputStream());
-            input = new DataInputStream(client.getInputStream());
-        }
-
         requestPlayerName();
         requestPlayerColor();
         requestWait();
@@ -126,7 +155,7 @@ public class ClientHandler extends Listened implements Runnable {
      */
     public void requestPlayerName() throws IOException {
 
-        while (clientName.equals("")) {
+        while (true) {
 
             //Send request
             String string = "Type your name: ";
@@ -139,6 +168,7 @@ public class ClientHandler extends Listened implements Runnable {
             if(!lobby.checkName(string)) {
                 lobby.addName(string);
                 clientName = string;
+                break;
             }
         }
     }
@@ -149,7 +179,7 @@ public class ClientHandler extends Listened implements Runnable {
      */
     public void requestPlayerColor() throws IOException {
 
-        while (clientColor == null) {
+        while (true) {
 
             //Send request
             String string = "Select your color: \n" + lobby.printColorList();
@@ -199,23 +229,49 @@ public class ClientHandler extends Listened implements Runnable {
         }
     }
 
-    /**
-     * Request the client to select the number of players for the game
-     *
-     * @return number of players
-     * @throws IOException unable to access the socket's stream
-     */
-    public int requestNumberOfPlayers() throws IOException {
 
+
+
+    public void handleConnectionSetup() throws IOException {
         output = new DataOutputStream(client.getOutputStream());
         input = new DataInputStream(client.getInputStream());
+
+        boolean flag = true;
+        while(flag) {
+            if(LobbyManager.printLobbyList().equals("")) {
+                output.writeUTF("No lobbies available. Creating a new lobby..");
+                createLobby();
+                flag = false;
+            }else {
+                String string = "Select how you want to connect:\n1. Create lobby\n2. Join lobby";
+                output.writeUTF(string);
+
+                string = input.readUTF();
+                switch (string) {
+                    case "1":
+                        createLobby();
+                        flag = false;
+                        break;
+
+                    case "2":
+                        joinLobby();
+                        flag = false;
+                        break;
+
+                    default:
+                }
+            }
+        }
+    }
+
+    public void createLobby() throws IOException {
 
         int numberOfPlayers = 0;
 
         while(numberOfPlayers == 0) {
 
             //Send request
-            String string = "Select number of players: \n1. 2 players \n2. 3 players";
+            String string = "Select number of players for the lobby:\n1. 2 players\n2. 3 players";
             output.writeUTF(string);
 
             //Receive selection
@@ -234,28 +290,30 @@ public class ClientHandler extends Listened implements Runnable {
             }
         }
 
-        return numberOfPlayers;
+        setLobby(LobbyManager.newLobby(numberOfPlayers));
     }
 
-    /**
-     * Method to get the client's name
-     *
-     * @return client's name
-     */
-    public String getClientName() {
-        return clientName;
-    }
+    public synchronized void joinLobby() throws IOException {
 
-    /**
-     * Method to get the client's color
-     *
-     * @return client's color
-     */
-    public Color getClientColor() {
-        return clientColor;
-    }
+        while (true) {
+            String string = LobbyManager.printLobbyList();
+            output.writeUTF(string);
 
-    public Lobby getLobby() {
-        return lobby;
+            string = input.readUTF();
+
+            int foo;
+            try {
+                foo = Integer.parseInt(string);
+            }
+            catch (NumberFormatException e)
+            {
+                foo = 0;
+            }
+
+            if(LobbyManager.checkLobbyList(foo)) {
+                setLobby(LobbyManager.getLobbyByID(foo));
+                break;
+            }
+        }
     }
 }
