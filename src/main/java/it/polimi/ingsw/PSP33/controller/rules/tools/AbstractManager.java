@@ -2,9 +2,12 @@ package it.polimi.ingsw.PSP33.controller.rules.tools;
 
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
+import it.polimi.ingsw.PSP33.events.toClient.turn.YouLose;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
+
+import java.util.List;
 
 /**
  * Class that manage everything in regards of change player turn and set up turn control
@@ -38,6 +41,18 @@ public abstract class AbstractManager {
         else nextPlayer = model.getPlayers().get(0);
 
         model.setCurrentPlayer(nextPlayer);
+    }
+
+    /**
+     * Method to remove a player form the game
+     */
+    public void removePlayer(String name){
+
+        Player player = model.getPlayers().stream().filter(p -> name.equals(p.getName())).findAny().orElse(null);
+
+        List<Player> players = model.getPlayers();
+        players.remove(player);
+        model.setPlayers(players);
     }
 
     /* method used for testing */

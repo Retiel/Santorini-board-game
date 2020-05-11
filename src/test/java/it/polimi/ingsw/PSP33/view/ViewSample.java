@@ -19,22 +19,22 @@ public class ViewSample extends AbstractView {
 
     @Override
     public void visit(DataCell dataCell) {
-
+        /* Missing check */
     }
 
     @Override
     public void visit(DataPlayer dataPlayer) {
-
+        /* Missing check */
     }
 
     @Override
     public void visit(DataPawn dataPawn) {
-
+        /* Missing check */
     }
 
     @Override
     public void visit(CurrentPlayer currentPlayer) {
-
+        /* Missing check */
     }
 
     @Override
@@ -46,12 +46,12 @@ public class ViewSample extends AbstractView {
 
     @Override
     public void visit(YouLose youLose) {
-
+        /* Missing check */
     }
 
     @Override
     public void visit(YouWin youWin) {
-
+        /* Missing check */
     }
 
     @Override

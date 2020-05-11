@@ -2,9 +2,12 @@ package it.polimi.ingsw.PSP33.controller;
 
 import it.polimi.ingsw.PSP33.controller.rules.SetUpManager;
 import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
+import it.polimi.ingsw.PSP33.controller.rules.tools.DataControl;
 import it.polimi.ingsw.PSP33.events.VCEventVisitor;
+import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
+import it.polimi.ingsw.PSP33.events.toServer.setup.PlayerDisconnected;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
@@ -37,6 +40,14 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
         }else{
             setUpManager.AskPlayers();
         }
+    }
+
+    @Override
+    public void visit(PlayerDisconnected playerDisconnected) {
+        turnManager.resetLimiters(playerDisconnected.getName());
+        turnManager.nextTurn();
+        turnManager.removePlayer(playerDisconnected.getName());
+        turnManager.newTurnContext();
     }
 
     @Override

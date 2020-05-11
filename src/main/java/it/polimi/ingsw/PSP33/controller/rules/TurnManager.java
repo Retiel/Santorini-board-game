@@ -141,7 +141,7 @@ public class TurnManager extends AbstractManager {
 
         if (DataControl.controlInput(coord,dataBuffer)){
             setData(Actions.MOVE, coord);
-            winContext.checkWinCondition(getBoard(), getModel().getCurrentPawn(), GetCell.getCellAdapter(coord,getBoard()));
+            if (winContext.checkWinCondition(getBoard(), getModel().getCurrentPawn(), GetCell.getCellAdapter(coord,getBoard()))) winningBracket();
             moveContext.execMove(coord.getX(), coord.getY(), getModel().getCurrentPawn(), getModel());
         }
         else getModel().notifyObservers(new PossibleMove(dataBuffer.getCoordList(), dataBuffer.getCoordListGods()));
@@ -175,19 +175,30 @@ public class TurnManager extends AbstractManager {
     }
 
     /**
+     * Method to reset limiters applied by a god before removing the player
+     * @param playerName player to remove
+     */
+    public void resetLimiters(String playerName){
+        Player player = getModel().getPlayers().stream().filter(p -> playerName.equals(p.getName())).findAny().orElse(null);
+        if (player != null){
+            Gods name = player.getCard().getName();
+            limiterContext.resetGodTrigger(name, DataControl.limitReset(name));
+        }
+    }
+
+    /**
      * Method to comunicate and chage the state of the game cause losing player
      */
     private void loserBracket(){
 
         getModel().notifyObservers(new YouLose());
-        List<Player> players = getModel().getPlayers();
-        players.remove(getModel().getCurrentPlayer());
-
         nextTurn();
+        removePlayer(getModel().getCurrentPlayer().getName());
 
-        if (players.size() > 1) getModel().setPlayers(players);
-        else {
-            //TODO: /* Missing default win definition */
+        if (getModel().getPlayers().size() == 1) {
+            getModel().notifyObservers(new YouWin());
+        }else{
+            newTurnContext();
         }
     }
 

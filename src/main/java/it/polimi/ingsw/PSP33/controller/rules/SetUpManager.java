@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 /**
- * Class that manage everything  about the set up phase
+ * Class that manage everything about the set up phase
  */
 public class SetUpManager extends AbstractManager {
 
