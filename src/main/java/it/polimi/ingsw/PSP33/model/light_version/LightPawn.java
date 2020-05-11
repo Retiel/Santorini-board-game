@@ -26,4 +26,9 @@ public class LightPawn {
     public int getNumber() {
         return number;
     }
+
+    @Override
+    public String toString(){
+        return color.toString().substring(0,1);
+    }
 }
