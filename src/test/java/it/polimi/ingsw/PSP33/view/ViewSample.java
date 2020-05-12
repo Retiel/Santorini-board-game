@@ -7,6 +7,7 @@ import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
+import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
 public class ViewSample extends AbstractView {
@@ -38,6 +39,13 @@ public class ViewSample extends AbstractView {
         System.out.print("Data update...\n");
         System.out.print(dataPawn.toString()+"\n");
         System.out.print("Data update finished\n\n\n");
+    }
+
+    @Override
+    public void visit(YourGod yourGod) {
+        System.out.print("Gods update...\n");
+        System.out.print(yourGod.toString()+"\n");
+        System.out.print("Gods finished\n\n\n");
     }
 
     @Override

@@ -1,5 +1,4 @@
-{
-  "gods": [
+[
     {
       "name": "APOLLO",
       "description": "Movimento: I tuoi Lavoratori possono muoversi in uno spazio occupato da un Lavoratore avversario spostandolo nello spazio appena lasciato libero."
@@ -36,5 +35,5 @@
       "name": "PROMETHEUS",
       "description": "Nel Tuo Turno: Se il tuo Lavoratore non sale, può costruire sia prima che dopo aver mosso."
     }
-  ]
-}
+]
+

@@ -25,6 +25,10 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
         this.setUpManager.SetStartingPlayer();
     }
 
+    public void startGame(){
+        setUpManager.AskPlayers();
+    }
+
     @Override
     public void visit(SelectedGods selectedGods) {
         setUpManager.setGods(selectedGods.getGods());
@@ -38,7 +42,7 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
         setUpManager.nextTurn();
 
         if (setUpManager.CheckCardSetUp()){
-            /* start the game */
+            turnManager.newTurnContext();
         }else{
             setUpManager.playersChooseGod();
         }
