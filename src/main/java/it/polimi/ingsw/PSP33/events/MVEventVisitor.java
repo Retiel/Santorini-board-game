@@ -7,6 +7,7 @@ import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
+import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
 /**
@@ -33,6 +34,11 @@ public interface MVEventVisitor {
      * Message to send to the player all inital data of the pawn
      */
     void visit(DataPawn dataPawn);
+
+    /**
+     * Message to send to the player all inital data of the pawn
+     */
+    void visit(YourGod yourGod);
 
     /**
      * Message to send to the player all inital data of the pawn

@@ -20,6 +20,6 @@ public class YourGod implements MVEvent {
 
     @Override
     public void accept(MVEventVisitor MVEventVisitor) {
-
+        MVEventVisitor.visit(this);
     }
 }

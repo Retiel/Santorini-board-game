@@ -2,7 +2,9 @@ package it.polimi.ingsw.PSP33.view;
 
 
 import it.polimi.ingsw.PSP33.controller.Controller;
+import it.polimi.ingsw.PSP33.events.toServer.setup.ChoosenGod;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
+import it.polimi.ingsw.PSP33.events.toServer.setup.SelectedGods;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.God;
@@ -22,6 +24,7 @@ public class MVCTest {
     private ViewSample view;
     private Model model;
     private Controller controller;
+    private List<God> gods;
 
     private Player testPlayer1;
     private Player testPlayer2;
@@ -39,6 +42,11 @@ public class MVCTest {
         testPlayers.add(testPlayer1);
         testPlayers.add(testPlayer2);
 
+        gods = new ArrayList<>();
+        gods.add(new God(Gods.ATHENA, "YOLO"));
+        gods.add(new God(Gods.ARTEMIS, "fnihsbgvse"));
+        gods.add(new God(Gods.APOLLO, "ewarFHJABFE"));
+
         model = new Model(testPlayers);
         controller = new Controller(model);
 
@@ -51,7 +59,11 @@ public class MVCTest {
     public void coreExecution(){
 
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        view.notifyObservers(new PlacePawn(new Coord(0,0))); /* test setup branch message */
+        view.notifyObservers(new PlacePawn(new Coord(0,0))); /* test setup pawn branch message */
+        System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        view.notifyObservers(new SelectedGods(gods)); /* test setup gods branch message */
+        System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
+        view.notifyObservers(new ChoosenGod(gods.get(1))); /* test setup one god branch message */
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         modelScenario(model, testPlayer1, testPlayer2);
 

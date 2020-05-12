@@ -7,6 +7,7 @@ import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
+import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
@@ -85,6 +86,11 @@ public class CLI extends AbstractView {
     public void visit(DataPawn dataPawn) {
 
         pawn = dataPawn.getPawn();
+    }
+
+    @Override
+    public void visit(YourGod yourGod) {
+
     }
 
     @Override
