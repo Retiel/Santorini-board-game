@@ -69,6 +69,7 @@ public class GameHandler extends AbstractView implements Listener {
         System.out.println("DEBUG_" + lobbyID +": observer done");
 
         //Controller starts the game
+        controller.startGame();
     }
 
     public synchronized void didReceiveMessage(VCEvent vcEvent) {
@@ -134,7 +135,7 @@ public class GameHandler extends AbstractView implements Listener {
 
     @Override
     public void visit(YourGod yourGod) {
-
+        sendMessageToClient(yourGod);
     }
 
     @Override
@@ -149,7 +150,7 @@ public class GameHandler extends AbstractView implements Listener {
 
     @Override
     public void visit(SelectGods selectGods) {
-
+        sendMessageToClient(selectGods);
     }
 
     @Override

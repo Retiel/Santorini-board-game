@@ -8,6 +8,7 @@ import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.tools.LightConvertion;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
+import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
 import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
@@ -139,14 +140,14 @@ public class SetUpManager extends AbstractManager {
     /**
      * Method to ask player to choose the gods to use in game
      */
-    public void AskGods() {
+    public void askGods() {
       getModel().notifyObservers(new SelectGods(Allgods));
     }
 
     /**
      * Method to ask player where to place the pawn in the setup stage
      */
-    public void AskPlayers(){
+    public void askPlayers(){
         getModel().notifyObservers(new PossiblePlacement(GetAvailablePlacement()));
     }
 

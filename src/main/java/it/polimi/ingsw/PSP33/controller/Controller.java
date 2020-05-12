@@ -21,12 +21,11 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
     public Controller(Model model) {
         this.setUpManager = new SetUpManager(model);
         this.turnManager = new TurnManager(model);
-
-        this.setUpManager.SetStartingPlayer();
     }
 
     public void startGame(){
-        setUpManager.AskPlayers();
+        setUpManager.SetStartingPlayer();
+        setUpManager.askPlayers();
     }
 
     @Override
@@ -60,9 +59,9 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
         if(setUpManager.CheckEndTurn()) setUpManager.nextTurn();
 
         if (setUpManager.CheckPawnSetUp()){
-            setUpManager.AskGods();
+            setUpManager.askGods();
         }else{
-            setUpManager.AskPlayers();
+            setUpManager.askPlayers();
         }
     }
 

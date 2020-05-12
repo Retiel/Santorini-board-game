@@ -4,16 +4,16 @@ import it.polimi.ingsw.PSP33.view.cli.CLI;
 
 public class ViewFactory {
 
-    public static View getView(int selection) {
+    public static AbstractView getView(int selection) {
         switch (selection) {
             case 1:
-                return new View(); //CLI
+                return new CLI(); //CLI
 
             case 2:
                 return null; //GUI
 
             default:
-                return new View();
+                return new CLI();
         }
     }
 }

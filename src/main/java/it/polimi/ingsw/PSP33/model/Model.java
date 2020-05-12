@@ -1,6 +1,7 @@
 package it.polimi.ingsw.PSP33.model;
 
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
+import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
 
@@ -87,6 +88,7 @@ public class Model extends Observable<MVEvent> {
      */
     public void setCurrentPlayer(Player currentPlayer) {
         this.currentPlayer = currentPlayer;
+        notifyObservers(new CurrentPlayer(currentPlayer.getName()));
     }
 
     /**

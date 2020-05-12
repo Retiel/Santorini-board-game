@@ -1,9 +1,8 @@
 package it.polimi.ingsw.PSP33.client;
 
 import it.polimi.ingsw.PSP33.server.Server;
-import it.polimi.ingsw.PSP33.utils.patterns.observable.Listener;
+import it.polimi.ingsw.PSP33.view.AbstractView;
 import it.polimi.ingsw.PSP33.view.ViewFactory;
-import it.polimi.ingsw.PSP33.view.View;
 
 import java.io.IOException;
 import java.net.Socket;
@@ -12,7 +11,7 @@ import java.util.Scanner;
 
 public class Client implements Runnable {
 
-    private View view;
+    private AbstractView view;
 
     public static void main(String[] args) {
         Client client = new Client();
