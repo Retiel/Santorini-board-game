@@ -77,12 +77,14 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
 
     @Override
     public void update(VCEvent message) {
+        System.out.println("update ok");
         sendMessage(message);
     }
 
     public void sendMessage(VCEvent vcEvent) {
         String vcJson = eventSerializer.serializeVC(vcEvent);
         try {
+            System.out.println(vcJson);
             output.writeUTF(vcJson);
         } catch (IOException e) {
             e.printStackTrace();

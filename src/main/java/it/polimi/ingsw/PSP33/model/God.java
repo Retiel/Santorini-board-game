@@ -49,7 +49,7 @@ public class God {
 
     @Override
     public String toString(){
-        String printer = name.toString()+"\nEffect: "+description;
+        String printer = name.toString() + "\n"+ description;
         return printer;
     }
 }

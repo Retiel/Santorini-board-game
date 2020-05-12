@@ -54,6 +54,8 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
         int coordX = placePawn.getCoord().getX();
         int coordY = placePawn.getCoord().getY();
 
+        System.out.println("YOLOOOOOOOO");
+
         setUpManager.PlacePlayerPawn(coordX, coordY);
 
         if(setUpManager.CheckEndTurn()) setUpManager.nextTurn();

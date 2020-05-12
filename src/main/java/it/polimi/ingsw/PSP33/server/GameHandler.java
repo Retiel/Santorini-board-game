@@ -73,6 +73,7 @@ public class GameHandler extends AbstractView implements Listener {
     }
 
     public synchronized void didReceiveMessage(VCEvent vcEvent) {
+        System.out.println(vcEvent.toString());
         notifyObservers(vcEvent);
     }
 

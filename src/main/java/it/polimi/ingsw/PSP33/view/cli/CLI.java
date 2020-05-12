@@ -32,18 +32,25 @@ import java.util.Scanner;
  */
 public class CLI extends AbstractView {
 
-    private LightPlayer player;
-    private CLIPrinter cliPrinter;
     private LightBoard board;
-    private Scanner scanner;
     private LightCell[][] lightGrid;
+    private LightPlayer player;
     private LightPawn pawn;
 
+    private CLIPrinter cliPrinter;
+    private Scanner scanner;
+
+    public CLI() {
+        cliPrinter = new CLIPrinter();
+        scanner = new Scanner(System.in);
+
+    }
 
     @Override
     public void visit(DataBoard dataBoard) {
         //set up client board
         board = dataBoard.getGrid();
+        lightGrid = board.getGrid();
     }
 
     @Override
@@ -95,8 +102,9 @@ public class CLI extends AbstractView {
         System.out.println("\nWhere do you want to place your worker?");
         cliPrinter.printList(possiblePlacement.getCoordList());
         int i = scanner.nextInt();
-
         PlacePawn pp = new PlacePawn(possiblePlacement.getCoordList().get(i-1));
+        System.out.println(possiblePlacement.getCoordList().get(i-1).toString());
+        notifyObservers(pp);
     }
 
     @Override

@@ -173,10 +173,12 @@ public class CLIPrinter {
      * @param choices the coordinates of possible moves
      */
     public void printList(List<Coord> choices){
+
+        int counter = 1;
         for (Coord c : choices) {
-            int counter = 1;
             System.out.println(counter+") ");
             System.out.println(choices.get(counter-1).toString()+"\n");
+            counter++;
         }
     }
 
@@ -201,7 +203,8 @@ public class CLIPrinter {
     public void printGodList(List<God> gods){
         int counter = 1;
         for(God god : gods){
-            System.out.println("\n"+counter+") "+god.toString()+"\n");
+            System.out.println("\n"+counter+") "+god.toString());
+            counter++;
         }
     }
 }
