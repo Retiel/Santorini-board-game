@@ -223,6 +223,11 @@ public class Lobby implements Runnable {
         }
 
         GameHandler gameHandler = new GameHandler(this);
+
+        for(ClientHandler clientHandler : clientHandlers) {
+            clientHandler.addListener(gameHandler);
+        }
+
         gameHandler.startGame();
 
         //Debug

@@ -42,11 +42,6 @@ public class ClientHandler extends Listened implements Runnable {
      */
     private Lobby lobby;
 
-    /**
-     * Boolean to check if client is ready
-     */
-    private boolean isReady;
-
     private final EventSerializer eventSerializer;
 
     /**
@@ -60,7 +55,6 @@ public class ClientHandler extends Listened implements Runnable {
         this.clientName = "";
         this.clientColor = null;
         this.lobby = null;
-        this.isReady = false;
         this.eventSerializer = new EventSerializer();
     }
 
@@ -102,7 +96,7 @@ public class ClientHandler extends Listened implements Runnable {
     /**
      * Method to get the lobby
      *
-     * @return
+     * @return lobby
      */
     public Lobby getLobby() {
         return lobby;
