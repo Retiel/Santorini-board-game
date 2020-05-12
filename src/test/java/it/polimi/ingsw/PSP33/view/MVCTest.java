@@ -59,9 +59,10 @@ public class MVCTest {
     public void coreExecution(){
 
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        view.notifyObservers(new PlacePawn(new Coord(0,0))); /* test setup pawn branch message */
+        view.notifyObservers(new PlacePawn(new Coord(1,1))); /* test setup pawn branch message */
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        view.notifyObservers(new SelectedGods(gods)); /* test setup gods branch message */
+        setPawns(model, testPlayer1, testPlayer2);
+        view.notifyObservers(new PlacePawn(new Coord(1,1))); /* test setup gods branch message */
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         view.notifyObservers(new ChoosenGod(gods.get(1))); /* test setup one god branch message */
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
@@ -152,6 +153,17 @@ public class MVCTest {
 
         testPlayer2.getPawns()[1].setCoords(3,2);
         board.getGrid()[3][2].setOccupied(testPlayer2.getPawns()[1]);
+    }
+
+    private static void setPawns(Model model, Player testPlayer1,Player testPlayer2){
+
+        Board board = model.getBoard();
+
+        testPlayer1.getPawns()[0].setCoords(0,0);
+        testPlayer1.getPawns()[1].setCoords(0,0);
+
+        testPlayer2.getPawns()[0].setCoords(0,0);
+        testPlayer2.getPawns()[1].setCoords(0,0);
     }
 
     private static void changeGod(Player testPlayer1,Player testPlayer2){

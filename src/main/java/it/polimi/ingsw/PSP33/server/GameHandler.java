@@ -10,6 +10,7 @@ import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
+import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
@@ -59,7 +60,7 @@ public class GameHandler extends AbstractView implements Runnable, Listener {
     public void run() {
         setMVC();
         waitClientsSetup();
-        notifyObservers(new NewTurn());
+        /* Start game set up */
     }
 
     public void setMVC() {
@@ -151,6 +152,11 @@ public class GameHandler extends AbstractView implements Runnable, Listener {
     @Override
     public void visit(DataPawn dataPawn) {
         sendMessageToAll(dataPawn);
+    }
+
+    @Override
+    public void visit(YourGod yourGod) {
+
     }
 
     @Override
