@@ -150,6 +150,6 @@ public class Pawn {
 
     @Override
     public String toString(){
-        return color.toString().substring(0,0);
+        return color.toString().substring(0,1);
     }
 }
