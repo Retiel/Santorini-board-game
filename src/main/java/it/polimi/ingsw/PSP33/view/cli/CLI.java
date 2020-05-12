@@ -1,17 +1,15 @@
 package it.polimi.ingsw.PSP33.view.cli;
 
 import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPawn;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
+import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
-import it.polimi.ingsw.PSP33.model.Board;
-import it.polimi.ingsw.PSP33.model.Pawn;
-import it.polimi.ingsw.PSP33.model.Player;
 import it.polimi.ingsw.PSP33.model.light_version.LightBoard;
 import it.polimi.ingsw.PSP33.model.light_version.LightCell;
 import it.polimi.ingsw.PSP33.model.light_version.LightPawn;
@@ -56,9 +54,9 @@ public class CLI extends AbstractView {
     }
 
     @Override
-    public void visit(DataGrid dataGrid) {
+    public void visit(DataBoard dataBoard) {
         //set up client board
-        board = dataGrid.getGrid();
+        board = dataBoard.getGrid();
     }
 
     @Override
@@ -102,6 +100,11 @@ public class CLI extends AbstractView {
         int i = scanner.nextInt();
 
         PlacePawn pp = new PlacePawn(possiblePlacement.getCoordList().get(i-1));
+    }
+
+    @Override
+    public void visit(SelectGods selectGods) {
+
     }
 
     @Override

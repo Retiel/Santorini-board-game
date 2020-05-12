@@ -4,11 +4,11 @@ import it.polimi.ingsw.PSP33.events.MVEventVisitor;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.model.light_version.LightBoard;
 
-public class DataGrid implements MVEvent {
+public class DataBoard implements MVEvent {
 
     private final LightBoard lightBoard;
 
-    public DataGrid(LightBoard lightBoard) {
+    public DataBoard(LightBoard lightBoard) {
         this.lightBoard = lightBoard;
     }
 

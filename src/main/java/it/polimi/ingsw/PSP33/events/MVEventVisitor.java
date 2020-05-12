@@ -1,11 +1,12 @@
 package it.polimi.ingsw.PSP33.events;
 
 import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPawn;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
+import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
 /**
@@ -16,7 +17,7 @@ public interface MVEventVisitor {
     /**
      * Message to send to the player all inital data of the board
      */
-    void visit(DataGrid dataGrid);
+    void visit(DataBoard dataBoard);
 
     /**
      * Message to send to the player all inital data of the modified cell
@@ -42,6 +43,11 @@ public interface MVEventVisitor {
      * Message to send to the player all inital data of the board
      */
     void visit(PossiblePlacement possiblePlacement);
+
+    /**
+     * Message to send to the player select the N gods to use in the game
+     */
+    void visit(SelectGods selectGods);
 
     /**
      * Message to comunicate to the losing statement

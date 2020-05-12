@@ -1,8 +1,6 @@
 package it.polimi.ingsw.PSP33.controller.rules.tools;
 
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
-import it.polimi.ingsw.PSP33.events.toClient.turn.YouLose;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;

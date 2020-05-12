@@ -9,7 +9,6 @@ import it.polimi.ingsw.PSP33.controller.rules.tools.DataBuffer;
 import it.polimi.ingsw.PSP33.controller.rules.tools.DataControl;
 import it.polimi.ingsw.PSP33.controller.rules.tools.AbstractManager;
 import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;

@@ -2,9 +2,9 @@ package it.polimi.ingsw.PSP33.controller;
 
 import it.polimi.ingsw.PSP33.controller.rules.SetUpManager;
 import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
-import it.polimi.ingsw.PSP33.controller.rules.tools.DataControl;
 import it.polimi.ingsw.PSP33.events.VCEventVisitor;
-import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
+import it.polimi.ingsw.PSP33.events.toServer.setup.ChoosenGod;
+import it.polimi.ingsw.PSP33.events.toServer.setup.SelectedGods;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlayerDisconnected;
@@ -26,6 +26,26 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
     }
 
     @Override
+    public void visit(SelectedGods selectedGods) {
+        setUpManager.setGods(selectedGods.getGods());
+        setUpManager.nextTurn();
+        setUpManager.playersChooseGod();
+    }
+
+    @Override
+    public void visit(ChoosenGod choosenGod) {
+        setUpManager.setGodforPlayer(choosenGod.getGod());
+        setUpManager.nextTurn();
+
+        if (setUpManager.CheckCardSetUp()){
+            /* start the game */
+        }else{
+            setUpManager.playersChooseGod();
+        }
+
+    }
+
+    @Override
     public void visit(PlacePawn placePawn) {
 
         int coordX = placePawn.getCoord().getX();
@@ -35,8 +55,8 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
 
         if(setUpManager.CheckEndTurn()) setUpManager.nextTurn();
 
-        if (setUpManager.CheckEndSetUp()){
-            turnManager.newTurnContext();
+        if (setUpManager.CheckPawnSetUp()){
+            setUpManager.AskGods();
         }else{
             setUpManager.AskPlayers();
         }

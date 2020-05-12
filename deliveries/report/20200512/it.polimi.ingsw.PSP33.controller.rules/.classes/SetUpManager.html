@@ -1,0 +1,188 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SetUpManager</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.controller.rules</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SetUpManager (it.polimi.ingsw.PSP33.controller.rules)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SetUpManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (28/ 28)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.controller.rules;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.tools.AbstractManager;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
+<i>6</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.tools.LightConvertion;
+<i>7</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
+<i>8</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
+<i>9</i>&nbsp;import it.polimi.ingsw.PSP33.model.Cell;
+<i>10</i>&nbsp;import it.polimi.ingsw.PSP33.model.Model;
+<i>11</i>&nbsp;import it.polimi.ingsw.PSP33.model.Pawn;
+<i>12</i>&nbsp;import it.polimi.ingsw.PSP33.model.Player;
+<i>13</i>&nbsp;import it.polimi.ingsw.PSP33.utils.Coord;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;import java.util.List;
+<i>16</i>&nbsp;import java.util.Random;
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;/**
+<i>19</i>&nbsp; * Class that manage everything about the set up phase
+<i>20</i>&nbsp; */
+<i>21</i>&nbsp;public class SetUpManager extends AbstractManager {
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;    private int pawn;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    public SetUpManager(Model model) {
+<b class="fc"><i>26</i>&nbsp;        super(model);</b>
+<b class="fc"><i>27</i>&nbsp;        this.pawn = 0;</b>
+<b class="fc"><i>28</i>&nbsp;    }</b>
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * Method to decide the the starting player
+<i>32</i>&nbsp;     */
+<i>33</i>&nbsp;    public void SetStartingPlayer() {
+<i>34</i>&nbsp;
+<b class="fc"><i>35</i>&nbsp;        Random random = new Random();</b>
+<b class="fc"><i>36</i>&nbsp;        int numberOfPlayers = getModel().getPlayers().size();</b>
+<b class="fc"><i>37</i>&nbsp;        int randomInteger = random.nextInt(numberOfPlayers);</b>
+<i>38</i>&nbsp;
+<b class="fc"><i>39</i>&nbsp;        getModel().setCurrentPlayer(getModel().getPlayers().get(randomInteger));</b>
+<b class="fc"><i>40</i>&nbsp;        getModel().notifyObservers( new DataBoard( LightConvertion.getLightVersion( getBoard() ) ) );</b>
+<b class="fc"><i>41</i>&nbsp;    }</b>
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    /**
+<i>44</i>&nbsp;     * Method to get list of possible cell to place the pawn during set up
+<i>45</i>&nbsp;     *
+<i>46</i>&nbsp;     * @return List of Coord class object
+<i>47</i>&nbsp;     */
+<i>48</i>&nbsp;    public List&lt;Coord&gt; GetAvailablePlacement(){
+<b class="fc"><i>49</i>&nbsp;        List&lt;Cell&gt; cellList = GetCell.getPlaceableCells(getModel().getBoard());</b>
+<b class="fc"><i>50</i>&nbsp;        return GetCell.getListAdapter(cellList);</b>
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    /**
+<i>54</i>&nbsp;     * Method to place the pawn once
+<i>55</i>&nbsp;     * @param coordX coordinate x of the cell
+<i>56</i>&nbsp;     * @param coordY coordinate y of the cell
+<i>57</i>&nbsp;     */
+<i>58</i>&nbsp;    public void PlacePlayerPawn(int coordX, int coordY){
+<b class="fc"><i>59</i>&nbsp;        Cell startingCell = getBoard().getGrid()[coordX][coordY];</b>
+<b class="fc"><i>60</i>&nbsp;        Pawn pawn1 = getModel().getCurrentPlayer().getPawns()[pawn];</b>
+<b class="fc"><i>61</i>&nbsp;        BasicAction.SetUpPawnPosition(startingCell, pawn1);</b>
+<b class="fc"><i>62</i>&nbsp;        if (pawn == 0) pawn++;</b>
+<b class="fc"><i>63</i>&nbsp;        else pawn = 0;</b>
+<b class="fc"><i>64</i>&nbsp;    }</b>
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    /**
+<i>67</i>&nbsp;     * Method to check if is still the current player turn
+<i>68</i>&nbsp;     *
+<i>69</i>&nbsp;     * @return Boolean (true = end current player turn, false = still current player turn)
+<i>70</i>&nbsp;     */
+<i>71</i>&nbsp;    public boolean CheckEndTurn(){
+<b class="fc"><i>72</i>&nbsp;        return pawn &lt; 1;</b>
+<i>73</i>&nbsp;    }
+<i>74</i>&nbsp;
+<i>75</i>&nbsp;    /**
+<i>76</i>&nbsp;     * Method to check if is still the set up phase
+<i>77</i>&nbsp;     *
+<i>78</i>&nbsp;     * @return Boolean (true = end set up, false = still need to set up)
+<i>79</i>&nbsp;     */
+<i>80</i>&nbsp;    public boolean CheckEndSetUp(){
+<i>81</i>&nbsp;
+<b class="fc"><i>82</i>&nbsp;        List&lt;Player&gt; playerList =  getModel().getPlayers();</b>
+<i>83</i>&nbsp;
+<b class="fc"><i>84</i>&nbsp;        for (Player player : playerList){</b>
+<b class="fc"><i>85</i>&nbsp;            if (player.getPawns()[0].getCoord() == null) return false;</b>
+<b class="fc"><i>86</i>&nbsp;            if (player.getPawns()[1].getCoord() == null) return false;</b>
+<b class="fc"><i>87</i>&nbsp;        }</b>
+<b class="fc"><i>88</i>&nbsp;        return true;</b>
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    public void AskPlayers(){
+<b class="fc"><i>92</i>&nbsp;        getModel().notifyObservers(new PossiblePlacement(GetAvailablePlacement()));</b>
+<b class="fc"><i>93</i>&nbsp;    }</b>
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;
+<i>96</i>&nbsp;    /* Methods generated for testing purpose */
+<i>97</i>&nbsp;
+<i>98</i>&nbsp;    public Model getModel() {
+<b class="fc"><i>99</i>&nbsp;        return super.getModel();</b>
+<i>100</i>&nbsp;    }
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;    public int getPawn() {
+<b class="fc"><i>103</i>&nbsp;        return pawn;</b>
+<i>104</i>&nbsp;    }
+<i>105</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-12 12:40</div>
+</div>
+</body>
+</html>

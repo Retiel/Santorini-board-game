@@ -1,0 +1,429 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TurnManager</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.controller.rules</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TurnManager (it.polimi.ingsw.PSP33.controller.rules)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TurnManager</td>
+<td class="coverageStat">
+  <span class="percent">
+    84,2%
+  </span>
+  <span class="absValue">
+    (16/ 19)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    73,8%
+  </span>
+  <span class="absValue">
+    (76/ 103)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TurnManager$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    85%
+  </span>
+  <span class="absValue">
+    (17/ 20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    74%
+  </span>
+  <span class="absValue">
+    (77/ 104)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.controller.rules;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.build.BuildContext;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.enemy.LimiterContext;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.move.MoveContext;
+<i>6</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.extra.ExtraContext;
+<i>7</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.win.WinContext;
+<i>8</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.tools.DataBuffer;
+<i>9</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.tools.DataControl;
+<i>10</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.tools.AbstractManager;
+<i>11</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
+<i>12</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.turn.*;
+<i>13</i>&nbsp;import it.polimi.ingsw.PSP33.model.Cell;
+<i>14</i>&nbsp;import it.polimi.ingsw.PSP33.model.Model;
+<i>15</i>&nbsp;import it.polimi.ingsw.PSP33.model.Player;
+<i>16</i>&nbsp;import it.polimi.ingsw.PSP33.utils.Coord;
+<i>17</i>&nbsp;import it.polimi.ingsw.PSP33.utils.enums.Actions;
+<i>18</i>&nbsp;import it.polimi.ingsw.PSP33.utils.enums.Gods;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;import java.util.ArrayList;
+<i>21</i>&nbsp;import java.util.List;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * Class that manage everything related to how execute a player turn
+<i>25</i>&nbsp; */
+<i>26</i>&nbsp;public class TurnManager extends AbstractManager {
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    private MoveContext moveContext;
+<i>29</i>&nbsp;    private BuildContext buildContext;
+<i>30</i>&nbsp;    private WinContext winContext;
+<i>31</i>&nbsp;    private ExtraContext extraContext;
+<i>32</i>&nbsp;    private LimiterContext limiterContext;
+<i>33</i>&nbsp;    private DataBuffer dataBuffer;
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    /**
+<i>36</i>&nbsp;     * Constructor
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    public TurnManager(Model model) {
+<b class="fc"><i>39</i>&nbsp;        super(model);</b>
+<b class="fc"><i>40</i>&nbsp;        this.dataBuffer = new DataBuffer();</b>
+<b class="fc"><i>41</i>&nbsp;        this.limiterContext = new LimiterContext();</b>
+<b class="fc"><i>42</i>&nbsp;    }</b>
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;    /**
+<i>45</i>&nbsp;     * Method that starts every players turn, it reset context and change it to the current
+<i>46</i>&nbsp;     */
+<i>47</i>&nbsp;    public void newTurnContext(){
+<i>48</i>&nbsp;
+<b class="fc"><i>49</i>&nbsp;        this.dataBuffer = new DataBuffer();</b>
+<b class="fc"><i>50</i>&nbsp;        Gods name = getModel().getCurrentPlayer().getCard().getName();</b>
+<b class="fc"><i>51</i>&nbsp;        getModel().setCurrentGodName(name);</b>
+<i>52</i>&nbsp;
+<b class="fc"><i>53</i>&nbsp;        this.moveContext = new MoveContext(name);</b>
+<b class="fc"><i>54</i>&nbsp;        this.buildContext = new BuildContext(name);</b>
+<b class="fc"><i>55</i>&nbsp;        this.winContext = new WinContext(name);</b>
+<b class="fc"><i>56</i>&nbsp;        this.extraContext = new ExtraContext(name);</b>
+<i>57</i>&nbsp;
+<b class="fc"><i>58</i>&nbsp;        limiterContext.resetGodTrigger(name, DataControl.limitReset(name));</b>
+<i>59</i>&nbsp;        
+<b class="fc"><i>60</i>&nbsp;        getModel().notifyObservers(new NewAction(</b>
+<b class="fc"><i>61</i>&nbsp;                true, false, DataControl.checkStart(getModel().getCurrentGodName())));</b>
+<b class="fc"><i>62</i>&nbsp;    }</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    /**
+<i>65</i>&nbsp;     * Method that controls the move choice option
+<i>66</i>&nbsp;     * @param pawnNumber the pawn involved in the action
+<i>67</i>&nbsp;     */
+<i>68</i>&nbsp;    public void moveFlow(int pawnNumber){
+<i>69</i>&nbsp;
+<b class="fc"><i>70</i>&nbsp;        if (getModel().getCurrentPawn() == null) {</b>
+<b class="fc"><i>71</i>&nbsp;            getModel().setCurrentPawn(getModel().getCurrentPlayer().getPawnByNumber(pawnNumber));</b>
+<i>72</i>&nbsp;        }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;        /* NOTE! the list have to be excluse to unless the effect afflict the basic list by shrinking it */
+<b class="fc"><i>75</i>&nbsp;        List&lt;Coord&gt; basicMove = getBasicFlow(Actions.MOVE);</b>
+<b class="fc"><i>76</i>&nbsp;        List&lt;Coord&gt; godsMove = getContextFlow(Actions.MOVE);</b>
+<i>77</i>&nbsp;
+<b class="fc"><i>78</i>&nbsp;        if (noActionAvailable(basicMove, godsMove)){</b>
+<i>79</i>&nbsp;
+<b class="fc"><i>80</i>&nbsp;            setData(basicMove, godsMove);</b>
+<b class="fc"><i>81</i>&nbsp;            if(DataControl.exclusiveList(basicMove, godsMove)){</b>
+<b class="nc"><i>82</i>&nbsp;                getModel().notifyObservers(new PossibleMove(basicMove, godsMove));</b>
+<i>83</i>&nbsp;            }
+<i>84</i>&nbsp;            else {
+<i>85</i>&nbsp;                // only Prometheus might use this branch
+<b class="fc"><i>86</i>&nbsp;                getModel().notifyObservers(new PossibleMove(godsMove, new ArrayList&lt;&gt;()));</b>
+<i>87</i>&nbsp;            }
+<b class="nc"><i>88</i>&nbsp;        }else loserBracket();</b>
+<b class="fc"><i>89</i>&nbsp;    }</b>
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    /**
+<i>92</i>&nbsp;     * Method that controls the build choice option
+<i>93</i>&nbsp;     * @param pawnNumber the pawn involved in the action
+<i>94</i>&nbsp;     */
+<i>95</i>&nbsp;    public void buildFlow(int pawnNumber){
+<i>96</i>&nbsp;
+<b class="fc"><i>97</i>&nbsp;        if (getModel().getCurrentPawn() == null) {</b>
+<b class="nc"><i>98</i>&nbsp;            getModel().setCurrentPawn(getModel().getCurrentPlayer().getPawnByNumber(pawnNumber));</b>
+<i>99</i>&nbsp;        }
+<i>100</i>&nbsp;
+<b class="fc"><i>101</i>&nbsp;        List&lt;Coord&gt; basicBuild = getBasicFlow(Actions.BUILD);</b>
+<b class="fc"><i>102</i>&nbsp;        List&lt;Coord&gt; godsBuild = getContextFlow(Actions.BUILD);</b>
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;
+<b class="fc"><i>105</i>&nbsp;        if (noActionAvailable(basicBuild, godsBuild)){</b>
+<i>106</i>&nbsp;
+<b class="fc"><i>107</i>&nbsp;            setData(basicBuild, godsBuild);</b>
+<b class="fc"><i>108</i>&nbsp;            if(DataControl.exclusiveList(basicBuild, godsBuild)){</b>
+<b class="fc"><i>109</i>&nbsp;                getModel().notifyObservers(new PossibleBuild(</b>
+<b class="fc"><i>110</i>&nbsp;                        basicBuild, godsBuild, DataControl.checkBuild(getModel().getCurrentGodName())));</b>
+<i>111</i>&nbsp;            }
+<i>112</i>&nbsp;            else {
+<b class="nc"><i>113</i>&nbsp;                getModel().notifyObservers(new PossibleBuild(</b>
+<b class="nc"><i>114</i>&nbsp;                        godsBuild, new ArrayList&lt;&gt;(), DataControl.checkBuild(getModel().getCurrentGodName())));</b>
+<i>115</i>&nbsp;            }
+<b class="nc"><i>116</i>&nbsp;        }else loserBracket();</b>
+<b class="fc"><i>117</i>&nbsp;    }</b>
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    /**
+<i>120</i>&nbsp;     * Method that controls the extra action option, it activates only if there is a extra option dictated by the god card
+<i>121</i>&nbsp;     * @param pawnNumber the pawn involved in the action
+<i>122</i>&nbsp;     */
+<i>123</i>&nbsp;    public void extraActionFlow(int pawnNumber){
+<i>124</i>&nbsp;
+<b class="fc"><i>125</i>&nbsp;        if (getModel().getCurrentPawn() == null) {</b>
+<b class="nc"><i>126</i>&nbsp;            getModel().setCurrentPawn(getModel().getCurrentPlayer().getPawnByNumber(pawnNumber));</b>
+<i>127</i>&nbsp;        }
+<i>128</i>&nbsp;
+<b class="fc"><i>129</i>&nbsp;        List&lt;Coord&gt; gods = getContextFlow(Actions.EXTRA);</b>
+<i>130</i>&nbsp;
+<b class="fc"><i>131</i>&nbsp;        setData(gods, gods);</b>
+<b class="fc"><i>132</i>&nbsp;        getModel().notifyObservers(new PossibleExtraAction(gods));</b>
+<b class="fc"><i>133</i>&nbsp;    }</b>
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;    /**
+<i>136</i>&nbsp;     * Method to apply the move change
+<i>137</i>&nbsp;     * @param coord coordinates of the new position
+<i>138</i>&nbsp;     */
+<i>139</i>&nbsp;    public void execMove(Coord coord){
+<i>140</i>&nbsp;
+<b class="fc"><i>141</i>&nbsp;        if (DataControl.controlInput(coord,dataBuffer)){</b>
+<b class="fc"><i>142</i>&nbsp;            setData(Actions.MOVE, coord);</b>
+<b class="fc"><i>143</i>&nbsp;            if (winContext.checkWinCondition(getBoard(), getModel().getCurrentPawn(), GetCell.getCellAdapter(coord,getBoard()))) winningBracket();</b>
+<b class="fc"><i>144</i>&nbsp;            moveContext.execMove(coord.getX(), coord.getY(), getModel().getCurrentPawn(), getModel());</b>
+<i>145</i>&nbsp;        }
+<b class="nc"><i>146</i>&nbsp;        else getModel().notifyObservers(new PossibleMove(dataBuffer.getCoordList(), dataBuffer.getCoordListGods()));</b>
+<b class="fc"><i>147</i>&nbsp;    }</b>
+<i>148</i>&nbsp;
+<i>149</i>&nbsp;    /**
+<i>150</i>&nbsp;     * Method to apply the build change
+<i>151</i>&nbsp;     * @param coord coordinates of the build position
+<i>152</i>&nbsp;     */
+<i>153</i>&nbsp;    public void execBuild(Coord coord, boolean roof) {
+<i>154</i>&nbsp;
+<b class="fc"><i>155</i>&nbsp;        if (DataControl.controlInput(coord,dataBuffer)) {</b>
+<b class="fc"><i>156</i>&nbsp;            setData(Actions.BUILD, coord);</b>
+<b class="fc"><i>157</i>&nbsp;            buildContext.execBuild(coord.getX(), coord.getY(), roof, getModel());</b>
+<i>158</i>&nbsp;        }
+<b class="nc"><i>159</i>&nbsp;        else getModel().notifyObservers(new PossibleBuild(</b>
+<b class="nc"><i>160</i>&nbsp;                dataBuffer.getCoordList(), dataBuffer.getCoordListGods(), DataControl.checkBuild(getModel().getCurrentGodName())));</b>
+<b class="fc"><i>161</i>&nbsp;    }</b>
+<i>162</i>&nbsp;
+<i>163</i>&nbsp;    /**
+<i>164</i>&nbsp;     * Method to apply the extra action change
+<i>165</i>&nbsp;     * @param coord coordinates where to apply the extra action
+<i>166</i>&nbsp;     */
+<i>167</i>&nbsp;    public void execExtra(Coord coord){
+<i>168</i>&nbsp;
+<b class="fc"><i>169</i>&nbsp;        if (DataControl.controlInput(coord,dataBuffer)) {</b>
+<b class="fc"><i>170</i>&nbsp;            setData(Actions.EXTRA, coord);</b>
+<b class="fc"><i>171</i>&nbsp;            extraContext.ExecAction(coord, getModel().getCurrentPawn(), getModel());</b>
+<i>172</i>&nbsp;        }
+<b class="nc"><i>173</i>&nbsp;        else getModel().notifyObservers(new PossibleExtraAction(dataBuffer.getCoordList()));</b>
+<b class="fc"><i>174</i>&nbsp;    }</b>
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;    /**
+<i>177</i>&nbsp;     * Method to reset limiters applied by a god before removing the player
+<i>178</i>&nbsp;     * @param playerName player to remove
+<i>179</i>&nbsp;     */
+<i>180</i>&nbsp;    public void resetLimiters(String playerName){
+<b class="nc"><i>181</i>&nbsp;        Player player = getModel().getPlayers().stream().filter(p -&gt; playerName.equals(p.getName())).findAny().orElse(null);</b>
+<b class="nc"><i>182</i>&nbsp;        if (player != null){</b>
+<b class="nc"><i>183</i>&nbsp;            Gods name = player.getCard().getName();</b>
+<b class="nc"><i>184</i>&nbsp;            limiterContext.resetGodTrigger(name, DataControl.limitReset(name));</b>
+<i>185</i>&nbsp;        }
+<b class="nc"><i>186</i>&nbsp;    }</b>
+<i>187</i>&nbsp;
+<i>188</i>&nbsp;    /**
+<i>189</i>&nbsp;     * Method to comunicate and chage the state of the game cause losing player
+<i>190</i>&nbsp;     */
+<i>191</i>&nbsp;    private void loserBracket(){
+<i>192</i>&nbsp;
+<b class="nc"><i>193</i>&nbsp;        getModel().notifyObservers(new YouLose());</b>
+<b class="nc"><i>194</i>&nbsp;        nextTurn();</b>
+<b class="nc"><i>195</i>&nbsp;        removePlayer(getModel().getCurrentPlayer().getName());</b>
+<i>196</i>&nbsp;
+<b class="nc"><i>197</i>&nbsp;        if (getModel().getPlayers().size() == 1) {</b>
+<b class="nc"><i>198</i>&nbsp;            getModel().notifyObservers(new YouWin());</b>
+<i>199</i>&nbsp;        }else{
+<b class="nc"><i>200</i>&nbsp;            newTurnContext();</b>
+<i>201</i>&nbsp;        }
+<b class="nc"><i>202</i>&nbsp;    }</b>
+<i>203</i>&nbsp;
+<i>204</i>&nbsp;    /**
+<i>205</i>&nbsp;     * Method to comunicate and chage the state of the game cause win condition met
+<i>206</i>&nbsp;     */
+<i>207</i>&nbsp;    private void winningBracket(){
+<b class="nc"><i>208</i>&nbsp;      getModel().notifyObservers(new YouWin());</b>
+<b class="nc"><i>209</i>&nbsp;    }</b>
+<i>210</i>&nbsp;
+<i>211</i>&nbsp;    /**
+<i>212</i>&nbsp;     * Method gets the list of cell based on the basic action
+<i>213</i>&nbsp;     * @param action the action context
+<i>214</i>&nbsp;     *
+<i>215</i>&nbsp;     * @return List of Cell class object
+<i>216</i>&nbsp;     */
+<i>217</i>&nbsp;    private List&lt;Cell&gt; getCellsBasic(Actions action){
+<i>218</i>&nbsp;
+<b class="fc"><i>219</i>&nbsp;        switch (action){</b>
+<b class="fc"><i>220</i>&nbsp;            case MOVE: return GetCell.getMovableCells(getModel().getCurrentPawn(), getBoard());</b>
+<b class="fc"><i>221</i>&nbsp;            case BUILD: return GetCell.getBuildableCells(getModel().getCurrentPawn(), getBoard());</b>
+<i>222</i>&nbsp;            default:
+<b class="nc"><i>223</i>&nbsp;                return new ArrayList&lt;&gt;();</b>
+<i>224</i>&nbsp;        }
+<i>225</i>&nbsp;    }
+<i>226</i>&nbsp;
+<i>227</i>&nbsp;    /**
+<i>228</i>&nbsp;     * Method gets the list of cell based on the gods
+<i>229</i>&nbsp;     * @param action the action context
+<i>230</i>&nbsp;     *
+<i>231</i>&nbsp;     * @return List of Cell class object
+<i>232</i>&nbsp;     */
+<i>233</i>&nbsp;    private List&lt;Cell&gt; getCellsContext(Actions action){
+<b class="fc"><i>234</i>&nbsp;        switch (action){</b>
+<b class="fc"><i>235</i>&nbsp;            case MOVE: return moveContext.checkMove(getModel().getCurrentPawn(), getBoard());</b>
+<b class="fc"><i>236</i>&nbsp;            case BUILD: return buildContext.checkBuild(getModel().getCurrentPawn(), getBoard());</b>
+<b class="fc"><i>237</i>&nbsp;            case EXTRA: return extraContext.extraRequest(getModel().getCurrentPawn(), getBoard());</b>
+<i>238</i>&nbsp;            default:
+<b class="nc"><i>239</i>&nbsp;                return new ArrayList&lt;&gt;();</b>
+<i>240</i>&nbsp;        }
+<i>241</i>&nbsp;    }
+<i>242</i>&nbsp;
+<i>243</i>&nbsp;    /**
+<i>244</i>&nbsp;     * Method check if the list in input are empty (Losing condition)
+<i>245</i>&nbsp;     * @param coordList1 first list to control
+<i>246</i>&nbsp;     * @param coordList2 second list to control
+<i>247</i>&nbsp;     *
+<i>248</i>&nbsp;     * @return Boolean
+<i>249</i>&nbsp;     */
+<i>250</i>&nbsp;    private boolean noActionAvailable(List&lt;Coord&gt; coordList1, List&lt;Coord&gt; coordList2){
+<b class="fc"><i>251</i>&nbsp;        return !coordList1.isEmpty() || !coordList2.isEmpty();</b>
+<i>252</i>&nbsp;    }
+<i>253</i>&nbsp;
+<i>254</i>&nbsp;    /**
+<i>255</i>&nbsp;     * Method filter list based on gods effect
+<i>256</i>&nbsp;     * @param cellList list to filter
+<i>257</i>&nbsp;     *
+<i>258</i>&nbsp;     * @return List of Cell object
+<i>259</i>&nbsp;     */
+<i>260</i>&nbsp;    private List&lt;Cell&gt; applyLimit(List&lt;Cell&gt; cellList){
+<b class="fc"><i>261</i>&nbsp;        return limiterContext.applyAllLimit(cellList, getModel().getCurrentPawn(), getBoard(), getModel().getCurrentGodName());</b>
+<i>262</i>&nbsp;    }
+<i>263</i>&nbsp;
+<i>264</i>&nbsp;    /**
+<i>265</i>&nbsp;     * Method to get list of coord for the type of action under basic rule
+<i>266</i>&nbsp;     * @param action type of action
+<i>267</i>&nbsp;     *
+<i>268</i>&nbsp;     * @return List of Coord object
+<i>269</i>&nbsp;     */
+<i>270</i>&nbsp;    private List&lt;Coord&gt; getBasicFlow(Actions action){
+<b class="fc"><i>271</i>&nbsp;        return GetCell.getListAdapter(applyLimit(getCellsBasic(action)));</b>
+<i>272</i>&nbsp;    }
+<i>273</i>&nbsp;
+<i>274</i>&nbsp;    /**
+<i>275</i>&nbsp;     * Method to get list of coord for the type of action with context
+<i>276</i>&nbsp;     * @param action type of action
+<i>277</i>&nbsp;     *
+<i>278</i>&nbsp;     * @return List of Coord object
+<i>279</i>&nbsp;     */
+<i>280</i>&nbsp;    private List&lt;Coord&gt; getContextFlow(Actions action){
+<b class="fc"><i>281</i>&nbsp;        return GetCell.getListAdapter(applyLimit(getCellsContext(action)));</b>
+<i>282</i>&nbsp;    }
+<i>283</i>&nbsp;
+<i>284</i>&nbsp;    /**
+<i>285</i>&nbsp;     * Method to update data buffer
+<i>286</i>&nbsp;     * @param action type of action
+<i>287</i>&nbsp;     * @param coord coordinate related
+<i>288</i>&nbsp;     */
+<i>289</i>&nbsp;    private void setData(Actions action, Coord coord){
+<i>290</i>&nbsp;
+<i>291</i>&nbsp;        Cell cell;
+<i>292</i>&nbsp;
+<b class="fc"><i>293</i>&nbsp;        switch (action){</b>
+<i>294</i>&nbsp;            case MOVE:
+<b class="fc"><i>295</i>&nbsp;                cell = GetCell.getCellAdapter(getModel().getCurrentPawn().getCoord(), getBoard());</b>
+<b class="fc"><i>296</i>&nbsp;                getModel().getCurrentPawn().setOldMove(cell.getCoord());</b>
+<b class="fc"><i>297</i>&nbsp;                break;</b>
+<i>298</i>&nbsp;            case BUILD:
+<b class="fc"><i>299</i>&nbsp;                cell = GetCell.getCellAdapter(coord, getBoard());</b>
+<b class="fc"><i>300</i>&nbsp;                getModel().getCurrentPawn().setOldBuild(cell.getCoord());</b>
+<b class="fc"><i>301</i>&nbsp;                break;</b>
+<i>302</i>&nbsp;            case EXTRA:
+<b class="fc"><i>303</i>&nbsp;                cell = GetCell.getCellAdapter(coord, getBoard());</b>
+<b class="fc"><i>304</i>&nbsp;                getModel().getCurrentPawn().setOldExtra(cell.getCoord());</b>
+<i>305</i>&nbsp;                break;
+<i>306</i>&nbsp;        }
+<i>307</i>&nbsp;        
+<b class="fc"><i>308</i>&nbsp;        limiterContext.activateGodLimiter(getModel().getCurrentGodName(), getModel().getCurrentPawn(), coord, getBoard());</b>
+<b class="fc"><i>309</i>&nbsp;    }</b>
+<i>310</i>&nbsp;
+<i>311</i>&nbsp;    /**
+<i>312</i>&nbsp;     * Method to update data buffer
+<i>313</i>&nbsp;     * @param basicList list of coordinates related to basic action
+<i>314</i>&nbsp;     * @param godList list of coordinates related to gods effect
+<i>315</i>&nbsp;     */
+<i>316</i>&nbsp;    private void setData(List&lt;Coord&gt; basicList, List&lt;Coord&gt; godList){
+<b class="fc"><i>317</i>&nbsp;        dataBuffer.setCoordList(basicList);</b>
+<b class="fc"><i>318</i>&nbsp;        dataBuffer.setCoordListGods(godList);</b>
+<b class="fc"><i>319</i>&nbsp;    }</b>
+<i>320</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-12 12:40</div>
+</div>
+</body>
+</html>

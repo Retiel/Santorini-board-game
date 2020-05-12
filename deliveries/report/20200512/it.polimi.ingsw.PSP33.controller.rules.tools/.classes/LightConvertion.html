@@ -1,0 +1,123 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: LightConvertion</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.controller.rules.tools</a> ]
+</div>
+
+<h1>Coverage Summary for Class: LightConvertion (it.polimi.ingsw.PSP33.controller.rules.tools)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">LightConvertion</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    60%
+  </span>
+  <span class="absValue">
+    (3/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81,8%
+  </span>
+  <span class="absValue">
+    (9/ 11)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.controller.rules.tools;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.model.Board;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.model.Cell;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.model.Pawn;
+<i>6</i>&nbsp;import it.polimi.ingsw.PSP33.model.Player;
+<i>7</i>&nbsp;import it.polimi.ingsw.PSP33.model.light_version.LightBoard;
+<i>8</i>&nbsp;import it.polimi.ingsw.PSP33.model.light_version.LightCell;
+<i>9</i>&nbsp;import it.polimi.ingsw.PSP33.model.light_version.LightPawn;
+<i>10</i>&nbsp;import it.polimi.ingsw.PSP33.model.light_version.LightPlayer;
+<i>11</i>&nbsp;
+<b class="nc"><i>12</i>&nbsp;public class LightConvertion {</b>
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    public static LightPawn getLightVersion(Pawn pawn){
+<b class="fc"><i>15</i>&nbsp;        return new LightPawn(pawn.getColor(), pawn.getNumber());</b>
+<i>16</i>&nbsp;    }
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    public static LightCell getLightVersion(Cell cell){
+<b class="fc"><i>19</i>&nbsp;        if (cell.getOccupied() == null) return new LightCell(cell.getCoord(), cell.getFloor(), cell.isRoof(), null);</b>
+<i>20</i>&nbsp;
+<b class="fc"><i>21</i>&nbsp;        LightPawn lightPawn = LightConvertion.getLightVersion(cell.getOccupied());</b>
+<b class="fc"><i>22</i>&nbsp;        return new LightCell(cell.getCoord(), cell.getFloor(), cell.isRoof(), lightPawn);</b>
+<i>23</i>&nbsp;    }
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    public static LightPlayer getLightVersion(Player player){
+<b class="nc"><i>26</i>&nbsp;        return new LightPlayer(player.getName(), player.getColor(), player.getCard());</b>
+<i>27</i>&nbsp;    }
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public static LightBoard getLightVersion(Board board){
+<b class="fc"><i>30</i>&nbsp;        LightCell[][] cells = new LightCell[board.getSIZE()][board.getSIZE()];</b>
+<i>31</i>&nbsp;
+<b class="fc"><i>32</i>&nbsp;        for(Cell[] rows : board.getGrid()){</b>
+<b class="fc"><i>33</i>&nbsp;            for (Cell cell : rows){</b>
+<b class="fc"><i>34</i>&nbsp;                cells[cell.getCoordX()][cell.getCoordY()] = LightConvertion.getLightVersion(cell);</b>
+<i>35</i>&nbsp;            }
+<i>36</i>&nbsp;        }
+<i>37</i>&nbsp;
+<b class="fc"><i>38</i>&nbsp;        return new LightBoard(cells);</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-12 12:40</div>
+</div>
+</body>
+</html>

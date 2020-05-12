@@ -1,0 +1,178 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Controller</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.controller</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Controller (it.polimi.ingsw.PSP33.controller)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Controller</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    90,9%
+  </span>
+  <span class="absValue">
+    (10/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    82,9%
+  </span>
+  <span class="absValue">
+    (29/ 35)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.controller;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.SetUpManager;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.controller.rules.tools.DataControl;
+<i>6</i>&nbsp;import it.polimi.ingsw.PSP33.events.VCEventVisitor;
+<i>7</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
+<i>8</i>&nbsp;import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
+<i>9</i>&nbsp;import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
+<i>10</i>&nbsp;import it.polimi.ingsw.PSP33.events.toServer.setup.PlayerDisconnected;
+<i>11</i>&nbsp;import it.polimi.ingsw.PSP33.events.toServer.turn.*;
+<i>12</i>&nbsp;import it.polimi.ingsw.PSP33.model.Model;
+<i>13</i>&nbsp;import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;public class Controller implements Observer&lt;VCEvent&gt;, VCEventVisitor {
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    private SetUpManager setUpManager;
+<i>19</i>&nbsp;    private TurnManager turnManager;
+<i>20</i>&nbsp;
+<b class="fc"><i>21</i>&nbsp;    public Controller(Model model) {</b>
+<b class="fc"><i>22</i>&nbsp;        this.setUpManager = new SetUpManager(model);</b>
+<b class="fc"><i>23</i>&nbsp;        this.turnManager = new TurnManager(model);</b>
+<i>24</i>&nbsp;
+<b class="fc"><i>25</i>&nbsp;        this.setUpManager.SetStartingPlayer();</b>
+<b class="fc"><i>26</i>&nbsp;    }</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    @Override
+<i>29</i>&nbsp;    public void visit(PlacePawn placePawn) {
+<i>30</i>&nbsp;
+<b class="fc"><i>31</i>&nbsp;        int coordX = placePawn.getCoord().getX();</b>
+<b class="fc"><i>32</i>&nbsp;        int coordY = placePawn.getCoord().getY();</b>
+<i>33</i>&nbsp;
+<b class="fc"><i>34</i>&nbsp;        setUpManager.PlacePlayerPawn(coordX, coordY);</b>
+<i>35</i>&nbsp;
+<b class="fc"><i>36</i>&nbsp;        if(setUpManager.CheckEndTurn()) setUpManager.nextTurn();</b>
+<i>37</i>&nbsp;
+<b class="fc"><i>38</i>&nbsp;        if (setUpManager.CheckEndSetUp()){</b>
+<b class="nc"><i>39</i>&nbsp;            turnManager.newTurnContext();</b>
+<i>40</i>&nbsp;        }else{
+<b class="fc"><i>41</i>&nbsp;            setUpManager.AskPlayers();</b>
+<i>42</i>&nbsp;        }
+<b class="fc"><i>43</i>&nbsp;    }</b>
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;    @Override
+<i>46</i>&nbsp;    public void visit(PlayerDisconnected playerDisconnected) {
+<b class="nc"><i>47</i>&nbsp;        turnManager.resetLimiters(playerDisconnected.getName());</b>
+<b class="nc"><i>48</i>&nbsp;        turnManager.nextTurn();</b>
+<b class="nc"><i>49</i>&nbsp;        turnManager.removePlayer(playerDisconnected.getName());</b>
+<b class="nc"><i>50</i>&nbsp;        turnManager.newTurnContext();</b>
+<b class="nc"><i>51</i>&nbsp;    }</b>
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    @Override
+<i>54</i>&nbsp;    public void visit(NewTurn newTurn) {
+<b class="fc"><i>55</i>&nbsp;        turnManager.nextTurn();</b>
+<b class="fc"><i>56</i>&nbsp;        turnManager.newTurnContext();</b>
+<b class="fc"><i>57</i>&nbsp;    }</b>
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    @Override
+<i>60</i>&nbsp;    public void visit(MoveAction moveAction) {
+<b class="fc"><i>61</i>&nbsp;        turnManager.execMove(moveAction.getCoord());</b>
+<b class="fc"><i>62</i>&nbsp;    }</b>
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    @Override
+<i>65</i>&nbsp;    public void visit(BuildAction buildAction) {
+<b class="fc"><i>66</i>&nbsp;        turnManager.execBuild(buildAction.getCoord(), buildAction.isRoof());</b>
+<b class="fc"><i>67</i>&nbsp;    }</b>
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;    @Override
+<i>70</i>&nbsp;    public void visit(ExtraAction extraAction) {
+<b class="fc"><i>71</i>&nbsp;        turnManager.execExtra(extraAction.getCoord());</b>
+<b class="fc"><i>72</i>&nbsp;    }</b>
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    @Override
+<i>75</i>&nbsp;    public void visit(RequestPossibleMove requestPossibleMove) {
+<b class="fc"><i>76</i>&nbsp;        turnManager.moveFlow(requestPossibleMove.getPawn());</b>
+<b class="fc"><i>77</i>&nbsp;    }</b>
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    @Override
+<i>80</i>&nbsp;    public void visit(RequestPossibleBuild requestPossibleBuild) {
+<b class="fc"><i>81</i>&nbsp;        turnManager.buildFlow(requestPossibleBuild.getPawn());</b>
+<b class="fc"><i>82</i>&nbsp;    }</b>
+<i>83</i>&nbsp;
+<i>84</i>&nbsp;    @Override
+<i>85</i>&nbsp;    public void visit(RequestExtraAction requestExtraAction) {
+<b class="fc"><i>86</i>&nbsp;        turnManager.extraActionFlow(requestExtraAction.getPawn());</b>
+<b class="fc"><i>87</i>&nbsp;    }</b>
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    @Override
+<i>90</i>&nbsp;    public void update(VCEvent serverMessage) {
+<b class="fc"><i>91</i>&nbsp;        serverMessage.accept(this);</b>
+<b class="fc"><i>92</i>&nbsp;    }</b>
+<i>93</i>&nbsp;
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-12 12:40</div>
+</div>
+</body>
+</html>

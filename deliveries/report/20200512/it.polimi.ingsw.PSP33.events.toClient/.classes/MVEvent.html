@@ -1,0 +1,62 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MVEvent</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.events.toClient</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MVEvent (it.polimi.ingsw.PSP33.events.toClient)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">MVEvent</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.events.toClient;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.events.MVEventVisitor;
+<i>4</i>&nbsp;
+<i>5</i>&nbsp;/**
+<i>6</i>&nbsp; * Custom interface used to implement the visitor pattern for visitable messages sent to client
+<i>7</i>&nbsp; */
+<i>8</i>&nbsp;public interface MVEvent{
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;    /**
+<i>11</i>&nbsp;     * Accept method of the visitor pattern
+<i>12</i>&nbsp;     * @param MVEventVisitor message sent to client that needs to be accepted
+<i>13</i>&nbsp;     */
+<i>14</i>&nbsp;    void accept(MVEventVisitor MVEventVisitor);
+<i>15</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-12 12:40</div>
+</div>
+</body>
+</html>

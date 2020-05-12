@@ -1,5 +1,7 @@
 package it.polimi.ingsw.PSP33.events;
 
+import it.polimi.ingsw.PSP33.events.toServer.setup.ChoosenGod;
+import it.polimi.ingsw.PSP33.events.toServer.setup.SelectedGods;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlayerDisconnected;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
@@ -10,6 +12,11 @@ import it.polimi.ingsw.PSP33.events.toServer.turn.*;
 public interface VCEventVisitor {
 
     /**
+     * Message to send the server the god a player choose
+     */
+    void visit(ChoosenGod choosenGod);
+
+    /**
      * Message to send the server where to place the pawn diuring set up phase
      */
     void visit(PlacePawn placePawn);
@@ -18,6 +25,11 @@ public interface VCEventVisitor {
      * Message to send the server when a player disconnect form the game
      */
     void visit(PlayerDisconnected playerDisconnected);
+
+    /**
+     * Message to send the server the gods choosen during setup
+     */
+    void visit(SelectedGods selectedGods);
 
     /**
      * Message to send the server to set a new turn

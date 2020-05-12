@@ -68,14 +68,14 @@ public class SetUpManagerTest {
 
         /* verifying that the checks return false */
         assertFalse(testSample.CheckEndTurn());
-        assertFalse(testSample.CheckEndSetUp());
+        assertFalse(testSample.CheckPawnSetUp());
 
         assertEquals(1, testSample.getPawn());
         testSample.PlacePlayerPawn(1,2);
 
         /* verifying that the checks return true (end turn) and false (end setup) */
         assertTrue(testSample.CheckEndTurn());
-        assertFalse(testSample.CheckEndSetUp());
+        assertFalse(testSample.CheckPawnSetUp());
 
         testSample.nextTurn();
 
@@ -87,7 +87,7 @@ public class SetUpManagerTest {
 
         /* verifying that the checks return true*/
         assertTrue(testSample.CheckEndTurn());
-        assertTrue(testSample.CheckEndSetUp());
+        assertTrue(testSample.CheckPawnSetUp());
 
     }
 

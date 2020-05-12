@@ -3,15 +3,17 @@ package it.polimi.ingsw.PSP33.server;
 
 import it.polimi.ingsw.PSP33.controller.Controller;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataGrid;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPawn;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
+import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
+import it.polimi.ingsw.PSP33.events.toServer.turn.NewTurn;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
 import it.polimi.ingsw.PSP33.utils.patterns.observable.Listener;
@@ -57,7 +59,7 @@ public class GameHandler extends AbstractView implements Runnable, Listener {
     public void run() {
         setMVC();
         waitClientsSetup();
-        //controller.startGame()
+        notifyObservers(new NewTurn());
     }
 
     public void setMVC() {
@@ -132,8 +134,8 @@ public class GameHandler extends AbstractView implements Runnable, Listener {
     }
 
     @Override
-    public void visit(DataGrid dataGrid) {
-        sendMessageToAll(dataGrid);
+    public void visit(DataBoard dataBoard) {
+        sendMessageToAll(dataBoard);
     }
 
     @Override
@@ -159,6 +161,11 @@ public class GameHandler extends AbstractView implements Runnable, Listener {
     @Override
     public void visit(PossiblePlacement possiblePlacement) {
         sendMessageToClient(possiblePlacement);
+    }
+
+    @Override
+    public void visit(SelectGods selectGods) {
+
     }
 
     @Override
