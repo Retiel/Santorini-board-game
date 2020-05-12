@@ -9,8 +9,12 @@ import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
 import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
+import it.polimi.ingsw.PSP33.events.toServer.setup.ChoosenGod;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
+import it.polimi.ingsw.PSP33.events.toServer.setup.SelectedGods;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
+import it.polimi.ingsw.PSP33.model.God;
+import it.polimi.ingsw.PSP33.model.Pawn;
 import it.polimi.ingsw.PSP33.model.light_version.LightBoard;
 import it.polimi.ingsw.PSP33.model.light_version.LightCell;
 import it.polimi.ingsw.PSP33.model.light_version.LightPawn;
@@ -19,6 +23,8 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.utils.enums.Color;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -26,33 +32,13 @@ import java.util.Scanner;
  */
 public class CLI extends AbstractView {
 
-    private static LightPlayer player;
-    private static CLIPrinter cliPrinter;
-    private static LightBoard board;
-    private static Scanner scanner;
-    private static LightCell[][] lightGrid;
-    private static LightPawn pawn = new LightPawn(Color.BLUE, 1);
+    private LightPlayer player;
+    private CLIPrinter cliPrinter;
+    private LightBoard board;
+    private Scanner scanner;
+    private LightCell[][] lightGrid;
+    private LightPawn pawn;
 
-    public static void main(String[] args) {
-        lightGrid = new LightCell[5][5];
-        int i = 0;
-        int j = 0;
-        while (j<5){
-            while (i<5){
-                Coord coord = new Coord(i,j);
-                lightGrid[i][j] = new LightCell(coord,0,false, null);
-                i++;
-            }
-            j++;
-            i = 0;
-        }
-        board = new LightBoard(lightGrid);
-        cliPrinter = new CLIPrinter();
-        scanner = new Scanner(System.in);
-
-        cliPrinter.printBoard(board);
-
-    }
 
     @Override
     public void visit(DataBoard dataBoard) {
@@ -84,13 +70,18 @@ public class CLI extends AbstractView {
 
     @Override
     public void visit(DataPawn dataPawn) {
-
+        //todo: correct deleting the Pawn attribute and update the board
         pawn = dataPawn.getPawn();
     }
 
     @Override
     public void visit(YourGod yourGod) {
-
+        int i;
+        System.out.println("\nWhich God Card do you want?");
+        cliPrinter.printGodList(yourGod.getGods());
+        i = scanner.nextInt();
+        ChoosenGod cg = new ChoosenGod(yourGod.getGods().get(i-1));
+        notifyObservers(cg);
     }
 
     @Override
@@ -110,7 +101,22 @@ public class CLI extends AbstractView {
 
     @Override
     public void visit(SelectGods selectGods) {
+        List<God> allGods = new ArrayList<God>();
+        for(God g : selectGods.getGods()){
+            allGods.add(g);
+        }
+        List<God> chosenGods = new ArrayList<God>();
+        int i;
+        for(int c=1;c<3;c++){
+            System.out.println("Choose the "+c+"° God:");
+            cliPrinter.printGodList(allGods);
+            i = scanner.nextInt();
+            chosenGods.add(allGods.get(i-1));
+            allGods.remove(allGods.get(i-1));
+        }
 
+        SelectedGods sg = new SelectedGods(chosenGods);
+        notifyObservers(sg);
     }
 
     @Override
@@ -183,6 +189,13 @@ public class CLI extends AbstractView {
                         rea = new RequestExtraAction(i);
                         notifyObservers(rea);
                     }
+                }
+            }
+
+            if (newAction.isExtra()){
+                if (!newAction.isBuild()&&!newAction.isMove()){
+                    rea = new RequestExtraAction(i);
+                    notifyObservers(rea);
                 }
             }
         }

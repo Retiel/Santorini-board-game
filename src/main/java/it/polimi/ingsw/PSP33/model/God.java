@@ -46,4 +46,10 @@ public class God {
     public String getDescription() {
         return description;
     }
+
+    @Override
+    public String toString(){
+        String printer = name.toString()+"\nEffect: "+description;
+        return printer;
+    }
 }
