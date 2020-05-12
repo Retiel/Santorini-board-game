@@ -20,15 +20,15 @@ class LobbyManager {
         return instance;
     }
 
-    public static void addLobby(Lobby lobby) {
+    public synchronized static void addLobby(Lobby lobby) {
         lobbies.put(lobby.getLobbyID(), lobby);
     }
 
-    public static void removeLobby(Lobby lobby) {
+    public synchronized static void removeLobby(Lobby lobby) {
         lobbies.remove(lobby.getLobbyID());
     }
 
-    public static Lobby newLobby(int numberOfPlayers) {
+    public synchronized static Lobby newLobby(int numberOfPlayers) {
         lobbyID++;
 
         Lobby lobby = new Lobby(lobbyID, numberOfPlayers);

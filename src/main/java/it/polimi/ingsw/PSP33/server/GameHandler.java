@@ -21,7 +21,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class GameHandler extends AbstractView implements Runnable, Listener {
+public class GameHandler extends AbstractView implements Listener {
 
     /**
      * Lobby ID used for debug
@@ -39,28 +39,16 @@ public class GameHandler extends AbstractView implements Runnable, Listener {
     private ClientHandler currentClient;
 
     /**
-     * Boolean list to check if all clients are ready to play
-     */
-    private final List<Boolean> areClientsReady;
-
-    /**
      * Constructor of the class
      * @param lobby lobby of the game
      */
     public GameHandler(Lobby lobby) {
         this.lobbyID = lobby.getLobbyID();
         this.clientHandlers = lobby.getClientHandlers();
-        this.areClientsReady = lobby.getAreClientsReady();
+        this.currentClient = null;
     }
 
-    @Override
-    public void run() {
-        setMVC();
-        System.out.println("Controller startd");
-        //controller.startGame()
-    }
-
-    public void setMVC() {
+    public void startGame() {
         //List of players from clients' data
         List<Player> players = new ArrayList<>();
         for(ClientHandler clientHandler : clientHandlers) {
@@ -75,7 +63,9 @@ public class GameHandler extends AbstractView implements Runnable, Listener {
         model.addObserver(this);
         this.addObserver(controller);
 
-        System.out.println("DEBUG_" + lobbyID +": set mvc over.");
+        System.out.println("DEBUG_" + lobbyID +": observer done");
+
+        //Controller starts the game
     }
 
     public synchronized void didReceiveMessage(VCEvent vcEvent) {

@@ -7,12 +7,12 @@ import it.polimi.ingsw.PSP33.view.View;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Scanner;
 
 
 public class Client implements Runnable {
 
     private View view;
-    private ServerAdapter serverAdapter;
 
     public static void main(String[] args) {
         Client client = new Client();
@@ -21,6 +21,8 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
+
+        getViewSelection();
 
         Socket server;
         try {
@@ -31,7 +33,10 @@ public class Client implements Runnable {
         }
         System.out.println("Connected");
 
-        serverAdapter = new ServerAdapter(server);
+        ServerAdapter serverAdapter = new ServerAdapter(server);
+
+        serverAdapter.addObserver(view);
+        view.addObserver(serverAdapter);
 
         Thread thread = new Thread(serverAdapter);
         thread.start();
@@ -44,16 +49,33 @@ public class Client implements Runnable {
             }
         }
 
-        view = ViewFactory.getView(serverAdapter.getViewSelection());
+        System.out.println("Game starts!");
 
-        serverAdapter.addObserver(view);
-        view.addObserver(serverAdapter);
+        //Game started and View has to start
+    }
 
-        System.out.println("Observer done");
-        try {
-            serverAdapter.selectionOver();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void getViewSelection() {
+
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("Select user interface:\n1. CLI\n2. GUI");
+
+            String string = scanner.nextLine();
+
+            switch (string) {
+                case "1":
+                    view = ViewFactory.getView(1);
+                    break;
+
+                case "2":
+                    view = ViewFactory.getView(2);
+                    break;
+
+                default:
+                    continue;
+            }
+            break;
         }
     }
 }

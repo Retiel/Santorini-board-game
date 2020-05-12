@@ -42,6 +42,11 @@ public class ClientHandler extends Listened implements Runnable {
      */
     private Lobby lobby;
 
+    /**
+     * Boolean to check if client is ready
+     */
+    private boolean isReady;
+
     private final EventSerializer eventSerializer;
 
     /**
@@ -55,7 +60,25 @@ public class ClientHandler extends Listened implements Runnable {
         this.clientName = "";
         this.clientColor = null;
         this.lobby = null;
+        this.isReady = false;
         this.eventSerializer = new EventSerializer();
+    }
+
+    @Override
+    public void run() {
+        try {
+            handleConnectionSetup();
+            handleClientSetup();
+        } catch (IOException e) {
+            if(lobby != null) {
+                lobby.removeClient(this);
+                return;
+            }
+            e.printStackTrace();
+        }
+
+        listenToClient();
+
     }
 
     /**
@@ -76,6 +99,11 @@ public class ClientHandler extends Listened implements Runnable {
         return clientColor;
     }
 
+    /**
+     * Method to get the lobby
+     *
+     * @return
+     */
     public Lobby getLobby() {
         return lobby;
     }
@@ -85,32 +113,9 @@ public class ClientHandler extends Listened implements Runnable {
         lobby.addClient(this);
     }
 
-    @Override
-    public void run() {
-        try {
-            handleConnectionSetup();
-            handleClientSetup();
-        } catch (IOException e) {
-            if(lobby != null) {
-                lobby.removeClient(this);
-                return;
-            }
-            e.printStackTrace();
-        }
-
-        handleGame();
-
-    }
-
-    public void handleGame() {
+    public void listenToClient() {
         //New thread to keep listening from socket
-        new Thread(() -> {
-            try {
-                receiveMessage();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }, "ClientHandler_" + clientName + "_receiveMessage()").start();
+        new Thread(this::receiveMessage, "ClientHandler_" + clientName + "_receiveMessage()").start();
     }
 
     /**
@@ -118,11 +123,18 @@ public class ClientHandler extends Listened implements Runnable {
      * notifies the game handler
      * @throws IOException unable to access the socket's stream
      */
-    public void receiveMessage() throws IOException {
+    public void receiveMessage() {
         while (true) {
-            String json = input.readUTF();
-            VCEvent vcEvent = eventSerializer.deserializeVC(json);
+            String json;
 
+            try {
+                json = input.readUTF();
+            } catch (IOException e) {
+                e.printStackTrace();
+                break;
+            }
+
+            VCEvent vcEvent = eventSerializer.deserializeVC(json);
             notifyListener(vcEvent);
         }
     }
@@ -154,9 +166,7 @@ public class ClientHandler extends Listened implements Runnable {
      * @throws IOException unable to access the socket's stream
      */
     public void requestPlayerName() throws IOException {
-
         while (true) {
-
             //Send request
             String string = "Type your name: ";
             output.writeUTF(string);
@@ -178,9 +188,7 @@ public class ClientHandler extends Listened implements Runnable {
      * @throws IOException unable to access the socket's stream
      */
     public void requestPlayerColor() throws IOException {
-
         while (true) {
-
             //Send request
             String string = "Select your color: \n" + lobby.printColorList();
             output.writeUTF(string);
@@ -217,20 +225,22 @@ public class ClientHandler extends Listened implements Runnable {
      * @throws IOException unable to access the socket's stream
      */
     public void requestWait() throws IOException {
-        String str = "Waiting for players..";
-        output.writeUTF(str);
+        String string = "Waiting for players..";
+        output.writeUTF(string);
 
         while (true) {
-            str = input.readUTF();
-            if (str.equals("OK")) {
+            string = input.readUTF();
+            if (string.equals("SETUP_OK")) {
                 lobby.setClientReady(this);
                 break;
             }
         }
     }
 
-
-
+    public void requestReady() throws IOException {
+        String string = "GAME_OK";
+        output.writeUTF(string);
+    }
 
     public void handleConnectionSetup() throws IOException {
         output = new DataOutputStream(client.getOutputStream());
