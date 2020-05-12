@@ -35,7 +35,6 @@ public class CLI extends AbstractView {
     private LightBoard board;
     private LightCell[][] lightGrid;
     private LightPlayer player;
-    private LightPawn pawn;
 
     private CLIPrinter cliPrinter;
     private Scanner scanner;
@@ -78,7 +77,7 @@ public class CLI extends AbstractView {
     @Override
     public void visit(DataPawn dataPawn) {
         //todo: correct deleting the Pawn attribute and update the board
-        pawn = dataPawn.getPawn();
+        dataPawn.getPawn();
     }
 
     @Override
@@ -86,8 +85,8 @@ public class CLI extends AbstractView {
         int i;
         System.out.println("\nWhich God Card do you want?");
         cliPrinter.printGodList(yourGod.getGods());
-        i = scanner.nextInt();
-        ChoosenGod cg = new ChoosenGod(yourGod.getGods().get(i-1));
+
+        ChoosenGod cg = new ChoosenGod(yourGod.getGods().get(readInput(yourGod.getGods().size()) - 1));
         notifyObservers(cg);
     }
 
@@ -98,29 +97,25 @@ public class CLI extends AbstractView {
 
     @Override
     public void visit(PossiblePlacement possiblePlacement) {
+        cliPrinter.printBoard(board);
         //print 2 times the placement for the pawn (setup phase)
         System.out.println("\nWhere do you want to place your worker?");
         cliPrinter.printList(possiblePlacement.getCoordList());
-        int i = scanner.nextInt();
-        PlacePawn pp = new PlacePawn(possiblePlacement.getCoordList().get(i-1));
-        System.out.println(possiblePlacement.getCoordList().get(i-1).toString());
+
+        PlacePawn pp = new PlacePawn(possiblePlacement.getCoordList().get(readInput(possiblePlacement.getCoordList().size()) - 1));
         notifyObservers(pp);
     }
 
     @Override
     public void visit(SelectGods selectGods) {
-        List<God> allGods = new ArrayList<God>();
-        for(God g : selectGods.getGods()){
-            allGods.add(g);
-        }
-        List<God> chosenGods = new ArrayList<God>();
-        int i;
+        List<God> allGods = new ArrayList<>(selectGods.getGods());
+        List<God> chosenGods = new ArrayList<>();
+
         for(int c=1;c<3;c++){
             System.out.println("Choose the "+c+"° God:");
             cliPrinter.printGodList(allGods);
-            i = scanner.nextInt();
-            chosenGods.add(allGods.get(i-1));
-            allGods.remove(allGods.get(i-1));
+            chosenGods.add(allGods.get(readInput(allGods.size())-1));
+            allGods.remove(allGods.get(readInput(allGods.size())-1));
         }
 
         SelectedGods sg = new SelectedGods(chosenGods);
@@ -217,7 +212,7 @@ public class CLI extends AbstractView {
         System.out.println("\nWhere do you want to build your Block?\n");
         cliPrinter.printList(possibleBuild.getCoordList());
         cliPrinter.printSecondList(possibleBuild.getGodsList(),possibleBuild.getCoordList().size());
-        int i = scanner.nextInt();
+        int i = readInput(possibleBuild.getCoordList().size() + possibleBuild.getGodsList().size());
 
         //send info to controller
         //todo: check real funcion of floor boolean
@@ -248,7 +243,7 @@ public class CLI extends AbstractView {
         System.out.println("\nWhere do you want to move your worker?\n");
         cliPrinter.printList(possibleMove.getCoordList());
         cliPrinter.printSecondList(possibleMove.getGodsList(),possibleMove.getCoordList().size());
-        int i = scanner.nextInt();
+        int i = readInput(possibleMove.getCoordList().size() + possibleMove.getGodsList().size());
 
         //send info to controller
         MoveAction ma;
@@ -267,14 +262,20 @@ public class CLI extends AbstractView {
         //print choices and read player's intentions
         System.out.println("\n");
         cliPrinter.printList(possibleExtraAction.getCoordList());
-        int i = scanner.nextInt();
 
         //send info to controller
         ExtraAction ea;
-        Coord choiceCoord = possibleExtraAction.getCoordList().get(i-1);
+        Coord choiceCoord = possibleExtraAction.getCoordList().get(readInput(possibleExtraAction.getCoordList().size()) - 1);
         ea = new ExtraAction(choiceCoord);
         notifyObservers(ea);
 
+    }
+
+    private int readInput(int size){
+        int i = scanner.nextInt();
+
+        if(i <= size && i > 0) return i;
+        return readInput(size);
     }
 
 }

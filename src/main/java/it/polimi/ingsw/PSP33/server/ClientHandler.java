@@ -131,14 +131,12 @@ public class ClientHandler extends Listened implements Runnable {
 
             try {
                 json = input.readUTF();
-                System.out.println(json);
             } catch (IOException e) {
                 e.printStackTrace();
                 break;
             }
 
             VCEvent vcEvent = eventSerializer.deserializeVC(json);
-            System.out.println(vcEvent.toString());
             notifyListener(vcEvent);
         }
     }
