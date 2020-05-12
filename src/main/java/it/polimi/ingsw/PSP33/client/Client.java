@@ -8,9 +8,14 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
 
-
+/**
+ * Class that handles client's connection and client's view
+ */
 public class Client implements Runnable {
 
+    /**
+     * Client's view
+     */
     private AbstractView view;
 
     public static void main(String[] args) {
@@ -47,12 +52,11 @@ public class Client implements Runnable {
                 e.printStackTrace();
             }
         }
-
-        System.out.println("Game starts!");
-
-        //Game started and View has to start
     }
 
+    /**
+     * Method to make the clients select his view
+     */
     public void getViewSelection() {
 
         Scanner scanner = new Scanner(System.in);

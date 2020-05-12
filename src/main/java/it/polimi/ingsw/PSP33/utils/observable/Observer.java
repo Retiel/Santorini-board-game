@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.utils.patterns.observable;
+package it.polimi.ingsw.PSP33.utils.observable;
 
 /**
  * Interface of the pattern observable-observer, used for the pattern MVC

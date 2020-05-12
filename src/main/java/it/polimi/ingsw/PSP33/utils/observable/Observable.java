@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.utils.patterns.observable;
+package it.polimi.ingsw.PSP33.utils.observable;
 
 import java.util.ArrayList;
 import java.util.List;

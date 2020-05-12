@@ -5,7 +5,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 
 /**
- * Server class that handles the connection requests from clients and creates a lobby for them
+ * Server class that handles the connection requests from clients
  */
 public class Server implements Runnable {
 

@@ -4,12 +4,15 @@ import it.polimi.ingsw.PSP33.events.EventSerializer;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.utils.enums.Color;
-import it.polimi.ingsw.PSP33.utils.patterns.observable.Listened;
+import it.polimi.ingsw.PSP33.utils.observable.Listened;
 
 import java.io.*;
 import java.net.Socket;
 
 
+/**
+ * Class that holds client's socket and all client's data
+ */
 public class ClientHandler extends Listened implements Runnable {
 
     /**
@@ -102,20 +105,25 @@ public class ClientHandler extends Listened implements Runnable {
         return lobby;
     }
 
+    /**
+     * Method to set the lobby
+     * @param lobby lobby
+     */
     public void setLobby(Lobby lobby) {
         this.lobby = lobby;
         lobby.addClient(this);
     }
 
+    /**
+     * Method that keeps listening to client's messages
+     */
     public void listenToClient() {
         //New thread to keep listening from socket
         new Thread(this::receiveMessage, "ClientHandler_" + clientName + "_receiveMessage()").start();
     }
 
     /**
-     * Method to handle the client connection. It waits for a new message from the input's stream and
-     * notifies the game handler
-     * @throws IOException unable to access the socket's stream
+     * Method that keeps receiving client's events to notify game handler
      */
     public void receiveMessage() {
         while (true) {
@@ -158,7 +166,7 @@ public class ClientHandler extends Listened implements Runnable {
     }
 
     /**
-     * Request the client to type their name
+     * Request the client to type his name
      * @throws IOException unable to access the socket's stream
      */
     public void requestPlayerName() throws IOException {
@@ -180,7 +188,7 @@ public class ClientHandler extends Listened implements Runnable {
     }
 
     /**
-     * Request the client to select their color
+     * Request the client to select his color
      * @throws IOException unable to access the socket's stream
      */
     public void requestPlayerColor() throws IOException {
@@ -233,11 +241,23 @@ public class ClientHandler extends Listened implements Runnable {
         }
     }
 
-    public void requestReady() throws IOException {
+    /**
+     * Method that requests a client to be set ready
+     */
+    public void requestReady() {
         String string = "GAME_OK";
-        output.writeUTF(string);
+
+        try {
+            output.writeUTF(string);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
+    /**
+     * Method that handles the client's connection setup
+     * @throws IOException unable to access the socket's stream
+     */
     public void handleConnectionSetup() throws IOException {
         output = new DataOutputStream(client.getOutputStream());
         input = new DataInputStream(client.getInputStream());
@@ -270,6 +290,10 @@ public class ClientHandler extends Listened implements Runnable {
         }
     }
 
+    /**
+     * Method that creates a new lobby and makes the client join it
+     * @throws IOException unable to access the socket's stream
+     */
     public void createLobby() throws IOException {
 
         int numberOfPlayers = 0;
@@ -299,6 +323,10 @@ public class ClientHandler extends Listened implements Runnable {
         setLobby(LobbyManager.newLobby(numberOfPlayers));
     }
 
+    /**
+     * Method that makes the client join a lobby
+     * @throws IOException unable to access the socket's stream
+     */
     public synchronized void joinLobby() throws IOException {
 
         while (true) {

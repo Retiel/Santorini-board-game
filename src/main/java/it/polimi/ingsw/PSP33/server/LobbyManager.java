@@ -3,11 +3,24 @@ package it.polimi.ingsw.PSP33.server;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class that manages multiple lobbies
+ */
 class LobbyManager {
 
+    /**
+     * Instance of the class to make it singleton
+     */
     private static LobbyManager instance = new LobbyManager();
 
+    /**
+     * Lobby ID
+     */
     private static int lobbyID;
+
+    /**
+     * Map of lobbies with lobbyID used as key
+     */
     private static Map<Integer, Lobby> lobbies;
 
 

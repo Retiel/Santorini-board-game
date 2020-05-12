@@ -3,13 +3,16 @@ package it.polimi.ingsw.PSP33.client;
 import it.polimi.ingsw.PSP33.events.EventSerializer;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
-import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
-import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
+import it.polimi.ingsw.PSP33.utils.observable.Observable;
+import it.polimi.ingsw.PSP33.utils.observable.Observer;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
 
+/**
+ * Class that handles all client's communication with the server
+ */
 public class ServerAdapter extends Observable<MVEvent> implements Runnable, Observer<VCEvent> {
 
     /**
@@ -81,6 +84,10 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
         sendMessage(message);
     }
 
+    /**
+     * Method that sends a view-controller event to the server
+     * @param vcEvent view-controller event
+     */
     public void sendMessage(VCEvent vcEvent) {
         String vcJson = eventSerializer.serializeVC(vcEvent);
         try {
@@ -91,6 +98,9 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
         }
     }
 
+    /**
+     * Method that receives model-view events from server
+     */
     public void receiveMessage() {
         while (true) {
             String mvJson;
@@ -107,16 +117,22 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
         }
     }
 
+    /**
+     * Method that handles the client's server connection
+     */
     public void handleServerConnection() {
         new Thread(this::receiveMessage).start();
     }
 
+    /**
+     * Method that handles the client's server setup
+     */
     public void handleServerSetup() {
 
+        //Starts listening to server on a new thread
         new Thread(this::getServerSetup).start();
 
         while (!isSetupOver) {
-
             synchronized (lock) {
                 try {
                     lock.wait();
@@ -142,6 +158,9 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
         }
     }
 
+    /**
+     * Method that gets the setup requests from the server
+     */
     public void getServerSetup() {
         while (!isSetupOver) {
             String string;
