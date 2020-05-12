@@ -17,7 +17,7 @@ public class Server implements Runnable {
     /**
      * Server's socket port
      */
-    public final static int SOCKET_PORT = 11212;
+    public final static int SOCKET_PORT = 7777;
 
     public static void main(String[] args) {
         Server server = new Server();
@@ -36,65 +36,17 @@ public class Server implements Runnable {
     @Override
     public void run() {
 
-        //Debug
-        int i = 1;
-
-        //Main loop
-        while (true) {
-
-            Lobby lobby = new Lobby(i);
-
+        while(true) {
             try {
-                //Accept new client connection
-                Socket first = serverSocket.accept();
-                ClientHandler clientHandler = new ClientHandler(first, lobby);
+                Socket client = serverSocket.accept();
 
-                //Get number of players from first connected client
-                lobby.setNumberOfPlayers(clientHandler.requestNumberOfPlayers());
+                ClientHandler clientHandler = new ClientHandler(client);
 
-                //Update list of client handlers
-                lobby.getClientHandlers().add(clientHandler);
-
-                //Start new thread for client handler
-                Thread thread = new Thread(clientHandler, "server_" + first.getInetAddress());
+                Thread thread = new Thread(clientHandler, "Server_" + client.getInetAddress());
                 thread.start();
             } catch (IOException e) {
-                System.out.println("First client disconnected. Accepting new client as first.");
-                continue;
+                e.printStackTrace();
             }
-
-            while (lobby.getClientHandlers().size() < lobby.getNumberOfPlayers()) {
-                try {
-                    //Accept new client connection
-                    Socket client = serverSocket.accept();
-                    ClientHandler clientHandler = new ClientHandler(client, lobby);
-
-                    //Update list of client handlers
-                    lobby.getClientHandlers().add(clientHandler);
-
-                    //Start new thread for client handler
-                    Thread thread = new Thread(clientHandler, "server_" + client.getInetAddress());
-                    thread.start();
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            //Wait for all clients to make their selection
-            synchronized (lobby.getColorList()) {
-                try {
-                    lobby.getColorList().wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            //Start a new game for the lobby
-            lobby.startGame();
-
-            //Debug
-            i++;
         }
     }
 }

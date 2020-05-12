@@ -2,14 +2,13 @@ package it.polimi.ingsw.PSP33.server;
 
 import it.polimi.ingsw.PSP33.utils.enums.Color;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.io.IOException;
+import java.util.*;
 
 /**
  * Lobby class used to save data from clients of the same lobby
  */
-public class Lobby {
+public class Lobby implements Runnable {
 
     /**
      * Lobby ID used for debug
@@ -37,32 +36,69 @@ public class Lobby {
     private int numberOfPlayers;
 
     /**
-     * Boolean list to check if all clients are ready
+     * Map to check if all clients are ready
      */
-    private final List<Boolean> areClientsReady;
+    private final Map<ClientHandler, Boolean> readyMap;
 
-    /**
-     * Construcor of the class
-     * @param lobbyID looby ID used for debug
-     */
-    public Lobby(int lobbyID) {
+
+    public Lobby(int lobbyID, int numberOfPlayers) {
         this.lobbyID = lobbyID;
+        this.numberOfPlayers = numberOfPlayers;
         this.clientHandlers = new ArrayList<>();
         this.clientNames = new ArrayList<>();
         this.colorList = new ArrayList<>();
-        this.numberOfPlayers = 0;
-        this.areClientsReady = new ArrayList<>();
+        this.readyMap = new HashMap<>();
 
         //Fill the list of available colors
         fillColorList();
     }
 
+    @Override
+    public void run() {
+        synchronized (this) {
+            try {
+                wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
+        startGame();
+    }
+
+    public int getLobbyID() {
+        return lobbyID;
+    }
+
     /**
-     * Method to add a new client's name to the list of used names
-     * @param name client's name
+     * Method to get the list of client handlers
+     *
+     * @return list of client handlers
      */
-    public synchronized void addName(String name) {
-        clientNames.add(name);
+    public synchronized List<ClientHandler> getClientHandlers() {
+        return clientHandlers;
+    }
+
+    public synchronized void addClient(ClientHandler clientHandler) {
+        clientHandlers.add(clientHandler);
+        readyMap.put(clientHandler, false);
+
+        if(clientHandlers.size() == numberOfPlayers) {
+            LobbyManager.removeLobby(this);
+        }
+    }
+
+    public synchronized boolean checkSize() {
+        return clientHandlers.size() < numberOfPlayers;
+    }
+
+    /**
+     * Method to get the number of players
+     *
+     * @return number of players
+     */
+    public int getNumberOfPlayers() {
+        return numberOfPlayers;
     }
 
     /**
@@ -76,29 +112,11 @@ public class Lobby {
     }
 
     /**
-     * Method to remove a selected color from the list of available colors and to notify the game handler
-     * @param color selected color
+     * Method to add a new client's name to the list of used names
+     * @param name client's name
      */
-    public synchronized void removeColor(Color color) {
-        synchronized (colorList) {
-            colorList.remove(color);
-
-            //Check if all clients have selected their colors
-            if(colorList.size() == 3 - numberOfPlayers) {
-                //Notify game handler
-                colorList.notify();
-            }
-        }
-    }
-
-    /**
-     * Method to check if a color is in the list of available colors
-     * @param color color to check
-     *
-     * @return true if the color to check is in the list of available colors
-     */
-    public synchronized boolean checkColor(Color color) {
-        return colorList.contains(color);
+    public synchronized void addName(String name) {
+        clientNames.add(name);
     }
 
     /**
@@ -131,84 +149,83 @@ public class Lobby {
     }
 
     /**
-     * Method to start a new game for this lobby
-     */
-    public void startGame() {
-
-        GameHandler gameHandler = new GameHandler(this);
-
-        Thread thread = new Thread(gameHandler, "GameHandler_" + lobbyID);
-        thread.start();
-
-        //Debug
-        System.out.println("DEBUG_" + lobbyID +": set game handler over");
-    }
-
-    /**
-     * Method to get the list of client handlers
+     * Method to check if a color is in the list of available colors
+     * @param color color to check
      *
-     * @return list of client handlers
+     * @return true if the color to check is in the list of available colors
      */
-    public List<ClientHandler> getClientHandlers() {
-        return clientHandlers;
+    public synchronized boolean checkColor(Color color) {
+        return colorList.contains(color);
     }
 
     /**
-     * Method to get the number of players
-     *
-     * @return number of players
+     * Method to remove a selected color from the list of available colors and to notify the game handler
+     * @param color selected color
      */
-    public int getNumberOfPlayers() {
-        return numberOfPlayers;
-    }
-
-    /**
-     * Method to set the number of players
-     * @param numberOfPlayers number of players
-     */
-    public void setNumberOfPlayers(int numberOfPlayers) {
-        this.numberOfPlayers = numberOfPlayers;
-
-        for(int i = 0; i < numberOfPlayers; i++) {
-            areClientsReady.add(false);
-        }
-    }
-
-    /**
-     * Method to get the list of available colors
-     *
-     * @return list of available colors
-     */
-    public List<Color> getColorList() {
-        return colorList;
+    public synchronized void removeColor(Color color) {
+        colorList.remove(color);
     }
 
     public synchronized void setClientReady(ClientHandler clientHandler) {
-        int index = clientHandlers.indexOf(clientHandler);
-        areClientsReady.set(index, true);
+        readyMap.replace(clientHandler, true);
 
         if (checkClientsReady()) {
-            synchronized (areClientsReady) {
-                areClientsReady.notify();
+            synchronized (this) {
+                notify();
             }
         }
     }
 
     public boolean checkClientsReady() {
-        for(Boolean b : areClientsReady) {
-            if(!b) {
-                return false;
+        if(clientHandlers.size() == numberOfPlayers) {
+            for (Boolean b : readyMap.values()) {
+                if (!b) {
+                    return false;
+                }
+            }
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public synchronized void removeClient(ClientHandler clientHandler) {
+        readyMap.remove(clientHandler);
+        clientHandlers.remove(clientHandler);
+
+        if(clientHandler.getClientColor() != null) {
+            clientNames.remove(clientHandler.getClientName());
+        }
+
+        if(!clientHandler.getClientName().equals("")) {
+            colorList.add(clientHandler.getClientColor());
+        }
+
+        if(clientHandlers.size() == numberOfPlayers - 1) {
+            LobbyManager.addLobby(this);
+        }
+
+        if(clientHandlers.size() == 0) {
+            LobbyManager.removeLobby(this);
+        }
+    }
+
+    /**
+     * Method to start a new game for this lobby
+     */
+    public void startGame() {
+        for (ClientHandler clientHandler : clientHandlers) {
+            try {
+                clientHandler.requestReady();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
 
-        return true;
-    }
+        GameHandler gameHandler = new GameHandler(this);
+        gameHandler.startGame();
 
-    public List<Boolean> getAreClientsReady() {
-        return areClientsReady;
-    }
-
-    public int getLobbyID() {
-        return lobbyID;
+        //Debug
+        System.out.println("DEBUG_" + lobbyID + ": set game handler over");
     }
 }
