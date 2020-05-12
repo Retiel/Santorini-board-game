@@ -1,8 +1,10 @@
 package it.polimi.ingsw.PSP33.view.cli;
 
 import it.polimi.ingsw.PSP33.model.Board;
+import it.polimi.ingsw.PSP33.model.God;
 import it.polimi.ingsw.PSP33.model.light_version.LightBoard;
 import it.polimi.ingsw.PSP33.utils.Coord;
+import it.polimi.ingsw.PSP33.utils.enums.Gods;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -190,6 +192,16 @@ public class CLIPrinter {
             System.out.println(index+") ");
             System.out.println(choices.get(counter).toString()+"\n");
             counter++;
+        }
+    }
+
+    /**
+     *
+     */
+    public void printGodList(List<God> gods){
+        int counter = 1;
+        for(God god : gods){
+            System.out.println("\n"+counter+") "+god.toString()+"\n");
         }
     }
 }
