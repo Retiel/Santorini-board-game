@@ -2,7 +2,6 @@ package it.polimi.ingsw.PSP33.server;
 
 import it.polimi.ingsw.PSP33.utils.enums.Color;
 
-import java.io.IOException;
 import java.util.*;
 
 /**
@@ -11,7 +10,7 @@ import java.util.*;
 public class Lobby implements Runnable {
 
     /**
-     * Lobby ID used for debug
+     * Lobby ID
      */
     private final int lobbyID;
 
@@ -40,7 +39,11 @@ public class Lobby implements Runnable {
      */
     private final Map<ClientHandler, Boolean> readyMap;
 
-
+    /**
+     * Constructor of the class
+     * @param lobbyID lobby ID
+     * @param numberOfPlayers number of players
+     */
     public Lobby(int lobbyID, int numberOfPlayers) {
         this.lobbyID = lobbyID;
         this.numberOfPlayers = numberOfPlayers;
@@ -66,6 +69,11 @@ public class Lobby implements Runnable {
         startGame();
     }
 
+    /**
+     * Method to get the lobby ID
+     *
+     * @return lobby ID used for debug
+     */
     public int getLobbyID() {
         return lobbyID;
     }
@@ -79,6 +87,10 @@ public class Lobby implements Runnable {
         return clientHandlers;
     }
 
+    /**
+     * Method to add a new client to the lobby
+     * @param clientHandler client to be added to the lobby
+     */
     public synchronized void addClient(ClientHandler clientHandler) {
         clientHandlers.add(clientHandler);
         readyMap.put(clientHandler, false);
@@ -88,6 +100,36 @@ public class Lobby implements Runnable {
         }
     }
 
+    /**
+     * Method to remove one client from the lobby
+     * @param clientHandler client handler to be removed
+     */
+    public synchronized void removeClient(ClientHandler clientHandler) {
+        readyMap.remove(clientHandler);
+        clientHandlers.remove(clientHandler);
+
+        if(clientHandler.getClientColor() != null) {
+            clientNames.remove(clientHandler.getClientName());
+        }
+
+        if(!clientHandler.getClientName().equals("")) {
+            colorList.add(clientHandler.getClientColor());
+        }
+
+        if(clientHandlers.size() == numberOfPlayers - 1) {
+            LobbyManager.addLobby(this);
+        }
+
+        if(clientHandlers.size() == 0) {
+            LobbyManager.removeLobby(this);
+        }
+    }
+
+    /**
+     * Method to check the size of client handlers
+     *
+     * @return true if the size of client handlers is less than the number of players
+     */
     public synchronized boolean checkSize() {
         return clientHandlers.size() < numberOfPlayers;
     }
@@ -102,7 +144,7 @@ public class Lobby implements Runnable {
     }
 
     /**
-     * Check if the name already exists within the list of clients' names
+     * Method to check if the name already exists within the list of clients' names
      * @param name selected name
      *
      * @return true if the name to check is in the list of all names
@@ -166,16 +208,11 @@ public class Lobby implements Runnable {
         colorList.remove(color);
     }
 
-    public synchronized void setClientReady(ClientHandler clientHandler) {
-        readyMap.replace(clientHandler, true);
-
-        if (checkClientsReady()) {
-            synchronized (this) {
-                notify();
-            }
-        }
-    }
-
+    /**
+     * Method to check if all clients are ready
+     *
+     * @return true if all values in readyMap are true
+     */
     public boolean checkClientsReady() {
         if(clientHandlers.size() == numberOfPlayers) {
             for (Boolean b : readyMap.values()) {
@@ -189,24 +226,17 @@ public class Lobby implements Runnable {
         }
     }
 
-    public synchronized void removeClient(ClientHandler clientHandler) {
-        readyMap.remove(clientHandler);
-        clientHandlers.remove(clientHandler);
+    /**
+     * Method to set one client to ready
+     * @param clientHandler client to be set to ready
+     */
+    public synchronized void setClientReady(ClientHandler clientHandler) {
+        readyMap.replace(clientHandler, true);
 
-        if(clientHandler.getClientColor() != null) {
-            clientNames.remove(clientHandler.getClientName());
-        }
-
-        if(!clientHandler.getClientName().equals("")) {
-            colorList.add(clientHandler.getClientColor());
-        }
-
-        if(clientHandlers.size() == numberOfPlayers - 1) {
-            LobbyManager.addLobby(this);
-        }
-
-        if(clientHandlers.size() == 0) {
-            LobbyManager.removeLobby(this);
+        if (checkClientsReady()) {
+            synchronized (this) {
+                notify();
+            }
         }
     }
 
@@ -215,11 +245,7 @@ public class Lobby implements Runnable {
      */
     public void startGame() {
         for (ClientHandler clientHandler : clientHandlers) {
-            try {
-                clientHandler.requestReady();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            clientHandler.requestReady();
         }
 
         GameHandler gameHandler = new GameHandler(this);

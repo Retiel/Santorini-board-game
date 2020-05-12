@@ -4,8 +4,8 @@ package it.polimi.ingsw.PSP33.view;
 import it.polimi.ingsw.PSP33.events.MVEventVisitor;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
-import it.polimi.ingsw.PSP33.utils.patterns.observable.Observable;
-import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
+import it.polimi.ingsw.PSP33.utils.observable.Observable;
+import it.polimi.ingsw.PSP33.utils.observable.Observer;
 
 
 /**

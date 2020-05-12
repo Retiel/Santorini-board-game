@@ -12,22 +12,23 @@ import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
 import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
-
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
-import it.polimi.ingsw.PSP33.events.toServer.turn.NewTurn;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
-import it.polimi.ingsw.PSP33.utils.patterns.observable.Listener;
+import it.polimi.ingsw.PSP33.utils.observable.Listener;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class that handles the game for one lobby
+ */
 public class GameHandler extends AbstractView implements Listener {
 
     /**
-     * Lobby ID used for debug
+     * Lobby ID
      */
     private final int lobbyID;
 
@@ -51,6 +52,9 @@ public class GameHandler extends AbstractView implements Listener {
         this.currentClient = null;
     }
 
+    /**
+     * Method that starts the game
+     */
     public void startGame() {
         //List of players from clients' data
         List<Player> players = new ArrayList<>();
@@ -72,10 +76,15 @@ public class GameHandler extends AbstractView implements Listener {
         controller.startGame();
     }
 
+    @Override
     public synchronized void didReceiveMessage(VCEvent vcEvent) {
         notifyObservers(vcEvent);
     }
 
+    /**
+     * Method that sends a model-view event to the current client
+     * @param mvEvent model-view event
+     */
     public synchronized void sendMessageToClient(MVEvent mvEvent) {
         try {
             currentClient.sendMessage(mvEvent);
@@ -84,6 +93,10 @@ public class GameHandler extends AbstractView implements Listener {
         }
     }
 
+    /**
+     * Method that sends a model-view event to all clients
+     * @param mvEvent model-view event
+     */
     public void sendMessageToAll(MVEvent mvEvent) {
         for(ClientHandler clientHandler : clientHandlers) {
             try {
@@ -94,6 +107,12 @@ public class GameHandler extends AbstractView implements Listener {
         }
     }
 
+    /**
+     * Method to get a client handler by its name
+     * @param name client's name
+     *
+     * @return client handler with the name in input
+     */
     public ClientHandler getClientHandlerByName(String name) {
         for(ClientHandler clientHandler : clientHandlers) {
             if(clientHandler.getClientName().equals(name)) {
@@ -104,6 +123,11 @@ public class GameHandler extends AbstractView implements Listener {
         return null;
     }
 
+    /**
+     * Method that sets the current client
+     *
+     * @param currentClient client handler to be set to current
+     */
     public void setCurrentClient(ClientHandler currentClient) {
         this.currentClient = currentClient;
     }

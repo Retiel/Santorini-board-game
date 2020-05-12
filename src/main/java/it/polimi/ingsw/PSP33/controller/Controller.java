@@ -10,7 +10,7 @@ import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlayerDisconnected;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
 import it.polimi.ingsw.PSP33.model.Model;
-import it.polimi.ingsw.PSP33.utils.patterns.observable.Observer;
+import it.polimi.ingsw.PSP33.utils.observable.Observer;
 
 
 public class Controller implements Observer<VCEvent>, VCEventVisitor {
