@@ -35,7 +35,7 @@ public class CLI extends AbstractView {
     private LightBoard board;
     private LightCell[][] lightGrid;
     private LightPlayer player;
-
+    private int pawnSelected;
     private CLIPrinter cliPrinter;
     private Scanner scanner;
 
@@ -111,7 +111,7 @@ public class CLI extends AbstractView {
         List<God> allGods = new ArrayList<>(selectGods.getGods());
         List<God> chosenGods = new ArrayList<>();
 
-        for(int c=1;c<3;c++){
+        for(int c=1;c<4;c++){
             System.out.println("Choose the "+c+"° God:");
             cliPrinter.printGodList(allGods);
             chosenGods.add(allGods.get(readInput(allGods.size())-1));
@@ -134,8 +134,8 @@ public class CLI extends AbstractView {
 
     @Override
     public void visit(NewAction newAction) {
-        int i;
         int j;
+        boolean beginning = true;
         //print board
         cliPrinter.printBoard(board);
 
@@ -144,20 +144,22 @@ public class CLI extends AbstractView {
         RequestExtraAction rea;
 
         if (!newAction.isExtra() && !newAction.isBuild() && !newAction.isMove()){
+            beginning = true;
             NewTurn newTurn = new NewTurn();
             notifyObservers(newTurn);
         } else{
-            //select which pawn you want to use
-            System.out.println("\nWhich pawn you want to use? (1 or 2)");
-            i = scanner.nextInt();
-
+            if(beginning) {
+                System.out.println("\nWhich pawn you want to use? (1 or 2)");
+                pawnSelected = scanner.nextInt();
+                beginning = false;
+            }
 
 
             //decide action with the Boolean and send input to controller (switch case)
             if (newAction.isMove()){
                 if (!newAction.isExtra()){
                     //send move action to controller
-                    rpm = new RequestPossibleMove(i);
+                    rpm = new RequestPossibleMove(pawnSelected);
                     notifyObservers(rpm);
                 }
                 else {
@@ -165,10 +167,10 @@ public class CLI extends AbstractView {
                     System.out.println("\nWhat type of action do you want to do?\n1) Move\n2) Extra");
                     j = scanner.nextInt();
                     if (j==1){
-                        rpm = new RequestPossibleMove(i);
+                        rpm = new RequestPossibleMove(pawnSelected);
                         notifyObservers(rpm);
                     } else if (j == 2){
-                        rea = new RequestExtraAction(i);
+                        rea = new RequestExtraAction(pawnSelected);
                         notifyObservers(rea);
                     }
                 }
@@ -177,7 +179,7 @@ public class CLI extends AbstractView {
             if (newAction.isBuild()){
 
                 if (!newAction.isExtra()){
-                    rpb = new RequestPossibleBuild(i);
+                    rpb = new RequestPossibleBuild(pawnSelected);
                     notifyObservers(rpb);
                 }
                 else{
@@ -186,10 +188,10 @@ public class CLI extends AbstractView {
                     j = scanner.nextInt();
 
                     if (j == 1){
-                        rpb = new RequestPossibleBuild(i);
+                        rpb = new RequestPossibleBuild(pawnSelected);
                         notifyObservers(rpb);
                     } else if (j == 2){
-                        rea = new RequestExtraAction(i);
+                        rea = new RequestExtraAction(pawnSelected);
                         notifyObservers(rea);
                     }
                 }
@@ -197,7 +199,7 @@ public class CLI extends AbstractView {
 
             if (newAction.isExtra()){
                 if (!newAction.isBuild()&&!newAction.isMove()){
-                    rea = new RequestExtraAction(i);
+                    rea = new RequestExtraAction(pawnSelected);
                     notifyObservers(rea);
                 }
             }
