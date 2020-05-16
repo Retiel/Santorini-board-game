@@ -2,17 +2,15 @@ package it.polimi.ingsw.PSP33.controller.rules;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import it.polimi.ingsw.PSP33.controller.rules.tools.AbstractManager;
-import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
-import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
-import it.polimi.ingsw.PSP33.controller.rules.tools.LightConvertion;
+import it.polimi.ingsw.PSP33.controller.rules.tools.*;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
-import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
 import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
 import it.polimi.ingsw.PSP33.model.*;
+import it.polimi.ingsw.PSP33.model.light_version.LightPlayer;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.io.FileNotFoundException;
@@ -54,9 +52,11 @@ public class SetUpManager extends AbstractManager {
         getModel().setCurrentPlayer(getModel().getPlayers().get(randomInteger));
         getModel().notifyObservers( new DataBoard( LightConvertion.getLightVersion( getBoard() ) ) );
 
+        List<LightPlayer> players = new ArrayList<>();
         for (Player player : getModel().getPlayers()){
-            getModel().notifyObservers( new DataPlayer(LightConvertion.getLightVersion(player) ) );
+            players.add(LightConvertion.getLightVersion(player));
         }
+        getModel().notifyObservers(new DataPlayer(players));
     }
 
     /**
@@ -78,6 +78,7 @@ public class SetUpManager extends AbstractManager {
         Cell startingCell = getBoard().getGrid()[coordX][coordY];
         Pawn pawn1 = getModel().getCurrentPlayer().getPawns()[pawn];
         BasicAction.SetUpPawnPosition(startingCell, pawn1);
+        getModel().notifyObservers(new DataCell(LightConvertion.getLightVersion(startingCell), null));
         if (pawn == 0) pawn++;
         else pawn = 0;
     }
@@ -126,7 +127,7 @@ public class SetUpManager extends AbstractManager {
      * Method to set a god for the current player
      */
     public void setGodforPlayer(God god){
-        gods.remove(god);
+        gods.removeIf(god1 -> god.getName().equals(god1.getName()));
         getModel().getCurrentPlayer().setCard(god);
     }
 

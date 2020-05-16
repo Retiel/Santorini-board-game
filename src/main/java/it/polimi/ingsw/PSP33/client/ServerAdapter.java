@@ -130,21 +130,23 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
         //Starts listening to server on a new thread
         new Thread(this::getServerSetup).start();
 
-        while (!isSetupOver) {
+        while (true) {
             synchronized (lock) {
                 try {
                     lock.wait();
-                    if (isSetupOver) {
-                        try {
-                            output.writeUTF("SETUP_OK");
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        break;
-                    }
+
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
+            }
+
+            if (isSetupOver) {
+                try {
+                    output.writeUTF("SETUP_OK");
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+                break;
             }
 
             String string = scanner.nextLine();
@@ -172,11 +174,10 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
 
             System.out.println(string);
 
-            if(string.equals("Waiting for players..")) {
-                isSetupOver = true;
-            }
-
             synchronized (lock) {
+                if(string.equals("Waiting for players..")) {
+                    isSetupOver = true;
+                }
                 lock.notify();
             }
         }

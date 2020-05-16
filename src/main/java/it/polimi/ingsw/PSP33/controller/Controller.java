@@ -57,12 +57,17 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
 
         setUpManager.PlacePlayerPawn(coordX, coordY);
 
-        if(setUpManager.CheckEndTurn()) setUpManager.nextTurn();
+        if(setUpManager.CheckEndTurn()){
+            setUpManager.nextTurn();
+            System.out.println("DEBUG: chance turn");
+        }
 
         if (setUpManager.CheckPawnSetUp()){
             setUpManager.askGods();
+            System.out.println("DEBUG: end set pawn turn");
         }else{
             setUpManager.askPlayers();
+            System.out.println("DEBUG: chance pawn");
         }
     }
 

@@ -149,7 +149,14 @@ public class GameHandler extends AbstractView implements Listener {
 
     @Override
     public void visit(DataPlayer dataPlayer) {
-        sendMessageToAll(dataPlayer);
+        for(ClientHandler clientHandler : clientHandlers) {
+            dataPlayer.setName(clientHandler.getClientName());
+            try {
+                clientHandler.sendMessage(dataPlayer);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     @Override

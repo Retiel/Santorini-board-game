@@ -15,10 +15,7 @@ import it.polimi.ingsw.PSP33.events.toServer.setup.SelectedGods;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
 import it.polimi.ingsw.PSP33.model.God;
 import it.polimi.ingsw.PSP33.model.Pawn;
-import it.polimi.ingsw.PSP33.model.light_version.LightBoard;
-import it.polimi.ingsw.PSP33.model.light_version.LightCell;
-import it.polimi.ingsw.PSP33.model.light_version.LightPawn;
-import it.polimi.ingsw.PSP33.model.light_version.LightPlayer;
+import it.polimi.ingsw.PSP33.model.light_version.*;
 import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.utils.enums.Color;
 import it.polimi.ingsw.PSP33.view.AbstractView;
@@ -34,7 +31,8 @@ public class CLI extends AbstractView {
 
     private LightBoard board;
     private LightCell[][] lightGrid;
-    private LightPlayer player;
+    private List<LightPlayer> player;
+    private LightModel lightModel;
     private int pawnSelected;
     private CLIPrinter cliPrinter;
     private Scanner scanner;
@@ -102,6 +100,7 @@ public class CLI extends AbstractView {
         System.out.println("\nWhere do you want to place your worker?");
         cliPrinter.printList(possiblePlacement.getCoordList());
 
+        System.out.println("client turn");
         PlacePawn pp = new PlacePawn(possiblePlacement.getCoordList().get(readInput(possiblePlacement.getCoordList().size()) - 1));
         notifyObservers(pp);
     }
@@ -111,11 +110,12 @@ public class CLI extends AbstractView {
         List<God> allGods = new ArrayList<>(selectGods.getGods());
         List<God> chosenGods = new ArrayList<>();
 
-        for(int c=1;c<4;c++){
+        for(int c=0;c<player.size();c++){
             System.out.println("Choose the "+c+"° God:");
             cliPrinter.printGodList(allGods);
-            chosenGods.add(allGods.get(readInput(allGods.size())-1));
-            allGods.remove(allGods.get(readInput(allGods.size())-1));
+            int i = readInput(allGods.size());
+            chosenGods.add(allGods.get(i-1));
+            allGods.remove(allGods.get(i-1));
         }
 
         SelectedGods sg = new SelectedGods(chosenGods);
