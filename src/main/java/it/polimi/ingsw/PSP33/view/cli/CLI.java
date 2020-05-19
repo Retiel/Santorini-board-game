@@ -133,6 +133,11 @@ public class CLI extends AbstractView {
     }
 
     @Override
+    public void visit(SelectPawn selectPawn) {
+
+    }
+
+    @Override
     public void visit(NewAction newAction) {
         int j;
         boolean beginning = true;
@@ -159,7 +164,7 @@ public class CLI extends AbstractView {
             if (newAction.isMove()){
                 if (!newAction.isExtra()){
                     //send move action to controller
-                    rpm = new RequestPossibleMove(pawnSelected);
+                    rpm = new RequestPossibleMove();
                     notifyObservers(rpm);
                 }
                 else {
@@ -167,10 +172,10 @@ public class CLI extends AbstractView {
                     System.out.println("\nWhat type of action do you want to do?\n1) Move\n2) Extra");
                     j = scanner.nextInt();
                     if (j==1){
-                        rpm = new RequestPossibleMove(pawnSelected);
+                        rpm = new RequestPossibleMove();
                         notifyObservers(rpm);
                     } else if (j == 2){
-                        rea = new RequestExtraAction(pawnSelected);
+                        rea = new RequestExtraAction();
                         notifyObservers(rea);
                     }
                 }
@@ -179,7 +184,7 @@ public class CLI extends AbstractView {
             if (newAction.isBuild()){
 
                 if (!newAction.isExtra()){
-                    rpb = new RequestPossibleBuild(pawnSelected);
+                    rpb = new RequestPossibleBuild();
                     notifyObservers(rpb);
                 }
                 else{
@@ -188,10 +193,10 @@ public class CLI extends AbstractView {
                     j = scanner.nextInt();
 
                     if (j == 1){
-                        rpb = new RequestPossibleBuild(pawnSelected);
+                        rpb = new RequestPossibleBuild();
                         notifyObservers(rpb);
                     } else if (j == 2){
-                        rea = new RequestExtraAction(pawnSelected);
+                        rea = new RequestExtraAction();
                         notifyObservers(rea);
                     }
                 }
@@ -199,7 +204,7 @@ public class CLI extends AbstractView {
 
             if (newAction.isExtra()){
                 if (!newAction.isBuild()&&!newAction.isMove()){
-                    rea = new RequestExtraAction(pawnSelected);
+                    rea = new RequestExtraAction();
                     notifyObservers(rea);
                 }
             }

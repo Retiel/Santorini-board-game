@@ -39,6 +39,7 @@ public abstract class AbstractManager {
         else nextPlayer = model.getPlayers().get(0);
 
         model.setCurrentPlayer(nextPlayer);
+        model.setCurrentPawn(null);
     }
 
     /**

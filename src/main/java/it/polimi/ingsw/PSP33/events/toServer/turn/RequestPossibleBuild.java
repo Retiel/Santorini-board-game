@@ -5,16 +5,6 @@ import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 
 public class RequestPossibleBuild implements VCEvent {
 
-    private final int pawn;
-
-    public RequestPossibleBuild(int pawn) {
-        this.pawn = pawn;
-    }
-
-    public int getPawn() {
-        return pawn;
-    }
-
     @Override
     public void accept(VCEventVisitor VCEventVisitor) {
         VCEventVisitor.visit(this);

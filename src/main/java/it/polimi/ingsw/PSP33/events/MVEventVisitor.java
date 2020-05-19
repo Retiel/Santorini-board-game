@@ -64,6 +64,10 @@ public interface MVEventVisitor {
      * Message to comunicate to the winning statement
      */
     void visit(YouWin youWin);
+    /**
+     * Message to request the player what pawn the player is going to use
+     */
+    void visit(SelectPawn selectPawn);
 
     /**
      * Message to request the player what to do at the star of his turn

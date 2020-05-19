@@ -32,6 +32,11 @@ public interface VCEventVisitor {
     void visit(SelectedGods selectedGods);
 
     /**
+     * Message to send the server the pawn choosen for the actions
+     */
+    void visit(SelectedPawn selectedPawn);
+
+    /**
      * Message to send the server to set a new turn
      */
     void visit(NewTurn newTurn);
