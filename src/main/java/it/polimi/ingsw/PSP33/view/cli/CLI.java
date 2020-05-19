@@ -81,7 +81,7 @@ public class CLI extends AbstractView {
     @Override
     public void visit(YourGod yourGod) {
         int i;
-        System.out.println("\nWhich God Card do you want?");
+        System.out.println("\nWhich God Card do you want?\n");
         cliPrinter.printGodList(yourGod.getGods());
 
         ChoosenGod cg = new ChoosenGod(yourGod.getGods().get(readInput(yourGod.getGods().size()) - 1));
@@ -110,8 +110,8 @@ public class CLI extends AbstractView {
         List<God> allGods = new ArrayList<>(selectGods.getGods());
         List<God> chosenGods = new ArrayList<>();
 
-        for(int c=0;c<player.size();c++){
-            System.out.println("Choose the "+c+"° God:");
+        for(int c=1;c<player.size()+1;c++){
+            System.out.println("Choose the "+c+"° God:\n");
             cliPrinter.printGodList(allGods);
             int i = readInput(allGods.size());
             chosenGods.add(allGods.get(i-1));

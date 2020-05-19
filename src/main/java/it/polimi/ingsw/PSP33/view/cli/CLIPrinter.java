@@ -19,150 +19,38 @@ public class CLIPrinter {
      * @param board the light Board of the client
      */
     public void printBoard(LightBoard board){
-        String border = "+ - - - ";
-        String empty = "|       ";
         String separatorSx = "|   ";
         String centralSep = "  |   ";
         String separatorDx = "  |";
 
-        //read First Line info and print
-        floorInfo.append("| ");
-        pawnInfo.append(separatorSx);
-        for(int i=0; i<4; i++){
-            if(board.getGrid()[0][i].isRoof()){
-                floorInfo.append("* ").append(board.getGrid()[0][i].getFloor()).append("   | ");
+        for(int j=0; j<=4;j++) {
+            floorInfo.append("| ");
+            pawnInfo.append(separatorSx);
+            for (int i = 0; i < 4; i++) {
+                if (board.getGrid()[j][i].isRoof()) {
+                    floorInfo.append("* ").append(board.getGrid()[j][i].getFloor()).append("   | ");
+                } else floorInfo.append("  ").append(board.getGrid()[j][i].getFloor()).append("   | ");
+                if (board.getGrid()[j][i].getOccupied() == null) {
+                    pawnInfo.append("  " + centralSep);
+                } else
+                    pawnInfo.append(board.getGrid()[j][i].getOccupied().toString() + board.getGrid()[j][i].getOccupied().getNumber() + centralSep);
             }
-            else floorInfo.append("  ").append(board.getGrid()[0][i].getFloor()).append("   | ");
-            if(board.getGrid()[0][i].getOccupied() == null){
-                pawnInfo.append("  " + centralSep);
-            } else pawnInfo.append(board.getGrid()[0][i].getOccupied().toString() + board.getGrid()[0][i].getOccupied().getNumber() + centralSep);
+            if (board.getGrid()[j][4].isRoof()) {
+                floorInfo.append("* ").append(board.getGrid()[j][4].getFloor()).append(" ").append(separatorDx);
+            } else floorInfo.append("  ").append(board.getGrid()[j][4].getFloor()).append(" ").append(separatorDx);
+            if (board.getGrid()[j][4].getOccupied() == null) {
+                pawnInfo.append("  " + separatorDx);
+            } else
+                pawnInfo.append(board.getGrid()[j][4].getOccupied().toString() + board.getGrid()[j][4].getOccupied().getNumber() + separatorDx);
+            System.out.println("+ - - - + - - - + - - - + - - - + - - - +");
+            System.out.println(floorInfo.toString());
+            System.out.println(pawnInfo.toString());
+            System.out.println("|       |       |       |       |       |");
+            pawnInfo.setLength(0);
+            floorInfo.setLength(0);
+
         }
-        if(board.getGrid()[0][4].isRoof()){
-            floorInfo.append("* ").append(board.getGrid()[0][4].getFloor()).append(" ").append(separatorDx);
-        }
-        else floorInfo.append("  ").append(board.getGrid()[0][4].getFloor()).append(" ").append(separatorDx);
-        if(board.getGrid()[0][4].getOccupied() == null){
-            pawnInfo.append("  " + separatorDx);
-        } else pawnInfo.append(board.getGrid()[0][4].getOccupied().toString() + board.getGrid()[0][4].getOccupied().getNumber() + separatorDx);
-        System.out.println(border + border + border + border + border + "+");
-        System.out.println(floorInfo.toString());
-        System.out.println(pawnInfo.toString());
-        System.out.println(empty + empty + empty + empty + empty + "|");
-        pawnInfo.setLength(0);
-        floorInfo.setLength(0);
-
-        //read Second Line info and print
-
-        floorInfo.append("| ");
-        pawnInfo.append(separatorSx);
-        for(int i=0; i<4; i++){
-            if(board.getGrid()[1][i].isRoof()){
-                floorInfo.append("* ").append(board.getGrid()[1][i].getFloor()).append("   | ");
-            }
-            else floorInfo.append("  ").append(board.getGrid()[1][i].getFloor()).append("   | ");
-            if(board.getGrid()[1][i].getOccupied() == null){
-                pawnInfo.append("  " + centralSep);
-            } else pawnInfo.append(board.getGrid()[1][i].getOccupied().toString() + board.getGrid()[1][i].getOccupied().getNumber() + centralSep);
-        }
-        if(board.getGrid()[1][4].isRoof()){
-            floorInfo.append("* ").append(board.getGrid()[1][4].getFloor()).append(" ").append(separatorDx);
-        }
-        else floorInfo.append("  ").append(board.getGrid()[1][4].getFloor()).append(" ").append(separatorDx);
-        if(board.getGrid()[1][4].getOccupied() == null){
-            pawnInfo.append("  " + separatorDx);
-        } else pawnInfo.append(board.getGrid()[1][4].getOccupied().toString() + board.getGrid()[0][4].getOccupied().getNumber() + separatorDx);
-        System.out.println(border + border + border + border + border + "+");
-        System.out.println(floorInfo.toString());
-        System.out.println(pawnInfo.toString());
-        System.out.println(empty + empty + empty + empty + empty + "|");
-        pawnInfo.setLength(0);
-        floorInfo.setLength(0);
-
-        //read Third Line info and print
-
-        floorInfo.append("| ");
-        pawnInfo.append(separatorSx);
-        for(int i=0; i<4; i++){
-            if(board.getGrid()[2][i].isRoof()){
-                floorInfo.append("* ").append(board.getGrid()[2][i].getFloor()).append("   | ");
-            }
-            else floorInfo.append("  ").append(board.getGrid()[2][i].getFloor()).append("   | ");
-            if(board.getGrid()[2][i].getOccupied() == null){
-                pawnInfo.append("  " + centralSep);
-            } else pawnInfo.append(board.getGrid()[2][i].getOccupied().toString() + board.getGrid()[0][i].getOccupied().getNumber() + centralSep);
-        }
-        if(board.getGrid()[2][4].isRoof()){
-            floorInfo.append("* ").append(board.getGrid()[2][4].getFloor()).append(" ").append(separatorDx);
-        }
-        else floorInfo.append("  ").append(board.getGrid()[2][4].getFloor()).append(" ").append(separatorDx);
-        if(board.getGrid()[2][4].getOccupied() == null){
-            pawnInfo.append("  " + separatorDx);
-        } else pawnInfo.append(board.getGrid()[2][4].getOccupied().toString() + board.getGrid()[0][4].getOccupied().getNumber() + separatorDx);
-
-        System.out.println(border + border + border + border + border + "+");
-        System.out.println(floorInfo.toString());
-        System.out.println(pawnInfo.toString());
-        System.out.println(empty + empty + empty + empty + empty + "|");
-        pawnInfo.setLength(0);
-        floorInfo.setLength(0);
-
-        //read Fourth Line info and print
-
-        floorInfo.append("| ");
-        pawnInfo.append(separatorSx);
-        for(int i=0; i<4; i++){
-            if(board.getGrid()[3][i].isRoof()){
-                floorInfo.append("* ").append(board.getGrid()[3][i].getFloor()).append("   | ");
-            }
-            else floorInfo.append("  ").append(board.getGrid()[3][i].getFloor()).append("   | ");
-            if(board.getGrid()[3][i].getOccupied() == null){
-                pawnInfo.append("  " + centralSep);
-            } else pawnInfo.append(board.getGrid()[3][i].getOccupied().toString() + board.getGrid()[0][i].getOccupied().getNumber() + centralSep);
-        }
-        if(board.getGrid()[3][4].isRoof()){
-            floorInfo.append("* ").append(board.getGrid()[3][4].getFloor()).append(" ").append(separatorDx);
-        }
-        else floorInfo.append("  ").append(board.getGrid()[3][4].getFloor()).append(" ").append(separatorDx);
-        if(board.getGrid()[3][4].getOccupied() == null){
-            pawnInfo.append("  " + separatorDx);
-        } else pawnInfo.append(board.getGrid()[3][4].getOccupied().toString() + board.getGrid()[0][4].getOccupied().getNumber() + separatorDx);
-
-        System.out.println(border + border + border + border + border + "+");
-        System.out.println(floorInfo.toString());
-        System.out.println(pawnInfo.toString());
-        System.out.println(empty + empty + empty + empty + empty + "|");
-        pawnInfo.setLength(0);
-        floorInfo.setLength(0);
-
-        //read Fifth Line info and print
-
-        floorInfo.append("| ");
-        pawnInfo.append(separatorSx);
-        for(int i=0; i<4; i++){
-            if(board.getGrid()[4][i].isRoof()){
-                floorInfo.append("* ").append(board.getGrid()[4][i].getFloor()).append("   | ");
-            }
-            else floorInfo.append("  ").append(board.getGrid()[4][i].getFloor()).append("   | ");
-            if(board.getGrid()[4][i].getOccupied() == null){
-                pawnInfo.append("  " + centralSep);
-            } else pawnInfo.append(board.getGrid()[4][i].getOccupied().toString() + board.getGrid()[0][i].getOccupied().getNumber() + centralSep);
-        }
-        if(board.getGrid()[4][4].isRoof()){
-            floorInfo.append("* ").append(board.getGrid()[4][4].getFloor()).append(" ").append(separatorDx);
-        }
-        else floorInfo.append("  ").append(board.getGrid()[4][4].getFloor()).append(" ").append(separatorDx);
-        if(board.getGrid()[4][4].getOccupied() == null){
-            pawnInfo.append("  " + separatorDx);
-        } else pawnInfo.append(board.getGrid()[4][4].getOccupied().toString() + board.getGrid()[0][4].getOccupied().getNumber() + separatorDx);
-
-        System.out.println(border + border + border + border + border + "+");
-        System.out.println(floorInfo.toString());
-        System.out.println(pawnInfo.toString());
-        System.out.println(empty + empty + empty + empty + empty + "|");
-        System.out.println(border + border + border + border + border + "+");
-        pawnInfo.setLength(0);
-        floorInfo.setLength(0);
-
+        System.out.println("+ - - - + - - - + - - - + - - - + - - - +");
     }
 
     /**
@@ -200,7 +88,7 @@ public class CLIPrinter {
     public void printGodList(List<God> gods){
         int counter = 1;
         for(God god : gods){
-            System.out.print("\n"+counter+") "+god.toString());
+            System.out.print(counter+") "+god.toString()+"\n");
             counter++;
         }
     }
