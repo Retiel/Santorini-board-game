@@ -38,6 +38,7 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
     @Override
     public void visit(SelectedPawn selectedPawn) {
         turnManager.setCurretPawn(selectedPawn.getPawn());
+        turnManager.newAction();
     }
 
     @Override

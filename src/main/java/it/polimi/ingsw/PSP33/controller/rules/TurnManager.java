@@ -57,6 +57,13 @@ public class TurnManager extends AbstractManager {
 
         limiterContext.resetGodTrigger(name, DataControl.limitReset(name));
         
+        getModel().notifyObservers(new SelectPawn());
+    }
+
+    /**
+     * Method send message ne action
+     */
+    public void newAction(){
         getModel().notifyObservers(new NewAction(
                 true, false, DataControl.checkStart(getModel().getCurrentGodName())));
     }
