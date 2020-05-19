@@ -41,7 +41,7 @@ public class SetUpManagerTest {
     public void SetUpTurn(){
 
         /* setting the starting player */
-        testSample.SetStartingPlayer();
+        testSample.setStartingPlayer();
         assertNotNull(testSample.getModel().getCurrentPlayer());
 
         /* asseting the placeable cell are all the board */

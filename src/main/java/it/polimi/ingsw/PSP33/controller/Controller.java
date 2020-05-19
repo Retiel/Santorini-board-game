@@ -24,7 +24,7 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
     }
 
     public void startGame(){
-        setUpManager.SetStartingPlayer();
+        setUpManager.setStartingPlayer();
         setUpManager.askPlayers();
     }
 

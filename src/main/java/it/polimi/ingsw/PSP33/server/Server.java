@@ -42,7 +42,7 @@ public class Server implements Runnable {
 
                 ClientHandler clientHandler = new ClientHandler(client);
 
-                Thread thread = new Thread(clientHandler, "Server_" + client.getInetAddress());
+                Thread thread = new Thread(clientHandler, "Server" + client.getInetAddress());
                 thread.start();
             } catch (IOException e) {
                 e.printStackTrace();

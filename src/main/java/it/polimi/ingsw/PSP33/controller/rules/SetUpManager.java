@@ -43,7 +43,7 @@ public class SetUpManager extends AbstractManager {
     /**
      * Method to decide the the starting player
      */
-    public void SetStartingPlayer() {
+    public void setStartingPlayer() {
 
         Random random = new Random();
         int numberOfPlayers = getModel().getPlayers().size();

@@ -45,6 +45,9 @@ public class ClientHandler extends Listened implements Runnable {
      */
     private Lobby lobby;
 
+    /**
+     * Event serializer
+     */
     private final EventSerializer eventSerializer;
 
     /**
@@ -58,7 +61,7 @@ public class ClientHandler extends Listened implements Runnable {
         this.clientName = "";
         this.clientColor = null;
         this.lobby = null;
-        this.eventSerializer = new EventSerializer();
+        this.eventSerializer = EventSerializer.getInstance();
     }
 
     @Override
@@ -69,13 +72,15 @@ public class ClientHandler extends Listened implements Runnable {
         } catch (IOException e) {
             if(lobby != null) {
                 lobby.removeClient(this);
-                return;
+                System.out.println("Lobby_" + lobby.getLobbyID() + ": "
+                        + client.getInetAddress() + "disconnected and removed from lobby");
+            } else {
+                System.out.println("Lobby_0: " + client.getInetAddress() + " disconnected");
             }
-            e.printStackTrace();
+            return;
         }
 
         listenToClient();
-
     }
 
     /**
@@ -119,7 +124,8 @@ public class ClientHandler extends Listened implements Runnable {
      */
     public void listenToClient() {
         //New thread to keep listening from socket
-        new Thread(this::receiveMessage, "ClientHandler_" + clientName + "_receiveMessage()").start();
+        new Thread(this::receiveMessage,
+                "Lobby_" + lobby.getLobbyID() + ": clienthandler_" + clientName + "_receiveMessage()").start();
     }
 
     /**
@@ -132,7 +138,7 @@ public class ClientHandler extends Listened implements Runnable {
             try {
                 json = input.readUTF();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Lobby_" + lobby.getLobbyID() + ": client_" + clientName + " disconnected");
                 break;
             }
 
@@ -177,10 +183,12 @@ public class ClientHandler extends Listened implements Runnable {
             string = input.readUTF();
 
             //Check name's uniqueness
-            if(!lobby.checkName(string)) {
-                lobby.addName(string);
-                clientName = string;
-                break;
+            if(!string.equals("")) {
+                if (!lobby.checkName(string)) {
+                    lobby.addName(string);
+                    clientName = string;
+                    break;
+                }
             }
         }
     }
@@ -227,28 +235,27 @@ public class ClientHandler extends Listened implements Runnable {
      * @throws IOException unable to access the socket's stream
      */
     public void requestWait() throws IOException {
-        String string = "Waiting for players..";
+        String string = "Waiting for players...";
         output.writeUTF(string);
 
-        while (true) {
-            string = input.readUTF();
-            if (string.equals("SETUP_OK")) {
-                lobby.setClientReady(this);
-                break;
-            }
-        }
+        lobby.setClientReady(this);
     }
 
     /**
      * Method that requests a client to be set ready
      */
     public void requestReady() {
-        String string = "GAME_OK";
+        String string = "All players are ready.";
 
         try {
             output.writeUTF(string);
         } catch (IOException e) {
-            e.printStackTrace();
+            //Remove client from lobby
+            if(lobby != null) {
+                lobby.removeClient(this);
+                System.out.println("Lobby_" + lobby.getLobbyID() + ": "
+                        + client.getInetAddress() + "disconnected and removed from lobby");
+            }
         }
     }
 
@@ -337,9 +344,8 @@ public class ClientHandler extends Listened implements Runnable {
             try {
                 foo = Integer.parseInt(string);
             }
-            catch (NumberFormatException e)
-            {
-                foo = 0;
+            catch (NumberFormatException e) {
+                continue;
             }
 
             if(LobbyManager.checkLobbyList(foo)) {

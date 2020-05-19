@@ -36,9 +36,9 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
     private Scanner scanner;
 
     /**
-     * Volatile boolean to check if setup is over
+     * Boolean to check if setup is over
      */
-    private volatile boolean isSetupOver;
+    private boolean isSetupOver;
 
     /**
      * Lock used to wait on server output
@@ -60,7 +60,7 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
         this.output = null;
         this.scanner = new Scanner(System.in);
         this.isSetupOver = false;
-        this.eventSerializer = new EventSerializer();
+        this.eventSerializer = EventSerializer.getInstance();
     }
 
     @Override
@@ -127,25 +127,19 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
      */
     public void handleServerSetup() {
 
-        //Starts listening to server on a new thread
+        //Starts listening to the server on a new thread
         new Thread(this::getServerSetup).start();
 
         while (true) {
             synchronized (lock) {
                 try {
                     lock.wait();
-
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             }
 
             if (isSetupOver) {
-                try {
-                    output.writeUTF("SETUP_OK");
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
                 break;
             }
 
@@ -156,13 +150,21 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
                 e.printStackTrace();
             }
         }
+
+        synchronized (this) {
+            try {
+                this.wait();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
     }
 
     /**
      * Method that gets the setup requests from the server
      */
     public void getServerSetup() {
-        while (!isSetupOver) {
+        loop: while (true) {
             String string;
 
             try {
@@ -174,29 +176,26 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
 
             System.out.println(string);
 
-            synchronized (lock) {
-                if(string.equals("Waiting for players..")) {
+            switch (string) {
+                case "Waiting for players...":
                     isSetupOver = true;
-                }
-                lock.notify();
-            }
-        }
 
-        while (true) {
-            String string;
+                    synchronized (lock) {
+                        lock.notify();
+                    }
 
-            try {
-                string = input.readUTF();
-            } catch (IOException e) {
-                e.printStackTrace();
-                break;
-            }
-
-            if(string.equals("GAME_OK")) {
-                synchronized (this) {
-                    this.notify();
                     break;
-                }
+
+                case "All players are ready.":
+                    synchronized (this) {
+                        this.notifyAll();
+                        break loop;
+                    }
+
+                default:
+                    synchronized (lock) {
+                        lock.notify();
+                    }
             }
         }
     }

@@ -62,7 +62,7 @@ public class CLIPrinter {
             else floorInfo.append("  ").append(board.getGrid()[1][i].getFloor()).append("   | ");
             if(board.getGrid()[1][i].getOccupied() == null){
                 pawnInfo.append("  " + centralSep);
-            } else pawnInfo.append(board.getGrid()[1][i].getOccupied().toString() + board.getGrid()[0][i].getOccupied().getNumber() + centralSep);
+            } else pawnInfo.append(board.getGrid()[1][i].getOccupied().toString() + board.getGrid()[1][i].getOccupied().getNumber() + centralSep);
         }
         if(board.getGrid()[1][4].isRoof()){
             floorInfo.append("* ").append(board.getGrid()[1][4].getFloor()).append(" ").append(separatorDx);

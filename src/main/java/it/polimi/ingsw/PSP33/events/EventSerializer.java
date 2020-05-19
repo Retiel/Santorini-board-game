@@ -7,12 +7,18 @@ import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 
 public class EventSerializer {
 
+    private static EventSerializer instance = new EventSerializer();
+
     private final Gson mvGson;
     private final Gson vcGson;
 
-    public EventSerializer() {
+    private EventSerializer() {
         mvGson = new GsonBuilder().registerTypeAdapter(MVEvent.class, new EventAdapter<MVEvent>()).create();
         vcGson = new GsonBuilder().registerTypeAdapter(VCEvent.class, new EventAdapter<VCEvent>()).create();
+    }
+
+    public static EventSerializer getInstance() {
+        return instance;
     }
 
     public String serializeMV(MVEvent mvEvent) {

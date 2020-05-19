@@ -70,10 +70,12 @@ public class GameHandler extends AbstractView implements Listener {
         model.addObserver(this);
         this.addObserver(controller);
 
-        System.out.println("DEBUG_" + lobbyID +": observer done");
+        System.out.println("Lobby_" + lobbyID +": observer done");
 
         //Controller starts the game
         controller.startGame();
+
+        System.out.println("Lobby_" + lobbyID +": game starts");
     }
 
     @Override

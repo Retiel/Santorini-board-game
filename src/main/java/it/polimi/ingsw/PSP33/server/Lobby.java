@@ -254,9 +254,9 @@ public class Lobby implements Runnable {
             clientHandler.addListener(gameHandler);
         }
 
-        gameHandler.startGame();
-
         //Debug
-        System.out.println("DEBUG_" + lobbyID + ": set game handler over");
+        System.out.println("Lobby_" + lobbyID + ": game handler done");
+
+        gameHandler.startGame();
     }
 }
