@@ -36,6 +36,11 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
     }
 
     @Override
+    public void visit(SelectedPawn selectedPawn) {
+        turnManager.setCurretPawn(selectedPawn.getPawn());
+    }
+
+    @Override
     public void visit(ChoosenGod choosenGod) {
         setUpManager.setGodforPlayer(choosenGod.getGod());
         setUpManager.nextTurn();
@@ -102,17 +107,17 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
 
     @Override
     public void visit(RequestPossibleMove requestPossibleMove) {
-        turnManager.moveFlow(requestPossibleMove.getPawn());
+        turnManager.moveFlow();
     }
 
     @Override
     public void visit(RequestPossibleBuild requestPossibleBuild) {
-        turnManager.buildFlow(requestPossibleBuild.getPawn());
+        turnManager.buildFlow();
     }
 
     @Override
     public void visit(RequestExtraAction requestExtraAction) {
-        turnManager.extraActionFlow(requestExtraAction.getPawn());
+        turnManager.extraActionFlow();
     }
 
     @Override

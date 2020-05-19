@@ -2,7 +2,6 @@ package it.polimi.ingsw.PSP33.view.cli;
 
 import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataPawn;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
@@ -14,10 +13,8 @@ import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.toServer.setup.SelectedGods;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
 import it.polimi.ingsw.PSP33.model.God;
-import it.polimi.ingsw.PSP33.model.Pawn;
 import it.polimi.ingsw.PSP33.model.light_version.*;
 import it.polimi.ingsw.PSP33.utils.Coord;
-import it.polimi.ingsw.PSP33.utils.enums.Color;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 
 import java.util.ArrayList;
@@ -70,12 +67,6 @@ public class CLI extends AbstractView {
 
         //update player info at the beginning
         player = dataPlayer.getPlayer();
-    }
-
-    @Override
-    public void visit(DataPawn dataPawn) {
-        //todo: correct deleting the Pawn attribute and update the board
-        dataPawn.getPawn();
     }
 
     @Override

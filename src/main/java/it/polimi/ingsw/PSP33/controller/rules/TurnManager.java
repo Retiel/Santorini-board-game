@@ -63,13 +63,8 @@ public class TurnManager extends AbstractManager {
 
     /**
      * Method that controls the move choice option
-     * @param pawnNumber the pawn involved in the action
      */
-    public void moveFlow(int pawnNumber){
-
-        if (getModel().getCurrentPawn() == null) {
-            getModel().setCurrentPawn(getModel().getCurrentPlayer().getPawnByNumber(pawnNumber));
-        }
+    public void moveFlow(){
 
         /* NOTE! the list have to be excluse to unless the effect afflict the basic list by shrinking it */
         List<Coord> basicMove = getBasicFlow(Actions.MOVE);
@@ -90,13 +85,8 @@ public class TurnManager extends AbstractManager {
 
     /**
      * Method that controls the build choice option
-     * @param pawnNumber the pawn involved in the action
      */
-    public void buildFlow(int pawnNumber){
-
-        if (getModel().getCurrentPawn() == null) {
-            getModel().setCurrentPawn(getModel().getCurrentPlayer().getPawnByNumber(pawnNumber));
-        }
+    public void buildFlow(){
 
         List<Coord> basicBuild = getBasicFlow(Actions.BUILD);
         List<Coord> godsBuild = getContextFlow(Actions.BUILD);
@@ -118,13 +108,8 @@ public class TurnManager extends AbstractManager {
 
     /**
      * Method that controls the extra action option, it activates only if there is a extra option dictated by the god card
-     * @param pawnNumber the pawn involved in the action
      */
-    public void extraActionFlow(int pawnNumber){
-
-        if (getModel().getCurrentPawn() == null) {
-            getModel().setCurrentPawn(getModel().getCurrentPlayer().getPawnByNumber(pawnNumber));
-        }
+    public void extraActionFlow(){
 
         List<Coord> gods = getContextFlow(Actions.EXTRA);
 

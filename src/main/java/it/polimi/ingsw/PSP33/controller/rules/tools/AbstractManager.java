@@ -43,6 +43,13 @@ public abstract class AbstractManager {
     }
 
     /**
+     * Method to set the current pawn
+     */
+    public void setCurretPawn(int pawn){
+        getModel().setCurrentPawn(getModel().getCurrentPlayer().getPawnByNumber(pawn));
+    }
+
+    /**
      * Method to remove a player form the game
      */
     public void removePlayer(String name){
