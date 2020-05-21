@@ -2,6 +2,7 @@ package it.polimi.ingsw.PSP33.view.cli;
 
 import it.polimi.ingsw.PSP33.model.God;
 import it.polimi.ingsw.PSP33.model.light_version.LightBoard;
+import it.polimi.ingsw.PSP33.model.light_version.LightModel;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class CLIPrinter {
      * class that print all the info in the Board
      * @param board the light Board of the client
      */
-    public void printBoard(LightBoard board){
+    public void printBoard(LightModel board){
         String separatorSx = "|   ";
         String centralSep = "  |   ";
         String separatorDx = "  |";
@@ -27,21 +28,21 @@ public class CLIPrinter {
             floorInfo.append("| ");
             pawnInfo.append(separatorSx);
             for (int i = 0; i < 4; i++) {
-                if (board.getGrid()[j][i].isRoof()) {
-                    floorInfo.append("* ").append(board.getGrid()[j][i].getFloor()).append("   | ");
-                } else floorInfo.append("  ").append(board.getGrid()[j][i].getFloor()).append("   | ");
-                if (board.getGrid()[j][i].getOccupied() == null) {
+                if (board.getLightGrid()[j][i].isRoof()) {
+                    floorInfo.append("* ").append(board.getLightGrid()[j][i].getFloor()).append("   | ");
+                } else floorInfo.append("  ").append(board.getLightGrid()[j][i].getFloor()).append("   | ");
+                if (board.getLightGrid()[j][i].getOccupied() == null) {
                     pawnInfo.append("  " + centralSep);
                 } else
-                    pawnInfo.append(board.getGrid()[j][i].getOccupied().toString() + board.getGrid()[j][i].getOccupied().getNumber() + centralSep);
+                    pawnInfo.append(board.getLightGrid()[j][i].getOccupied().toString() + board.getLightGrid()[j][i].getOccupied().getNumber() + centralSep);
             }
-            if (board.getGrid()[j][4].isRoof()) {
-                floorInfo.append("* ").append(board.getGrid()[j][4].getFloor()).append(" ").append(separatorDx);
-            } else floorInfo.append("  ").append(board.getGrid()[j][4].getFloor()).append(" ").append(separatorDx);
-            if (board.getGrid()[j][4].getOccupied() == null) {
+            if (board.getLightGrid()[j][4].isRoof()) {
+                floorInfo.append("* ").append(board.getLightGrid()[j][4].getFloor()).append(" ").append(separatorDx);
+            } else floorInfo.append("  ").append(board.getLightGrid()[j][4].getFloor()).append(" ").append(separatorDx);
+            if (board.getLightGrid()[j][4].getOccupied() == null) {
                 pawnInfo.append("  " + separatorDx);
             } else
-                pawnInfo.append(board.getGrid()[j][4].getOccupied().toString() + board.getGrid()[j][4].getOccupied().getNumber() + separatorDx);
+                pawnInfo.append(board.getLightGrid()[j][4].getOccupied().toString() + board.getLightGrid()[j][4].getOccupied().getNumber() + separatorDx);
             System.out.println("+ - - - + - - - + - - - + - - - + - - - +");
             System.out.println(floorInfo.toString());
             System.out.println(pawnInfo.toString());
@@ -62,7 +63,7 @@ public class CLIPrinter {
         int counter = 1;
         for (Coord c : choices) {
             System.out.print(counter+") ");
-            System.out.print(choices.get(counter-1).toString()+"\n");
+            System.out.println(c.toString());
             counter++;
         }
     }
@@ -73,12 +74,11 @@ public class CLIPrinter {
      * @param index the lenght of the previous list
      */
     public void printSecondList(List<Coord> choices, int index){
-        int counter = 0;
+
         for (Coord c : choices) {
             index++;
             System.out.print(index+") ");
-            System.out.print(choices.get(counter).toString()+"\n");
-            counter++;
+            System.out.println(c.toString());
         }
     }
 
