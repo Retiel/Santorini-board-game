@@ -30,7 +30,6 @@ public class CLI extends AbstractView {
     private LightCell[][] lightGrid;
     private List<LightPlayer> player;
     private LightModel lightModel;
-    private int pawnSelected;
     private CLIPrinter cliPrinter;
     private Scanner scanner;
 
@@ -124,7 +123,11 @@ public class CLI extends AbstractView {
 
     @Override
     public void visit(SelectPawn selectPawn) {
+        System.out.println("\nWhich pawn you want to use? (1 or 2)");
+        int pawnSelected = scanner.nextInt();
 
+        SelectedPawn sp = new SelectedPawn(pawnSelected);
+        notifyObservers(sp);
     }
 
     @Override
@@ -139,15 +142,9 @@ public class CLI extends AbstractView {
         RequestExtraAction rea;
 
         if (!newAction.isExtra() && !newAction.isBuild() && !newAction.isMove()){
-            beginning = true;
             NewTurn newTurn = new NewTurn();
             notifyObservers(newTurn);
         } else{
-            if(beginning) {
-                System.out.println("\nWhich pawn you want to use? (1 or 2)");
-                pawnSelected = scanner.nextInt();
-                beginning = false;
-            }
 
 
             //decide action with the Boolean and send input to controller (switch case)
