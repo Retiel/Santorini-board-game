@@ -34,13 +34,6 @@ public class ViewSample extends AbstractView {
     }
 
     @Override
-    public void visit(DataPawn dataPawn) {
-        System.out.print("Data update...\n");
-        System.out.print(dataPawn.toString()+"\n");
-        System.out.print("Data update finished\n\n\n");
-    }
-
-    @Override
     public void visit(YourGod yourGod) {
         System.out.print("Gods update...\n");
         System.out.print(yourGod.toString()+"\n");
@@ -74,6 +67,11 @@ public class ViewSample extends AbstractView {
 
     @Override
     public void visit(YouWin youWin) {
+        /* Missing check */
+    }
+
+    @Override
+    public void visit(SelectPawn selectPawn) {
         /* Missing check */
     }
 

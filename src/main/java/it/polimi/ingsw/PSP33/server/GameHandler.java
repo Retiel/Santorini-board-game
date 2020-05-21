@@ -161,11 +161,6 @@ public class GameHandler extends AbstractView implements Listener {
     }
 
     @Override
-    public void visit(DataPawn dataPawn) {
-        sendMessageToAll(dataPawn);
-    }
-
-    @Override
     public void visit(YourGod yourGod) {
         sendMessageToClient(yourGod);
     }
@@ -193,6 +188,11 @@ public class GameHandler extends AbstractView implements Listener {
     @Override
     public void visit(YouWin youWin) {
         sendMessageToClient(youWin);
+    }
+
+    @Override
+    public void visit(SelectPawn selectPawn) {
+        sendMessageToClient(selectPawn);
     }
 
     @Override

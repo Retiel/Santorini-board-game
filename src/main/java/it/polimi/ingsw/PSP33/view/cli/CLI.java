@@ -91,7 +91,6 @@ public class CLI extends AbstractView {
         System.out.println("\nWhere do you want to place your worker?");
         cliPrinter.printList(possiblePlacement.getCoordList());
 
-        System.out.println("client turn");
         PlacePawn pp = new PlacePawn(possiblePlacement.getCoordList().get(readInput(possiblePlacement.getCoordList().size()) - 1));
         notifyObservers(pp);
     }

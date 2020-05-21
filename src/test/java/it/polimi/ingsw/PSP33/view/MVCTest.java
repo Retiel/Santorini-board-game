@@ -70,13 +70,13 @@ public class MVCTest {
 
         view.notifyObservers(new NewTurn()); /* test new turn branch message */
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        view.notifyObservers(new RequestPossibleMove(1)); /* test Move branch message */
+        view.notifyObservers(new RequestPossibleMove()); /* test Move branch message */
         view.notifyObservers(new MoveAction(new Coord(0,1)));
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        view.notifyObservers(new RequestPossibleBuild(1)); /* test Build branch message */
+        view.notifyObservers(new RequestPossibleBuild()); /* test Build branch message */
         view.notifyObservers(new BuildAction(new Coord(0,0), false));
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
-        view.notifyObservers(new RequestExtraAction(1)); /* test Extra Action branch message */
+        view.notifyObservers(new RequestExtraAction()); /* test Extra Action branch message */
         view.notifyObservers(new ExtraAction(new Coord(1,1)));
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
