@@ -26,9 +26,6 @@ import java.util.Scanner;
  */
 public class CLI extends AbstractView {
 
-    private LightBoard board;
-    private LightCell[][] lightGrid;
-    private List<LightPlayer> player;
     private LightModel lightModel;
     private CLIPrinter cliPrinter;
     private Scanner scanner;
@@ -36,14 +33,14 @@ public class CLI extends AbstractView {
     public CLI() {
         cliPrinter = new CLIPrinter();
         scanner = new Scanner(System.in);
+        lightModel = new LightModel();
 
     }
 
     @Override
     public void visit(DataBoard dataBoard) {
         //set up client board
-        board = dataBoard.getGrid();
-        lightGrid = board.getGrid();
+        lightModel.setLightGrid(dataBoard.getGrid().getGrid());
     }
 
     @Override
@@ -53,19 +50,20 @@ public class CLI extends AbstractView {
         if (dataCell.getOldCell() != null){
             int oldx = dataCell.getOldCell().getCoord().getX();
             int oldy = dataCell.getOldCell().getCoord().getY();
-            board.getGrid()[oldx][oldy] = dataCell.getOldCell();
+            lightModel.getLightGrid()[oldx][oldy] = dataCell.getOldCell();
         }
 
         int newx = dataCell.getNewCell().getCoord().getX();
         int newy = dataCell.getNewCell().getCoord().getY();
-        board.getGrid()[newx][newy] = dataCell.getNewCell();
+        lightModel.getLightGrid()[newx][newy] = dataCell.getNewCell();
     }
 
     @Override
     public void visit(DataPlayer dataPlayer) {
 
         //update player info at the beginning
-        player = dataPlayer.getPlayer();
+        lightModel.setPlayers(dataPlayer.getPlayer());
+        lightModel.setPlayerName(dataPlayer.getName());
     }
 
     @Override
@@ -85,7 +83,7 @@ public class CLI extends AbstractView {
 
     @Override
     public void visit(PossiblePlacement possiblePlacement) {
-        cliPrinter.printBoard(board);
+        cliPrinter.printBoard(lightModel);
         //print 2 times the placement for the pawn (setup phase)
         System.out.println("\nWhere do you want to place your worker?");
         cliPrinter.printList(possiblePlacement.getCoordList());
@@ -99,7 +97,7 @@ public class CLI extends AbstractView {
         List<God> allGods = new ArrayList<>(selectGods.getGods());
         List<God> chosenGods = new ArrayList<>();
 
-        for(int c=1;c<player.size()+1;c++){
+        for(int c=1;c<lightModel.getPlayers().size()+1;c++){
             System.out.println("Choose the "+c+"° God:\n");
             cliPrinter.printGodList(allGods);
             int i = readInput(allGods.size());
@@ -123,11 +121,27 @@ public class CLI extends AbstractView {
 
     @Override
     public void visit(SelectPawn selectPawn) {
-        System.out.println("\nWhich pawn you want to use? (1 or 2)");
-        int pawnSelected = scanner.nextInt();
+        //todo: c = selectPawn.getPawn;
+        //int c = 0;
+        //switch (c) {
+            //case 0:
+                System.out.println("\nWhich worker you want to use? (1 or 2)");
+                SelectedPawn sp1 = new SelectedPawn(readInput(2));
+                notifyObservers(sp1);
 
-        SelectedPawn sp = new SelectedPawn(pawnSelected);
-        notifyObservers(sp);
+            /*case 1:
+                System.out.println("You can move only the worker number 1\n");
+                SelectedPawn sp2 = new SelectedPawn(c);
+                notifyObservers(sp2);
+
+            case 2:
+                System.out.println("You can move only the worker number 2\n");
+                SelectedPawn sp3 = new SelectedPawn(c);
+                notifyObservers(sp3);*/
+
+        //}
+
+
     }
 
     @Override
@@ -135,7 +149,7 @@ public class CLI extends AbstractView {
         int j;
         boolean beginning = true;
         //print board
-        cliPrinter.printBoard(board);
+        cliPrinter.printBoard(lightModel);
 
         RequestPossibleBuild rpb;
         RequestPossibleMove rpm;
@@ -157,7 +171,7 @@ public class CLI extends AbstractView {
                 else {
                     //choose and create possible move or extra message to notify to the controller
                     System.out.println("\nWhat type of action do you want to do?\n1) Move\n2) Extra");
-                    j = scanner.nextInt();
+                    j = readInput(2);
                     if (j==1){
                         rpm = new RequestPossibleMove();
                         notifyObservers(rpm);
@@ -177,7 +191,7 @@ public class CLI extends AbstractView {
                 else{
                     //choose your action and send proper message to server
                     System.out.println("\nWhat type of action do you want to do?\n1) Build\n2) Extra");
-                    j = scanner.nextInt();
+                    j = readInput(2);
 
                     if (j == 1){
                         rpb = new RequestPossibleBuild();
@@ -201,7 +215,7 @@ public class CLI extends AbstractView {
     @Override
     public void visit(PossibleBuild possibleBuild) {
         //print board
-        cliPrinter.printBoard(board);
+        cliPrinter.printBoard(lightModel);
         //print choices and read player's intentions
         System.out.println("\nWhere do you want to build your Block?\n");
         cliPrinter.printList(possibleBuild.getCoordList());
@@ -214,7 +228,7 @@ public class CLI extends AbstractView {
         BuildAction ba;
         if(i <= possibleBuild.getCoordList().size()){
             choiceCoord = possibleBuild.getCoordList().get(i-1);
-            if(board.getGrid()[choiceCoord.getX()][choiceCoord.getY()].getFloor()<2) {
+            if(lightModel.getLightGrid()[choiceCoord.getX()][choiceCoord.getY()].getFloor()<2) {
                 ba = new BuildAction(choiceCoord, false);
             }
             else ba = new BuildAction(choiceCoord, true);
@@ -222,7 +236,7 @@ public class CLI extends AbstractView {
         }
         else{
             choiceCoord = possibleBuild.getGodsList().get(i-possibleBuild.getCoordList().size()-1);
-            if(board.getGrid()[choiceCoord.getX()][choiceCoord.getY()].getFloor()<2){
+            if(lightModel.getLightGrid()[choiceCoord.getX()][choiceCoord.getY()].getFloor()<2){
                 ba = new BuildAction(choiceCoord,false);
             } else ba = new BuildAction(choiceCoord,false);
         }
@@ -232,7 +246,7 @@ public class CLI extends AbstractView {
     @Override
     public void visit(PossibleMove possibleMove) {
         //print board
-        cliPrinter.printBoard(board);
+        cliPrinter.printBoard(lightModel);
         //print choices and read player's intentions
         System.out.println("\nWhere do you want to move your worker?\n");
         cliPrinter.printList(possibleMove.getCoordList());
@@ -252,7 +266,7 @@ public class CLI extends AbstractView {
     @Override
     public void visit(PossibleExtraAction possibleExtraAction) {
         //print board
-        cliPrinter.printBoard(board);
+        cliPrinter.printBoard(lightModel);
         //print choices and read player's intentions
         System.out.println("\n");
         cliPrinter.printList(possibleExtraAction.getCoordList());
@@ -266,10 +280,19 @@ public class CLI extends AbstractView {
     }
 
     private int readInput(int size){
-        int i = scanner.nextInt();
-
-        if(i <= size && i > 0) return i;
-        return readInput(size);
+        if(scanner.hasNextInt()){
+            int i = scanner.nextInt();
+            if(i <= size && i > 0) {
+                return i;
+            } else {
+                System.out.println("\nInvalid Choice (integer out of bound), please select again:\n");
+                return readInput(size);}
+        }
+        else{
+            System.out.println("\nInvalid Choice (mismatch input type), please select again:\n");
+            scanner.next();
+            return readInput(size);
+        }
     }
 
 }
