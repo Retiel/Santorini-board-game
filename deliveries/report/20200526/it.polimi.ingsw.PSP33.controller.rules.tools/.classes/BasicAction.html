@@ -1,0 +1,128 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: BasicAction</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.controller.rules.tools</a> ]
+</div>
+
+<h1>Coverage Summary for Class: BasicAction (it.polimi.ingsw.PSP33.controller.rules.tools)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">BasicAction</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (3/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91,7%
+  </span>
+  <span class="absValue">
+    (11/ 12)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.controller.rules.tools;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.model.Cell;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.model.Pawn;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;/**
+<i>7</i>&nbsp; * TurnAction class, a list of the basic action a player can do in his turn.
+<i>8</i>&nbsp; */
+<b class="nc"><i>9</i>&nbsp;public class BasicAction {</b>
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;    /**
+<i>12</i>&nbsp;     * The method initialize the pawn position
+<i>13</i>&nbsp;     * @param pawn pawn to put in the board
+<i>14</i>&nbsp;     * @param startingCell cell where the selected pawn start
+<i>15</i>&nbsp;     */
+<i>16</i>&nbsp;    public static void SetUpPawnPosition(Cell startingCell, Pawn pawn) {
+<b class="fc"><i>17</i>&nbsp;        pawn.setCoords(startingCell.getCoordX(), startingCell.getCoordY());</b>
+<b class="fc"><i>18</i>&nbsp;        startingCell.setOccupied(pawn);</b>
+<b class="fc"><i>19</i>&nbsp;    }</b>
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;    /**
+<i>22</i>&nbsp;     * The method a player can use to move a worker on the Board
+<i>23</i>&nbsp;     * @param oldCell position of the pawn
+<i>24</i>&nbsp;     * @param newCell new position of the pawn
+<i>25</i>&nbsp;     * @param pawn the pawn involved
+<i>26</i>&nbsp;     */
+<i>27</i>&nbsp;    public static void MovePawn(Cell oldCell, Cell newCell, Pawn pawn) {
+<i>28</i>&nbsp;
+<b class="fc"><i>29</i>&nbsp;        pawn.setCoords(newCell.getCoordX(), newCell.getCoordY());</b>
+<b class="fc"><i>30</i>&nbsp;        oldCell.setOccupied(null);</b>
+<b class="fc"><i>31</i>&nbsp;        newCell.setOccupied(pawn);</b>
+<b class="fc"><i>32</i>&nbsp;    }</b>
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    /**
+<i>35</i>&nbsp;     * the method a player can use to Build a Block (or a Dome) on a Cell
+<i>36</i>&nbsp;     * @param c the Cell where the player wants to Build
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    public static void BuildBlock(Cell c){
+<b class="fc"><i>39</i>&nbsp;        if(c.getFloor() == 3){</b>
+<b class="fc"><i>40</i>&nbsp;            c.setRoof(true);</b>
+<i>41</i>&nbsp;        }
+<b class="fc"><i>42</i>&nbsp;        else c.setFloor(c.getFloor()+1);</b>
+<b class="fc"><i>43</i>&nbsp;    }</b>
+<i>44</i>&nbsp;
+<i>45</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-26 15:37</div>
+</div>
+</body>
+</html>

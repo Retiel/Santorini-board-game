@@ -1,0 +1,186 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: DataControl</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.controller.rules.tools</a> ]
+</div>
+
+<h1>Coverage Summary for Class: DataControl (it.polimi.ingsw.PSP33.controller.rules.tools)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">DataControl</td>
+<td class="coverageStat">
+  <span class="percent">
+    83,3%
+  </span>
+  <span class="absValue">
+    (5/ 6)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    91,7%
+  </span>
+  <span class="absValue">
+    (11/ 12)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">DataControl$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    85,7%
+  </span>
+  <span class="absValue">
+    (6/ 7)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    92,3%
+  </span>
+  <span class="absValue">
+    (12/ 13)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.controller.rules.tools;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.utils.Coord;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.utils.enums.Gods;
+<i>5</i>&nbsp;
+<i>6</i>&nbsp;import java.util.List;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;/**
+<i>9</i>&nbsp; * Class with all method for flag and boolean control
+<i>10</i>&nbsp; */
+<b class="nc"><i>11</i>&nbsp;public class DataControl {</b>
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;    /**
+<i>14</i>&nbsp;     * Method that verify the input of the player
+<i>15</i>&nbsp;     * @param coord input to control
+<i>16</i>&nbsp;     * @param dataBuffer data bank with all data needed
+<i>17</i>&nbsp;     *
+<i>18</i>&nbsp;     * @return Boolean
+<i>19</i>&nbsp;     */
+<i>20</i>&nbsp;    public static boolean controlInput(Coord coord, DataBuffer dataBuffer){
+<b class="fc"><i>21</i>&nbsp;        return dataBuffer.getCoordList().contains(coord) || dataBuffer.getCoordListGods().contains(coord);</b>
+<i>22</i>&nbsp;    }
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    /**
+<i>25</i>&nbsp;     * Method that verify the list are exclusive, the lists have no common object
+<i>26</i>&nbsp;     * @param list1 first list
+<i>27</i>&nbsp;     * @param list2 second list
+<i>28</i>&nbsp;     *
+<i>29</i>&nbsp;     * @return Boolean
+<i>30</i>&nbsp;     */
+<i>31</i>&nbsp;    public static boolean exclusiveList(List&lt;Coord&gt; list1, List&lt;Coord&gt; list2){
+<b class="fc"><i>32</i>&nbsp;        for (Coord coord : list1){</b>
+<b class="fc"><i>33</i>&nbsp;            if (list2.contains(coord)) return false;</b>
+<b class="fc"><i>34</i>&nbsp;        }</b>
+<b class="fc"><i>35</i>&nbsp;        return true;</b>
+<i>36</i>&nbsp;    }
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    /**
+<i>39</i>&nbsp;     * Method to enable extraAction at the start of the turn
+<i>40</i>&nbsp;     * @param name name of the god to which enable the extraAction
+<i>41</i>&nbsp;     *
+<i>42</i>&nbsp;     * @return Boolean
+<i>43</i>&nbsp;     */
+<i>44</i>&nbsp;    public static boolean checkStart(Gods name){
+<b class="fc"><i>45</i>&nbsp;        switch (name){</b>
+<b class="fc"><i>46</i>&nbsp;            case PROMETHEUS: return true;</b>
+<i>47</i>&nbsp;            case NOGOD:
+<i>48</i>&nbsp;            default:
+<b class="fc"><i>49</i>&nbsp;                return false;</b>
+<i>50</i>&nbsp;        }
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    /**
+<i>54</i>&nbsp;     * Method to enable roof build at any level
+<i>55</i>&nbsp;     * @param name name of the god to which enable the feature
+<i>56</i>&nbsp;     *
+<i>57</i>&nbsp;     * @return Boolean
+<i>58</i>&nbsp;     */
+<i>59</i>&nbsp;    public static boolean checkBuild(Gods name){
+<b class="fc"><i>60</i>&nbsp;        return name.equals(Gods.ATLAS);</b>
+<i>61</i>&nbsp;    }
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    /**
+<i>64</i>&nbsp;     * Method reset limiter at the turn rotation
+<i>65</i>&nbsp;     * @param name name of the god
+<i>66</i>&nbsp;     *
+<i>67</i>&nbsp;     * @return Boolean
+<i>68</i>&nbsp;     */
+<i>69</i>&nbsp;    public static boolean limitReset(Gods name){
+<b class="fc"><i>70</i>&nbsp;        switch (name){</b>
+<i>71</i>&nbsp;            case ATHENA:
+<i>72</i>&nbsp;            case NOGOD:
+<b class="fc"><i>73</i>&nbsp;            default: return false;</b>
+<i>74</i>&nbsp;        }
+<i>75</i>&nbsp;    }
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-26 15:37</div>
+</div>
+</body>
+</html>

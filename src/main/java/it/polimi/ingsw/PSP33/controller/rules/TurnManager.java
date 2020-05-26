@@ -230,7 +230,7 @@ public class TurnManager extends AbstractManager {
      * @return Boolean
      */
     private boolean noActionAvailable(List<Coord> coordList1, List<Coord> coordList2){
-        return !coordList1.isEmpty() || !coordList2.isEmpty();
+        return coordList1.isEmpty() && coordList2.isEmpty();
     }
 
     /**
@@ -268,7 +268,7 @@ public class TurnManager extends AbstractManager {
 
         if (test_move1 || test_build1){
             if (test_move2 || test_build2){
-                notifyView(new YouLose());
+                loserBracket();
             }else {
                 notifyView(new SelectPawn(2));
             }

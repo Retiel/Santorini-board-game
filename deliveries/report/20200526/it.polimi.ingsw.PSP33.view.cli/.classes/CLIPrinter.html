@@ -1,0 +1,179 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CLIPrinter</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.view.cli</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CLIPrinter (it.polimi.ingsw.PSP33.view.cli)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CLIPrinter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 45)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.view.cli;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.model.God;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.model.light_version.LightBoard;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.model.light_version.LightModel;
+<i>6</i>&nbsp;import it.polimi.ingsw.PSP33.utils.Coord;
+<i>7</i>&nbsp;
+<i>8</i>&nbsp;import java.util.List;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * Class which permit to print all the necessary information for the player
+<i>12</i>&nbsp; * (Map and lists that contain the possible choices)
+<i>13</i>&nbsp; */
+<b class="nc"><i>14</i>&nbsp;public class CLIPrinter {</b>
+<i>15</i>&nbsp;
+<b class="nc"><i>16</i>&nbsp;    private StringBuilder floorInfo = new StringBuilder(50);</b>
+<b class="nc"><i>17</i>&nbsp;    private StringBuilder pawnInfo = new StringBuilder(50);</b>
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    /**
+<i>20</i>&nbsp;     * class that print all the info in the Board
+<i>21</i>&nbsp;     * @param board the light Board of the client
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    public void printBoard(LightModel board){
+<b class="nc"><i>24</i>&nbsp;        String separatorSx = &quot;|   &quot;;</b>
+<b class="nc"><i>25</i>&nbsp;        String centralSep = &quot;  |   &quot;;</b>
+<b class="nc"><i>26</i>&nbsp;        String separatorDx = &quot;  |&quot;;</b>
+<i>27</i>&nbsp;
+<b class="nc"><i>28</i>&nbsp;        for(int j=0; j&lt;=4;j++) {</b>
+<b class="nc"><i>29</i>&nbsp;            floorInfo.append(&quot;| &quot;);</b>
+<b class="nc"><i>30</i>&nbsp;            pawnInfo.append(separatorSx);</b>
+<b class="nc"><i>31</i>&nbsp;            for (int i = 0; i &lt; 4; i++) {</b>
+<b class="nc"><i>32</i>&nbsp;                if (board.getLightGrid()[j][i].isRoof()) {</b>
+<b class="nc"><i>33</i>&nbsp;                    floorInfo.append(&quot;* &quot;).append(board.getLightGrid()[j][i].getFloor()).append(&quot;   | &quot;);</b>
+<b class="nc"><i>34</i>&nbsp;                } else floorInfo.append(&quot;  &quot;).append(board.getLightGrid()[j][i].getFloor()).append(&quot;   | &quot;);</b>
+<b class="nc"><i>35</i>&nbsp;                if (board.getLightGrid()[j][i].getOccupied() == null) {</b>
+<b class="nc"><i>36</i>&nbsp;                    pawnInfo.append(&quot;  &quot; + centralSep);</b>
+<i>37</i>&nbsp;                } else
+<b class="nc"><i>38</i>&nbsp;                    pawnInfo.append(board.getLightGrid()[j][i].getOccupied().toString() + board.getLightGrid()[j][i].getOccupied().getNumber() + centralSep);</b>
+<i>39</i>&nbsp;            }
+<b class="nc"><i>40</i>&nbsp;            if (board.getLightGrid()[j][4].isRoof()) {</b>
+<b class="nc"><i>41</i>&nbsp;                floorInfo.append(&quot;* &quot;).append(board.getLightGrid()[j][4].getFloor()).append(&quot; &quot;).append(separatorDx);</b>
+<b class="nc"><i>42</i>&nbsp;            } else floorInfo.append(&quot;  &quot;).append(board.getLightGrid()[j][4].getFloor()).append(&quot; &quot;).append(separatorDx);</b>
+<b class="nc"><i>43</i>&nbsp;            if (board.getLightGrid()[j][4].getOccupied() == null) {</b>
+<b class="nc"><i>44</i>&nbsp;                pawnInfo.append(&quot;  &quot; + separatorDx);</b>
+<i>45</i>&nbsp;            } else
+<b class="nc"><i>46</i>&nbsp;                pawnInfo.append(board.getLightGrid()[j][4].getOccupied().toString() + board.getLightGrid()[j][4].getOccupied().getNumber() + separatorDx);</b>
+<b class="nc"><i>47</i>&nbsp;            System.out.println(&quot;+ - - - + - - - + - - - + - - - + - - - +&quot;);</b>
+<b class="nc"><i>48</i>&nbsp;            System.out.println(floorInfo.toString());</b>
+<b class="nc"><i>49</i>&nbsp;            System.out.println(pawnInfo.toString());</b>
+<b class="nc"><i>50</i>&nbsp;            System.out.println(&quot;|       |       |       |       |       |&quot;);</b>
+<b class="nc"><i>51</i>&nbsp;            pawnInfo.setLength(0);</b>
+<b class="nc"><i>52</i>&nbsp;            floorInfo.setLength(0);</b>
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;        }
+<b class="nc"><i>55</i>&nbsp;        System.out.println(&quot;+ - - - + - - - + - - - + - - - + - - - +&quot;);</b>
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    /**
+<i>59</i>&nbsp;     * method that prints the choices from number 1
+<i>60</i>&nbsp;     * @param choices the coordinates of possible moves
+<i>61</i>&nbsp;     */
+<i>62</i>&nbsp;    public void printList(List&lt;Coord&gt; choices){
+<i>63</i>&nbsp;
+<b class="nc"><i>64</i>&nbsp;        int counter = 1;</b>
+<b class="nc"><i>65</i>&nbsp;        for (Coord c : choices) {</b>
+<b class="nc"><i>66</i>&nbsp;            System.out.print(counter+&quot;) &quot;);</b>
+<b class="nc"><i>67</i>&nbsp;            System.out.println(c.toString());</b>
+<b class="nc"><i>68</i>&nbsp;            counter++;</b>
+<b class="nc"><i>69</i>&nbsp;        }</b>
+<i>70</i>&nbsp;    }
+<i>71</i>&nbsp;
+<i>72</i>&nbsp;    /**
+<i>73</i>&nbsp;     * method that prints the other possible choices continuing from the last number (previous list length)
+<i>74</i>&nbsp;     * @param choices the coordinates of possible moves
+<i>75</i>&nbsp;     * @param index the lenght of the previous list
+<i>76</i>&nbsp;     */
+<i>77</i>&nbsp;    public void printSecondList(List&lt;Coord&gt; choices, int index){
+<i>78</i>&nbsp;
+<b class="nc"><i>79</i>&nbsp;        for (Coord c : choices) {</b>
+<b class="nc"><i>80</i>&nbsp;            index++;</b>
+<b class="nc"><i>81</i>&nbsp;            System.out.print(index+&quot;) &quot;);</b>
+<b class="nc"><i>82</i>&nbsp;            System.out.println(c.toString());</b>
+<b class="nc"><i>83</i>&nbsp;        }</b>
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    /**
+<i>87</i>&nbsp;     *
+<i>88</i>&nbsp;     */
+<i>89</i>&nbsp;    public void printGodList(List&lt;God&gt; gods){
+<b class="nc"><i>90</i>&nbsp;        int counter = 1;</b>
+<b class="nc"><i>91</i>&nbsp;        for(God god : gods){</b>
+<b class="nc"><i>92</i>&nbsp;            System.out.print(counter+&quot;) &quot;+god.toString()+&quot;\n&quot;);</b>
+<b class="nc"><i>93</i>&nbsp;            counter++;</b>
+<b class="nc"><i>94</i>&nbsp;        }</b>
+<i>95</i>&nbsp;    }
+<i>96</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-05-26 15:37</div>
+</div>
+</body>
+</html>
