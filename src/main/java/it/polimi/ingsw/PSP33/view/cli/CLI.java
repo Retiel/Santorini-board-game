@@ -29,7 +29,12 @@ public class CLI extends AbstractView {
     private LightModel lightModel;
     private CLIPrinter cliPrinter;
     private Scanner scanner;
+    private int playerID;
 
+
+    /**
+     * the constructor of the CLI class
+     */
     public CLI() {
         cliPrinter = new CLIPrinter();
         scanner = new Scanner(System.in);
@@ -37,12 +42,20 @@ public class CLI extends AbstractView {
 
     }
 
+    /**
+     * visit implementation method that configure the board of the client
+     * @param dataBoard
+     */
     @Override
     public void visit(DataBoard dataBoard) {
         //set up client board
         lightModel.setLightGrid(dataBoard.getGrid().getGrid());
     }
 
+    /**
+     * visit implementation method that configure one single Cell of the client
+     * @param dataCell
+     */
     @Override
     public void visit(DataCell dataCell) {
 
@@ -56,16 +69,33 @@ public class CLI extends AbstractView {
         int newx = dataCell.getNewCell().getCoord().getX();
         int newy = dataCell.getNewCell().getCoord().getY();
         lightModel.getLightGrid()[newx][newy] = dataCell.getNewCell();
+
+        if(lightModel.isYourTurn() == false){
+            System.out.println("\nAn opponent made a move and changed the Board:");
+            cliPrinter.printBoard(lightModel);
+        }
     }
 
+    /**
+     * method for the players data setup
+     * @param dataPlayer
+     */
     @Override
     public void visit(DataPlayer dataPlayer) {
-
         //update player info at the beginning
         lightModel.setPlayers(dataPlayer.getPlayer());
         lightModel.setPlayerName(dataPlayer.getName());
+        for (int i=0; i<dataPlayer.getPlayer().size()-1; i++) {
+            if(dataPlayer.getPlayer().get(i).getName() == dataPlayer.getName()){
+                playerID = i;
+            }
+        }
     }
 
+    /**
+     * method for the choice of the God used in the game
+     * @param yourGod
+     */
     @Override
     public void visit(YourGod yourGod) {
         int i;
@@ -74,24 +104,37 @@ public class CLI extends AbstractView {
 
         ChoosenGod cg = new ChoosenGod(yourGod.getGods().get(readInput(yourGod.getGods().size()) - 1));
         notifyObservers(cg);
+        lightModel.setYourTurn(false);
     }
 
+    /**
+     * visit method for the current player
+     * @param currentPlayer
+     */
     @Override
     public void visit(CurrentPlayer currentPlayer) {
+        //todo: set current player for printer
 
     }
 
+    /**
+     * visit method for the initial placement of the workers
+     * @param possiblePlacement
+     */
     @Override
     public void visit(PossiblePlacement possiblePlacement) {
         cliPrinter.printBoard(lightModel);
         //print 2 times the placement for the pawn (setup phase)
         System.out.println("\nWhere do you want to place your worker?");
         cliPrinter.printList(possiblePlacement.getCoordList());
-
         PlacePawn pp = new PlacePawn(possiblePlacement.getCoordList().get(readInput(possiblePlacement.getCoordList().size()) - 1));
         notifyObservers(pp);
     }
 
+    /**
+     * visit method which display the available god cards to the player
+     * @param selectGods
+     */
     @Override
     public void visit(SelectGods selectGods) {
         List<God> allGods = new ArrayList<>(selectGods.getGods());
@@ -109,37 +152,52 @@ public class CLI extends AbstractView {
         notifyObservers(sg);
     }
 
+    /**
+     * method that notify the player the outcome of the game
+     * @param youLose
+     */
     @Override
     public void visit(YouLose youLose) {
         System.out.println("You lose!");
     }
 
+    /**
+     * method that notify the player the outcome of the game
+     * @param youWin
+     */
     @Override
     public void visit(YouWin youWin) {
         System.out.println("You win!");
     }
 
+    /**
+     * visit method that permit the player to select the main worker
+     * @param selectPawn
+     */
     @Override
     public void visit(SelectPawn selectPawn) {
-        //todo: c = selectPawn.getPawn;
-        //int c = 0;
-        //switch (c) {
-            //case 0:
+        int c = selectPawn.getValue();
+        switch (c) {
+            default:
+                cliPrinter.printBoard(lightModel);
                 System.out.println("\nWhich worker you want to use? (1 or 2)");
                 SelectedPawn sp1 = new SelectedPawn(readInput(2));
                 notifyObservers(sp1);
+                break;
 
-            /*case 1:
+            case 1:
                 System.out.println("You can move only the worker number 1\n");
                 SelectedPawn sp2 = new SelectedPawn(c);
                 notifyObservers(sp2);
+                break;
 
             case 2:
                 System.out.println("You can move only the worker number 2\n");
                 SelectedPawn sp3 = new SelectedPawn(c);
-                notifyObservers(sp3);*/
+                notifyObservers(sp3);
+                break;
 
-        //}
+        }
 
 
     }
@@ -147,9 +205,6 @@ public class CLI extends AbstractView {
     @Override
     public void visit(NewAction newAction) {
         int j;
-        boolean beginning = true;
-        //print board
-        cliPrinter.printBoard(lightModel);
 
         RequestPossibleBuild rpb;
         RequestPossibleMove rpm;
@@ -158,9 +213,13 @@ public class CLI extends AbstractView {
         if (!newAction.isExtra() && !newAction.isBuild() && !newAction.isMove()){
             NewTurn newTurn = new NewTurn();
             notifyObservers(newTurn);
+
+            cliPrinter.printBoard(lightModel);
+            System.out.println("\nEnd of the turn:");
+            lightModel.setYourTurn(false);
         } else{
 
-
+            lightModel.setYourTurn(true);
             //decide action with the Boolean and send input to controller (switch case)
             if (newAction.isMove()){
                 if (!newAction.isExtra()){
@@ -170,7 +229,9 @@ public class CLI extends AbstractView {
                 }
                 else {
                     //choose and create possible move or extra message to notify to the controller
-                    System.out.println("\nWhat type of action do you want to do?\n1) Move\n2) Extra");
+                    cliPrinter.printBoard(lightModel);
+                    System.out.println("\nWhat type of action do you want to do?\n1) Move\n2) God Effect");
+                    //System.out.println(lightModel.getPlayers().get(playerID).getCard().getDescription());
                     j = readInput(2);
                     if (j==1){
                         rpm = new RequestPossibleMove();
@@ -190,7 +251,9 @@ public class CLI extends AbstractView {
                 }
                 else{
                     //choose your action and send proper message to server
-                    System.out.println("\nWhat type of action do you want to do?\n1) Build\n2) Extra");
+                    cliPrinter.printBoard(lightModel);
+                    System.out.print("\nWhat type of action do you want to do?\n1) Build\n2) God Effect");
+                    //System.out.println(lightModel.getPlayers().get(playerID).getCard().getDescription());
                     j = readInput(2);
 
                     if (j == 1){
@@ -268,8 +331,9 @@ public class CLI extends AbstractView {
         //print board
         cliPrinter.printBoard(lightModel);
         //print choices and read player's intentions
-        System.out.println("\n");
-        cliPrinter.printList(possibleExtraAction.getCoordList());
+        //todo:System.out.println(lightModel.getPlayers().get(playerID).getCard().getDescription());
+        System.out.println("Where do you want to use Your God Action?");
+        cliPrinter.printSecondList(possibleExtraAction.getCoordList(),0);
 
         //send info to controller
         ExtraAction ea;
@@ -285,11 +349,11 @@ public class CLI extends AbstractView {
             if(i <= size && i > 0) {
                 return i;
             } else {
-                System.out.println("\nInvalid Choice (integer out of bound), please select again:\n");
+                System.out.println("\nInvalid Choice (integer out of bound), please select again:");
                 return readInput(size);}
         }
         else{
-            System.out.println("\nInvalid Choice (mismatch input type), please select again:\n");
+            System.out.println("\nInvalid Choice (mismatch input type), please select again:");
             scanner.next();
             return readInput(size);
         }
