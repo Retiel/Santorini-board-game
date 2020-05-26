@@ -95,12 +95,17 @@ public class TurnManager extends AbstractManager {
         List<Coord> basicBuild = getBasicFlow(Actions.BUILD);
         List<Coord> godsBuild = getContextFlow(Actions.BUILD);
 
-        setData(basicBuild, godsBuild);
-        if(DataControl.exclusiveList(basicBuild, godsBuild)){
-            notifyView(new PossibleBuild(basicBuild, godsBuild, DataControl.checkBuild(getModel().getCurrentGodName())));
+        if(noActionAvailable(basicBuild, godsBuild)){
+            loserBracket();
         }
-        else {
-            notifyView(new PossibleBuild(godsBuild, new ArrayList<>(), DataControl.checkBuild(getModel().getCurrentGodName())));
+        else{
+            setData(basicBuild, godsBuild);
+            if(DataControl.exclusiveList(basicBuild, godsBuild)){
+                notifyView(new PossibleBuild(basicBuild, godsBuild, DataControl.checkBuild(getModel().getCurrentGodName())));
+            }
+            else {
+                notifyView(new PossibleBuild(godsBuild, new ArrayList<>(), DataControl.checkBuild(getModel().getCurrentGodName())));
+            }
         }
     }
 
@@ -123,7 +128,9 @@ public class TurnManager extends AbstractManager {
 
         if (DataControl.controlInput(coord,dataBuffer)){
             setData(Actions.MOVE, coord);
-            if (winContext.checkWinCondition(getBoard(), getModel().getCurrentPawn(), GetCell.getCellAdapter(coord,getBoard()))) winningBracket();
+            if (winContext.checkWinCondition(getBoard(), getModel().getCurrentPawn(), GetCell.getCellAdapter(coord,getBoard()))){
+                winningBracket();
+            }
             moveContext.execMove(coord.getX(), coord.getY(), getModel().getCurrentPawn(), getModel());
         }
         else notifyView(new PossibleMove(dataBuffer.getCoordList(), dataBuffer.getCoordListGods()));
@@ -173,8 +180,9 @@ public class TurnManager extends AbstractManager {
     private void loserBracket(){
 
         notifyView(new YouLose());
+        String player = getModel().getCurrentPlayer().getName();
         nextTurn();
-        removePlayer(getModel().getCurrentPlayer().getName());
+        removePlayer(player);
 
         if (getModel().getPlayers().size() == 1) {
             notifyView(new YouWin());
@@ -234,7 +242,7 @@ public class TurnManager extends AbstractManager {
     }
 
     /**
-     * Method to control the movability adn buildability of the pawns of the current player
+     * Method to control the movability of the pawns of the current player
      */
     private void forwardControl(){
 
@@ -247,33 +255,24 @@ public class TurnManager extends AbstractManager {
         List<Coord> move1 = getBasicFlow(Actions.MOVE);
         List<Coord> g_move1 =  getContextFlow(Actions.MOVE);
 
-        List<Coord> build1 = getBasicFlow(Actions.BUILD);
-        List<Coord> g_build1 =  getContextFlow(Actions.BUILD);
-
         // verify pawn 2
         getModel().setCurrentPawn(pawn2);
 
         List<Coord> move2 = getBasicFlow(Actions.MOVE);
         List<Coord> g_move2 =  getContextFlow(Actions.MOVE);
 
-        List<Coord> build2 = getBasicFlow(Actions.BUILD);
-        List<Coord> g_build2 =  getContextFlow(Actions.BUILD);
-
         // test case
         boolean test_move1 = noActionAvailable(move1, g_move1);
         boolean test_move2 = noActionAvailable(move2, g_move2);
 
-        boolean test_build1 = noActionAvailable(build1, g_build1);
-        boolean test_build2 = noActionAvailable(build2, g_build2);
-
-        if (test_move1 || test_build1){
-            if (test_move2 || test_build2){
+        if (test_move1){
+            if (test_move2){
                 loserBracket();
             }else {
                 notifyView(new SelectPawn(2));
             }
         }else {
-            if (test_move2 || test_build2){
+            if (test_move2){
                 notifyView(new SelectPawn(1));
             }else {
                 notifyView(new SelectPawn(0));

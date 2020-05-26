@@ -1,6 +1,6 @@
 # ing-sw-2020-mandocdoc-mascheroni-morici
 
-Group member:
+Membri del gruppo:
 -
 - Ray Oliver Mandocdoc
 - Marco Mascheroni
