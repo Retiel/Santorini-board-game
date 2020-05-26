@@ -21,7 +21,9 @@ public class ViewSample extends AbstractView {
     @Override
     public void visit(DataCell dataCell) {
         System.out.print("Data update...\n");
-        System.out.print(dataCell.getOldCell().toString()+"\n");
+        if(dataCell.getOldCell() != null) {
+            System.out.print(dataCell.getOldCell().toString() + "\n");
+        }
         System.out.print(dataCell.getNewCell().toString()+"\n");
         System.out.print("Data update finished\n\n\n");
     }

@@ -7,7 +7,7 @@ import java.net.Socket;
 /**
  * Server class that handles the connection requests from clients
  */
-public class Server implements Runnable {
+public class Server {
 
     /**
      * Server's socket
@@ -20,7 +20,6 @@ public class Server implements Runnable {
     public final static int SOCKET_PORT = 7777;
 
     public static void main(String[] args) {
-        Server server = new Server();
 
         try {
             //Open server's socket
@@ -29,12 +28,6 @@ public class Server implements Runnable {
             System.out.println("Cannot open server socket");
             System.exit(1);
         }
-
-        server.run();
-    }
-
-    @Override
-    public void run() {
 
         while(true) {
             try {

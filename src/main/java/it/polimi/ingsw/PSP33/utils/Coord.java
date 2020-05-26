@@ -31,27 +31,6 @@ public class Coord {
         return new Coord(x, y);
     }
 
-    /**
-    public void setLocation(Coord coord) {
-        setLocation(coord.x, coord.y);
-    }
-
-
-    public void setLocation(int x, int y) {
-        move(x, y);
-    }
-
-    public void move(int x, int y) {
-        this.x = x;
-        this.y = y;
-    }
-
-    public void translate(int dx, int dy) {
-        this.x += dx;
-        this.y += dy;
-    }
-    */
-
     @Override
     public boolean equals(Object obj) {
         if (obj instanceof Coord) {

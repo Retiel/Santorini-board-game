@@ -343,8 +343,7 @@ public class ClientHandler extends Listened implements Runnable {
             int foo;
             try {
                 foo = Integer.parseInt(string);
-            }
-            catch (NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 continue;
             }
 
