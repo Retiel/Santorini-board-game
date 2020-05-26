@@ -33,6 +33,10 @@ class LobbyManager {
         return instance;
     }
 
+    public static Map<Integer, Lobby> getLobbies() {
+        return lobbies;
+    }
+
     public synchronized static void addLobby(Lobby lobby) {
         lobbies.put(lobby.getLobbyID(), lobby);
     }

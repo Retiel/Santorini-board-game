@@ -11,22 +11,11 @@ import java.util.Scanner;
 /**
  * Class that handles client's connection and client's view
  */
-public class Client implements Runnable {
-
-    /**
-     * Client's view
-     */
-    private AbstractView view;
+public class Client {
 
     public static void main(String[] args) {
-        Client client = new Client();
-        client.run();
-    }
 
-    @Override
-    public void run() {
-
-        getViewSelection();
+        AbstractView view = ViewFactory.getView(1);
 
         Socket server;
         try {
@@ -57,7 +46,9 @@ public class Client implements Runnable {
     /**
      * Method to make the clients select his view
      */
-    public void getViewSelection() {
+    public static AbstractView getViewSelection() {
+
+        AbstractView view;
 
         Scanner scanner = new Scanner(System.in);
 
@@ -80,5 +71,7 @@ public class Client implements Runnable {
             }
             break;
         }
+
+        return view;
     }
 }

@@ -8,7 +8,8 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 import java.util.List;
 
 /**
- * Class which permit to print all the necessary information for the player (Map and lists that contain the possible choices)
+ * Class which permit to print all the necessary information for the player
+ * (Map and lists that contain the possible choices)
  */
 public class CLIPrinter {
 

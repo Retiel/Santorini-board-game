@@ -4,7 +4,6 @@ package it.polimi.ingsw.PSP33.view;
 import it.polimi.ingsw.PSP33.controller.Controller;
 import it.polimi.ingsw.PSP33.events.toServer.setup.ChoosenGod;
 import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
-import it.polimi.ingsw.PSP33.events.toServer.setup.SelectedGods;
 import it.polimi.ingsw.PSP33.events.toServer.turn.*;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.God;
@@ -57,6 +56,7 @@ public class MVCTest {
 
     @Test
     public void coreExecution(){
+        controller.startGame();
 
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         view.notifyObservers(new PlacePawn(new Coord(1,1))); /* test setup pawn branch message */
@@ -69,6 +69,7 @@ public class MVCTest {
         modelScenario(model, testPlayer1, testPlayer2);
 
         view.notifyObservers(new NewTurn()); /* test new turn branch message */
+        view.notifyObservers(new SelectedPawn(1));
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         view.notifyObservers(new RequestPossibleMove()); /* test Move branch message */
         view.notifyObservers(new MoveAction(new Coord(0,1)));
