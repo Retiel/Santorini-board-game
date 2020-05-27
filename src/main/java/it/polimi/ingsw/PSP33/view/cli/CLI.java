@@ -286,7 +286,7 @@ public class CLI extends AbstractView {
         int i = readInput(possibleBuild.getCoordList().size() + possibleBuild.getGodsList().size());
 
         //send info to controller
-        //todo: check real funcion of floor boolean
+        //todo: check real function of floor boolean
         Coord choiceCoord;
         BuildAction ba;
         if(i <= possibleBuild.getCoordList().size()){

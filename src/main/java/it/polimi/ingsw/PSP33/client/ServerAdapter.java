@@ -2,6 +2,8 @@ package it.polimi.ingsw.PSP33.client;
 
 import it.polimi.ingsw.PSP33.events.EventSerializer;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
+import it.polimi.ingsw.PSP33.events.toClient.turn.YouLose;
+import it.polimi.ingsw.PSP33.events.toClient.turn.YouWin;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.utils.observable.Observable;
 import it.polimi.ingsw.PSP33.utils.observable.Observer;
@@ -111,6 +113,22 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
             }
 
             MVEvent mvEvent = eventSerializer.deserializeMV(mvJson);
+
+            if(mvEvent instanceof YouLose){
+                try {
+                    server.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            if(mvEvent instanceof YouWin){
+                try {
+                    server.close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+
             notifyObservers(mvEvent);
         }
     }

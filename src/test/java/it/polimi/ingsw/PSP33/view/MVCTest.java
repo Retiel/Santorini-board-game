@@ -84,7 +84,7 @@ public class MVCTest {
     }
 
 /*
-              NOTE! use this legend as a reference for the diffent test cases
+              NOTE! use this legend as a reference for the different test cases
 
               legend:
               * -> roof = true
@@ -94,7 +94,7 @@ public class MVCTest {
               e -> pawn position player2
                  god: Athena
 
-              -> Graphical rappresentation of the board state: (using matrix standard refence with the upper left stating as a [0,0] coordinates)
+              -> Graphical representation of the board state: (using matrix standard reference with the upper left stating as a [0,0] coordinates)
                          _______ _______ _______ _______ _______
                         |       |       |   p   |       |       |
                         |   0   |   1   |   0   |   0   |   1   |

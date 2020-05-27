@@ -65,6 +65,10 @@ public class GameHandler extends AbstractView implements Listener {
         Model model = new Model(players);
         Controller controller = new Controller(model);
 
+        /* Testing item*/
+        Server server = new Server();
+        server.listenInput(model);
+
         //Observer pattern
         model.addObserver(this);
         this.addObserver(controller);
@@ -183,11 +187,14 @@ public class GameHandler extends AbstractView implements Listener {
     @Override
     public void visit(YouLose youLose) {
         sendMessageToClient(youLose);
+        clientHandlers.remove(currentClient);
     }
 
     @Override
     public void visit(YouWin youWin) {
         sendMessageToClient(youWin);
+        clientHandlers.remove(currentClient);
+        sendMessageToAll(new YouLose());
     }
 
     @Override
