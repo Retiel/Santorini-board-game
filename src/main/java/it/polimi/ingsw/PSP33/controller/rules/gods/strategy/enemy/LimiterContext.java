@@ -59,9 +59,10 @@ public class LimiterContext {
      */
     public void activateGodLimiter(Gods godName, Pawn p, Coord c, Board b){
         Cell cell = GetCell.getCellAdapter(c, b);
-        ChangeLimiter(godName);
+
         for (ActiveGods gods : allEffect){
-            if (godName.equals(gods.getName())) gods.setEnable(limiter.activation(p,cell,b));
+            ChangeLimiter(gods.getName());
+            if (godName.equals(gods.getName()) && !gods.enable) gods.setEnable(limiter.activation(p,cell,b));
         }
     }
 

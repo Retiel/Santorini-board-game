@@ -311,7 +311,7 @@ public class TurnManager extends AbstractManager {
     }
 
     /**
-     * Method to update data buffer
+     * Method to update old data in the model
      * @param action type of action
      * @param coord coordinate related
      */

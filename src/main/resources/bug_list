@@ -1,3 +1,9 @@
 
-Athena -> effect not applying
+
+PROBLEMS:
 Atlas -> effect not using
+
+
+
+CORRECTIONS:
+Atlas -> not treated in the current CLI, need implementation

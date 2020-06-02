@@ -58,6 +58,10 @@ public class CustomDebbuger implements Runnable{
                     System.out.println("select command");
                     turnSwitch();
                     break;
+                case "god":
+                    System.out.println("select god");
+                    godSwitch();
+                    break;
                 case "info":
                     System.out.println("Lobby number: " + this.lobbyID);
                     break;
@@ -104,7 +108,7 @@ public class CustomDebbuger implements Runnable{
     private void turnSwitch(){
         String command = scanner.nextLine();
         switch (command){
-            case "next":
+            case "next": /* needs testing */
                 model.notifyObservers(new NewAction(false, false, false));
                 break;
             case "restart": /* Command still impossible due to project limitation */
@@ -112,6 +116,10 @@ public class CustomDebbuger implements Runnable{
                 break;
             default:
         }
+    }
+
+    private void godSwitch(){
+        /* has to change the god of the next turn */
     }
 
     private Cell retrieveNewCell(){
