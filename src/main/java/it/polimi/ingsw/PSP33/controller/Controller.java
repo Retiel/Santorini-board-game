@@ -124,4 +124,13 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
     }
 
 
+    /*Debugging tools*/
+
+    public SetUpManager getSetUpManager() {
+        return setUpManager;
+    }
+
+    public TurnManager getTurnManager() {
+        return turnManager;
+    }
 }

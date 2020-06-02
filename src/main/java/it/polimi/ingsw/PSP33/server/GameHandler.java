@@ -14,6 +14,7 @@ import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
+import it.polimi.ingsw.PSP33.utils.CustomDebbuger;
 import it.polimi.ingsw.PSP33.utils.observable.Listener;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 
@@ -65,15 +66,18 @@ public class GameHandler extends AbstractView implements Listener {
         Model model = new Model(players);
         Controller controller = new Controller(model);
 
-        /* Testing item*/
-        Server server = new Server();
-        server.listenInput(model);
-
         //Observer pattern
         model.addObserver(this);
         this.addObserver(controller);
 
         System.out.println("Lobby_" + lobbyID +": observer done");
+
+        /* Testing item*/
+        CustomDebbuger customDebbuger = new CustomDebbuger(lobbyID, model, controller);
+        Thread thread = new Thread(customDebbuger, "Debugger for lobby: " + lobbyID);
+        System.out.println("Debugger for lobby: " + lobbyID + " [active]");
+        thread.start();
+        /* end testing items */
 
         //Controller starts the game
         controller.startGame();
