@@ -109,7 +109,7 @@ public class CustomDebbuger implements Runnable{
         String command = scanner.nextLine();
         switch (command){
             case "next": /* needs testing */
-                model.notifyObservers(new NewAction(false, false, false));
+                model.notifyObservers(new NewAction(false, false, false, false));
                 break;
             case "restart": /* Command still impossible due to project limitation */
                 //controller.getTurnManager().newTurnContext();

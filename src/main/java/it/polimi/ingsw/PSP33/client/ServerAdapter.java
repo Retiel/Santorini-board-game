@@ -108,12 +108,13 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
             try {
                 mvJson = input.readUTF();
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("closed connection");
                 break;
             }
 
             MVEvent mvEvent = eventSerializer.deserializeMV(mvJson);
 
+            /* manage win and lose disconnection */
             if(mvEvent instanceof YouLose){
                 try {
                     server.close();

@@ -34,7 +34,7 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
 
     @Override
     public void visit(SelectedPawn selectedPawn) {
-        turnManager.setCurretPawn(selectedPawn.getPawn());
+        turnManager.setCurrentPawn(selectedPawn.getPawn());
         turnManager.newAction();
     }
 
@@ -77,9 +77,7 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
     @Override
     public void visit(PlayerDisconnected playerDisconnected) {
         turnManager.resetLimiters(playerDisconnected.getName());
-        turnManager.nextTurn();
         turnManager.removePlayer(playerDisconnected.getName());
-        turnManager.newTurnContext();
     }
 
     @Override

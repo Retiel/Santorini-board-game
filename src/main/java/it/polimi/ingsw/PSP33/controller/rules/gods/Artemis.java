@@ -37,7 +37,7 @@ public class Artemis implements Move, ExtraAction {
         LightCell lightCellNew = LightConvertion.getLightVersion(cell);
 
         model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
-        model.notifyObservers(new NewAction(false, true, false));
+        model.notifyObservers(new NewAction(false, true, false, false));
     }
 
     @Override
@@ -55,6 +55,6 @@ public class Artemis implements Move, ExtraAction {
         LightCell lightCellNew = LightConvertion.getLightVersion(newCell);
 
         model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
-        model.notifyObservers(new NewAction(false, true, true));
+        model.notifyObservers(new NewAction(false, true, true, false));
     }
 }

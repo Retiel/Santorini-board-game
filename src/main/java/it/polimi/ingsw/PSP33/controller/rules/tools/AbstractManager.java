@@ -46,35 +46,8 @@ public abstract class AbstractManager {
     /**
      * Method to set the current pawn
      */
-    public void setCurretPawn(int pawn){
+    public void setCurrentPawn(int pawn){
         getModel().setCurrentPawn(getModel().getCurrentPlayer().getPawnByNumber(pawn));
-    }
-
-    /**
-     * Method to remove a player form the game
-     */
-    public void removePlayer(String name){
-
-        Player player = model.getPlayers().stream().filter(p -> name.equals(p.getName())).findAny().orElse(null);
-
-        List<Player> players = model.getPlayers();
-        removePawn(player.getPawns());
-        players.remove(player);
-        model.setPlayers(players);
-    }
-
-    /**
-     * Method to remove pawns of the removed player from the grid
-     * @param pawns list of the pawns
-     */
-    private void removePawn(Pawn[] pawns){
-        for (Pawn pawn: pawns){
-            Coord coord = pawn.getCoord();
-
-            Cell cell = getBoard().getGrid()[coord.getX()][coord.getY()];
-            cell.setOccupied(null);
-            notifyView(new DataCell(LightConvertion.getLightVersion(cell), null));
-        }
     }
 
     /* method used for testing */

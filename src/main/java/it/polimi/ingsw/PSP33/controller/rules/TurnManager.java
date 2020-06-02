@@ -5,10 +5,8 @@ import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.enemy.LimiterContext
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.move.MoveContext;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.extra.ExtraContext;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.win.WinContext;
-import it.polimi.ingsw.PSP33.controller.rules.tools.DataBuffer;
-import it.polimi.ingsw.PSP33.controller.rules.tools.DataControl;
-import it.polimi.ingsw.PSP33.controller.rules.tools.AbstractManager;
-import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
+import it.polimi.ingsw.PSP33.controller.rules.tools.*;
+import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
@@ -65,7 +63,7 @@ public class TurnManager extends AbstractManager {
      * Method send message ne action
      */
     public void newAction(){
-        notifyView(new NewAction(true, false, DataControl.checkStart(getModel().getCurrentGodName())));
+        notifyView(new NewAction(true, false, DataControl.checkStart(getModel().getCurrentGodName()), false));
     }
 
     /**
@@ -175,27 +173,43 @@ public class TurnManager extends AbstractManager {
     }
 
     /**
+     * Method to remove a player form the game
+     */
+    public void removePlayer(String name){
+
+        Player player = getModel().getPlayers().stream().filter(p -> name.equals(p.getName())).findAny().orElse(null);
+
+        List<Player> players = getModel().getPlayers();
+        removePawn(player.getPawns());
+        players.remove(player);
+
+        nextTurn();
+        newTurnContext();
+
+        getModel().setPlayers(players);
+
+        if (players.size() == 1) {
+            notifyView(new YouWin(players.get(0).getName()));
+        }
+    }
+
+    /**
      * Method to comunicate and chage the state of the game cause losing player
      */
     private void loserBracket(){
 
-        notifyView(new YouLose());
         String player = getModel().getCurrentPlayer().getName();
+        notifyView(new YouLose(player));
         nextTurn();
         removePlayer(player);
 
-        if (getModel().getPlayers().size() == 1) {
-            notifyView(new YouWin());
-        }else{
-            newTurnContext();
-        }
     }
 
     /**
      * Method to comunicate and chage the state of the game cause win condition met
      */
     private void winningBracket(){
-        notifyView(new YouWin());
+        notifyView(new YouWin(getModel().getCurrentPlayer().getName()));
     }
 
     /**
@@ -346,4 +360,19 @@ public class TurnManager extends AbstractManager {
         dataBuffer.setCoordList(basicList);
         dataBuffer.setCoordListGods(godList);
     }
+
+    /**
+     * Method to remove pawns of the removed player from the grid
+     * @param pawns list of the pawns
+     */
+    private void removePawn(Pawn[] pawns){
+        for (Pawn pawn: pawns){
+            Coord coord = pawn.getCoord();
+
+            Cell cell = getBoard().getGrid()[coord.getX()][coord.getY()];
+            cell.setOccupied(null);
+            notifyView(new DataCell(LightConvertion.getLightVersion(cell), null));
+        }
+    }
+
 }

@@ -27,6 +27,8 @@ import java.util.List;
  */
 public class GameHandler extends AbstractView implements Listener {
 
+
+    private boolean toggle;
     /**
      * Lobby ID
      */
@@ -50,6 +52,7 @@ public class GameHandler extends AbstractView implements Listener {
         this.lobbyID = lobby.getLobbyID();
         this.clientHandlers = lobby.getClientHandlers();
         this.currentClient = null;
+        this.toggle = true;
     }
 
     /**
@@ -96,9 +99,9 @@ public class GameHandler extends AbstractView implements Listener {
      */
     public synchronized void sendMessageToClient(MVEvent mvEvent) {
         try {
-            currentClient.sendMessage(mvEvent);
+            if(toggle) currentClient.sendMessage(mvEvent);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Lobby_" + lobbyID + ": [message_dropped]");
         }
     }
 
@@ -109,9 +112,9 @@ public class GameHandler extends AbstractView implements Listener {
     public void sendMessageToAll(MVEvent mvEvent) {
         for(ClientHandler clientHandler : clientHandlers) {
             try {
-                clientHandler.sendMessage(mvEvent);
+                if(toggle) clientHandler.sendMessage(mvEvent);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Lobby_" + lobbyID + ": [message_dropped]");
             }
         }
     }
@@ -163,7 +166,7 @@ public class GameHandler extends AbstractView implements Listener {
             try {
                 clientHandler.sendMessage(dataPlayer);
             } catch (IOException e) {
-                e.printStackTrace();
+                System.out.println("Lobby_" + lobbyID + ": [message_dropped]");
             }
         }
     }
@@ -196,9 +199,13 @@ public class GameHandler extends AbstractView implements Listener {
 
     @Override
     public void visit(YouWin youWin) {
+
+        ClientHandler clientHandler = getClientHandlerByName(youWin.getName());
+        setCurrentClient(clientHandler);
         sendMessageToClient(youWin);
         clientHandlers.remove(currentClient);
-        sendMessageToAll(new YouLose());
+        sendMessageToAll(new YouLose(""));
+        toggle = false;
     }
 
     @Override
@@ -225,4 +232,6 @@ public class GameHandler extends AbstractView implements Listener {
     public void visit(PossibleExtraAction possibleExtraAction) {
         sendMessageToClient(possibleExtraAction);
     }
+
+
 }

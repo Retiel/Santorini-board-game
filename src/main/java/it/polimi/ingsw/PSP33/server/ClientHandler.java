@@ -3,6 +3,7 @@ package it.polimi.ingsw.PSP33.server;
 import it.polimi.ingsw.PSP33.events.EventSerializer;
 import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
+import it.polimi.ingsw.PSP33.events.toServer.setup.PlayerDisconnected;
 import it.polimi.ingsw.PSP33.utils.enums.Color;
 import it.polimi.ingsw.PSP33.utils.observable.Listened;
 
@@ -139,6 +140,7 @@ public class ClientHandler extends Listened implements Runnable {
                 json = input.readUTF();
             } catch (IOException e) {
                 System.out.println("Lobby_" + lobby.getLobbyID() + ": client_" + clientName + " disconnected");
+                notifyListener(new PlayerDisconnected(getClientName()));
                 break;
             }
 

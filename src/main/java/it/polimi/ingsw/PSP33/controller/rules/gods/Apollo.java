@@ -11,7 +11,6 @@ import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Pawn;
 import it.polimi.ingsw.PSP33.model.light_version.LightCell;
-import it.polimi.ingsw.PSP33.model.light_version.LightPawn;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -53,7 +52,7 @@ public class Apollo implements Move {
         LightCell lightCellNew = LightConvertion.getLightVersion(newCell);
 
         model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
-        model.notifyObservers(new NewAction(false, true, false));
+        model.notifyObservers(new NewAction(false, true, false, false));
     }
 
 }

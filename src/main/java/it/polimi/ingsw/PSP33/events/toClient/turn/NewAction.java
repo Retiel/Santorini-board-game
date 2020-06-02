@@ -13,10 +13,13 @@ public class NewAction implements MVEvent {
     private final boolean build;
     private final boolean extra;
 
-    public NewAction(boolean move, boolean build, boolean extra) {
+    private final boolean endTurn;
+
+    public NewAction(boolean move, boolean build, boolean extra, boolean endTurn) {
         this.move = move;
         this.build = build;
         this.extra = extra;
+        this.endTurn = endTurn;
     }
 
     public boolean isMove() {
@@ -29,6 +32,10 @@ public class NewAction implements MVEvent {
 
     public boolean isExtra() {
         return extra;
+    }
+
+    public boolean isEndTurn() {
+        return endTurn;
     }
 
     @Override
