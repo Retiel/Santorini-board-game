@@ -1,6 +1,8 @@
 package it.polimi.ingsw.PSP33.client;
 
+import com.google.gson.Gson;
 import it.polimi.ingsw.PSP33.server.Server;
+import it.polimi.ingsw.PSP33.utils.Connection;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 import it.polimi.ingsw.PSP33.view.ViewFactory;
 
@@ -17,9 +19,12 @@ public class Client {
 
         AbstractView view = ViewFactory.getView(1);
 
+        Gson gson = new Gson();
+        Connection connection = gson.fromJson("src/main/resources/connection.json", Connection.class);
+
         Socket server;
         try {
-            server = new Socket("127.0.0.1", Server.SOCKET_PORT);
+            server = new Socket(connection.getServer_ip(), connection.getPort());
         } catch (IOException e) {
             System.out.println("Server unreachable");
             return;

@@ -154,7 +154,7 @@ public class CLI extends AbstractView {
 
     /**
      * method that notify the player the outcome of the game
-     * @param youLose
+     * @param youLose message to communicate the lose
      */
     @Override
     public void visit(YouLose youLose) {
@@ -163,7 +163,7 @@ public class CLI extends AbstractView {
 
     /**
      * method that notify the player the outcome of the game
-     * @param youWin
+     * @param youWin message to communicate the Win
      */
     @Override
     public void visit(YouWin youWin) {
@@ -172,7 +172,7 @@ public class CLI extends AbstractView {
 
     /**
      * visit method that permit the player to select the main worker
-     * @param selectPawn
+     * @param selectPawn message to communicate the necessity to select pawn
      */
     @Override
     public void visit(SelectPawn selectPawn) {
