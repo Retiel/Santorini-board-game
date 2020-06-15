@@ -200,11 +200,13 @@ public class GameHandler extends AbstractView implements Listener {
     @Override
     public void visit(YouWin youWin) {
 
-        ClientHandler clientHandler = getClientHandlerByName(youWin.getName());
+        String winner = youWin.getName();
+        ClientHandler clientHandler = getClientHandlerByName(winner);
         setCurrentClient(clientHandler);
         sendMessageToClient(youWin);
         clientHandlers.remove(currentClient);
-        sendMessageToAll(new YouLose(""));
+        sendMessageToAll(new YouLose(winner));
+
         toggle = false;
     }
 

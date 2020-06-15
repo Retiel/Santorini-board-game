@@ -16,16 +16,36 @@
                 <version>3.2.3</version>
                 <executions>
                     <execution>
+                        <id>jar_client</id>
                         <phase>package</phase>
                         <goals>
                             <goal>shade</goal>
                         </goals>
                         <configuration>
                             <!-- put your configurations here -->
+                            <outputFile>target/client.jar</outputFile>
                             <transformers>
                                 <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
                                     <manifestEntries>
-                                        <Main-Class>java.client.Client</Main-Class>
+                                        <Main-Class>it.polimi.ingsw.PSP33.client.Client</Main-Class>
+                                    </manifestEntries>
+                                </transformer>
+                            </transformers>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>jar_server</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>shade</goal>
+                        </goals>
+                        <configuration>
+                            <!-- put your configurations here -->
+                            <outputFile>target/server.jar</outputFile>
+                            <transformers>
+                                <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
+                                    <manifestEntries>
+                                        <Main-Class>it.polimi.ingsw.PSP33.server.Server</Main-Class>
                                     </manifestEntries>
                                 </transformer>
                             </transformers>

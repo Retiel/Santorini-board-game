@@ -1,11 +1,13 @@
 package it.polimi.ingsw.PSP33.client;
 
 import com.google.gson.Gson;
-import it.polimi.ingsw.PSP33.server.Server;
 import it.polimi.ingsw.PSP33.utils.Connection;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 import it.polimi.ingsw.PSP33.view.ViewFactory;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.Socket;
 import java.util.Scanner;
@@ -20,11 +22,16 @@ public class Client {
         AbstractView view = ViewFactory.getView(1);
 
         Gson gson = new Gson();
-        Connection connection = gson.fromJson("src/main/resources/connection.json", Connection.class);
+        Connection connection = null;
+        try {
+            connection = gson.fromJson(new FileReader("src/main/resources/connection.json"), Connection.class);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
 
         Socket server;
         try {
-            server = new Socket(connection.getServer_ip(), connection.getPort());
+            server = new Socket(connection.getServer(), connection.getPort());
         } catch (IOException e) {
             System.out.println("Server unreachable");
             return;

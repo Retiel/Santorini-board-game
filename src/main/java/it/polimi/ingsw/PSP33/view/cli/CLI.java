@@ -20,6 +20,8 @@ import it.polimi.ingsw.PSP33.view.AbstractView;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * the rapppresentation of the View Class for the CLI mode
@@ -28,18 +30,17 @@ public class CLI extends AbstractView {
 
     private LightModel lightModel;
     private CLIPrinter cliPrinter;
-    private Scanner scanner;
-    private int playerID;
 
+    private ExecutorService executor;
 
     /**
      * the constructor of the CLI class
      */
     public CLI() {
         cliPrinter = new CLIPrinter();
-        scanner = new Scanner(System.in);
         lightModel = new LightModel();
 
+        executor = Executors.newSingleThreadExecutor();
     }
 
     /**
@@ -70,7 +71,7 @@ public class CLI extends AbstractView {
         int newy = dataCell.getNewCell().getCoord().getY();
         lightModel.getLightGrid()[newx][newy] = dataCell.getNewCell();
 
-        if(lightModel.isYourTurn() == false){
+        if(!lightModel.isYourTurn()) {
             System.out.println("\nAn opponent made a move and changed the Board:");
             cliPrinter.printBoard(lightModel);
         }
@@ -85,11 +86,6 @@ public class CLI extends AbstractView {
         //update player info at the beginning
         lightModel.setPlayers(dataPlayer.getPlayer());
         lightModel.setPlayerName(dataPlayer.getName());
-        for (int i=0; i<dataPlayer.getPlayer().size()-1; i++) {
-            if(dataPlayer.getPlayer().get(i).getName() == dataPlayer.getName()){
-                playerID = i;
-            }
-        }
     }
 
     /**
@@ -98,13 +94,15 @@ public class CLI extends AbstractView {
      */
     @Override
     public void visit(YourGod yourGod) {
-        int i;
-        System.out.println("\nWhich God Card do you want?\n");
-        cliPrinter.printGodList(yourGod.getGods());
 
-        ChoosenGod cg = new ChoosenGod(yourGod.getGods().get(readInput(yourGod.getGods().size()) - 1));
-        notifyObservers(cg);
-        lightModel.setYourTurn(false);
+        executor.execute(() -> {
+            System.out.println("\nWhich God Card do you want?\n");
+            cliPrinter.printGodList(yourGod.getGods());
+
+            ChoosenGod cg = new ChoosenGod(yourGod.getGods().get(readInput(yourGod.getGods().size()) - 1));
+            notifyObservers(cg);
+            lightModel.setYourTurn(false);
+        });
     }
 
     /**
@@ -123,12 +121,15 @@ public class CLI extends AbstractView {
      */
     @Override
     public void visit(PossiblePlacement possiblePlacement) {
-        cliPrinter.printBoard(lightModel);
-        //print 2 times the placement for the pawn (setup phase)
-        System.out.println("\nWhere do you want to place your worker?");
-        cliPrinter.printList(possiblePlacement.getCoordList());
-        PlacePawn pp = new PlacePawn(possiblePlacement.getCoordList().get(readInput(possiblePlacement.getCoordList().size()) - 1));
-        notifyObservers(pp);
+
+        executor.execute(() -> {
+            cliPrinter.printBoard(lightModel);
+            //print 2 times the placement for the pawn (setup phase)
+            System.out.println("\nWhere do you want to place your worker?");
+            cliPrinter.printList(possiblePlacement.getCoordList());
+            PlacePawn pp = new PlacePawn(possiblePlacement.getCoordList().get(readInput(possiblePlacement.getCoordList().size()) - 1));
+            notifyObservers(pp);
+        });
     }
 
     /**
@@ -137,19 +138,22 @@ public class CLI extends AbstractView {
      */
     @Override
     public void visit(SelectGods selectGods) {
-        List<God> allGods = new ArrayList<>(selectGods.getGods());
-        List<God> chosenGods = new ArrayList<>();
 
-        for(int c=1;c<lightModel.getPlayers().size()+1;c++){
-            System.out.println("Choose the "+c+"° God:\n");
-            cliPrinter.printGodList(allGods);
-            int i = readInput(allGods.size());
-            chosenGods.add(allGods.get(i-1));
-            allGods.remove(allGods.get(i-1));
-        }
+        executor.execute(() -> {
+            List<God> allGods = new ArrayList<>(selectGods.getGods());
+            List<God> chosenGods = new ArrayList<>();
 
-        SelectedGods sg = new SelectedGods(chosenGods);
-        notifyObservers(sg);
+            for(int c=1;c<lightModel.getPlayers().size()+1;c++){
+                System.out.println("Choose the "+c+"° God:\n");
+                cliPrinter.printGodList(allGods);
+                int i = readInput(allGods.size());
+                chosenGods.add(allGods.get(i-1));
+                allGods.remove(allGods.get(i-1));
+            }
+
+            SelectedGods sg = new SelectedGods(chosenGods);
+            notifyObservers(sg);
+        });
     }
 
     /**
@@ -158,7 +162,7 @@ public class CLI extends AbstractView {
      */
     @Override
     public void visit(YouLose youLose) {
-        System.out.println("You lose!");
+        System.out.println("Player " + youLose.getName() + "has won!");
     }
 
     /**
@@ -176,187 +180,196 @@ public class CLI extends AbstractView {
      */
     @Override
     public void visit(SelectPawn selectPawn) {
-        int c = selectPawn.getValue();
-        switch (c) {
-            default:
-                cliPrinter.printBoard(lightModel);
-                System.out.println("\nWhich worker you want to use? (1 or 2)");
-                SelectedPawn sp1 = new SelectedPawn(readInput(2));
-                notifyObservers(sp1);
-                break;
 
-            case 1:
-                System.out.println("You can move only the worker number 1\n");
-                SelectedPawn sp2 = new SelectedPawn(c);
-                notifyObservers(sp2);
-                break;
+        executor.execute(() -> {
+            int c = selectPawn.getValue();
+            switch (c) {
+                default:
+                    cliPrinter.printBoard(lightModel);
+                    System.out.println("\nWhich worker you want to use? (1 or 2)");
+                    SelectedPawn sp1 = new SelectedPawn(readInput(2));
+                    notifyObservers(sp1);
+                    break;
 
-            case 2:
-                System.out.println("You can move only the worker number 2\n");
-                SelectedPawn sp3 = new SelectedPawn(c);
-                notifyObservers(sp3);
-                break;
+                case 1:
+                    System.out.println("You can move only the worker number 1\n");
+                    SelectedPawn sp2 = new SelectedPawn(c);
+                    notifyObservers(sp2);
+                    break;
 
-        }
-
-
+                case 2:
+                    System.out.println("You can move only the worker number 2\n");
+                    SelectedPawn sp3 = new SelectedPawn(c);
+                    notifyObservers(sp3);
+                    break;
+            }
+        });
     }
 
     @Override
     public void visit(NewAction newAction) {
-        int j;
+        executor.execute(() -> {
+            int j;
 
-        RequestPossibleBuild rpb;
-        RequestPossibleMove rpm;
-        RequestExtraAction rea;
+            RequestPossibleBuild rpb;
+            RequestPossibleMove rpm;
+            RequestExtraAction rea;
 
-        if (!newAction.isExtra() && !newAction.isBuild() && !newAction.isMove()){
-            NewTurn newTurn = new NewTurn();
-            notifyObservers(newTurn);
+            if (!newAction.isExtra() && !newAction.isBuild() && !newAction.isMove()){
+                NewTurn newTurn = new NewTurn();
+                notifyObservers(newTurn);
 
-            cliPrinter.printBoard(lightModel);
-            System.out.println("\nEnd of the turn:");
-            lightModel.setYourTurn(false);
-        } else{
+                cliPrinter.printBoard(lightModel);
+                System.out.println("End of the turn:");
+                lightModel.setYourTurn(false);
+            } else{
 
-            lightModel.setYourTurn(true);
-            //decide action with the Boolean and send input to controller (switch case)
-            if (newAction.isMove()){
-                if (!newAction.isExtra()){
-                    //send move action to controller
-                    rpm = new RequestPossibleMove();
-                    notifyObservers(rpm);
-                }
-                else {
-                    //choose and create possible move or extra message to notify to the controller
-                    cliPrinter.printBoard(lightModel);
-                    System.out.println("\nWhat type of action do you want to do?\n1) Move\n2) God Effect");
-                    //System.out.println(lightModel.getPlayers().get(playerID).getCard().getDescription());
-                    j = readInput(2);
-                    if (j==1){
+                lightModel.setYourTurn(true);
+                //decide action with the Boolean and send input to controller (switch case)
+                if (newAction.isMove()){
+                    if (!newAction.isExtra()){
+                        //send move action to controller
                         rpm = new RequestPossibleMove();
                         notifyObservers(rpm);
-                    } else if (j == 2){
-                        rea = new RequestExtraAction();
-                        notifyObservers(rea);
+                    }
+                    else {
+                        //choose and create possible move or extra message to notify to the controller
+                        cliPrinter.printBoard(lightModel);
+                        System.out.println("What type of action do you want to do?\n1) Move\n2) God Effect");
+                        //System.out.println(lightModel.getPlayers().get(playerID).getCard().getDescription());
+                        j = readInput(2);
+                        if (j==1){
+                            rpm = new RequestPossibleMove();
+                            notifyObservers(rpm);
+                        } else if (j == 2){
+                            rea = new RequestExtraAction();
+                            notifyObservers(rea);
+                        }
                     }
                 }
-            }
 
-            if (newAction.isBuild()){
+                if (newAction.isBuild()){
 
-                if (!newAction.isExtra()){
-                    rpb = new RequestPossibleBuild();
-                    notifyObservers(rpb);
-                }
-                else{
-                    //choose your action and send proper message to server
-                    cliPrinter.printBoard(lightModel);
-                    System.out.print("\nWhat type of action do you want to do?\n1) Build\n2) God Effect");
-                    //System.out.println(lightModel.getPlayers().get(playerID).getCard().getDescription());
-                    j = readInput(2);
-
-                    if (j == 1){
+                    if (!newAction.isExtra()){
                         rpb = new RequestPossibleBuild();
                         notifyObservers(rpb);
-                    } else if (j == 2){
+                    }
+                    else{
+                        //choose your action and send proper message to server
+                        cliPrinter.printBoard(lightModel);
+                        System.out.print("What type of action do you want to do?\n1) Build\n2) God Effect");
+                        //System.out.println(lightModel.getPlayers().get(playerID).getCard().getDescription());
+                        j = readInput(2);
+
+                        if (j == 1){
+                            rpb = new RequestPossibleBuild();
+                            notifyObservers(rpb);
+                        } else if (j == 2){
+                            rea = new RequestExtraAction();
+                            notifyObservers(rea);
+                        }
+                    }
+                }
+
+                if (newAction.isExtra()){
+                    if (!newAction.isBuild()&&!newAction.isMove()){
                         rea = new RequestExtraAction();
                         notifyObservers(rea);
                     }
                 }
             }
-
-            if (newAction.isExtra()){
-                if (!newAction.isBuild()&&!newAction.isMove()){
-                    rea = new RequestExtraAction();
-                    notifyObservers(rea);
-                }
-            }
-        }
+        });
     }
 
     @Override
     public void visit(PossibleBuild possibleBuild) {
-        //print board
-        cliPrinter.printBoard(lightModel);
-        //print choices and read player's intentions
-        System.out.println("\nWhere do you want to build your Block?\n");
-        cliPrinter.printList(possibleBuild.getCoordList());
-        cliPrinter.printSecondList(possibleBuild.getGodsList(),possibleBuild.getCoordList().size());
-        int i = readInput(possibleBuild.getCoordList().size() + possibleBuild.getGodsList().size());
+        executor.execute(() -> {
+            //print board
+            cliPrinter.printBoard(lightModel);
+            //print choices and read player's intentions
+            System.out.println("Where do you want to build your Block?\n");
+            cliPrinter.printList(possibleBuild.getCoordList());
+            cliPrinter.printSecondList(possibleBuild.getGodsList(),possibleBuild.getCoordList().size());
+            int i = readInput(possibleBuild.getCoordList().size() + possibleBuild.getGodsList().size());
 
-        //send info to controller
-        //todo: check real function of floor boolean
-        Coord choiceCoord;
-        BuildAction ba;
-        if(i <= possibleBuild.getCoordList().size()){
-            choiceCoord = possibleBuild.getCoordList().get(i-1);
-            if(lightModel.getLightGrid()[choiceCoord.getX()][choiceCoord.getY()].getFloor()<2) {
-                ba = new BuildAction(choiceCoord, false);
+            //send info to controller
+            //todo: check real function of floor boolean
+            Coord choiceCoord;
+            BuildAction ba;
+            if(i <= possibleBuild.getCoordList().size()){
+                choiceCoord = possibleBuild.getCoordList().get(i-1);
+                if(lightModel.getLightGrid()[choiceCoord.getX()][choiceCoord.getY()].getFloor()<2) {
+                    ba = new BuildAction(choiceCoord, false);
+                }
+                else ba = new BuildAction(choiceCoord, true);
+
             }
-            else ba = new BuildAction(choiceCoord, true);
-
-        }
-        else{
-            choiceCoord = possibleBuild.getGodsList().get(i-possibleBuild.getCoordList().size()-1);
-            if(lightModel.getLightGrid()[choiceCoord.getX()][choiceCoord.getY()].getFloor()<2){
-                ba = new BuildAction(choiceCoord,false);
-            } else ba = new BuildAction(choiceCoord,false);
-        }
-        notifyObservers(ba);
+            else{
+                choiceCoord = possibleBuild.getGodsList().get(i-possibleBuild.getCoordList().size()-1);
+                if(lightModel.getLightGrid()[choiceCoord.getX()][choiceCoord.getY()].getFloor()<2){
+                    ba = new BuildAction(choiceCoord,false);
+                } else ba = new BuildAction(choiceCoord,false);
+            }
+            notifyObservers(ba);
+        });
     }
 
     @Override
     public void visit(PossibleMove possibleMove) {
-        //print board
-        cliPrinter.printBoard(lightModel);
-        //print choices and read player's intentions
-        System.out.println("\nWhere do you want to move your worker?\n");
-        cliPrinter.printList(possibleMove.getCoordList());
-        cliPrinter.printSecondList(possibleMove.getGodsList(),possibleMove.getCoordList().size());
-        int i = readInput(possibleMove.getCoordList().size() + possibleMove.getGodsList().size());
+        executor.execute(() -> {
+            //print board
+            cliPrinter.printBoard(lightModel);
+            //print choices and read player's intentions
+            System.out.println("Where do you want to move your worker?\n");
+            cliPrinter.printList(possibleMove.getCoordList());
+            cliPrinter.printSecondList(possibleMove.getGodsList(),possibleMove.getCoordList().size());
+            int i = readInput(possibleMove.getCoordList().size() + possibleMove.getGodsList().size());
 
-        //send info to controller
-        MoveAction ma;
-        if(i <= possibleMove.getCoordList().size()){
-            ma = new MoveAction(possibleMove.getCoordList().get(i - 1));
-        } else {
-            ma = new MoveAction(possibleMove.getGodsList().get(i - possibleMove.getCoordList().size() - 1));
-        }
-        notifyObservers(ma);
+            //send info to controller
+            MoveAction ma;
+            if(i <= possibleMove.getCoordList().size()){
+                ma = new MoveAction(possibleMove.getCoordList().get(i - 1));
+            } else {
+                ma = new MoveAction(possibleMove.getGodsList().get(i - possibleMove.getCoordList().size() - 1));
+            }
+            notifyObservers(ma);
+        });
     }
 
     @Override
     public void visit(PossibleExtraAction possibleExtraAction) {
-        //print board
-        cliPrinter.printBoard(lightModel);
-        //print choices and read player's intentions
-        //todo:System.out.println(lightModel.getPlayers().get(playerID).getCard().getDescription());
-        System.out.println("Where do you want to use Your God Action?");
-        cliPrinter.printSecondList(possibleExtraAction.getCoordList(),0);
+        executor.execute(() -> {
+            //print board
+            cliPrinter.printBoard(lightModel);
+            //print choices and read player's intentions
+            //todo:System.out.println(lightModel.getPlayers().get(playerID).getCard().getDescription());
+            System.out.println("Where do you want to use Your God Action?");
+            cliPrinter.printSecondList(possibleExtraAction.getCoordList(),0);
 
-        //send info to controller
-        ExtraAction ea;
-        Coord choiceCoord = possibleExtraAction.getCoordList().get(readInput(possibleExtraAction.getCoordList().size()) - 1);
-        ea = new ExtraAction(choiceCoord);
-        notifyObservers(ea);
+            //send info to controller
+            ExtraAction ea;
+            Coord choiceCoord = possibleExtraAction.getCoordList().get(readInput(possibleExtraAction.getCoordList().size()) - 1);
+            ea = new ExtraAction(choiceCoord);
+            notifyObservers(ea);
+        });
 
     }
 
     private int readInput(int size){
+
+        Scanner scanner = new Scanner(System.in);
         if(scanner.hasNextInt()){
             int i = scanner.nextInt();
             if(i <= size && i > 0) {
                 return i;
             } else {
-                System.out.println("\nInvalid Choice (integer out of bound), please select again:");
+                System.out.println("Invalid Choice (integer out of bound), please select again:");
                 return readInput(size);}
         }
-        else{
-            System.out.println("\nInvalid Choice (mismatch input type), please select again:");
+        else {
+            System.out.println("Invalid Choice (mismatch input type), please select again:");
             scanner.next();
             return readInput(size);
         }
     }
-
 }
