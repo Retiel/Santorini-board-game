@@ -2,7 +2,7 @@ package it.polimi.ingsw.PSP33.controller.rules.gods;
 
 import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.move.Move;
-import it.polimi.ingsw.PSP33.controller.rules.tools.LightConvertion;
+import it.polimi.ingsw.PSP33.controller.rules.tools.LightConversion;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.model.Board;
@@ -49,12 +49,12 @@ public class Minotaur implements Move {
 
         }while (!(dX*(i+1) > 4 || dY*(i+1) > 4 ) );
 
-        BasicAction.MovePawn(oldCell, newCell, pawn);
-        BasicAction.MovePawn(newCell, otherCell, otherPawn);
+        BasicAction.movePawn(oldCell, newCell, pawn);
+        BasicAction.movePawn(newCell, otherCell, otherPawn);
         newCell.setOccupied(pawn);
 
-        LightCell lightCellOld = LightConvertion.getLightVersion(oldCell);
-        LightCell lightCellNew = LightConvertion.getLightVersion(newCell);
+        LightCell lightCellOld = LightConversion.getLightVersion(oldCell);
+        LightCell lightCellNew = LightConversion.getLightVersion(newCell);
 
         model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
         model.notifyObservers(new NewAction(false, true, false, false));

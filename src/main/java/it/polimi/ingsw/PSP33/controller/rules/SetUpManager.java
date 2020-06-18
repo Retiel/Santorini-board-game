@@ -50,11 +50,11 @@ public class SetUpManager extends AbstractManager {
         int randomInteger = random.nextInt(numberOfPlayers);
 
         getModel().setCurrentPlayer(getModel().getPlayers().get(randomInteger));
-        getModel().notifyObservers( new DataBoard( LightConvertion.getLightVersion( getBoard() ) ) );
+        getModel().notifyObservers( new DataBoard( LightConversion.getLightVersion( getBoard() ) ) );
 
         List<LightPlayer> players = new ArrayList<>();
         for (Player player : getModel().getPlayers()){
-            players.add(LightConvertion.getLightVersion(player));
+            players.add(LightConversion.getLightVersion(player));
         }
         getModel().notifyObservers(new DataPlayer(players));
     }
@@ -65,7 +65,7 @@ public class SetUpManager extends AbstractManager {
      * @return List of Coord class object
      */
     public List<Coord> GetAvailablePlacement(){
-        List<Cell> cellList = GetCell.getPlaceableCells(getModel().getBoard());
+        List<Cell> cellList = GetCell.getPlaceCells(getModel().getBoard());
         return GetCell.getListAdapter(cellList);
     }
 
@@ -77,8 +77,8 @@ public class SetUpManager extends AbstractManager {
     public void PlacePlayerPawn(int coordX, int coordY){
         Cell startingCell = getBoard().getGrid()[coordX][coordY];
         Pawn pawn1 = getModel().getCurrentPlayer().getPawns()[pawn];
-        BasicAction.SetUpPawnPosition(startingCell, pawn1);
-        getModel().notifyObservers(new DataCell(LightConvertion.getLightVersion(startingCell), null));
+        BasicAction.setUpPawnPosition(startingCell, pawn1);
+        getModel().notifyObservers(new DataCell(LightConversion.getLightVersion(startingCell), null));
         if (pawn == 0) pawn++;
         else pawn = 0;
     }

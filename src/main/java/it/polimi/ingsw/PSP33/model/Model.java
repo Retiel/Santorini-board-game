@@ -24,7 +24,7 @@ public class Model extends Observable<MVEvent> {
     private List<Player> players;
 
     /**
-     * Player on the curent turn
+     * Player on the current turn
      */
     private Player currentPlayer;
 

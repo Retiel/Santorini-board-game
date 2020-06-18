@@ -1,7 +1,5 @@
 package it.polimi.ingsw.PSP33.model.light_version;
 
-import it.polimi.ingsw.PSP33.utils.enums.Color;
-
 import java.util.List;
 
 public class LightModel {

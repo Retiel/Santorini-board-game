@@ -155,7 +155,7 @@ public class TurnManager extends AbstractManager {
 
         if (DataControl.controlInput(coord,dataBuffer)) {
             setData(Actions.EXTRA, coord);
-            extraContext.ExecAction(coord, getModel().getCurrentPawn(), getModel());
+            extraContext.execAction(coord, getModel().getCurrentPawn(), getModel());
         }
         else notifyView(new PossibleExtraAction(dataBuffer.getCoordList()));
     }
@@ -371,7 +371,7 @@ public class TurnManager extends AbstractManager {
 
             Cell cell = getBoard().getGrid()[coord.getX()][coord.getY()];
             cell.setOccupied(null);
-            notifyView(new DataCell(LightConvertion.getLightVersion(cell), null));
+            notifyView(new DataCell(LightConversion.getLightVersion(cell), null));
         }
     }
 

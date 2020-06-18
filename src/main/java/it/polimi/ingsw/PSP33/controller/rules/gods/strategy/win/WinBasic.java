@@ -4,6 +4,10 @@ import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
 
+/**
+ * BWin condition for all player
+ * (also usable as a template to copy/paste)
+ */
 public class WinBasic implements WinCondition {
 
     @Override

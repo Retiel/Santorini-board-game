@@ -8,7 +8,7 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 import java.util.List;
 
 /**
- * Interface that define the move of the pawns and using pattern stategy it differenciate base on the gods effect
+ * Interface that define the move of the pawns, it uses pattern strategy to differentiate gods effect
  *
  */
 public interface Move {

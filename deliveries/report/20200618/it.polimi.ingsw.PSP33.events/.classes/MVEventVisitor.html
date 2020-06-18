@@ -1,0 +1,132 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: MVEventVisitor</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.events</a> ]
+</div>
+
+<h1>Coverage Summary for Class: MVEventVisitor (it.polimi.ingsw.PSP33.events)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">MVEventVisitor</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.events;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
+<i>6</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
+<i>7</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
+<i>8</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
+<i>9</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
+<i>10</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.turn.*;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;/**
+<i>13</i>&nbsp; * Custom interface used to implement the visitor pattern for messages sent to client
+<i>14</i>&nbsp; */
+<i>15</i>&nbsp;public interface MVEventVisitor {
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    /**
+<i>18</i>&nbsp;     * Message to send to the player all inital data of the board
+<i>19</i>&nbsp;     */
+<i>20</i>&nbsp;    void visit(DataBoard dataBoard);
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    /**
+<i>23</i>&nbsp;     * Message to send to the player all inital data of the modified cell
+<i>24</i>&nbsp;     */
+<i>25</i>&nbsp;    void visit(DataCell dataCell);
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;    /**
+<i>28</i>&nbsp;     * Message to send to the player all inital data of the player
+<i>29</i>&nbsp;     */
+<i>30</i>&nbsp;    void visit(DataPlayer dataPlayer);
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    /**
+<i>33</i>&nbsp;     * Message to send to the player all inital data of the pawn
+<i>34</i>&nbsp;     */
+<i>35</i>&nbsp;    void visit(YourGod yourGod);
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    /**
+<i>38</i>&nbsp;     * Message to send to the player all inital data of the pawn
+<i>39</i>&nbsp;     */
+<i>40</i>&nbsp;    void visit(CurrentPlayer currentPlayer);
+<i>41</i>&nbsp;
+<i>42</i>&nbsp;    /**
+<i>43</i>&nbsp;     * Message to send to the player all inital data of the board
+<i>44</i>&nbsp;     */
+<i>45</i>&nbsp;    void visit(PossiblePlacement possiblePlacement);
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    /**
+<i>48</i>&nbsp;     * Message to send to the player select the N gods to use in the game
+<i>49</i>&nbsp;     */
+<i>50</i>&nbsp;    void visit(SelectGods selectGods);
+<i>51</i>&nbsp;
+<i>52</i>&nbsp;    /**
+<i>53</i>&nbsp;     * Message to comunicate to the losing statement
+<i>54</i>&nbsp;     */
+<i>55</i>&nbsp;    void visit(YouLose youLose);
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;    /**
+<i>58</i>&nbsp;     * Message to comunicate to the winning statement
+<i>59</i>&nbsp;     */
+<i>60</i>&nbsp;    void visit(YouWin youWin);
+<i>61</i>&nbsp;    /**
+<i>62</i>&nbsp;     * Message to request the player what pawn the player is going to use
+<i>63</i>&nbsp;     */
+<i>64</i>&nbsp;    void visit(SelectPawn selectPawn);
+<i>65</i>&nbsp;
+<i>66</i>&nbsp;    /**
+<i>67</i>&nbsp;     * Message to request the player what to do at the star of his turn
+<i>68</i>&nbsp;     */
+<i>69</i>&nbsp;    void visit(NewAction newAction);
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;    /**
+<i>72</i>&nbsp;     * Message to request the player to select a cell for his move
+<i>73</i>&nbsp;     */
+<i>74</i>&nbsp;    void visit(PossibleBuild possibleBuild);
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;    /**
+<i>77</i>&nbsp;     * Message to request the player to select a cell where to build
+<i>78</i>&nbsp;     */
+<i>79</i>&nbsp;    void visit(PossibleMove possibleMove);
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;    /**
+<i>82</i>&nbsp;     * Message to request the player if use the gods power
+<i>83</i>&nbsp;     */
+<i>84</i>&nbsp;    void visit(PossibleExtraAction possibleExtraAction);
+<i>85</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-06-18 11:13</div>
+</div>
+</body>
+</html>

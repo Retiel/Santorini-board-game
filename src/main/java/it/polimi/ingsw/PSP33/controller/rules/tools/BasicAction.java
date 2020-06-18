@@ -13,7 +13,7 @@ public class BasicAction {
      * @param pawn pawn to put in the board
      * @param startingCell cell where the selected pawn start
      */
-    public static void SetUpPawnPosition(Cell startingCell, Pawn pawn) {
+    public static void setUpPawnPosition(Cell startingCell, Pawn pawn) {
         pawn.setCoords(startingCell.getCoordX(), startingCell.getCoordY());
         startingCell.setOccupied(pawn);
     }
@@ -24,7 +24,7 @@ public class BasicAction {
      * @param newCell new position of the pawn
      * @param pawn the pawn involved
      */
-    public static void MovePawn(Cell oldCell, Cell newCell, Pawn pawn) {
+    public static void movePawn(Cell oldCell, Cell newCell, Pawn pawn) {
 
         pawn.setCoords(newCell.getCoordX(), newCell.getCoordY());
         oldCell.setOccupied(null);
@@ -33,13 +33,13 @@ public class BasicAction {
 
     /**
      * the method a player can use to Build a Block (or a Dome) on a Cell
-     * @param c the Cell where the player wants to Build
+     * @param cell the Cell where the player wants to Build
      */
-    public static void BuildBlock(Cell c){
-        if(c.getFloor() == 3){
-            c.setRoof(true);
+    public static void buildBlock(Cell cell){
+        if(cell.getFloor() == 3){
+            cell.setRoof(true);
         }
-        else c.setFloor(c.getFloor()+1);
+        else cell.setFloor(cell.getFloor()+1);
     }
 
 }

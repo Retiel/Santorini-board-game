@@ -18,10 +18,8 @@ import java.util.List;
 public class MoveContext {
 
     private Move move;
-    private String context;
 
     public MoveContext(Gods godName) {
-        this.context = godName.name();
         switch (godName){
             case APOLLO: this.move = new Apollo(); break;
             case ARTEMIS: this.move = new Artemis(); break;
@@ -35,25 +33,25 @@ public class MoveContext {
 
     /**
      * Method to check available move based on the god effect
-     * @param p pawn involved
-     * @param b board of the game
+     * @param pawn pawn involved
+     * @param board board of the game
      *
      * @return List of Cell object
      */
-    public List<Cell> checkMove(Pawn p, Board b){
-        return  move.checkMove(p,b);
+    public List<Cell> checkMove(Pawn pawn, Board board){
+        return  move.checkMove(pawn, board);
     }
 
     /**
      * Method to execute move based on the god effect
      * @param coordX coordinate x
      * @param coordY coordinate y
-     * @param p pawn involved
-     * @param m model used also for notify
+     * @param pawn pawn involved
+     * @param model model used also for notify
      */
-    public void execMove(int coordX, int coordY, Pawn p, Model m){
-        Cell newCell = m.getBoard().getGrid()[coordX][coordY];
-        move.executeMove(newCell, p, m);
+    public void execMove(int coordX, int coordY, Pawn pawn, Model model){
+        Cell newCell = model.getBoard().getGrid()[coordX][coordY];
+        move.executeMove(newCell, pawn, model);
     }
 
 }

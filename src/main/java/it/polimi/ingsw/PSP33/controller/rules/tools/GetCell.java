@@ -47,7 +47,7 @@ public class GetCell {
         for(ix = 0; ix < size; ix++){
             for(iy = 0; iy < size; iy++){
 
-                if(AreAdiacent(pawn.getCoordX(), pawn.getCoordY(), ix, iy)){
+                if(AreAdjacent(pawn.getCoordX(), pawn.getCoordY(), ix, iy)){
                     cellList.add(grid[ix][iy]);
                 }
             }
@@ -62,7 +62,7 @@ public class GetCell {
      *
      * @return List of Cell class object
      */
-    public  static List<Cell> getPlaceableCells(Board board){
+    public  static List<Cell> getPlaceCells(Board board){
 
         List<Cell> cellList = new ArrayList<>();
 
@@ -130,7 +130,7 @@ public class GetCell {
      *
      * @return Boolean
      */
-    public static boolean AreAdiacent(int x1, int y1, int x2, int y2){
+    public static boolean AreAdjacent(int x1, int y1, int x2, int y2){
 
         int deltaX = abs(x1 - x2);
         int deltaY =  abs(y1 - y2);

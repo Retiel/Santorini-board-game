@@ -3,7 +3,7 @@ package it.polimi.ingsw.PSP33.controller.rules.gods;
 import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.move.Move;
-import it.polimi.ingsw.PSP33.controller.rules.tools.LightConvertion;
+import it.polimi.ingsw.PSP33.controller.rules.tools.LightConversion;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.model.Board;
@@ -41,15 +41,15 @@ public class Apollo implements Move {
         Cell oldCell = model.getBoard().getGrid()[pawn.getCoordX()][pawn.getCoordY()];
         Pawn other = newCell.getOccupied();
 
-        BasicAction.MovePawn(oldCell, newCell, pawn);
+        BasicAction.movePawn(oldCell, newCell, pawn);
         if(other != null) {
-            BasicAction.MovePawn(newCell, oldCell, other);
+            BasicAction.movePawn(newCell, oldCell, other);
             oldCell.setOccupied(other);
             newCell.setOccupied(pawn);
         }
 
-        LightCell lightCellOld = LightConvertion.getLightVersion(oldCell);
-        LightCell lightCellNew = LightConvertion.getLightVersion(newCell);
+        LightCell lightCellOld = LightConversion.getLightVersion(oldCell);
+        LightCell lightCellNew = LightConversion.getLightVersion(newCell);
 
         model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
         model.notifyObservers(new NewAction(false, true, false, false));

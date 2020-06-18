@@ -110,7 +110,7 @@ public class ExtraContextTest {
 
         testCheckMethod(testSample, samplePawn, sample);
 
-        testSample.ExecAction(new Coord(1,3), samplePawn, testModel);
+        testSample.execAction(new Coord(1,3), samplePawn, testModel);
         assertEquals(1, samplePawn.getCoordX());
         assertEquals(1, samplePawn.getCoordY());
     }
@@ -133,7 +133,7 @@ public class ExtraContextTest {
 
         testCheckMethod(testSample, samplePawn, sample);
 
-        testSample.ExecAction(new Coord(3,1), samplePawn, testModel);
+        testSample.execAction(new Coord(3,1), samplePawn, testModel);
         assertEquals(3, samplePawn.getCoordX());
         assertEquals(1, samplePawn.getCoordY());
 
@@ -159,7 +159,7 @@ public class ExtraContextTest {
 
         testCheckMethod(testSample,samplePawn, sample2);
 
-        testSample.ExecAction(new Coord(3,1), samplePawn, testModel);
+        testSample.execAction(new Coord(3,1), samplePawn, testModel);
         Cell cell = GetCell.getCellAdapter(new Coord(3,1), testBoard);
         assertEquals(3, cell.getFloor());
         assertFalse(cell.isRoof());
@@ -185,13 +185,13 @@ public class ExtraContextTest {
 
         testBoard.getGrid()[2][2].setFloor(0);
 
-        testSample.ExecAction(new Coord(2,2), samplePawn, testModel);
+        testSample.execAction(new Coord(2,2), samplePawn, testModel);
         Cell cell = GetCell.getCellAdapter(new Coord(2,2), testBoard);
         assertEquals(1, cell.getFloor());
         assertFalse(cell.isRoof());
 
 
-        testSample.ExecAction(new Coord(2,2), samplePawn, testModel);
+        testSample.execAction(new Coord(2,2), samplePawn, testModel);
         assertEquals(2, cell.getFloor());
         assertFalse(cell.isRoof());
 
@@ -211,7 +211,7 @@ public class ExtraContextTest {
 
         testCheckMethod(testSample, samplePawn, sample);
 
-        testSample.ExecAction(new Coord(2,2), samplePawn, testModel);
+        testSample.execAction(new Coord(2,2), samplePawn, testModel);
         Cell cell = GetCell.getCellAdapter(new Coord(2,2), testBoard);
         assertEquals(1, cell.getFloor());
         assertFalse(cell.isRoof());

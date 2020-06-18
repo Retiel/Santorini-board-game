@@ -268,8 +268,8 @@ public class GetCellTest {
     /* test case for method AreAdiacent */
     @Test
     public void areAdiacent() {
-        assertTrue(GetCell.AreAdiacent(1,1,1,2));assertTrue(GetCell.AreAdiacent(1,1,0,0));assertTrue(GetCell.AreAdiacent(1,1,2,0));
-        assertFalse(GetCell.AreAdiacent(1,1,3,0));assertFalse(GetCell.AreAdiacent(1,1,1,3));assertFalse(GetCell.AreAdiacent(1,1,1,1));
+        assertTrue(GetCell.AreAdjacent(1,1,1,2));assertTrue(GetCell.AreAdjacent(1,1,0,0));assertTrue(GetCell.AreAdjacent(1,1,2,0));
+        assertFalse(GetCell.AreAdjacent(1,1,3,0));assertFalse(GetCell.AreAdjacent(1,1,1,3));assertFalse(GetCell.AreAdjacent(1,1,1,1));
     }
 
     /* test case for method getListAdapte */
@@ -304,7 +304,7 @@ public class GetCellTest {
     @Test
     public void SetUp_placeableCell() {
 
-        List<Cell> cellList = GetCell.getPlaceableCells(testBoard);
+        List<Cell> cellList = GetCell.getPlaceCells(testBoard);
         List<Coord> testList = GetCell.getListAdapter(cellList);
 
         for (Coord coord : testList){

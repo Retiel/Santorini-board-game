@@ -13,7 +13,7 @@ public class Cell {
     private final Coord coord;
 
     /**
-     * Integer that represent the pieces of contruction, except the roof
+     * Integer that represent the pieces of construction, except the roof
      */
     private int floor;
 

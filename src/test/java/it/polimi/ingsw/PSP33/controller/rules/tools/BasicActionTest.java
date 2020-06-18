@@ -75,7 +75,7 @@ public class BasicActionTest {
     @Test
     public void setPawnStartingPoint_correctInput_onePawnSet() {
 
-        BasicAction.SetUpPawnPosition(testCell, testPlayer1.getPawns()[0]);
+        BasicAction.setUpPawnPosition(testCell, testPlayer1.getPawns()[0]);
         allGridMoveCheck(1,1);
     }
 
@@ -84,14 +84,14 @@ public class BasicActionTest {
 
         Cell testOldCell = testModel.getBoard().getGrid()[1][1];
         Cell testNewCell = testModel.getBoard().getGrid()[1][3];
-        BasicAction.MovePawn(testOldCell, testNewCell, testPlayer1.getPawns()[0]);
+        BasicAction.movePawn(testOldCell, testNewCell, testPlayer1.getPawns()[0]);
 
         allGridMoveCheck(1,3);
 
         testOldCell = testNewCell;
         testNewCell = testModel.getBoard().getGrid()[3][3];
-        BasicAction.MovePawn(testOldCell, testNewCell, testPlayer1.getPawns()[0]);
-        BasicAction.MovePawn(testOldCell, testNewCell, testPlayer1.getPawns()[0]);
+        BasicAction.movePawn(testOldCell, testNewCell, testPlayer1.getPawns()[0]);
+        BasicAction.movePawn(testOldCell, testNewCell, testPlayer1.getPawns()[0]);
 
         allGridMoveCheck(3,3);
     }
@@ -115,14 +115,14 @@ public class BasicActionTest {
     @Test
     public void buildPawn() {
 
-        BasicAction.BuildBlock(testCell);
+        BasicAction.buildBlock(testCell);
         allGridBuildCheck(1);
 
-        BasicAction.BuildBlock(testCell);
+        BasicAction.buildBlock(testCell);
         allGridBuildCheck(2);
 
-        BasicAction.BuildBlock(testCell);
-        BasicAction.BuildBlock(testCell);
+        BasicAction.buildBlock(testCell);
+        BasicAction.buildBlock(testCell);
         allGridBuildCheck(3);
         assertTrue(testCell.isRoof());
     }

@@ -1056,7 +1056,7 @@ JSZip.support = require('./support');
 JSZip.defaults = require('./defaults');
 
 // TODO find a better way to handle this version,
-// a require('gods.json').version doesn't work with webpack, see #327
+// a require('package.json').version doesn't work with webpack, see #327
 JSZip.version = "3.1.5";
 
 JSZip.loadAsync = function (content, options) {

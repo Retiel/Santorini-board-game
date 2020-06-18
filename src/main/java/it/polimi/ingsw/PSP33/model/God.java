@@ -22,7 +22,7 @@ public class God {
     /**
      * Constructor of the class
      * @param name name of teh god
-     * @param description descriptio of the effect of the card
+     * @param description description of the effect of the card
      */
     public God(Gods name, String description) {
         this.name = name;

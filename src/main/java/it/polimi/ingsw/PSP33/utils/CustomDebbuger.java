@@ -2,7 +2,7 @@ package it.polimi.ingsw.PSP33.utils;
 
 import it.polimi.ingsw.PSP33.controller.Controller;
 import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
-import it.polimi.ingsw.PSP33.controller.rules.tools.LightConvertion;
+import it.polimi.ingsw.PSP33.controller.rules.tools.LightConversion;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
@@ -101,7 +101,7 @@ public class CustomDebbuger implements Runnable{
         int floor = readInt(3);
         cell.setFloor(floor);
 
-        model.notifyObservers(new DataCell(LightConvertion.getLightVersion(cell), null));
+        model.notifyObservers(new DataCell(LightConversion.getLightVersion(cell), null));
         System.out.println("cell built");
     }
 
@@ -135,8 +135,8 @@ public class CustomDebbuger implements Runnable{
     }
 
     private void movePawn(int pawn, Cell newCell, Cell oldCell){
-        BasicAction.MovePawn(oldCell, newCell, model.getCurrentPlayer().getPawnByNumber(pawn));
-        model.notifyObservers(new DataCell(LightConvertion.getLightVersion(newCell), LightConvertion.getLightVersion(oldCell)));
+        BasicAction.movePawn(oldCell, newCell, model.getCurrentPlayer().getPawnByNumber(pawn));
+        model.notifyObservers(new DataCell(LightConversion.getLightVersion(newCell), LightConversion.getLightVersion(oldCell)));
     }
 
     private void configModel(int number) {
@@ -259,7 +259,7 @@ public class CustomDebbuger implements Runnable{
                 board.getGrid()[i][j].setRoof(config_r[i][j]);
             }
         }
-        model.notifyObservers(new DataBoard(LightConvertion.getLightVersion(board)));
+        model.notifyObservers(new DataBoard(LightConversion.getLightVersion(board)));
     }
 
     private int readInt(int size){

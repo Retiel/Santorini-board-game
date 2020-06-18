@@ -46,7 +46,7 @@ public class SetUpManagerTest {
 
         /* asseting the placeable cell are all the board */
         List<Coord> testList = testSample.GetAvailablePlacement();
-        List<Cell> sample = GetCell.getPlaceableCells(testModel.getBoard());
+        List<Cell> sample = GetCell.getPlaceCells(testModel.getBoard());
 
         for (Coord coord : testList){
             assertTrue(sample.contains(GetCell.getCellAdapter(coord, testModel.getBoard())));

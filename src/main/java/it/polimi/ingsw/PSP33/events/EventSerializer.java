@@ -7,7 +7,7 @@ import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 
 public class EventSerializer {
 
-    private static EventSerializer instance = new EventSerializer();
+    private static final EventSerializer instance = new EventSerializer();
 
     private final Gson mvGson;
     private final Gson vcGson;

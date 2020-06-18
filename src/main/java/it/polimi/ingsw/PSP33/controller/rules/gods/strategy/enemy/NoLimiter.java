@@ -6,6 +6,10 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 
 import java.util.List;
 
+/**
+ * Basic with no limits applied
+ * (Usable as a template to copy/paste)
+ */
 public class NoLimiter implements Limiter{
 
     @Override

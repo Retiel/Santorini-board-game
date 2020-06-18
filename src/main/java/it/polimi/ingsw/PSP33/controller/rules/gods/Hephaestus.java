@@ -4,7 +4,7 @@ import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.build.Build;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.extra.ExtraAction;
-import it.polimi.ingsw.PSP33.controller.rules.tools.LightConvertion;
+import it.polimi.ingsw.PSP33.controller.rules.tools.LightConversion;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.model.Board;
@@ -33,9 +33,9 @@ public class Hephaestus implements Build, ExtraAction {
 
     @Override
     public void applyAction(Cell cell, Pawn pawn, Model model) {
-        BasicAction.BuildBlock(cell);
+        BasicAction.buildBlock(cell);
 
-        LightCell lightCellNew = LightConvertion.getLightVersion(cell);
+        LightCell lightCellNew = LightConversion.getLightVersion(cell);
 
         model.notifyObservers(new DataCell(lightCellNew, null));
         model.notifyObservers(new NewAction(false, false, false, false));
@@ -49,9 +49,9 @@ public class Hephaestus implements Build, ExtraAction {
 
     @Override
     public void executeBuild(Cell cellToBuild, boolean trigger, Model model) {
-        BasicAction.BuildBlock(cellToBuild);
+        BasicAction.buildBlock(cellToBuild);
 
-        LightCell lightCellNew = LightConvertion.getLightVersion(cellToBuild);
+        LightCell lightCellNew = LightConversion.getLightVersion(cellToBuild);
 
         model.notifyObservers(new DataCell(lightCellNew, null));
         if (cellToBuild.getFloor() < 3) model.notifyObservers(new NewAction(false, false, true, true));

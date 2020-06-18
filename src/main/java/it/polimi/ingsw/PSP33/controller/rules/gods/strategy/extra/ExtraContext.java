@@ -48,7 +48,7 @@ public class ExtraContext {
      * @param pawn pawn involved
      * @param model model used also for notify
      */
-    public void ExecAction(Coord coord, Pawn pawn, Model model){
+    public void execAction(Coord coord, Pawn pawn, Model model){
         Cell cell =  model.getBoard().getGrid()[coord.getX()][coord.getY()];
         extraAction.applyAction(cell, pawn, model);
     }

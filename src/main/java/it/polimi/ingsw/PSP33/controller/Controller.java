@@ -12,8 +12,8 @@ import it.polimi.ingsw.PSP33.utils.observable.Observer;
 
 public class Controller implements Observer<VCEvent>, VCEventVisitor {
 
-    private SetUpManager setUpManager;
-    private TurnManager turnManager;
+    private final SetUpManager setUpManager;
+    private final TurnManager turnManager;
 
     public Controller(Model model) {
         this.setUpManager = new SetUpManager(model);

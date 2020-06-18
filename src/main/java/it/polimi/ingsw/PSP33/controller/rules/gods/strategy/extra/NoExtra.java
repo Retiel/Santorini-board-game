@@ -8,6 +8,10 @@ import it.polimi.ingsw.PSP33.model.Pawn;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * No extra effect exist
+ * (Usable as a template to copy/paste)
+ */
 public class NoExtra implements ExtraAction {
 
     @Override

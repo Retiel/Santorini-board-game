@@ -31,13 +31,13 @@ public class BuildContext {
 
     /**
      * Method to check available build based on the god effect
-     * @param p pawn involved
-     * @param b board of the game
+     * @param pawn pawn involved
+     * @param board board of the game
      *
      * @return List of Cell object
      */
-    public List<Cell> checkBuild(Pawn p, Board b){
-        return  build.checkBuild(p,b);
+    public List<Cell> checkBuild(Pawn pawn, Board board){
+        return  build.checkBuild(pawn, board);
     }
 
     /**
