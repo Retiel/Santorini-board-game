@@ -111,8 +111,7 @@ public class CLI extends AbstractView {
      */
     @Override
     public void visit(CurrentPlayer currentPlayer) {
-        //todo: set current player for printer
-
+        /* sinkhole used for server*/
     }
 
     /**
@@ -293,7 +292,6 @@ public class CLI extends AbstractView {
             int i = readInput(possibleBuild.getCoordList().size() + possibleBuild.getGodsList().size());
 
             //send info to controller
-            //todo: check real function of floor boolean
             Coord choiceCoord;
             BuildAction ba;
             if(i <= possibleBuild.getCoordList().size()){
@@ -342,7 +340,6 @@ public class CLI extends AbstractView {
             //print board
             cliPrinter.printBoard(lightModel);
             //print choices and read player's intentions
-            //todo:System.out.println(lightModel.getPlayers().get(playerID).getCard().getDescription());
             System.out.println("Where do you want to use Your God Action?");
             cliPrinter.printSecondList(possibleExtraAction.getCoordList(),0);
 

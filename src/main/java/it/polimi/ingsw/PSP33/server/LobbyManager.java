@@ -3,6 +3,8 @@ package it.polimi.ingsw.PSP33.server;
 import java.util.HashMap;
 import java.util.Map;
 
+//TODO: missing comments
+
 /**
  * Class that manages multiple lobbies
  */
@@ -22,7 +24,6 @@ class LobbyManager {
      * Map of lobbies with lobbyID used as key
      */
     private static Map<Integer, Lobby> lobbies;
-
 
     private LobbyManager() {
         lobbyID = 0;
