@@ -194,19 +194,19 @@ public class TurnManager extends AbstractManager {
     }
 
     /**
-     * Method to comunicate and chage the state of the game cause losing player
+     * Method to communicate and change the state of the game cause losing player
      */
     private void loserBracket(){
 
         String player = getModel().getCurrentPlayer().getName();
-        notifyView(new YouLose(player));
+        notifyView(new YouLose(""));
         nextTurn();
         removePlayer(player);
 
     }
 
     /**
-     * Method to comunicate and chage the state of the game cause win condition met
+     * Method to communicate and change the state of the game cause win condition met
      */
     private void winningBracket(){
         notifyView(new YouWin(getModel().getCurrentPlayer().getName()));
