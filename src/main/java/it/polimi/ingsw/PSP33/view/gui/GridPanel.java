@@ -6,14 +6,14 @@ import java.awt.*;
 
 public class GridPanel extends JPanel {
 
-    private JButton[][] buttons;
+    private CellButton[][] buttons;
     private final static int DIM = 5;
 
     public GridPanel() {
         setLayout(new GridLayout(DIM,DIM));
         setPreferredSize(new Dimension(430, 450));
 
-        buttons = new JButton[DIM][DIM];
+        buttons = new CellButton[DIM][DIM];
 
         for(int i = 0; i < DIM; i++) {
             for(int j = 0; j < DIM; j++) {
@@ -25,7 +25,7 @@ public class GridPanel extends JPanel {
         setOpaque(false);
     }
 
-    public JButton[][] getButtons() {
+    public CellButton[][] getButtons() {
         return buttons;
     }
 }

@@ -1,6 +1,7 @@
 package it.polimi.ingsw.PSP33.view;
 
 import it.polimi.ingsw.PSP33.view.cli.CLI;
+import it.polimi.ingsw.PSP33.view.gui.GUI;
 
 public class ViewFactory {
 
@@ -10,7 +11,7 @@ public class ViewFactory {
                 return new CLI(); //CLI
 
             case 2:
-                return null; //GUI
+                return new GUI(); //GUI
 
             default:
                 return new CLI();

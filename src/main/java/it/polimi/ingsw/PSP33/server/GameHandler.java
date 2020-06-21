@@ -179,6 +179,7 @@ public class GameHandler extends AbstractView implements Listener {
     @Override
     public void visit(CurrentPlayer currentPlayer) {
         setCurrentClient(getClientHandlerByName(currentPlayer.getName()));
+        sendMessageToAll(currentPlayer);
     }
 
     @Override

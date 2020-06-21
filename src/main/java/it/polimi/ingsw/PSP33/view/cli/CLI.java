@@ -111,7 +111,7 @@ public class CLI extends AbstractView {
      */
     @Override
     public void visit(CurrentPlayer currentPlayer) {
-        /* sinkhole used for server*/
+        System.out.println(currentPlayer.getName() + "'s turn");
     }
 
     /**
@@ -294,18 +294,32 @@ public class CLI extends AbstractView {
             //send info to controller
             Coord choiceCoord;
             BuildAction ba;
+            //TODO: test
             if(i <= possibleBuild.getCoordList().size()){
                 choiceCoord = possibleBuild.getCoordList().get(i-1);
-                if(lightModel.getLightGrid()[choiceCoord.getX()][choiceCoord.getY()].getFloor()<2) {
-                    ba = new BuildAction(choiceCoord, false);
+                if(possibleBuild.isRoofAvailable()) {
+                    System.out.println("Do you want to build a roof?\n1. Yes\n2. No");
+                    int k = readInput(2);
+                    if(k == 1) {
+                        ba = new BuildAction(choiceCoord, true);
+                    } else {
+                        ba = new BuildAction(choiceCoord, false);
+                    }
                 }
-                else ba = new BuildAction(choiceCoord, true);
+                else ba = new BuildAction(choiceCoord, false);
 
             }
+            //TODO: test
             else{
                 choiceCoord = possibleBuild.getGodsList().get(i-possibleBuild.getCoordList().size()-1);
-                if(lightModel.getLightGrid()[choiceCoord.getX()][choiceCoord.getY()].getFloor()<2){
-                    ba = new BuildAction(choiceCoord,false);
+                if(possibleBuild.isRoofAvailable()) {
+                    System.out.println("Do you want to build a roof?\n1. Yes\n2. No");
+                    int k = readInput(2);
+                    if(k == 1) {
+                        ba = new BuildAction(choiceCoord, true);
+                    } else {
+                        ba = new BuildAction(choiceCoord, false);
+                    }
                 } else ba = new BuildAction(choiceCoord,false);
             }
             notifyObservers(ba);
