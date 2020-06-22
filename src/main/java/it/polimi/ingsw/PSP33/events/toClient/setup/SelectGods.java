@@ -9,13 +9,19 @@ import java.util.List;
 public class SelectGods implements MVEvent {
 
     private final List<God> gods;
+    private final int numberOfGods;
 
-    public SelectGods(List<God> gods) {
+    public SelectGods(List<God> gods, int numberOfGods) {
         this.gods = gods;
+        this.numberOfGods = numberOfGods;
     }
 
     public List<God> getGods() {
         return gods;
+    }
+
+    public int getNumberOfGods() {
+        return numberOfGods;
     }
 
     @Override

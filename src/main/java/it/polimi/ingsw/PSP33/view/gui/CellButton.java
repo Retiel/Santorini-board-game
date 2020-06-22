@@ -3,6 +3,7 @@ import it.polimi.ingsw.PSP33.model.light_version.LightPawn;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
 import javax.swing.*;
+import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,28 +12,27 @@ import java.util.List;
 
 public class CellButton extends JButton implements ActionListener {
 
-    //TODO: roof label
     private JLabel floorLabel;
     private JLabel pawnLabel;
+    private JLabel roofLabel;
 
-    private int floor;
-    //private String pawn;
-    private LightPawn pawn;
+    private Border defaultBorder;
 
-    private Coord coord;
+    private final Coord coord;
 
     private final List<ButtonListener> listeners = new ArrayList<>();
 
     public CellButton(Coord coord) {
         this.coord = coord;
 
+        defaultBorder = getBorder();
         setLayout(new GridBagLayout());
         setContentAreaFilled(false);
 
-        floor = 0;
+        //Floor
         floorLabel = new JLabel();
         floorLabel.setFont(new Font("Verdana", Font.PLAIN,18));
-        floorLabel.setText("" + floor);
+        setFloor(0);
         GridBagConstraints floorCon = new GridBagConstraints();
         floorCon.gridx = 0;
         floorCon.gridy = 0;
@@ -40,10 +40,21 @@ public class CellButton extends JButton implements ActionListener {
         floorCon.weighty = 1;
         add(floorLabel, floorCon);
 
-        pawn = null;
+        //Roof
+        roofLabel = new JLabel();
+        roofLabel.setFont(new Font("Verdana", Font.PLAIN,18));
+
+        GridBagConstraints roofCon = new GridBagConstraints();
+        roofCon.gridx = 1;
+        roofCon.gridy = 0;
+        roofCon.weightx = 1;
+        roofCon.weighty = 1;
+        add(roofLabel, roofCon);
+
+        //Pawn
         pawnLabel = new JLabel();
         pawnLabel.setFont(new Font("Verdana", Font.PLAIN,22));
-        pawnLabel.setText("");
+        setPawn(null);
         GridBagConstraints pawnCon = new GridBagConstraints();
         pawnCon.gridx = 1;
         pawnCon.gridy = 1;
@@ -58,19 +69,12 @@ public class CellButton extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
         notifyButtonListener(coord);
     }
 
     public void addButtonListener(ButtonListener listener) {
         synchronized (listeners) {
             listeners.add(listener);
-        }
-    }
-
-    public void removeButtonListener(ButtonListener listener) {
-        synchronized (listeners) {
-            listeners.remove(listener);
         }
     }
 
@@ -83,16 +87,30 @@ public class CellButton extends JButton implements ActionListener {
     }
 
     public void setFloor(int floor) {
-        this.floor = floor;
         floorLabel.setText("" + floor);
     }
 
+    public void setRoof(boolean roof) {
+        if(roof) {
+            roofLabel.setText("R");
+        } else {
+            roofLabel.setText("");
+        }
+    }
+
     public void setPawn(LightPawn pawn) {
-        this.pawn = pawn;
         if(pawn != null) {
             pawnLabel.setText(pawn.getColor().name().substring(0, 1) + pawn.getNumber());
         } else {
             pawnLabel.setText("");
         }
+    }
+
+    public void setColorBorder(Color color) {
+        setBorder(BorderFactory.createLineBorder(color, 2));
+    }
+
+    public void setDefaultBorder() {
+        setBorder(defaultBorder);
     }
 }

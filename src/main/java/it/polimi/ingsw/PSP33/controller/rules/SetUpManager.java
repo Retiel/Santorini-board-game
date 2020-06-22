@@ -142,7 +142,7 @@ public class SetUpManager extends AbstractManager {
      * Method to ask player to choose the gods to use in game
      */
     public void askGods() {
-      getModel().notifyObservers(new SelectGods(Allgods));
+      getModel().notifyObservers(new SelectGods(Allgods, getModel().getPlayers().size()));
     }
 
     /**

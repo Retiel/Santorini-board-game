@@ -142,7 +142,7 @@ public class CLI extends AbstractView {
             List<God> allGods = new ArrayList<>(selectGods.getGods());
             List<God> chosenGods = new ArrayList<>();
 
-            for(int c=1;c<lightModel.getPlayers().size()+1;c++){
+            for(int c=1;c<selectGods.getNumberOfGods()+1;c++){
                 System.out.println("Choose the "+c+"° God:\n");
                 cliPrinter.printGodList(allGods);
                 int i = readInput(allGods.size());
