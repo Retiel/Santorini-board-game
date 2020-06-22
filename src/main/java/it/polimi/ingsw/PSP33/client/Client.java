@@ -19,7 +19,7 @@ public class Client {
 
     public static void main(String[] args) {
 
-        AbstractView view = ViewFactory.getView(2);
+        AbstractView view = ViewFactory.getView(1);
 
         Gson gson = new Gson();
         Connection connection = null;

@@ -167,8 +167,10 @@ public class TurnManager extends AbstractManager {
     public void resetLimiters(String playerName){
         Player player = getModel().getPlayers().stream().filter(p -> playerName.equals(p.getName())).findAny().orElse(null);
         if (player != null){
-            Gods name = player.getCard().getName();
-            limiterContext.resetGodTrigger(name, DataControl.limitReset(name));
+            if(player.getCard() != null){
+                Gods name = player.getCard().getName();
+                limiterContext.resetGodTrigger(name, DataControl.limitReset(name));
+            }
         }
     }
 
@@ -180,8 +182,10 @@ public class TurnManager extends AbstractManager {
         Player player = getModel().getPlayers().stream().filter(p -> name.equals(p.getName())).findAny().orElse(null);
 
         List<Player> players = getModel().getPlayers();
-        removePawn(player.getPawns());
-        players.remove(player);
+        if(player != null){
+            removePawn(player.getPawns());
+            players.remove(player);
+        }
 
         nextTurn();
         newTurnContext();
