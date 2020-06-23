@@ -149,14 +149,14 @@ public class MainFrame extends JFrame {
 
     public void showLose(String winner) {
         JOptionPane.showMessageDialog(this, winner + " won!");
-        //setVisible(false);
-        //dispose();
+        setVisible(false);
+        dispose();
     }
 
     public void showWin() {
         JOptionPane.showMessageDialog(this, "You win!");
-        //setVisible(false);
-        //dispose();
+        setVisible(false);
+        dispose();
     }
 
     public void enableButtons(List<Coord> coords, List<Coord> gods) {
