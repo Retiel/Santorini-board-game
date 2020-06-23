@@ -7,11 +7,10 @@ import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.extra.ExtraContext;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.win.WinContext;
 import it.polimi.ingsw.PSP33.controller.rules.tools.*;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
+import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
+import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
-import it.polimi.ingsw.PSP33.model.Cell;
-import it.polimi.ingsw.PSP33.model.Model;
-import it.polimi.ingsw.PSP33.model.Pawn;
-import it.polimi.ingsw.PSP33.model.Player;
+import it.polimi.ingsw.PSP33.model.*;
 import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.utils.enums.Actions;
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
@@ -188,7 +187,27 @@ public class TurnManager extends AbstractManager {
         }
 
         nextTurn();
-        newTurnContext();
+
+        boolean flag = true;
+        for (Player player1 : players){
+            if (player1.getPawnByNumber(1).getCoord() == null){
+                flag = false;
+                notifyView(new SelectPawn(1));
+                break;
+            }
+            if (player1.getPawnByNumber(2).getCoord() == null){
+                flag = false;
+                notifyView(new SelectPawn(2));
+                break;
+            }
+            if (player1.getCard() == null){
+                flag = false;
+                if (getGods() == null) notifyView(new SelectGods(getAllgods(),players.size()));
+                else notifyView(new YourGod(getGods()));
+                break;
+            }
+        }
+        if (flag) newTurnContext();
 
         getModel().setPlayers(players);
 
@@ -371,11 +390,13 @@ public class TurnManager extends AbstractManager {
      */
     private void removePawn(Pawn[] pawns){
         for (Pawn pawn: pawns){
-            Coord coord = pawn.getCoord();
+            if(pawn.getCoord() != null){
+                Coord coord = pawn.getCoord();
 
-            Cell cell = getBoard().getGrid()[coord.getX()][coord.getY()];
-            cell.setOccupied(null);
-            notifyView(new DataCell(LightConversion.getLightVersion(cell), null));
+                Cell cell = getBoard().getGrid()[coord.getX()][coord.getY()];
+                cell.setOccupied(null);
+                notifyView(new DataCell(LightConversion.getLightVersion(cell), null));
+            }
         }
     }
 

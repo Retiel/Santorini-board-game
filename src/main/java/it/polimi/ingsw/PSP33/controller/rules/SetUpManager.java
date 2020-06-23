@@ -35,6 +35,7 @@ public class SetUpManager extends AbstractManager {
 
         try {
             this.Allgods = parseGods();
+            setAllgods(this.Allgods);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
@@ -167,6 +168,7 @@ public class SetUpManager extends AbstractManager {
 
     public void setGods(List<God> gods) {
         this.gods = gods;
+        setGods(gods);
     }
 
     /* Methods generated for testing purpose */
