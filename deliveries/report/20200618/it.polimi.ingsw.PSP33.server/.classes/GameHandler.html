@@ -88,7 +88,7 @@
 <i>14</i>&nbsp;import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 <i>15</i>&nbsp;import it.polimi.ingsw.PSP33.model.Model;
 <i>16</i>&nbsp;import it.polimi.ingsw.PSP33.model.Player;
-<i>17</i>&nbsp;import it.polimi.ingsw.PSP33.utils.CustomDebbuger;
+<i>17</i>&nbsp;import it.polimi.ingsw.PSP33.utils.CustomDebugger;
 <i>18</i>&nbsp;import it.polimi.ingsw.PSP33.utils.observable.Listener;
 <i>19</i>&nbsp;import it.polimi.ingsw.PSP33.view.AbstractView;
 <i>20</i>&nbsp;
@@ -150,8 +150,8 @@
 <b class="nc"><i>76</i>&nbsp;        System.out.println(&quot;Lobby_&quot; + lobbyID +&quot;: observer done&quot;);</b>
 <i>77</i>&nbsp;
 <i>78</i>&nbsp;        /* Testing item*/
-<b class="nc"><i>79</i>&nbsp;        CustomDebbuger customDebbuger = new CustomDebbuger(lobbyID, model, controller);</b>
-<b class="nc"><i>80</i>&nbsp;        Thread thread = new Thread(customDebbuger, &quot;Debugger for lobby: &quot; + lobbyID);</b>
+<b class="nc"><i>79</i>&nbsp;        CustomDebbuger customDebugger = new CustomDebbuger(lobbyID, model, controller);</b>
+<b class="nc"><i>80</i>&nbsp;        Thread thread = new Thread(customDebugger, &quot;Debugger for lobby: &quot; + lobbyID);</b>
 <b class="nc"><i>81</i>&nbsp;        System.out.println(&quot;Debugger for lobby: &quot; + lobbyID + &quot; [active]&quot;);</b>
 <b class="nc"><i>82</i>&nbsp;        thread.start();</b>
 <i>83</i>&nbsp;        /* end testing items */

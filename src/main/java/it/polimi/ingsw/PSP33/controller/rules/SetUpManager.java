@@ -168,7 +168,7 @@ public class SetUpManager extends AbstractManager {
 
     public void setGods(List<God> gods) {
         this.gods = gods;
-        setGods(gods);
+        super.setGods(gods);
     }
 
     /* Methods generated for testing purpose */

@@ -278,7 +278,7 @@ public class TurnManager extends AbstractManager {
     }
 
     /**
-     * Method to control the movability of the pawns of the current player
+     * Method to control the mobility of the pawns of the current player
      */
     private void forwardControl(){
 
@@ -333,7 +333,8 @@ public class TurnManager extends AbstractManager {
      * @return List of Coord object
      */
     private List<Coord> getBasicFlow(Actions action){
-        return GetCell.getListAdapter(applyLimit(getCellsBasic(action)));
+        if(action == Actions.BUILD) return GetCell.getListAdapter(getCellsBasic(action));
+        else return GetCell.getListAdapter(applyLimit(getCellsBasic(action)));
     }
 
     /**
@@ -343,7 +344,8 @@ public class TurnManager extends AbstractManager {
      * @return List of Coord object
      */
     private List<Coord> getContextFlow(Actions action){
-        return GetCell.getListAdapter(applyLimit(getCellsContext(action)));
+        if(action == Actions.BUILD) return GetCell.getListAdapter(getCellsContext(action));
+        else return GetCell.getListAdapter(applyLimit(getCellsContext(action)));
     }
 
     /**

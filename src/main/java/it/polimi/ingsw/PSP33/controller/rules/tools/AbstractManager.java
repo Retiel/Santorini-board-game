@@ -49,33 +49,6 @@ public abstract class AbstractManager {
     }
 
     /**
-     * Method to move the game to the next player turn (case disconnection)
-     * @param player disconnected player
-     */
-    public void nextTurn(Player player) {
-
-        Player current = model.getCurrentPlayer();
-
-        if(current == player){
-            Player nextPlayer;
-            int next = model.getPlayers().indexOf(current) + 1;
-
-            if(next < model.getPlayers().size()) nextPlayer = model.getPlayers().get(next);
-            else nextPlayer = model.getPlayers().get(0);
-
-            model.setCurrentPlayer(nextPlayer);
-            model.setCurrentPawn(null);
-        }else{
-            int cur = model.getPlayers().indexOf(current);
-            int dis = model.getPlayers().indexOf(player);
-
-
-        }
-
-
-    }
-
-    /**
      * Method to set the current pawn
      */
     public void setCurrentPawn(int pawn){

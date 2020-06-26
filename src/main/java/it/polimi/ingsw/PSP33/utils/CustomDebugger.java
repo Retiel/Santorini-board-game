@@ -7,15 +7,13 @@ import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
 import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
 import it.polimi.ingsw.PSP33.events.toServer.turn.RequestPossibleMove;
-import it.polimi.ingsw.PSP33.model.Board;
-import it.polimi.ingsw.PSP33.model.Cell;
-import it.polimi.ingsw.PSP33.model.Model;
-import it.polimi.ingsw.PSP33.model.Pawn;
+import it.polimi.ingsw.PSP33.model.*;
+import it.polimi.ingsw.PSP33.utils.enums.Gods;
 
 import java.util.Scanner;
 
 /* Setting cheat method for debugging purpose */
-public class CustomDebbuger implements Runnable{
+public class CustomDebugger implements Runnable{
 
     private final int lobbyID;
 
@@ -24,7 +22,7 @@ public class CustomDebbuger implements Runnable{
 
     private final Scanner scanner;
 
-    public CustomDebbuger(int lobbyID, Model model, Controller controller) {
+    public CustomDebugger(int lobbyID, Model model, Controller controller) {
         this.lobbyID = lobbyID;
         this.model = model;
         this.controller = controller;
@@ -33,8 +31,12 @@ public class CustomDebbuger implements Runnable{
 
     @Override
     public void run() {
+
+        System.out.println("Command list available:\n> move\n> build\n> god\n> info\n");
+
         while(true){
             String input1 = scanner.nextLine();
+
             switch (input1){
                 case "test":
                     System.out.println("Test, it works");
@@ -45,29 +47,33 @@ public class CustomDebbuger implements Runnable{
                     System.out.println("mode available [1,2]");
                     configModel(readInt(2));
                     controller.visit(new RequestPossibleMove());
+                    System.out.println("executing command");
                     break;
                 case "move":        /* Note: move only in empty cell (switch position is not supported) */
                     System.out.println("select pawn");
                     moveSwitch();
+                    System.out.println("executing command");
                     break;
-                case "build":        /* Note: move only in empty cell (switch position is not supported) */
+                case "build":        /* Note: only build floor */
                     System.out.println("select cell");
                     buildSwitch();
+                    System.out.println("executing command");
                     break;
-                case "turn":
+                case "turn":        /* Note: not working */
                     System.out.println("select command");
                     turnSwitch();
+                    System.out.println("executing command");
                     break;
-                case "god":
+                case "god":        /* Note: changes the god of the next player */
                     System.out.println("select god");
                     godSwitch();
+                    System.out.println("executing command");
                     break;
-                case "info":
+                case "info":         /* Note: tells about the lobby where the cheat is working*/
                     System.out.println("Lobby number: " + this.lobbyID);
                     break;
                 default:
             }
-            System.out.println("executing command");
             scanner.reset();
         }
     }
@@ -88,7 +94,7 @@ public class CustomDebbuger implements Runnable{
                 movePawn(2, newCell, oldCell);
                 break;
             default:
-                System.out.println("<- reverting instruction");
+                System.out.println("wrong command, terminating cheat execution...");
         }
 
         System.out.println("Done");
@@ -115,11 +121,53 @@ public class CustomDebbuger implements Runnable{
                 //controller.getTurnManager().newTurnContext();
                 break;
             default:
+                System.out.println("wrong command, terminating cheat execution...");
         }
     }
 
     private void godSwitch(){
-        /* has to change the god of the next turn */
+        String godName = scanner.nextLine();
+        switch (godName){
+            case "apollo":
+                nextPlayerSet(Gods.APOLLO);
+                break;
+            case "artemis":
+                nextPlayerSet(Gods.ARTEMIS);
+                break;
+            case "athena":
+                nextPlayerSet(Gods.ATHENA);
+                break;
+            case "atlas":
+                nextPlayerSet(Gods.ATLAS);
+                break;
+            case "demeter":
+                nextPlayerSet(Gods.DEMETER);
+                break;
+            case "hephaestus":
+                nextPlayerSet(Gods.HEPHAESTUS);
+                break;
+            case "minotaur":
+                nextPlayerSet(Gods.MINOTAUR);
+                break;
+            case "pan":
+                nextPlayerSet(Gods.PAN);
+                break;
+            case "prometheus":
+                nextPlayerSet(Gods.PROMETHEUS);
+                break;
+            default:
+                System.out.println("wrong command, terminating cheat execution...");
+        }
+    }
+
+    private void nextPlayerSet(Gods godName) {
+
+        Player current = model.getCurrentPlayer();
+        Player nextPlayer;
+        int next = model.getPlayers().indexOf(current) + 1;
+
+        if(next < model.getPlayers().size()) model.getPlayers().get(next).setCard(new God(godName, "test"));
+        else model.getPlayers().get(0).setCard(new God(godName, "test"));
     }
 
     private Cell retrieveNewCell(){
