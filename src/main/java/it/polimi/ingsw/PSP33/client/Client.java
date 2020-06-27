@@ -5,12 +5,8 @@ import it.polimi.ingsw.PSP33.utils.Connection;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 import it.polimi.ingsw.PSP33.view.ViewFactory;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 
 /**
  * Class that handles client's connection and client's view
@@ -22,12 +18,7 @@ public class Client {
         AbstractView view = ViewFactory.getView(1);
 
         Gson gson = new Gson();
-        Connection connection = null;
-        try {
-            connection = gson.fromJson(new FileReader("src/main/resources/connection.json"), Connection.class);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        Connection connection = gson.fromJson(getConnectionReader(), Connection.class);
 
         Socket server;
         try {
@@ -55,35 +46,9 @@ public class Client {
         }
     }
 
-    /**
-     * Method to make the clients select his view
-     */
-    public static AbstractView getViewSelection() {
+    private static Reader getConnectionReader() {
+        InputStream input = Client.class.getResourceAsStream("/connection.json");
 
-        AbstractView view;
-
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            System.out.println("Select user interface:\n1. CLI\n2. GUI");
-
-            String string = scanner.nextLine();
-
-            switch (string) {
-                case "1":
-                    view = ViewFactory.getView(1);
-                    break;
-
-                case "2":
-                    view = ViewFactory.getView(2);
-                    break;
-
-                default:
-                    continue;
-            }
-            break;
-        }
-
-        return view;
+        return new BufferedReader(new InputStreamReader(input));
     }
 }

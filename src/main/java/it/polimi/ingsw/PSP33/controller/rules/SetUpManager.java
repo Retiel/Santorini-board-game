@@ -13,8 +13,7 @@ import it.polimi.ingsw.PSP33.model.*;
 import it.polimi.ingsw.PSP33.model.light_version.LightPlayer;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -25,7 +24,7 @@ import java.util.Random;
 public class SetUpManager extends AbstractManager {
 
     private List<God> gods;
-    private List<God> Allgods;
+    private List<God> allGods;
     private int pawn;
 
     public SetUpManager(Model model) {
@@ -33,11 +32,7 @@ public class SetUpManager extends AbstractManager {
         this.pawn = 0;
         this.gods = new ArrayList<>();
 
-        try {
-            this.Allgods = parseGods();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
+        this.allGods = parseGods();
     }
 
     /**
@@ -142,7 +137,7 @@ public class SetUpManager extends AbstractManager {
      * Method to ask player to choose the gods to use in game
      */
     public void askGods() {
-      getModel().notifyObservers(new SelectGods(Allgods, getModel().getPlayers().size()));
+      getModel().notifyObservers(new SelectGods(allGods, getModel().getPlayers().size()));
     }
 
     /**
@@ -157,12 +152,13 @@ public class SetUpManager extends AbstractManager {
      *
      * @return List of God object
      */
-    private List<God> parseGods() throws FileNotFoundException {
+    private List<God> parseGods() {
         Gson gson = new Gson();
 
-        return gson.fromJson(
-                new FileReader("src/main/resources/gods.json"),
-                new TypeToken<List<God>>(){}.getType());
+        InputStream input = getClass().getResourceAsStream("/gods.json");
+        BufferedReader reader = new BufferedReader(new InputStreamReader(input));
+
+        return gson.fromJson(reader, new TypeToken<List<God>>(){}.getType());
     }
 
     public void setGods(List<God> gods) {
