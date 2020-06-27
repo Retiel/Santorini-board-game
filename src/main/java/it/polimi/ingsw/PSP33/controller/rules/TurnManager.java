@@ -7,11 +7,11 @@ import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.extra.ExtraContext;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.win.WinContext;
 import it.polimi.ingsw.PSP33.controller.rules.tools.*;
 import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
+import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
+import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
+import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
 import it.polimi.ingsw.PSP33.events.toClient.turn.*;
-import it.polimi.ingsw.PSP33.model.Cell;
-import it.polimi.ingsw.PSP33.model.Model;
-import it.polimi.ingsw.PSP33.model.Pawn;
-import it.polimi.ingsw.PSP33.model.Player;
+import it.polimi.ingsw.PSP33.model.*;
 import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.utils.enums.Actions;
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
@@ -188,13 +188,31 @@ public class TurnManager extends AbstractManager {
         }
 
         nextTurn();
-        newTurnContext();
-
         getModel().setPlayers(players);
 
         if (players.size() == 1) {
             notifyView(new YouWin(players.get(0).getName()));
         }
+        else if(players.size() > 1){
+            boolean flag = true;
+
+            for (Player player1 : players){
+                if (player1.getPawnByNumber(1).getCoord() == null || player1.getPawnByNumber(2).getCoord() == null){
+                    flag = false;
+                    notifyView(new PossiblePlacement(GetCell.getListAdapter(GetCell.getPlaceCells(getBoard()))));
+                    break;
+                }
+
+                if (player1.getCard() == null){
+                    flag = false;
+                    if (getGods() == null) notifyView(new SelectGods(getAllgods(),players.size()));
+                    else notifyView(new YourGod(getGods()));
+                    break;
+                }
+            }
+            if (flag) newTurnContext();
+        }
+
     }
 
     /**
@@ -260,7 +278,7 @@ public class TurnManager extends AbstractManager {
     }
 
     /**
-     * Method to control the movability of the pawns of the current player
+     * Method to control the mobility of the pawns of the current player
      */
     private void forwardControl(){
 
@@ -315,7 +333,8 @@ public class TurnManager extends AbstractManager {
      * @return List of Coord object
      */
     private List<Coord> getBasicFlow(Actions action){
-        return GetCell.getListAdapter(applyLimit(getCellsBasic(action)));
+        if(action == Actions.BUILD) return GetCell.getListAdapter(getCellsBasic(action));
+        else return GetCell.getListAdapter(applyLimit(getCellsBasic(action)));
     }
 
     /**
@@ -325,7 +344,8 @@ public class TurnManager extends AbstractManager {
      * @return List of Coord object
      */
     private List<Coord> getContextFlow(Actions action){
-        return GetCell.getListAdapter(applyLimit(getCellsContext(action)));
+        if(action == Actions.BUILD) return GetCell.getListAdapter(getCellsContext(action));
+        else return GetCell.getListAdapter(applyLimit(getCellsContext(action)));
     }
 
     /**
@@ -371,11 +391,13 @@ public class TurnManager extends AbstractManager {
      */
     private void removePawn(Pawn[] pawns){
         for (Pawn pawn: pawns){
-            Coord coord = pawn.getCoord();
+            if(pawn.getCoord() != null){
+                Coord coord = pawn.getCoord();
 
-            Cell cell = getBoard().getGrid()[coord.getX()][coord.getY()];
-            cell.setOccupied(null);
-            notifyView(new DataCell(LightConversion.getLightVersion(cell), null));
+                Cell cell = getBoard().getGrid()[coord.getX()][coord.getY()];
+                cell.setOccupied(null);
+                notifyView(new DataCell(LightConversion.getLightVersion(cell), null));
+            }
         }
     }
 

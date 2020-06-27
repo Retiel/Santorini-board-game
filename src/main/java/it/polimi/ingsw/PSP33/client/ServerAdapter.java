@@ -94,7 +94,7 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
         try {
             output.writeUTF(vcJson);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Other player disconnected");
         }
     }
 

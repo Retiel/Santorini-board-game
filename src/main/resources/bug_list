@@ -1,9 +1,10 @@
 
 
-PROBLEMS:
-Atlas -> effect not using
-
-
-
-CORRECTIONS:
-Atlas -> not treated in the current CLI, need implementation
+TODO: in ordine di priorità
+- getClass().getResource(): fetching dei file
+- GUI per setup
+- GUI dettagli grafici:
+    > legenda
+    > carte
+- LightModel per GUI definizione utilità o meno
+- trigger di Atlas definire

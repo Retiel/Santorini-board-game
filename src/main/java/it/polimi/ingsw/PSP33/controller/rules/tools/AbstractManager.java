@@ -15,8 +15,13 @@ public abstract class AbstractManager {
 
     private final Model model;
 
+    private List<God> gods;
+    private List<God> Allgods;
+
     public AbstractManager(Model model) {
         this.model = model;
+        this.gods = null;
+        this.Allgods = null;
     }
 
     public Model getModel() {
@@ -48,6 +53,22 @@ public abstract class AbstractManager {
      */
     public void setCurrentPawn(int pawn){
         getModel().setCurrentPawn(getModel().getCurrentPlayer().getPawnByNumber(pawn));
+    }
+
+    public List<God> getGods() {
+        return gods;
+    }
+
+    public List<God> getAllgods() {
+        return Allgods;
+    }
+
+    public void setGods(List<God> gods) {
+        this.gods = gods;
+    }
+
+    public void setAllgods(List<God> allgods) {
+        Allgods = allgods;
     }
 
     /* method used for testing */

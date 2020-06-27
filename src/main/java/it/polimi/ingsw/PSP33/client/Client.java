@@ -15,7 +15,7 @@ public class Client {
 
     public static void main(String[] args) {
 
-        AbstractView view = ViewFactory.getView(1);
+        AbstractView view = ViewFactory.getView(2);
 
         Gson gson = new Gson();
         Connection connection = gson.fromJson(getConnectionReader(), Connection.class);

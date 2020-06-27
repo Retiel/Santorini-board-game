@@ -14,7 +14,7 @@ import it.polimi.ingsw.PSP33.events.toClient.turn.*;
 import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
-import it.polimi.ingsw.PSP33.utils.CustomDebbuger;
+import it.polimi.ingsw.PSP33.utils.CustomDebugger;
 import it.polimi.ingsw.PSP33.utils.observable.Listener;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 
@@ -76,8 +76,8 @@ public class GameHandler extends AbstractView implements Listener {
         System.out.println("Lobby_" + lobbyID +": observer done");
 
         /* Testing item*/
-        CustomDebbuger customDebbuger = new CustomDebbuger(lobbyID, model, controller);
-        Thread thread = new Thread(customDebbuger, "Debugger for lobby: " + lobbyID);
+        CustomDebugger customDebugger = new CustomDebugger(lobbyID, model, controller);
+        Thread thread = new Thread(customDebugger, "Debugger for lobby: " + lobbyID);
         System.out.println("Debugger for lobby: " + lobbyID + " [active]");
         thread.start();
         /* end testing items */
