@@ -3,10 +3,10 @@ package it.polimi.ingsw.PSP33.utils;
 import it.polimi.ingsw.PSP33.controller.Controller;
 import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.tools.LightConversion;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
-import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
-import it.polimi.ingsw.PSP33.events.toServer.turn.RequestPossibleMove;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataBoard;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataCell;
+import it.polimi.ingsw.PSP33.events.to_client.turn.NewAction;
+import it.polimi.ingsw.PSP33.events.to_server.turn.RequestPossibleMove;
 import it.polimi.ingsw.PSP33.model.*;
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
 

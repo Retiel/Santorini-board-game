@@ -1,13 +1,13 @@
 package it.polimi.ingsw.PSP33.view;
 
-import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
-import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
-import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
-import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
-import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
-import it.polimi.ingsw.PSP33.events.toClient.turn.*;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataCell;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataBoard;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataPlayer;
+import it.polimi.ingsw.PSP33.events.to_client.setup.CurrentPlayer;
+import it.polimi.ingsw.PSP33.events.to_client.setup.PossiblePlacement;
+import it.polimi.ingsw.PSP33.events.to_client.setup.SelectGods;
+import it.polimi.ingsw.PSP33.events.to_client.setup.YourGod;
+import it.polimi.ingsw.PSP33.events.to_client.turn.*;
 
 public class ViewSample extends AbstractView {
 

@@ -98,12 +98,12 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <section class="description">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../events/VCEventVisitor.html" title="interface in it.polimi.ingsw.PSP33.events">VCEventVisitor</a></code>, <code><a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&gt;</code></dd>
+<dd><code><a href="../events/VCEventVisitor.html" title="interface in it.polimi.ingsw.PSP33.events">VCEventVisitor</a></code>, <code><a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&gt;</code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">Controller</span>
 extends java.lang.Object
-implements <a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&gt;, <a href="../events/VCEventVisitor.html" title="interface in it.polimi.ingsw.PSP33.events">VCEventVisitor</a></pre>
+implements <a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&gt;, <a href="../events/VCEventVisitor.html" title="interface in it.polimi.ingsw.PSP33.events">VCEventVisitor</a></pre>
 </section>
 <section class="summary">
 <ul class="blockList">
@@ -167,89 +167,89 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">update</a></span>&#8203;(<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&nbsp;serverMessage)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">update</a></span>&#8203;(<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&nbsp;serverMessage)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="altColor" id="i4">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.setup.ChoosenGod)">visit</a></span>&#8203;(<a href="../events/toServer/setup/ChoosenGod.html" title="class in it.polimi.ingsw.PSP33.events.toServer.setup">ChoosenGod</a>&nbsp;choosenGod)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.setup.ChoosenGod)">visit</a></span>&#8203;(<a href="../events/toServer/setup/ChoosenGod.html" title="class in it.polimi.ingsw.PSP33.events.to_server.setup">ChoosenGod</a>&nbsp;choosenGod)</code></th>
 <td class="colLast">
 <div class="block">Message to send the server the god a player choose</div>
 </td>
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn)">visit</a></span>&#8203;(<a href="../events/toServer/setup/PlacePawn.html" title="class in it.polimi.ingsw.PSP33.events.toServer.setup">PlacePawn</a>&nbsp;placePawn)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn)">visit</a></span>&#8203;(<a href="../events/toServer/setup/PlacePawn.html" title="class in it.polimi.ingsw.PSP33.events.to_server.setup">PlacePawn</a>&nbsp;placePawn)</code></th>
 <td class="colLast">
 <div class="block">Message to send the server where to place the pawn diuring set up phase</div>
 </td>
 </tr>
 <tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.setup.PlayerDisconnected)">visit</a></span>&#8203;(<a href="../events/toServer/setup/PlayerDisconnected.html" title="class in it.polimi.ingsw.PSP33.events.toServer.setup">PlayerDisconnected</a>&nbsp;playerDisconnected)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.setup.PlayerDisconnected)">visit</a></span>&#8203;(<a href="../events/toServer/setup/PlayerDisconnected.html" title="class in it.polimi.ingsw.PSP33.events.to_server.setup">PlayerDisconnected</a>&nbsp;playerDisconnected)</code></th>
 <td class="colLast">
 <div class="block">Message to send the server when a player disconnect form the game</div>
 </td>
 </tr>
 <tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.setup.SelectedGods)">visit</a></span>&#8203;(<a href="../events/toServer/setup/SelectedGods.html" title="class in it.polimi.ingsw.PSP33.events.toServer.setup">SelectedGods</a>&nbsp;selectedGods)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.setup.SelectedGods)">visit</a></span>&#8203;(<a href="../events/toServer/setup/SelectedGods.html" title="class in it.polimi.ingsw.PSP33.events.to_server.setup">SelectedGods</a>&nbsp;selectedGods)</code></th>
 <td class="colLast">
 <div class="block">Message to send the server the gods choosen during setup</div>
 </td>
 </tr>
 <tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.BuildAction)">visit</a></span>&#8203;(<a href="../events/toServer/turn/BuildAction.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">BuildAction</a>&nbsp;buildAction)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.BuildAction)">visit</a></span>&#8203;(<a href="../events/toServer/turn/BuildAction.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">BuildAction</a>&nbsp;buildAction)</code></th>
 <td class="colLast">
 <div class="block">Message to send the server where to build</div>
 </td>
 </tr>
 <tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.ExtraAction)">visit</a></span>&#8203;(<a href="../events/toServer/turn/ExtraAction.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">ExtraAction</a>&nbsp;extraAction)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.ExtraAction)">visit</a></span>&#8203;(<a href="../events/toServer/turn/ExtraAction.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">ExtraAction</a>&nbsp;extraAction)</code></th>
 <td class="colLast">
 <div class="block">Message to send the server where to place the pawn diuring set up phase</div>
 </td>
 </tr>
 <tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.MoveAction)">visit</a></span>&#8203;(<a href="../events/toServer/turn/MoveAction.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">MoveAction</a>&nbsp;moveAction)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.MoveAction)">visit</a></span>&#8203;(<a href="../events/toServer/turn/MoveAction.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">MoveAction</a>&nbsp;moveAction)</code></th>
 <td class="colLast">
 <div class="block">Message to send the server where to move the pawn</div>
 </td>
 </tr>
 <tr class="rowColor" id="i11">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.NewTurn)">visit</a></span>&#8203;(<a href="../events/toServer/turn/NewTurn.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">NewTurn</a>&nbsp;newTurn)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.NewTurn)">visit</a></span>&#8203;(<a href="../events/toServer/turn/NewTurn.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">NewTurn</a>&nbsp;newTurn)</code></th>
 <td class="colLast">
 <div class="block">Message to send the server to set a new turn</div>
 </td>
 </tr>
 <tr class="altColor" id="i12">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.RequestExtraAction)">visit</a></span>&#8203;(<a href="../events/toServer/turn/RequestExtraAction.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">RequestExtraAction</a>&nbsp;requestExtraAction)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.RequestExtraAction)">visit</a></span>&#8203;(<a href="../events/toServer/turn/RequestExtraAction.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">RequestExtraAction</a>&nbsp;requestExtraAction)</code></th>
 <td class="colLast">
 <div class="block">Message to send the server to activate their gods power</div>
 </td>
 </tr>
 <tr class="rowColor" id="i13">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.RequestPossibleBuild)">visit</a></span>&#8203;(<a href="../events/toServer/turn/RequestPossibleBuild.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">RequestPossibleBuild</a>&nbsp;requestPossibleBuild)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.RequestPossibleBuild)">visit</a></span>&#8203;(<a href="../events/toServer/turn/RequestPossibleBuild.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">RequestPossibleBuild</a>&nbsp;requestPossibleBuild)</code></th>
 <td class="colLast">
 <div class="block">Message to send the sever to request the possible build</div>
 </td>
 </tr>
 <tr class="altColor" id="i14">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.RequestPossibleMove)">visit</a></span>&#8203;(<a href="../events/toServer/turn/RequestPossibleMove.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">RequestPossibleMove</a>&nbsp;requestPossibleMove)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.RequestPossibleMove)">visit</a></span>&#8203;(<a href="../events/toServer/turn/RequestPossibleMove.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">RequestPossibleMove</a>&nbsp;requestPossibleMove)</code></th>
 <td class="colLast">
 <div class="block">Message to send the server to request the possible move</div>
 </td>
 </tr>
 <tr class="rowColor" id="i15">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.SelectedPawn)">visit</a></span>&#8203;(<a href="../events/toServer/turn/SelectedPawn.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">SelectedPawn</a>&nbsp;selectedPawn)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toServer.turn.SelectedPawn)">visit</a></span>&#8203;(<a href="../events/toServer/turn/SelectedPawn.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">SelectedPawn</a>&nbsp;selectedPawn)</code></th>
 <td class="colLast">
 <div class="block">Message to send the server the pawn choosen for the actions</div>
 </td>
@@ -301,7 +301,7 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toServer.setup.SelectedGods)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/setup/SelectedGods.html" title="class in it.polimi.ingsw.PSP33.events.toServer.setup">SelectedGods</a>&nbsp;selectedGods)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/setup/SelectedGods.html" title="class in it.polimi.ingsw.PSP33.events.to_server.setup">SelectedGods</a>&nbsp;selectedGods)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/VCEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toServer.setup.SelectedGods)">VCEventVisitor</a></code></span></div>
 <div class="block">Message to send the server the gods choosen during setup</div>
 <dl>
@@ -313,7 +313,7 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toServer.turn.SelectedPawn)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/SelectedPawn.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">SelectedPawn</a>&nbsp;selectedPawn)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/SelectedPawn.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">SelectedPawn</a>&nbsp;selectedPawn)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/VCEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toServer.turn.SelectedPawn)">VCEventVisitor</a></code></span></div>
 <div class="block">Message to send the server the pawn choosen for the actions</div>
 <dl>
@@ -325,7 +325,7 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toServer.setup.ChoosenGod)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/setup/ChoosenGod.html" title="class in it.polimi.ingsw.PSP33.events.toServer.setup">ChoosenGod</a>&nbsp;choosenGod)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/setup/ChoosenGod.html" title="class in it.polimi.ingsw.PSP33.events.to_server.setup">ChoosenGod</a>&nbsp;choosenGod)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/VCEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toServer.setup.ChoosenGod)">VCEventVisitor</a></code></span></div>
 <div class="block">Message to send the server the god a player choose</div>
 <dl>
@@ -337,7 +337,7 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/setup/PlacePawn.html" title="class in it.polimi.ingsw.PSP33.events.toServer.setup">PlacePawn</a>&nbsp;placePawn)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/setup/PlacePawn.html" title="class in it.polimi.ingsw.PSP33.events.to_server.setup">PlacePawn</a>&nbsp;placePawn)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/VCEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn)">VCEventVisitor</a></code></span></div>
 <div class="block">Message to send the server where to place the pawn diuring set up phase</div>
 <dl>
@@ -349,7 +349,7 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toServer.setup.PlayerDisconnected)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/setup/PlayerDisconnected.html" title="class in it.polimi.ingsw.PSP33.events.toServer.setup">PlayerDisconnected</a>&nbsp;playerDisconnected)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/setup/PlayerDisconnected.html" title="class in it.polimi.ingsw.PSP33.events.to_server.setup">PlayerDisconnected</a>&nbsp;playerDisconnected)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/VCEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toServer.setup.PlayerDisconnected)">VCEventVisitor</a></code></span></div>
 <div class="block">Message to send the server when a player disconnect form the game</div>
 <dl>
@@ -361,7 +361,7 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toServer.turn.NewTurn)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/NewTurn.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">NewTurn</a>&nbsp;newTurn)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/NewTurn.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">NewTurn</a>&nbsp;newTurn)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/VCEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toServer.turn.NewTurn)">VCEventVisitor</a></code></span></div>
 <div class="block">Message to send the server to set a new turn</div>
 <dl>
@@ -373,7 +373,7 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toServer.turn.MoveAction)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/MoveAction.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">MoveAction</a>&nbsp;moveAction)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/MoveAction.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">MoveAction</a>&nbsp;moveAction)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/VCEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toServer.turn.MoveAction)">VCEventVisitor</a></code></span></div>
 <div class="block">Message to send the server where to move the pawn</div>
 <dl>
@@ -385,7 +385,7 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toServer.turn.BuildAction)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/BuildAction.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">BuildAction</a>&nbsp;buildAction)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/BuildAction.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">BuildAction</a>&nbsp;buildAction)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/VCEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toServer.turn.BuildAction)">VCEventVisitor</a></code></span></div>
 <div class="block">Message to send the server where to build</div>
 <dl>
@@ -397,7 +397,7 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toServer.turn.ExtraAction)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/ExtraAction.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">ExtraAction</a>&nbsp;extraAction)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/ExtraAction.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">ExtraAction</a>&nbsp;extraAction)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/VCEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toServer.turn.ExtraAction)">VCEventVisitor</a></code></span></div>
 <div class="block">Message to send the server where to place the pawn diuring set up phase</div>
 <dl>
@@ -409,7 +409,7 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toServer.turn.RequestPossibleMove)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/RequestPossibleMove.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">RequestPossibleMove</a>&nbsp;requestPossibleMove)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/RequestPossibleMove.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">RequestPossibleMove</a>&nbsp;requestPossibleMove)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/VCEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toServer.turn.RequestPossibleMove)">VCEventVisitor</a></code></span></div>
 <div class="block">Message to send the server to request the possible move</div>
 <dl>
@@ -421,7 +421,7 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toServer.turn.RequestPossibleBuild)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/RequestPossibleBuild.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">RequestPossibleBuild</a>&nbsp;requestPossibleBuild)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/RequestPossibleBuild.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">RequestPossibleBuild</a>&nbsp;requestPossibleBuild)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/VCEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toServer.turn.RequestPossibleBuild)">VCEventVisitor</a></code></span></div>
 <div class="block">Message to send the sever to request the possible build</div>
 <dl>
@@ -433,7 +433,7 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toServer.turn.RequestExtraAction)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/RequestExtraAction.html" title="class in it.polimi.ingsw.PSP33.events.toServer.turn">RequestExtraAction</a>&nbsp;requestExtraAction)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toServer/turn/RequestExtraAction.html" title="class in it.polimi.ingsw.PSP33.events.to_server.turn">RequestExtraAction</a>&nbsp;requestExtraAction)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/VCEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toServer.turn.RequestExtraAction)">VCEventVisitor</a></code></span></div>
 <div class="block">Message to send the server to activate their gods power</div>
 <dl>
@@ -445,10 +445,10 @@ implements <a href="../utils/observable/Observer.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="update(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">update</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">update</span>&#8203;(<span class="arguments"><a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&nbsp;serverMessage)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">update</span>&#8203;(<span class="arguments"><a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&nbsp;serverMessage)</span></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../utils/observable/Observer.html#update(T)">update</a></code>&nbsp;in interface&nbsp;<code><a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&gt;</code></dd>
+<dd><code><a href="../utils/observable/Observer.html#update(T)">update</a></code>&nbsp;in interface&nbsp;<code><a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&gt;</code></dd>
 </dl>
 </section>
 </li>

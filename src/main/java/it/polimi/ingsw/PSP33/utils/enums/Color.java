@@ -29,4 +29,10 @@ public enum Color {
     public static Color getColorByIndex(int index) {
         return BY_INDEX.get(index);
     }
+
+
+    @Override
+    public String toString() {
+        return name();
+    }
 }

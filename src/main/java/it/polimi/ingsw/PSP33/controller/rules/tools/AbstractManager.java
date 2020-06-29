@@ -1,10 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.rules.tools;
 
-import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
+import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
 import it.polimi.ingsw.PSP33.model.*;
-import it.polimi.ingsw.PSP33.model.light_version.LightModel;
-import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.List;
 

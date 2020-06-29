@@ -2,10 +2,10 @@ package it.polimi.ingsw.PSP33;
 
 
 import it.polimi.ingsw.PSP33.controller.Controller;
-import it.polimi.ingsw.PSP33.events.toServer.setup.ChoosenGod;
-import it.polimi.ingsw.PSP33.events.toServer.setup.PlacePawn;
-import it.polimi.ingsw.PSP33.events.toServer.setup.SelectedGods;
-import it.polimi.ingsw.PSP33.events.toServer.turn.*;
+import it.polimi.ingsw.PSP33.events.to_server.setup.ChoosenGod;
+import it.polimi.ingsw.PSP33.events.to_server.setup.PlacePawn;
+import it.polimi.ingsw.PSP33.events.to_server.setup.SelectedGods;
+import it.polimi.ingsw.PSP33.events.to_server.turn.*;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.God;
 import it.polimi.ingsw.PSP33.model.Model;

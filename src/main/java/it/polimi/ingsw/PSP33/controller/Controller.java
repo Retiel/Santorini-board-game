@@ -2,10 +2,10 @@ package it.polimi.ingsw.PSP33.controller;
 
 import it.polimi.ingsw.PSP33.controller.rules.SetUpManager;
 import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
-import it.polimi.ingsw.PSP33.events.VCEventVisitor;
-import it.polimi.ingsw.PSP33.events.toServer.setup.*;
-import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
-import it.polimi.ingsw.PSP33.events.toServer.turn.*;
+import it.polimi.ingsw.PSP33.events.to_server.VCEventVisitor;
+import it.polimi.ingsw.PSP33.events.to_server.setup.*;
+import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
+import it.polimi.ingsw.PSP33.events.to_server.turn.*;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.utils.observable.Observer;
 

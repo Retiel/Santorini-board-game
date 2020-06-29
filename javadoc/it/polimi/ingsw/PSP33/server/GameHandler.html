@@ -93,7 +93,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </div>
 <div class="contentContainer">
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance"><a href="../utils/observable/Observable.html" title="class in it.polimi.ingsw.PSP33.utils.observable">it.polimi.ingsw.PSP33.utils.observable.Observable</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&gt;
+<div class="inheritance"><a href="../utils/observable/Observable.html" title="class in it.polimi.ingsw.PSP33.utils.observable">it.polimi.ingsw.PSP33.utils.observable.Observable</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&gt;
 <div class="inheritance"><a href="../view/AbstractView.html" title="class in it.polimi.ingsw.PSP33.view">it.polimi.ingsw.PSP33.view.AbstractView</a>
 <div class="inheritance">it.polimi.ingsw.PSP33.server.GameHandler</div>
 </div>
@@ -102,7 +102,7 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 <section class="description">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../events/MVEventVisitor.html" title="interface in it.polimi.ingsw.PSP33.events">MVEventVisitor</a></code>, <code><a href="../utils/observable/Listener.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Listener</a></code>, <code><a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toClient">MVEvent</a>&gt;</code></dd>
+<dd><code><a href="../events/MVEventVisitor.html" title="interface in it.polimi.ingsw.PSP33.events">MVEventVisitor</a></code>, <code><a href="../utils/observable/Listener.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Listener</a></code>, <code><a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_client">MVEvent</a>&gt;</code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">GameHandler</span>
@@ -159,7 +159,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <tbody>
 <tr class="altColor" id="i0">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#didReceiveMessage(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">didReceiveMessage</a></span>&#8203;(<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&nbsp;vcEvent)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#didReceiveMessage(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">didReceiveMessage</a></span>&#8203;(<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&nbsp;vcEvent)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i1">
@@ -171,14 +171,14 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 </tr>
 <tr class="altColor" id="i2">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendMessageToAll(it.polimi.ingsw.PSP33.events.toClient.MVEvent)">sendMessageToAll</a></span>&#8203;(<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toClient">MVEvent</a>&nbsp;mvEvent)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendMessageToAll(it.polimi.ingsw.PSP33.events.toClient.MVEvent)">sendMessageToAll</a></span>&#8203;(<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_client">MVEvent</a>&nbsp;mvEvent)</code></th>
 <td class="colLast">
 <div class="block">Method that sends a model-view event to all clients</div>
 </td>
 </tr>
 <tr class="rowColor" id="i3">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendMessageToClient(it.polimi.ingsw.PSP33.events.toClient.MVEvent)">sendMessageToClient</a></span>&#8203;(<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toClient">MVEvent</a>&nbsp;mvEvent)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendMessageToClient(it.polimi.ingsw.PSP33.events.toClient.MVEvent)">sendMessageToClient</a></span>&#8203;(<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_client">MVEvent</a>&nbsp;mvEvent)</code></th>
 <td class="colLast">
 <div class="block">Method that sends a model-view event to the current client</div>
 </td>
@@ -199,103 +199,103 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 </tr>
 <tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update(it.polimi.ingsw.PSP33.events.toClient.MVEvent)">update</a></span>&#8203;(<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toClient">MVEvent</a>&nbsp;message)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update(it.polimi.ingsw.PSP33.events.toClient.MVEvent)">update</a></span>&#8203;(<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_client">MVEvent</a>&nbsp;message)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 <tr class="rowColor" id="i7">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.data.DataBoard)">visit</a></span>&#8203;(<a href="../events/toClient/data/DataBoard.html" title="class in it.polimi.ingsw.PSP33.events.toClient.data">DataBoard</a>&nbsp;dataBoard)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.data.DataBoard)">visit</a></span>&#8203;(<a href="../events/toClient/data/DataBoard.html" title="class in it.polimi.ingsw.PSP33.events.to_client.data">DataBoard</a>&nbsp;dataBoard)</code></th>
 <td class="colLast">
 <div class="block">Message to send to the player all inital data of the board</div>
 </td>
 </tr>
 <tr class="altColor" id="i8">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.data.DataCell)">visit</a></span>&#8203;(<a href="../events/toClient/data/DataCell.html" title="class in it.polimi.ingsw.PSP33.events.toClient.data">DataCell</a>&nbsp;dataCell)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.data.DataCell)">visit</a></span>&#8203;(<a href="../events/toClient/data/DataCell.html" title="class in it.polimi.ingsw.PSP33.events.to_client.data">DataCell</a>&nbsp;dataCell)</code></th>
 <td class="colLast">
 <div class="block">Message to send to the player all inital data of the modified cell</div>
 </td>
 </tr>
 <tr class="rowColor" id="i9">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer)">visit</a></span>&#8203;(<a href="../events/toClient/data/DataPlayer.html" title="class in it.polimi.ingsw.PSP33.events.toClient.data">DataPlayer</a>&nbsp;dataPlayer)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer)">visit</a></span>&#8203;(<a href="../events/toClient/data/DataPlayer.html" title="class in it.polimi.ingsw.PSP33.events.to_client.data">DataPlayer</a>&nbsp;dataPlayer)</code></th>
 <td class="colLast">
 <div class="block">Message to send to the player all inital data of the player</div>
 </td>
 </tr>
 <tr class="altColor" id="i10">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer)">visit</a></span>&#8203;(<a href="../events/toClient/setup/CurrentPlayer.html" title="class in it.polimi.ingsw.PSP33.events.toClient.setup">CurrentPlayer</a>&nbsp;currentPlayer)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer)">visit</a></span>&#8203;(<a href="../events/toClient/setup/CurrentPlayer.html" title="class in it.polimi.ingsw.PSP33.events.to_client.setup">CurrentPlayer</a>&nbsp;currentPlayer)</code></th>
 <td class="colLast">
 <div class="block">Message to send to the player all inital data of the pawn</div>
 </td>
 </tr>
 <tr class="rowColor" id="i11">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement)">visit</a></span>&#8203;(<a href="../events/toClient/setup/PossiblePlacement.html" title="class in it.polimi.ingsw.PSP33.events.toClient.setup">PossiblePlacement</a>&nbsp;possiblePlacement)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement)">visit</a></span>&#8203;(<a href="../events/toClient/setup/PossiblePlacement.html" title="class in it.polimi.ingsw.PSP33.events.to_client.setup">PossiblePlacement</a>&nbsp;possiblePlacement)</code></th>
 <td class="colLast">
 <div class="block">Message to send to the player all inital data of the board</div>
 </td>
 </tr>
 <tr class="altColor" id="i12">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods)">visit</a></span>&#8203;(<a href="../events/toClient/setup/SelectGods.html" title="class in it.polimi.ingsw.PSP33.events.toClient.setup">SelectGods</a>&nbsp;selectGods)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods)">visit</a></span>&#8203;(<a href="../events/toClient/setup/SelectGods.html" title="class in it.polimi.ingsw.PSP33.events.to_client.setup">SelectGods</a>&nbsp;selectGods)</code></th>
 <td class="colLast">
 <div class="block">Message to send to the player select the N gods to use in the game</div>
 </td>
 </tr>
 <tr class="rowColor" id="i13">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.setup.YourGod)">visit</a></span>&#8203;(<a href="../events/toClient/setup/YourGod.html" title="class in it.polimi.ingsw.PSP33.events.toClient.setup">YourGod</a>&nbsp;yourGod)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.setup.YourGod)">visit</a></span>&#8203;(<a href="../events/toClient/setup/YourGod.html" title="class in it.polimi.ingsw.PSP33.events.to_client.setup">YourGod</a>&nbsp;yourGod)</code></th>
 <td class="colLast">
 <div class="block">Message to send to the player all inital data of the pawn</div>
 </td>
 </tr>
 <tr class="altColor" id="i14">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.NewAction)">visit</a></span>&#8203;(<a href="../events/toClient/turn/NewAction.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">NewAction</a>&nbsp;newAction)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.NewAction)">visit</a></span>&#8203;(<a href="../events/toClient/turn/NewAction.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">NewAction</a>&nbsp;newAction)</code></th>
 <td class="colLast">
 <div class="block">Message to request the player what to do at the star of his turn</div>
 </td>
 </tr>
 <tr class="rowColor" id="i15">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.PossibleBuild)">visit</a></span>&#8203;(<a href="../events/toClient/turn/PossibleBuild.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">PossibleBuild</a>&nbsp;possibleBuild)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.PossibleBuild)">visit</a></span>&#8203;(<a href="../events/toClient/turn/PossibleBuild.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">PossibleBuild</a>&nbsp;possibleBuild)</code></th>
 <td class="colLast">
 <div class="block">Message to request the player to select a cell for his move</div>
 </td>
 </tr>
 <tr class="altColor" id="i16">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.PossibleExtraAction)">visit</a></span>&#8203;(<a href="../events/toClient/turn/PossibleExtraAction.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">PossibleExtraAction</a>&nbsp;possibleExtraAction)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.PossibleExtraAction)">visit</a></span>&#8203;(<a href="../events/toClient/turn/PossibleExtraAction.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">PossibleExtraAction</a>&nbsp;possibleExtraAction)</code></th>
 <td class="colLast">
 <div class="block">Message to request the player if use the gods power</div>
 </td>
 </tr>
 <tr class="rowColor" id="i17">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.PossibleMove)">visit</a></span>&#8203;(<a href="../events/toClient/turn/PossibleMove.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">PossibleMove</a>&nbsp;possibleMove)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.PossibleMove)">visit</a></span>&#8203;(<a href="../events/toClient/turn/PossibleMove.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">PossibleMove</a>&nbsp;possibleMove)</code></th>
 <td class="colLast">
 <div class="block">Message to request the player to select a cell where to build</div>
 </td>
 </tr>
 <tr class="altColor" id="i18">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.SelectPawn)">visit</a></span>&#8203;(<a href="../events/toClient/turn/SelectPawn.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">SelectPawn</a>&nbsp;selectPawn)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.SelectPawn)">visit</a></span>&#8203;(<a href="../events/toClient/turn/SelectPawn.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">SelectPawn</a>&nbsp;selectPawn)</code></th>
 <td class="colLast">
 <div class="block">Message to request the player what pawn the player is going to use</div>
 </td>
 </tr>
 <tr class="rowColor" id="i19">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.YouLose)">visit</a></span>&#8203;(<a href="../events/toClient/turn/YouLose.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">YouLose</a>&nbsp;youLose)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.YouLose)">visit</a></span>&#8203;(<a href="../events/toClient/turn/YouLose.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">YouLose</a>&nbsp;youLose)</code></th>
 <td class="colLast">
 <div class="block">Message to comunicate to the losing statement</div>
 </td>
 </tr>
 <tr class="altColor" id="i20">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.YouWin)">visit</a></span>&#8203;(<a href="../events/toClient/turn/YouWin.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">YouWin</a>&nbsp;youWin)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#visit(it.polimi.ingsw.PSP33.events.toClient.turn.YouWin)">visit</a></span>&#8203;(<a href="../events/toClient/turn/YouWin.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">YouWin</a>&nbsp;youWin)</code></th>
 <td class="colLast">
 <div class="block">Message to comunicate to the winning statement</div>
 </td>
@@ -358,7 +358,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="didReceiveMessage(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">didReceiveMessage</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">didReceiveMessage</span>&#8203;(<span class="arguments"><a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&nbsp;vcEvent)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">didReceiveMessage</span>&#8203;(<span class="arguments"><a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&nbsp;vcEvent)</span></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
 <dd><code><a href="../utils/observable/Listener.html#didReceiveMessage(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">didReceiveMessage</a></code>&nbsp;in interface&nbsp;<code><a href="../utils/observable/Listener.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Listener</a></code></dd>
@@ -368,7 +368,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="sendMessageToClient(it.polimi.ingsw.PSP33.events.toClient.MVEvent)">sendMessageToClient</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">sendMessageToClient</span>&#8203;(<span class="arguments"><a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toClient">MVEvent</a>&nbsp;mvEvent)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">sendMessageToClient</span>&#8203;(<span class="arguments"><a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_client">MVEvent</a>&nbsp;mvEvent)</span></div>
 <div class="block">Method that sends a model-view event to the current client</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -379,7 +379,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="sendMessageToAll(it.polimi.ingsw.PSP33.events.toClient.MVEvent)">sendMessageToAll</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">sendMessageToAll</span>&#8203;(<span class="arguments"><a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toClient">MVEvent</a>&nbsp;mvEvent)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">sendMessageToAll</span>&#8203;(<span class="arguments"><a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_client">MVEvent</a>&nbsp;mvEvent)</span></div>
 <div class="block">Method that sends a model-view event to all clients</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>
@@ -414,10 +414,10 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="update(it.polimi.ingsw.PSP33.events.toClient.MVEvent)">update</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">update</span>&#8203;(<span class="arguments"><a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toClient">MVEvent</a>&nbsp;message)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">update</span>&#8203;(<span class="arguments"><a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_client">MVEvent</a>&nbsp;message)</span></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../utils/observable/Observer.html#update(T)">update</a></code>&nbsp;in interface&nbsp;<code><a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toClient">MVEvent</a>&gt;</code></dd>
+<dd><code><a href="../utils/observable/Observer.html#update(T)">update</a></code>&nbsp;in interface&nbsp;<code><a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_client">MVEvent</a>&gt;</code></dd>
 <dt><span class="overrideSpecifyLabel">Overrides:</span></dt>
 <dd><code><a href="../view/AbstractView.html#update(it.polimi.ingsw.PSP33.events.toClient.MVEvent)">update</a></code>&nbsp;in class&nbsp;<code><a href="../view/AbstractView.html" title="class in it.polimi.ingsw.PSP33.view">AbstractView</a></code></dd>
 </dl>
@@ -426,7 +426,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.data.DataBoard)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/data/DataBoard.html" title="class in it.polimi.ingsw.PSP33.events.toClient.data">DataBoard</a>&nbsp;dataBoard)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/data/DataBoard.html" title="class in it.polimi.ingsw.PSP33.events.to_client.data">DataBoard</a>&nbsp;dataBoard)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.data.DataBoard)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to send to the player all inital data of the board</div>
 <dl>
@@ -438,7 +438,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.data.DataCell)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/data/DataCell.html" title="class in it.polimi.ingsw.PSP33.events.toClient.data">DataCell</a>&nbsp;dataCell)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/data/DataCell.html" title="class in it.polimi.ingsw.PSP33.events.to_client.data">DataCell</a>&nbsp;dataCell)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.data.DataCell)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to send to the player all inital data of the modified cell</div>
 <dl>
@@ -450,7 +450,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/data/DataPlayer.html" title="class in it.polimi.ingsw.PSP33.events.toClient.data">DataPlayer</a>&nbsp;dataPlayer)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/data/DataPlayer.html" title="class in it.polimi.ingsw.PSP33.events.to_client.data">DataPlayer</a>&nbsp;dataPlayer)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to send to the player all inital data of the player</div>
 <dl>
@@ -462,7 +462,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.setup.YourGod)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/setup/YourGod.html" title="class in it.polimi.ingsw.PSP33.events.toClient.setup">YourGod</a>&nbsp;yourGod)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/setup/YourGod.html" title="class in it.polimi.ingsw.PSP33.events.to_client.setup">YourGod</a>&nbsp;yourGod)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.setup.YourGod)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to send to the player all inital data of the pawn</div>
 <dl>
@@ -474,7 +474,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/setup/CurrentPlayer.html" title="class in it.polimi.ingsw.PSP33.events.toClient.setup">CurrentPlayer</a>&nbsp;currentPlayer)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/setup/CurrentPlayer.html" title="class in it.polimi.ingsw.PSP33.events.to_client.setup">CurrentPlayer</a>&nbsp;currentPlayer)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to send to the player all inital data of the pawn</div>
 <dl>
@@ -486,7 +486,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/setup/PossiblePlacement.html" title="class in it.polimi.ingsw.PSP33.events.toClient.setup">PossiblePlacement</a>&nbsp;possiblePlacement)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/setup/PossiblePlacement.html" title="class in it.polimi.ingsw.PSP33.events.to_client.setup">PossiblePlacement</a>&nbsp;possiblePlacement)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to send to the player all inital data of the board</div>
 <dl>
@@ -498,7 +498,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/setup/SelectGods.html" title="class in it.polimi.ingsw.PSP33.events.toClient.setup">SelectGods</a>&nbsp;selectGods)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/setup/SelectGods.html" title="class in it.polimi.ingsw.PSP33.events.to_client.setup">SelectGods</a>&nbsp;selectGods)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to send to the player select the N gods to use in the game</div>
 <dl>
@@ -510,7 +510,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.turn.YouLose)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/YouLose.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">YouLose</a>&nbsp;youLose)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/YouLose.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">YouLose</a>&nbsp;youLose)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.turn.YouLose)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to comunicate to the losing statement</div>
 <dl>
@@ -522,7 +522,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.turn.YouWin)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/YouWin.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">YouWin</a>&nbsp;youWin)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/YouWin.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">YouWin</a>&nbsp;youWin)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.turn.YouWin)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to comunicate to the winning statement</div>
 <dl>
@@ -534,7 +534,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.turn.SelectPawn)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/SelectPawn.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">SelectPawn</a>&nbsp;selectPawn)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/SelectPawn.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">SelectPawn</a>&nbsp;selectPawn)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.turn.SelectPawn)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to request the player what pawn the player is going to use</div>
 <dl>
@@ -546,7 +546,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.turn.NewAction)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/NewAction.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">NewAction</a>&nbsp;newAction)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/NewAction.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">NewAction</a>&nbsp;newAction)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.turn.NewAction)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to request the player what to do at the star of his turn</div>
 <dl>
@@ -558,7 +558,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.turn.PossibleBuild)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/PossibleBuild.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">PossibleBuild</a>&nbsp;possibleBuild)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/PossibleBuild.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">PossibleBuild</a>&nbsp;possibleBuild)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.turn.PossibleBuild)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to request the player to select a cell for his move</div>
 <dl>
@@ -570,7 +570,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.turn.PossibleMove)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/PossibleMove.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">PossibleMove</a>&nbsp;possibleMove)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/PossibleMove.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">PossibleMove</a>&nbsp;possibleMove)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.turn.PossibleMove)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to request the player to select a cell where to build</div>
 <dl>
@@ -582,7 +582,7 @@ implements <a href="../utils/observable/Listener.html" title="interface in it.po
 <li class="blockList">
 <section class="detail">
 <h3><a id="visit(it.polimi.ingsw.PSP33.events.toClient.turn.PossibleExtraAction)">visit</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/PossibleExtraAction.html" title="class in it.polimi.ingsw.PSP33.events.toClient.turn">PossibleExtraAction</a>&nbsp;possibleExtraAction)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">visit</span>&#8203;(<span class="arguments"><a href="../events/toClient/turn/PossibleExtraAction.html" title="class in it.polimi.ingsw.PSP33.events.to_client.turn">PossibleExtraAction</a>&nbsp;possibleExtraAction)</span></div>
 <div class="block"><span class="descfrmTypeLabel">Description copied from interface:&nbsp;<code><a href="../events/MVEventVisitor.html#visit(it.polimi.ingsw.PSP33.events.toClient.turn.PossibleExtraAction)">MVEventVisitor</a></code></span></div>
 <div class="block">Message to request the player if use the gods power</div>
 <dl>

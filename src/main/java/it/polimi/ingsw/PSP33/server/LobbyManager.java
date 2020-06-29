@@ -3,7 +3,6 @@ package it.polimi.ingsw.PSP33.server;
 import java.util.HashMap;
 import java.util.Map;
 
-//TODO: missing comments
 
 /**
  * Class that manages multiple lobbies
@@ -38,6 +37,16 @@ class LobbyManager {
         return lobbies;
     }
 
+    public static Map<Integer, String> getLobbyMap() {
+        Map<Integer, String> lobbyMap = new HashMap<>();
+
+        for(Lobby lobby : getLobbies().values()) {
+            lobbyMap.put(lobby.getLobbyID(), lobby.toString());
+        }
+
+        return lobbyMap;
+    }
+
     public synchronized static void addLobby(Lobby lobby) {
         lobbies.put(lobby.getLobbyID(), lobby);
     }
@@ -56,25 +65,6 @@ class LobbyManager {
         thread.start();
 
         return lobby;
-    }
-
-    public synchronized static String printLobbyList() {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for(Lobby lobby : lobbies.values()) {
-            stringBuilder
-                    .append(lobby.getLobbyID())
-                    .append(". ").append("< ")
-                    .append(lobby.getClientHandlers().size())
-                    .append(" / ")
-                    .append(lobby.getNumberOfPlayers())
-                    .append(" >\n");
-        }
-        if(!stringBuilder.toString().equals("")) {
-            stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-        }
-
-        return stringBuilder.toString();
     }
 
     public synchronized static boolean checkLobbyList(int lobbyID) {

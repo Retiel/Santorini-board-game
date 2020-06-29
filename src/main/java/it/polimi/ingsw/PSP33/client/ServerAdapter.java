@@ -1,21 +1,26 @@
 package it.polimi.ingsw.PSP33.client;
 
 import it.polimi.ingsw.PSP33.events.EventSerializer;
-import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-import it.polimi.ingsw.PSP33.events.toClient.turn.YouLose;
-import it.polimi.ingsw.PSP33.events.toClient.turn.YouWin;
-import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
+import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
+import it.polimi.ingsw.PSP33.events.to_client.CCEvent;
+import it.polimi.ingsw.PSP33.events.to_client.CCEventVisitor;
+import it.polimi.ingsw.PSP33.events.to_client.turn.YouLose;
+import it.polimi.ingsw.PSP33.events.to_client.turn.YouWin;
+import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
+import it.polimi.ingsw.PSP33.events.to_server.SCEvent;
 import it.polimi.ingsw.PSP33.utils.observable.Observable;
 import it.polimi.ingsw.PSP33.utils.observable.Observer;
 
 import java.io.*;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Class that handles all client's communication with the server
  */
-public class ServerAdapter extends Observable<MVEvent> implements Runnable, Observer<VCEvent> {
+public abstract class ServerAdapter extends Observable<MVEvent> implements Runnable, Observer<VCEvent>, CCEventVisitor {
 
     /**
      * Server's socket
@@ -52,6 +57,8 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
      */
     private final EventSerializer eventSerializer;
 
+    private final ExecutorService executor;
+
     /**
      * Constructor of the class
      * @param server server's socket
@@ -63,6 +70,7 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
         this.scanner = new Scanner(System.in);
         this.isSetupOver = false;
         this.eventSerializer = EventSerializer.getInstance();
+        this.executor = Executors.newSingleThreadExecutor();
     }
 
     @Override
@@ -73,47 +81,44 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
             output = new DataOutputStream(server.getOutputStream());
         } catch (IOException e) {
             System.out.println("Disconnected");
-            e.printStackTrace();
         }
 
         handleServerSetup();
-        handleServerConnection();
     }
 
     @Override
     public void update(VCEvent message) {
-        sendMessage(message);
+        sendVCEvent(message);
     }
 
     /**
      * Method that sends a view-controller event to the server
      * @param vcEvent view-controller event
      */
-    public void sendMessage(VCEvent vcEvent) {
+    public void sendVCEvent(VCEvent vcEvent) {
         String vcJson = eventSerializer.serializeVC(vcEvent);
         try {
             output.writeUTF(vcJson);
         } catch (IOException e) {
-            System.out.println("Other player disconnected");
+            System.out.println("Disconnected from game");
         }
     }
 
     /**
      * Method that receives model-view events from server
      */
-    public void receiveMessage() {
+    public void receiveMVEvent() {
         while (true) {
             String mvJson;
 
             try {
                 mvJson = input.readUTF();
             } catch (IOException e) {
-                System.out.println("closed connection");
+                System.out.println("Disconnected from game");
                 break;
             }
 
             MVEvent mvEvent = eventSerializer.deserializeMV(mvJson);
-
             /* manage win and lose disconnection */
             if(mvEvent instanceof YouLose){
                 try {
@@ -134,88 +139,66 @@ public class ServerAdapter extends Observable<MVEvent> implements Runnable, Obse
         }
     }
 
+    public void sendSCEvent(SCEvent scEvent) {
+        String scJson = eventSerializer.serializeSC(scEvent);
+        try {
+            output.writeUTF(scJson);
+        } catch (IOException e) {
+            System.out.println("Disconnected from setup");
+        }
+    }
+
+    public void receiveCCEvent() {
+        while (true) {
+            String ccJson;
+
+            try {
+                ccJson = input.readUTF();
+            } catch (IOException e) {
+                System.out.println("Disconnected from setup");
+                break;
+            }
+
+            CCEvent ccEvent = eventSerializer.deserializeCC(ccJson);
+            ccEvent.accept(this);
+
+            if(isSetupOver) {
+                break;
+            }
+        }
+    }
+
     /**
      * Method that handles the client's server connection
      */
     public void handleServerConnection() {
-        new Thread(this::receiveMessage).start();
+        executor.execute(this::receiveMVEvent);
     }
 
     /**
      * Method that handles the client's server setup
      */
     public void handleServerSetup() {
-
-        //Starts listening to the server on a new thread
-        new Thread(this::getServerSetup).start();
-
-        while (true) {
-            synchronized (lock) {
-                try {
-                    lock.wait();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            }
-
-            if (isSetupOver) {
-                break;
-            }
-
-            String string = scanner.nextLine();
-            try {
-                output.writeUTF(string);
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
-        synchronized (this) {
-            try {
-                this.wait();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
+        executor.execute(this::receiveCCEvent);
     }
 
-    /**
-     * Method that gets the setup requests from the server
-     */
-    public void getServerSetup() {
-        loop: while (true) {
-            String string;
+    public DataInputStream getInput() {
+        return input;
+    }
 
-            try {
-                string = input.readUTF();
-            } catch (IOException e) {
-                e.printStackTrace();
-                break;
-            }
+    public DataOutputStream getOutput() {
+        return output;
+    }
 
-            System.out.println(string);
+    public Scanner getScanner() {
+        return scanner;
+    }
 
-            switch (string) {
-                case "Waiting for players...":
-                    isSetupOver = true;
+    public void setSetupOver(boolean setupOver) {
+        isSetupOver = setupOver;
+    }
 
-                    synchronized (lock) {
-                        lock.notify();
-                    }
-
-                    break;
-
-                case "All players are ready.":
-                    synchronized (this) {
-                        this.notifyAll();
-                        break loop;
-                    }
-
-                default:
-                    synchronized (lock) {
-                        lock.notify();
-                    }
-            }
-        }
+    public Object getLock() {
+        return lock;
     }
 }

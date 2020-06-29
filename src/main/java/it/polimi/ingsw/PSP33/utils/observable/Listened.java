@@ -1,6 +1,6 @@
 package it.polimi.ingsw.PSP33.utils.observable;
 
-import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
+import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
 
 import java.util.ArrayList;
 import java.util.List;

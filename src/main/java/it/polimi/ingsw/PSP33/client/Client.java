@@ -15,7 +15,16 @@ public class Client {
 
     public static void main(String[] args) {
 
-        AbstractView view = ViewFactory.getView(2);
+        int viewSelection;
+
+        //TODO: args.length > 0 with parameter --cli from jar
+        if(args.length == 0) {
+            viewSelection = 1;
+        } else {
+            viewSelection = 2;
+        }
+
+        AbstractView view = ViewFactory.getView(viewSelection);
 
         Gson gson = new Gson();
         Connection connection = gson.fromJson(getConnectionReader(), Connection.class);
@@ -29,7 +38,12 @@ public class Client {
         }
         System.out.println("Connected");
 
-        ServerAdapter serverAdapter = new ServerAdapter(server);
+        ServerAdapter serverAdapter;
+        if(viewSelection == 1) {
+            serverAdapter = new ServerAdapterCLI(server);
+        } else {
+            serverAdapter = new ServerAdapterGUI(server);
+        }
 
         serverAdapter.addObserver(view);
         view.addObserver(serverAdapter);

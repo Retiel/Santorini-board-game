@@ -93,19 +93,19 @@ $('.navPadding').css('padding-top', $('.fixedNav').css("height"));
 </div>
 <div class="contentContainer">
 <div class="inheritance" title="Inheritance Tree">java.lang.Object
-<div class="inheritance"><a href="../utils/observable/Observable.html" title="class in it.polimi.ingsw.PSP33.utils.observable">it.polimi.ingsw.PSP33.utils.observable.Observable</a>&lt;<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toClient">MVEvent</a>&gt;
+<div class="inheritance"><a href="../utils/observable/Observable.html" title="class in it.polimi.ingsw.PSP33.utils.observable">it.polimi.ingsw.PSP33.utils.observable.Observable</a>&lt;<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_client">MVEvent</a>&gt;
 <div class="inheritance">it.polimi.ingsw.PSP33.client.ServerAdapter</div>
 </div>
 </div>
 <section class="description">
 <dl>
 <dt>All Implemented Interfaces:</dt>
-<dd><code><a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&gt;</code>, <code>java.lang.Runnable</code></dd>
+<dd><code><a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&gt;</code>, <code>java.lang.Runnable</code></dd>
 </dl>
 <hr>
 <pre>public class <span class="typeNameLabel">ServerAdapter</span>
-extends <a href="../utils/observable/Observable.html" title="class in it.polimi.ingsw.PSP33.utils.observable">Observable</a>&lt;<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toClient">MVEvent</a>&gt;
-implements java.lang.Runnable, <a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&gt;</pre>
+extends <a href="../utils/observable/Observable.html" title="class in it.polimi.ingsw.PSP33.utils.observable">Observable</a>&lt;<a href="../events/toClient/MVEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_client">MVEvent</a>&gt;
+implements java.lang.Runnable, <a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&gt;</pre>
 <div class="block">Class that handles all client's communication with the server</div>
 </section>
 <section class="summary">
@@ -190,14 +190,14 @@ implements java.lang.Runnable, <a href="../utils/observable/Observer.html" title
 </tr>
 <tr class="rowColor" id="i5">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendMessage(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">sendMessage</a></span>&#8203;(<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&nbsp;vcEvent)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#sendMessage(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">sendMessage</a></span>&#8203;(<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&nbsp;vcEvent)</code></th>
 <td class="colLast">
 <div class="block">Method that sends a view-controller event to the server</div>
 </td>
 </tr>
 <tr class="altColor" id="i6">
 <td class="colFirst"><code>void</code></td>
-<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">update</a></span>&#8203;(<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&nbsp;message)</code></th>
+<th class="colSecond" scope="row"><code><span class="memberNameLink"><a href="#update(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">update</a></span>&#8203;(<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&nbsp;message)</code></th>
 <td class="colLast">&nbsp;</td>
 </tr>
 </tbody>
@@ -261,17 +261,17 @@ implements java.lang.Runnable, <a href="../utils/observable/Observer.html" title
 <li class="blockList">
 <section class="detail">
 <h3><a id="update(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">update</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">update</span>&#8203;(<span class="arguments"><a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&nbsp;message)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">update</span>&#8203;(<span class="arguments"><a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&nbsp;message)</span></div>
 <dl>
 <dt><span class="overrideSpecifyLabel">Specified by:</span></dt>
-<dd><code><a href="../utils/observable/Observer.html#update(T)">update</a></code>&nbsp;in interface&nbsp;<code><a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&gt;</code></dd>
+<dd><code><a href="../utils/observable/Observer.html#update(T)">update</a></code>&nbsp;in interface&nbsp;<code><a href="../utils/observable/Observer.html" title="interface in it.polimi.ingsw.PSP33.utils.observable">Observer</a>&lt;<a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&gt;</code></dd>
 </dl>
 </section>
 </li>
 <li class="blockList">
 <section class="detail">
 <h3><a id="sendMessage(it.polimi.ingsw.PSP33.events.toServer.VCEvent)">sendMessage</a></h3>
-<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">sendMessage</span>&#8203;(<span class="arguments"><a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.toServer">VCEvent</a>&nbsp;vcEvent)</span></div>
+<div class="memberSignature"><span class="modifiers">public</span>&nbsp;<span class="returnType">void</span>&nbsp;<span class="memberName">sendMessage</span>&#8203;(<span class="arguments"><a href="../events/toServer/VCEvent.html" title="interface in it.polimi.ingsw.PSP33.events.to_server">VCEvent</a>&nbsp;vcEvent)</span></div>
 <div class="block">Method that sends a view-controller event to the server</div>
 <dl>
 <dt><span class="paramLabel">Parameters:</span></dt>

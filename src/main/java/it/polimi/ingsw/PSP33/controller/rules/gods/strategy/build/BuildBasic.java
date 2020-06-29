@@ -2,8 +2,8 @@ package it.polimi.ingsw.PSP33.controller.rules.gods.strategy.build;
 
 import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.tools.LightConversion;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
-import it.polimi.ingsw.PSP33.events.toClient.turn.NewAction;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataCell;
+import it.polimi.ingsw.PSP33.events.to_client.turn.NewAction;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Model;

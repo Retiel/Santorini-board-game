@@ -2,16 +2,16 @@ package it.polimi.ingsw.PSP33.server;
 
 
 import it.polimi.ingsw.PSP33.controller.Controller;
-import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataBoard;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataCell;
-import it.polimi.ingsw.PSP33.events.toClient.data.DataPlayer;
-import it.polimi.ingsw.PSP33.events.toClient.setup.CurrentPlayer;
-import it.polimi.ingsw.PSP33.events.toClient.setup.PossiblePlacement;
-import it.polimi.ingsw.PSP33.events.toClient.setup.SelectGods;
-import it.polimi.ingsw.PSP33.events.toClient.setup.YourGod;
-import it.polimi.ingsw.PSP33.events.toClient.turn.*;
-import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
+import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataBoard;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataCell;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataPlayer;
+import it.polimi.ingsw.PSP33.events.to_client.setup.CurrentPlayer;
+import it.polimi.ingsw.PSP33.events.to_client.setup.PossiblePlacement;
+import it.polimi.ingsw.PSP33.events.to_client.setup.SelectGods;
+import it.polimi.ingsw.PSP33.events.to_client.setup.YourGod;
+import it.polimi.ingsw.PSP33.events.to_client.turn.*;
+import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
 import it.polimi.ingsw.PSP33.utils.CustomDebugger;
@@ -28,7 +28,11 @@ import java.util.List;
 public class GameHandler extends AbstractView implements Listener {
 
 
+    /**
+     * Boolean used to stop sending messages
+     */
     private boolean toggle;
+
     /**
      * Lobby ID
      */
@@ -77,8 +81,8 @@ public class GameHandler extends AbstractView implements Listener {
 
         /* Testing item*/
         CustomDebugger customDebugger = new CustomDebugger(lobbyID, model, controller);
-        Thread thread = new Thread(customDebugger, "Debugger for lobby: " + lobbyID);
-        System.out.println("Debugger for lobby: " + lobbyID + " [active]");
+        Thread thread = new Thread(customDebugger);
+        System.out.println("Lobby_" + lobbyID +": debugger active");
         thread.start();
         /* end testing items */
 
@@ -98,11 +102,7 @@ public class GameHandler extends AbstractView implements Listener {
      * @param mvEvent model-view event
      */
     public synchronized void sendMessageToClient(MVEvent mvEvent) {
-        try {
-            if(toggle) currentClient.sendMessage(mvEvent);
-        } catch (IOException e) {
-            System.out.println("Lobby_" + lobbyID + ": [message_dropped]");
-        }
+        if(toggle) currentClient.sendMVEvent(mvEvent);
     }
 
     /**
@@ -111,11 +111,7 @@ public class GameHandler extends AbstractView implements Listener {
      */
     public void sendMessageToAll(MVEvent mvEvent) {
         for(ClientHandler clientHandler : clientHandlers) {
-            try {
-                if(toggle) clientHandler.sendMessage(mvEvent);
-            } catch (IOException e) {
-                System.out.println("Lobby_" + lobbyID + ": [message_dropped]");
-            }
+            if(toggle) clientHandler.sendMVEvent(mvEvent);
         }
     }
 
@@ -163,11 +159,7 @@ public class GameHandler extends AbstractView implements Listener {
     public void visit(DataPlayer dataPlayer) {
         for(ClientHandler clientHandler : clientHandlers) {
             dataPlayer.setName(clientHandler.getClientName());
-            try {
-                clientHandler.sendMessage(dataPlayer);
-            } catch (IOException e) {
-                System.out.println("Lobby_" + lobbyID + ": [message_dropped]");
-            }
+            clientHandler.sendMVEvent(dataPlayer);
         }
     }
 
@@ -235,6 +227,4 @@ public class GameHandler extends AbstractView implements Listener {
     public void visit(PossibleExtraAction possibleExtraAction) {
         sendMessageToClient(possibleExtraAction);
     }
-
-
 }

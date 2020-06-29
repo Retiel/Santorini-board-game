@@ -75,8 +75,8 @@
 <div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.server;
 <i>2</i>&nbsp;
 <i>3</i>&nbsp;import com.google.gson.Gson;
-<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
 <i>6</i>&nbsp;import it.polimi.ingsw.PSP33.utils.enums.Color;
 <i>7</i>&nbsp;
 <i>8</i>&nbsp;import java.io.*;
@@ -181,11 +181,11 @@
 <b class="nc"><i>107</i>&nbsp;            output.writeObject(nameRequest);</b>
 <i>108</i>&nbsp;
 <b class="nc"><i>109</i>&nbsp;            Object next = input.readObject();</b>
-<b class="nc"><i>110</i>&nbsp;            String nameSelection = (String) next;</b>
+<b class="nc"><i>110</i>&nbsp;            String nameSelected = (String) next;</b>
 <i>111</i>&nbsp;
-<b class="nc"><i>112</i>&nbsp;            if(!lobby.checkName(nameSelection)) {</b>
-<b class="nc"><i>113</i>&nbsp;                lobby.addName(nameSelection);</b>
-<b class="nc"><i>114</i>&nbsp;                clientName = nameSelection;</b>
+<b class="nc"><i>112</i>&nbsp;            if(!lobby.checkName(nameSelected)) {</b>
+<b class="nc"><i>113</i>&nbsp;                lobby.addName(nameSelected);</b>
+<b class="nc"><i>114</i>&nbsp;                clientName = nameSelected;</b>
 <i>115</i>&nbsp;            }
 <b class="nc"><i>116</i>&nbsp;        }</b>
 <i>117</i>&nbsp;    }

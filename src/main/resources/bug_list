@@ -1,10 +1,11 @@
 
 
 TODO: in ordine di priorità
-- getClass().getResource(): fetching dei file
+- getClass().getResource(): fetching dei file [DONE]
 - GUI per setup
 - GUI dettagli grafici:
     > legenda
     > carte
+
 - LightModel per GUI definizione utilità o meno
 - trigger di Atlas definire

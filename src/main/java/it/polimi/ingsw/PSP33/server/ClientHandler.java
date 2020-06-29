@@ -1,20 +1,27 @@
 package it.polimi.ingsw.PSP33.server;
 
 import it.polimi.ingsw.PSP33.events.EventSerializer;
-import it.polimi.ingsw.PSP33.events.toClient.MVEvent;
-import it.polimi.ingsw.PSP33.events.toServer.VCEvent;
-import it.polimi.ingsw.PSP33.events.toServer.setup.PlayerDisconnected;
+import it.polimi.ingsw.PSP33.events.to_client.CCEvent;
+import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
+import it.polimi.ingsw.PSP33.events.to_client.connection.*;
+import it.polimi.ingsw.PSP33.events.to_server.SCEvent;
+import it.polimi.ingsw.PSP33.events.to_server.SCEventVisitor;
+import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
+import it.polimi.ingsw.PSP33.events.to_server.connection.*;
+import it.polimi.ingsw.PSP33.events.to_server.setup.PlayerDisconnected;
 import it.polimi.ingsw.PSP33.utils.enums.Color;
 import it.polimi.ingsw.PSP33.utils.observable.Listened;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 
 /**
  * Class that holds client's socket and all client's data
  */
-public class ClientHandler extends Listened implements Runnable {
+public class ClientHandler extends Listened implements Runnable, SCEventVisitor {
 
     /**
      * Client's socket
@@ -42,6 +49,11 @@ public class ClientHandler extends Listened implements Runnable {
     private Color clientColor;
 
     /**
+     * Boolean used to check if setup is over
+     */
+    private boolean isSetupOver;
+
+    /**
      * Client's lobby
      */
     private Lobby lobby;
@@ -50,6 +62,11 @@ public class ClientHandler extends Listened implements Runnable {
      * Event serializer
      */
     private final EventSerializer eventSerializer;
+
+    /**
+     * ExecutorService to execute one task on a dedicated thread
+     */
+    private final ExecutorService executor;
 
     /**
      * Constructor of the class
@@ -61,27 +78,22 @@ public class ClientHandler extends Listened implements Runnable {
         this.output = null;
         this.clientName = "";
         this.clientColor = null;
+        this.isSetupOver = false;
         this.lobby = null;
         this.eventSerializer = EventSerializer.getInstance();
+        this.executor = Executors.newSingleThreadExecutor();
     }
 
     @Override
     public void run() {
         try {
-            handleConnectionSetup();
-            handleClientSetup();
+            input = new DataInputStream(client.getInputStream());
+            output = new DataOutputStream(client.getOutputStream());
         } catch (IOException e) {
-            if(lobby != null) {
-                lobby.removeClient(this);
-                System.out.println("Lobby_" + lobby.getLobbyID() + ": "
-                        + client.getInetAddress() + "disconnected and removed from lobby");
-            } else {
-                System.out.println("Lobby_0: " + client.getInetAddress() + " disconnected");
-            }
-            return;
+            System.out.println("Lobby_0: " + client.getInetAddress() + " unable to open client's socket streams");
         }
 
-        listenToClient();
+        handleClientSetup();
     }
 
     /**
@@ -103,6 +115,14 @@ public class ClientHandler extends Listened implements Runnable {
     }
 
     /**
+     * Method to set setupOver
+     * @param setupOver true if setup is over
+     */
+    public void setSetupOver(boolean setupOver) {
+        isSetupOver = setupOver;
+    }
+
+    /**
      * Method to get the lobby
      *
      * @return lobby
@@ -121,18 +141,17 @@ public class ClientHandler extends Listened implements Runnable {
     }
 
     /**
-     * Method that keeps listening to client's messages
+     * Method that makes the method to receive game's events run on a dedicated thread
      */
-    public void listenToClient() {
+    public void listenToGameEvents() {
         //New thread to keep listening from socket
-        new Thread(this::receiveMessage,
-                "Lobby_" + lobby.getLobbyID() + ": clienthandler_" + clientName + "_receiveMessage()").start();
+        executor.execute(this::receiveVCEvent);
     }
 
     /**
-     * Method that keeps receiving client's events to notify game handler
+     * Method that keeps receiving game's events to notify game handler
      */
-    public void receiveMessage() {
+    public void receiveVCEvent() {
         while (true) {
             String json;
 
@@ -150,209 +169,174 @@ public class ClientHandler extends Listened implements Runnable {
     }
 
     /**
-     * Method to send an event to the client
+     * Method to send a game event to the client
      * @param mvEvent model-view event
-     * @throws IOException unable to access the socket's stream
      */
-    public void sendMessage(MVEvent mvEvent) throws IOException {
+    public void sendMVEvent(MVEvent mvEvent) {
         String mvJson = eventSerializer.serializeMV(mvEvent);
-        output.writeUTF(mvJson);
+        try {
+            output.writeUTF(mvJson);
+        } catch (IOException e) {
+            System.out.println("Lobby_" + lobby.getLobbyID() + ": " + getClientName() + " [mv_dropped]");
+        }
+    }
+
+    /**
+     * Method that makes the method to receive setup's events run on a dedicated thread
+     */
+    public void listenToSetupEvents() {
+        //New thread to keep listening from socket
+        executor.execute(this::receiveSCEvent);
+    }
+
+    /**
+     * Method that keeps receiving setup's events until setup is over
+     */
+    public void receiveSCEvent() {
+        while (true) {
+            String scJson;
+
+            try{
+                scJson = input.readUTF();
+            } catch (IOException e) {
+                if(lobby != null) {
+                    lobby.removeClient(this);
+                    System.out.println("Lobby_" + lobby.getLobbyID() + ": "
+                            + client.getInetAddress() + " disconnected and removed from lobby");
+                } else {
+                    System.out.println("Lobby_0: " + client.getInetAddress() + " disconnected before joining a lobby");
+                }
+                break;
+            }
+
+            SCEvent scEvent = eventSerializer.deserializeSC(scJson);
+            scEvent.accept(this);
+
+            if(isSetupOver) {
+                break;
+            }
+        }
+    }
+
+    /**
+     * Method to send a setup event to the client
+     * @param ccEvent client connection message
+     */
+    public void sendCCEvent(CCEvent ccEvent) {
+        String ccJson = eventSerializer.serializeCC(ccEvent);
+        try {
+            output.writeUTF(ccJson);
+        } catch (IOException e) {
+            if(lobby != null) {
+                System.out.println("Lobby_" + lobby.getLobbyID() + ": "
+                        + client.getInetAddress() + " [cc_dropped]");
+            } else {
+                System.out.println("Lobby_0: " + client.getInetAddress() + " [cc_dropped]");
+            }
+        }
     }
 
     /**
      * Method to handle the client connection for the lobby setup
-     * @throws IOException unable to access the socket's stream
      */
-    public void handleClientSetup() throws IOException {
+    public void handleClientSetup() {
         System.out.println("Connected to " + client.getInetAddress());
 
-        requestPlayerName();
-        requestPlayerColor();
-        requestWait();
-    }
+        //Starts listening to setup events on a dedicated thread
+        listenToSetupEvents();
 
-    /**
-     * Request the client to type his name
-     * @throws IOException unable to access the socket's stream
-     */
-    public void requestPlayerName() throws IOException {
-        while (true) {
-            //Send request
-            String string = "Type your name: ";
-            output.writeUTF(string);
-
-            //Receive selection
-            string = input.readUTF();
-
-            //Check name's uniqueness
-            if(!string.equals("")) {
-                if (!lobby.checkName(string)) {
-                    lobby.addName(string);
-                    clientName = string;
-                    break;
-                }
-            }
+        if(LobbyManager.getLobbies().values().size() == 0) {
+            sendCCEvent(new SelectNumberOfPlayers());
+        } else {
+            sendCCEvent(new SelectConnection());
         }
     }
 
     /**
-     * Request the client to select his color
-     * @throws IOException unable to access the socket's stream
+     * Method used by the Lobby to notify the client that setup is over
      */
-    public void requestPlayerColor() throws IOException {
-        while (true) {
-            //Send request
-            String string = "Select your color: \n" + lobby.printColorList();
-            output.writeUTF(string);
+    public void setReady() {
+        sendCCEvent(new AllPlayersReady());
 
-            //Receive selection
-            string = input.readUTF();
+        //Starts listening to game events on a dedicated thread
+        listenToGameEvents();
+    }
 
-            Color color;
-            switch (string) {
-                case "1":
-                    color = Color.getColorByIndex(1);
-                    break;
-                case "2":
-                    color = Color.getColorByIndex(2);
-                    break;
-                case "3":
-                    color = Color.getColorByIndex(3);
-                    break;
-
-                default:
-                    continue;
-            }
-
-            if(lobby.checkColor(color)) {
-                lobby.removeColor(color);
-                clientColor = color;
+    @Override
+    public void visit(ConnectionSelected connectionSelected) {
+        switch (connectionSelected.getSelection()) {
+            case 1:
+                sendCCEvent(new SelectNumberOfPlayers());
                 break;
-            }
-        }
-    }
 
-    /**
-     * Tell the client to wait for other players
-     * @throws IOException unable to access the socket's stream
-     */
-    public void requestWait() throws IOException {
-        String string = "Waiting for players...";
-        output.writeUTF(string);
-
-        lobby.setClientReady(this);
-    }
-
-    /**
-     * Method that requests a client to be set ready
-     */
-    public void requestReady() {
-        String string = "All players are ready.";
-
-        try {
-            output.writeUTF(string);
-        } catch (IOException e) {
-            //Remove client from lobby
-            if(lobby != null) {
-                lobby.removeClient(this);
-                System.out.println("Lobby_" + lobby.getLobbyID() + ": "
-                        + client.getInetAddress() + "disconnected and removed from lobby");
-            }
-        }
-    }
-
-    /**
-     * Method that handles the client's connection setup
-     * @throws IOException unable to access the socket's stream
-     */
-    public void handleConnectionSetup() throws IOException {
-        output = new DataOutputStream(client.getOutputStream());
-        input = new DataInputStream(client.getInputStream());
-
-        boolean flag = true;
-        while(flag) {
-            if(LobbyManager.printLobbyList().equals("")) {
-                output.writeUTF("No lobbies available. Creating a new lobby..");
-                createLobby();
-                flag = false;
-            }else {
-                String string = "Select how you want to connect:\n1. Create lobby\n2. Join lobby";
-                output.writeUTF(string);
-
-                string = input.readUTF();
-                switch (string) {
-                    case "1":
-                        createLobby();
-                        flag = false;
-                        break;
-
-                    case "2":
-                        joinLobby();
-                        flag = false;
-                        break;
-
-                    default:
-                }
-            }
-        }
-    }
-
-    /**
-     * Method that creates a new lobby and makes the client join it
-     * @throws IOException unable to access the socket's stream
-     */
-    public void createLobby() throws IOException {
-
-        int numberOfPlayers = 0;
-
-        while(numberOfPlayers == 0) {
-
-            //Send request
-            String string = "Select number of players for the lobby:\n1. 2 players\n2. 3 players";
-            output.writeUTF(string);
-
-            //Receive selection
-            string = input.readUTF();
-
-            switch (string) {
-                case "1":
-                    numberOfPlayers = 2;
-                    break;
-
-                case "2":
-                    numberOfPlayers = 3;
-                    break;
-
-                default:
-            }
-        }
-
-        setLobby(LobbyManager.newLobby(numberOfPlayers));
-    }
-
-    /**
-     * Method that makes the client join a lobby
-     * @throws IOException unable to access the socket's stream
-     */
-    public synchronized void joinLobby() throws IOException {
-
-        while (true) {
-            String string = LobbyManager.printLobbyList();
-            output.writeUTF(string);
-
-            string = input.readUTF();
-
-            int foo;
-            try {
-                foo = Integer.parseInt(string);
-            } catch (NumberFormatException e) {
-                continue;
-            }
-
-            if(LobbyManager.checkLobbyList(foo)) {
-                setLobby(LobbyManager.getLobbyByID(foo));
+            case 2:
+                sendCCEvent(new SelectLobby(LobbyManager.getLobbyMap()));
                 break;
-            }
+
+            default:
+                sendCCEvent(new SelectConnection());
+        }
+    }
+
+    @Override
+    public void visit(NumberOfPlayersSelected numberOfPlayersSelected) {
+        switch (numberOfPlayersSelected.getSelection()) {
+            case 1:
+                setLobby(LobbyManager.newLobby(2));
+                sendCCEvent(new SelectName());
+                break;
+
+            case 2:
+                setLobby(LobbyManager.newLobby(3));
+                sendCCEvent(new SelectName());
+                break;
+
+            default:
+                sendCCEvent(new SelectNumberOfPlayers());
+        }
+    }
+
+    @Override
+    public void visit(LobbySelected lobbySelected) {
+        //Check lobby selection
+        if(LobbyManager.checkLobbyList(lobbySelected.getLobbyID())) {
+            setLobby(LobbyManager.getLobbyByID(lobbySelected.getLobbyID()));
+            sendCCEvent(new SelectName());
+        } else {
+            sendCCEvent(new SelectLobby(LobbyManager.getLobbyMap()));
+        }
+    }
+
+    @Override
+    public void visit(NameSelected nameSelected) {
+        String name = nameSelected.getName();
+
+        //Check name's uniqueness
+        if(!name.equals("") && !lobby.checkName(name)) {
+            lobby.addName(name);
+            clientName = name;
+
+            sendCCEvent(new SelectColor(lobby.getColorList()));
+        } else {
+            sendCCEvent(new SelectName());
+        }
+    }
+
+    @Override
+    public void visit(ColorSelected colorSelected) {
+        Color color = colorSelected.getColor();
+
+        //Check color uniqueness
+        if(lobby.checkColor(color)) {
+            lobby.removeColor(color);
+            clientColor = color;
+
+            lobby.setClientReady(this);
+            setSetupOver(true);
+
+            sendCCEvent(new RequestWait());
+        } else {
+            sendCCEvent(new SelectColor(lobby.getColorList()));
         }
     }
 }

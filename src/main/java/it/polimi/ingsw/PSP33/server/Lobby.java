@@ -58,6 +58,7 @@ public class Lobby implements Runnable {
 
     @Override
     public void run() {
+        //Keeps waiting until all clients are ready
         synchronized (this) {
             try {
                 wait();
@@ -140,7 +141,8 @@ public class Lobby implements Runnable {
      * @return number of players
      */
     public int getNumberOfPlayers() {
-        return numberOfPlayers;
+        int n = numberOfPlayers;
+        return n;
     }
 
     /**
@@ -168,26 +170,8 @@ public class Lobby implements Runnable {
         colorList.addAll(Arrays.asList(Color.values()));
     }
 
-    /**
-     * Method to print the list of available colors
-     *
-     * @return string representation of the list of available colors
-     */
-    public synchronized String printColorList() {
-
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (Color color : colorList) {
-            stringBuilder
-                    .append(Color.getIndex(color))
-                    .append(". ")
-                    .append(color.name())
-                    .append("\n");
-        }
-
-        stringBuilder.deleteCharAt(stringBuilder.length() - 1);
-
-        return stringBuilder.toString();
+    public synchronized List<Color> getColorList() {
+        return colorList;
     }
 
     /**
@@ -244,12 +228,15 @@ public class Lobby implements Runnable {
      * Method to start a new game for this lobby
      */
     public void startGame() {
+        //Notify all clients
         for (ClientHandler clientHandler : clientHandlers) {
-            clientHandler.requestReady();
+            clientHandler.setReady();
         }
 
+        //GameHandler
         GameHandler gameHandler = new GameHandler(this);
 
+        //Listener
         for(ClientHandler clientHandler : clientHandlers) {
             clientHandler.addListener(gameHandler);
         }
@@ -257,7 +244,12 @@ public class Lobby implements Runnable {
         //Debug
         System.out.println("Lobby_" + lobbyID + ": game handler done");
 
+        //Starts the game
         gameHandler.startGame();
     }
 
+    @Override
+    public String toString() {
+        return "< " + getClientHandlers().size() + " / " + getNumberOfPlayers() + " >";
+    }
 }
