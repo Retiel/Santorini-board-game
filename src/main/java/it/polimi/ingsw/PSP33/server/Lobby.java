@@ -250,6 +250,6 @@ public class Lobby implements Runnable {
 
     @Override
     public String toString() {
-        return "< " + getClientHandlers().size() + " / " + getNumberOfPlayers() + " >";
+        return "Lobby_" + lobbyID + " < " + getClientHandlers().size() + " / " + getNumberOfPlayers() + " >";
     }
 }

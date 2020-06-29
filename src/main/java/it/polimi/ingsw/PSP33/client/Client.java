@@ -18,7 +18,7 @@ public class Client {
         int viewSelection;
 
         //TODO: args.length > 0 with parameter --cli from jar
-        if(args.length == 0) {
+        if(args.length > 0) {
             viewSelection = 1;
         } else {
             viewSelection = 2;

@@ -3,18 +3,19 @@ package it.polimi.ingsw.PSP33.view.gui;
 import it.polimi.ingsw.PSP33.model.God;
 import it.polimi.ingsw.PSP33.model.light_version.LightCell;
 import it.polimi.ingsw.PSP33.utils.Coord;
+import it.polimi.ingsw.PSP33.view.gui.components.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainFrame extends JFrame {
+public class GameFrame extends JFrame {
 
     private GridPanel gridPanel;
     private TextPanel textPanel;
 
-    public MainFrame() {
+    public GameFrame() {
         //Main frame
         super("Santorini");
         setSize(600, 600);
@@ -22,6 +23,7 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setLayout(new GridBagLayout());
+        setAlwaysOnTop(true);
 
         //Text panel
         ImagePanel textImagePanel = new ImagePanel("src/main/resources/SantoriniPanelMidResized.png");

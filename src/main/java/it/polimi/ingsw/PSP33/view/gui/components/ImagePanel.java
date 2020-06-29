@@ -1,9 +1,9 @@
-package it.polimi.ingsw.PSP33.view.gui;
+package it.polimi.ingsw.PSP33.view.gui.components;
 
 import javax.swing.*;
 import java.awt.*;
 
-class ImagePanel extends JPanel {
+public class ImagePanel extends JPanel {
 
     private Image img;
 

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.view.gui;
+package it.polimi.ingsw.PSP33.view.gui.components;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package it.polimi.ingsw.PSP33.view.gui;
+package it.polimi.ingsw.PSP33.view.gui.components;
 import it.polimi.ingsw.PSP33.model.light_version.LightPawn;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
