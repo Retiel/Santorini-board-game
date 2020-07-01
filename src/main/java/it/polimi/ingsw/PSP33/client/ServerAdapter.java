@@ -92,7 +92,7 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
         try {
             output.writeUTF(vcJson);
         } catch (IOException e) {
-            System.out.println("Disconnected from game");
+            System.out.println("Disconnected from game - Unable to send event");
         }
     }
 
@@ -106,7 +106,8 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
             try {
                 mvJson = input.readUTF();
             } catch (IOException e) {
-                System.out.println("Disconnected from game");
+                System.out.println("Disconnected from game - Unable to receive event");
+                System.exit(0);
                 break;
             }
 
@@ -140,7 +141,7 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
         try {
             output.writeUTF(scJson);
         } catch (IOException e) {
-            System.out.println("Disconnected from setup");
+            System.out.println("Disconnected from setup - Unable to send event");
         }
     }
 
@@ -154,7 +155,8 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
             try {
                 ccJson = input.readUTF();
             } catch (IOException e) {
-                System.out.println("Disconnected from setup");
+                System.out.println("Disconnected from setup - Unable to receive event");
+                System.exit(0);
                 break;
             }
 

@@ -48,6 +48,8 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
      */
     private Color clientColor;
 
+    private String next;
+
     /**
      * Boolean used to check if setup is over
      */
@@ -153,17 +155,17 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
      */
     public void receiveVCEvent() {
         while (true) {
-            String json;
+            String vcJson;
 
             try {
-                json = input.readUTF();
+                vcJson = input.readUTF();
             } catch (IOException e) {
                 System.out.println("Lobby_" + lobby.getLobbyID() + ": client_" + clientName + " disconnected");
                 notifyListener(new PlayerDisconnected(getClientName()));
                 break;
             }
 
-            VCEvent vcEvent = eventSerializer.deserializeVC(json);
+            VCEvent vcEvent = eventSerializer.deserializeVC(vcJson);
             notifyListener(vcEvent);
         }
     }
@@ -213,6 +215,7 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
             scEvent.accept(this);
 
             if(isSetupOver) {
+                listenToGameEvents();
                 break;
             }
         }
@@ -257,11 +260,11 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
      * Method used by the Lobby to notify the client that setup is over
      */
     public void setReady() {
+
         sendCCEvent(new AllPlayersReady());
-        setSetupOver(true);
 
         //Starts listening to game events on a dedicated thread
-        listenToGameEvents();
+        //listenToGameEvents();
     }
 
     @Override
@@ -333,6 +336,7 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
             lobby.removeColor(color);
             clientColor = color;
 
+            setSetupOver(true);
             lobby.setClientReady(this);
 
             sendCCEvent(new RequestWait());

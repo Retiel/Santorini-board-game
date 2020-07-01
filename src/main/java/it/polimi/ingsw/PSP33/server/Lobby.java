@@ -14,6 +14,8 @@ public class Lobby implements Runnable {
      */
     private final int lobbyID;
 
+    private boolean isGameStarted;
+
     /**
      * List of client handlers of the lobby
      */
@@ -46,6 +48,7 @@ public class Lobby implements Runnable {
      */
     public Lobby(int lobbyID, int numberOfPlayers) {
         this.lobbyID = lobbyID;
+        this.isGameStarted = false;
         this.numberOfPlayers = numberOfPlayers;
         this.clientHandlers = new ArrayList<>();
         this.clientNames = new ArrayList<>();
@@ -77,6 +80,10 @@ public class Lobby implements Runnable {
      */
     public int getLobbyID() {
         return lobbyID;
+    }
+
+    public void setGameStarted(boolean gameStarted) {
+        isGameStarted = gameStarted;
     }
 
     /**
@@ -117,7 +124,7 @@ public class Lobby implements Runnable {
             clientNames.remove(clientHandler.getClientName());
         }
 
-        if(clientHandlers.size() == numberOfPlayers - 1) {
+        if(clientHandlers.size() == numberOfPlayers - 1 && !isGameStarted) {
             LobbyManager.addLobby(this);
         }
 
@@ -244,6 +251,7 @@ public class Lobby implements Runnable {
         System.out.println("Lobby_" + lobbyID + ": game handler done");
 
         //Starts the game
+        isGameStarted = true;
         gameHandler.startGame();
     }
 
