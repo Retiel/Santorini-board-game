@@ -18,6 +18,7 @@ public class ImagePanel extends JPanel {
     public ImagePanel(Image img) {
         this.img = img;
         Dimension size = new Dimension(img.getWidth(null), img.getHeight(null));
+        setLayout(new GridBagLayout());
         setPreferredSize(size);
         setMinimumSize(size);
         setMaximumSize(size);

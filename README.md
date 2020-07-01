@@ -10,6 +10,7 @@ Requisiti implementati:
 -
 - Regole complete
 - CLI
+- GUI
 - Socket
 - FA: Partite multiple
 

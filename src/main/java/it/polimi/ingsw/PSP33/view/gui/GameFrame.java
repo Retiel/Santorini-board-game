@@ -21,7 +21,7 @@ public class GameFrame extends JFrame {
     public GameFrame() throws IOException {
         //Main frame
         super("Santorini");
-        setSize(600, 600);
+        setSize(1100, 668);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -31,30 +31,100 @@ public class GameFrame extends JFrame {
         InputStream imageStream;
 
         //Text panel
-        imageStream = getClass().getResourceAsStream("/SantoriniPanelMidResized.png");
-        ImagePanel textImagePanel = new ImagePanel(imageStream);
         textPanel = new TextPanel();
 
-        GridBagConstraints textCon = new GridBagConstraints();
-        textCon.gridx = 1;
-        textCon.gridy = 0;
-        textImagePanel.add(textPanel);
-        add(textImagePanel, textCon);
-
-        //Board panel
-        imageStream = getClass().getResourceAsStream("/SantoriniBoardResized.png");
-        ImagePanel boardImagePanel = new ImagePanel(imageStream);
+        //Housing panel of the grid
         BorderPanel borderPanel = new BorderPanel();
         gridPanel = new GridPanel();
 
-        boardImagePanel.add(borderPanel);
+        /* Board panel components */
+        //right board part
+        ImagePanel rx = new ImagePanel("src/main/resources/rx.png");
+        rx.setLayout(new GridBagLayout());
+
+        //left board part
+        ImagePanel lx = new ImagePanel("src/main/resources/lx.png");
+        lx.setLayout(new GridBagLayout());
+
+        //top board part
+        ImagePanel top = new ImagePanel("src/main/resources/top.png");
+        top.setLayout(new GridBagLayout());
+
+        //bot board part
+        ImagePanel bot = new ImagePanel("src/main/resources/bottom.png");
+        bot.setLayout(new GridBagLayout());
+
+        //center board part
+        ImagePanel mid = new ImagePanel("src/main/resources/center.png");
+        mid.setLayout(new GridBagLayout());
+
+        // central component which houses rx, lx and center components
+        JPanel centralPanel = new JPanel();
+        centralPanel.setLayout(new GridBagLayout());
+
+        /* List of constrains used */
+
+        //text constrain
+        GridBagConstraints textCon = new GridBagConstraints();
+        textCon.gridx = 0;
+        textCon.gridy = 0;
+        textCon.insets = new Insets(0,5,225,25);
+        textCon.anchor = GridBagConstraints.PAGE_START;
+        textCon.gridwidth = 2;
+        textCon.fill = GridBagConstraints.BOTH;
+
+        //top component constrain
+        GridBagConstraints topPad = new GridBagConstraints();
+        topPad.gridx = 0;
+        topPad.gridy = 0;
+        topPad.fill = GridBagConstraints.HORIZONTAL;
+
+        //bot component constrain
+        GridBagConstraints botPad = new GridBagConstraints();
+        botPad.gridx = 0;
+        botPad.gridy = 2;
+        botPad.fill = GridBagConstraints.HORIZONTAL;
+
+        //left component constrain
+        GridBagConstraints lxPad = new GridBagConstraints();
+        lxPad.gridx = 0;
+        lxPad.gridy = 0;
+        lxPad.fill = GridBagConstraints.VERTICAL;
+
+        //center component constrain
+        GridBagConstraints midPad = new GridBagConstraints();
+        midPad.gridx = 1;
+        midPad.gridy = 0;
+
+        //right component constrain
+        GridBagConstraints rxPad = new GridBagConstraints();
+        rxPad.gridx = 2;
+        rxPad.gridy = 0;
+        rxPad.fill = GridBagConstraints.VERTICAL;
         borderPanel.add(gridPanel);
-        GridBagConstraints imageCon = new GridBagConstraints();
-        imageCon.gridx = 1;
-        imageCon.gridy = 1;
-        add(boardImagePanel, imageCon);
+        mid.add(borderPanel);
+
+        //text constrain
+        GridBagConstraints centralPanelCon = new GridBagConstraints();
+        centralPanelCon.gridx = 0;
+        centralPanelCon.gridy = 1;
+        centralPanelCon.fill = GridBagConstraints.BOTH;
+
+        // text added in the right panel with his constrains
+        rx.add(textPanel, textCon);
+
+        // central row components added with their own constrains
+        centralPanel.add(rx, rxPad);
+        centralPanel.add(mid, midPad);
+        centralPanel.add(lx, lxPad);
+
+        // creating the game board with their own constrains on dimensions
+        add(top, topPad);
+        add(centralPanel, centralPanelCon);
+        add(bot, botPad);
 
         pack();
+        //setVisible(true);
     }
 
     public GridPanel getGridPanel() {
