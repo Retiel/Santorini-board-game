@@ -11,7 +11,7 @@ public class GridPanel extends JPanel {
 
     public GridPanel() {
         setLayout(new GridLayout(DIM,DIM));
-        setPreferredSize(new Dimension(430, 450));
+        setPreferredSize(new Dimension(408, 425));
 
         buttons = new CellButton[DIM][DIM];
 

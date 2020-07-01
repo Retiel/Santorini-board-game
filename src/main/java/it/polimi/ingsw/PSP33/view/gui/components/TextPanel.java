@@ -8,10 +8,10 @@ public class TextPanel extends JPanel {
     private JTextArea textArea;
 
     public TextPanel() {
-        setSize(600, 60);
+        setSize(150, 60);
 
         textArea = new JTextArea();
-        textArea.setSize(570, 60);
+        textArea.setSize(150, 60);
         textArea.setEditable(false);
         textArea.setCursor(null);
         textArea.setOpaque(false);
