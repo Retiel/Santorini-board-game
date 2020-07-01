@@ -45,7 +45,7 @@ public class Prometheus implements Move, ExtraAction {
         LightCell lightCellNew = LightConversion.getLightVersion(newCell);
 
         model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
-        model.notifyObservers(new NewAction(false, true, false, false));
+        model.notifyObservers(new NewAction(false, true, false));
     }
 
     @Override
@@ -61,7 +61,7 @@ public class Prometheus implements Move, ExtraAction {
         LightCell lightCellNew = LightConversion.getLightVersion(cell);
 
         model.notifyObservers(new DataCell(lightCellNew, null));
-        model.notifyObservers(new NewAction(true, false, false, false));
+        model.notifyObservers(new NewAction(true, false, false));
 
     }
 }

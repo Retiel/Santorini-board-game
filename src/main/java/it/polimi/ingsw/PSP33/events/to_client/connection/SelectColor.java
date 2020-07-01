@@ -6,8 +6,14 @@ import it.polimi.ingsw.PSP33.utils.enums.Color;
 
 import java.util.List;
 
+/**
+ * Color selection event
+ */
 public class SelectColor implements CCEvent {
 
+    /**
+     * List of available colors
+     */
     private final List<Color> colors;
 
     public SelectColor(List<Color> colors) {

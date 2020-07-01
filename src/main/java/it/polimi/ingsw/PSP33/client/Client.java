@@ -3,7 +3,8 @@ package it.polimi.ingsw.PSP33.client;
 import com.google.gson.Gson;
 import it.polimi.ingsw.PSP33.utils.Connection;
 import it.polimi.ingsw.PSP33.view.AbstractView;
-import it.polimi.ingsw.PSP33.view.ViewFactory;
+import it.polimi.ingsw.PSP33.view.cli.CLI;
+import it.polimi.ingsw.PSP33.view.gui.GUI;
 
 import java.io.*;
 import java.net.Socket;
@@ -15,16 +16,8 @@ public class Client {
 
     public static void main(String[] args) {
 
-        int viewSelection;
-
-        //TODO: args.length > 0 with parameter --cli from jar
-        if(args.length > 0) {
-            viewSelection = 1;
-        } else {
-            viewSelection = 2;
-        }
-
-        AbstractView view = ViewFactory.getView(viewSelection);
+        AbstractView view;
+        ServerAdapter serverAdapter;
 
         Gson gson = new Gson();
         Connection connection = gson.fromJson(getConnectionReader(), Connection.class);
@@ -38,10 +31,14 @@ public class Client {
         }
         System.out.println("Connected");
 
-        ServerAdapter serverAdapter;
-        if(viewSelection == 1) {
+        //TODO: args.length > 0 with parameter --cli from jar
+        if(args.length > 0) {
+            //CLI
+            view = new CLI();
             serverAdapter = new ServerAdapterCLI(server);
         } else {
+            //GUI
+            view = new GUI();
             serverAdapter = new ServerAdapterGUI(server);
         }
 
@@ -60,7 +57,12 @@ public class Client {
         }
     }
 
+    /**
+     * Method used to to fetch the connection json used to connect the client to the server
+     * @return reader used by Gson
+     */
     private static Reader getConnectionReader() {
+        //TODO: get connection info from user instead of connection.json
         InputStream input = Client.class.getResourceAsStream("/connection.json");
 
         return new BufferedReader(new InputStreamReader(input));

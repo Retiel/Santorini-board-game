@@ -3,8 +3,14 @@ package it.polimi.ingsw.PSP33.events.to_client.setup;
 import it.polimi.ingsw.PSP33.events.to_client.MVEventVisitor;
 import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
 
+/**
+ * Current player event
+ */
 public class CurrentPlayer implements MVEvent {
 
+    /**
+     * Name of the current player
+     */
     private final String name;
 
     public CurrentPlayer(String name) {

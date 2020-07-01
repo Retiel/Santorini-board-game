@@ -18,7 +18,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Class that handles all client's communication with the server
+ * Abstract class that handles all client's communication with the server
  */
 public abstract class ServerAdapter extends Observable<MVEvent> implements Runnable, Observer<VCEvent>, CCEventVisitor {
 
@@ -38,25 +38,18 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
     private DataOutputStream output;
 
     /**
-     * Scanner for client input
-     */
-    private Scanner scanner;
-
-    /**
      * Boolean to check if setup is over
      */
     private boolean isSetupOver;
-
-    /**
-     * Lock used to wait on server output
-     */
-    private final Object lock = new Object();
 
     /**
      * Event serializer
      */
     private final EventSerializer eventSerializer;
 
+    /**
+     * ExecutorService used to run tasks on a dedicated thread
+     */
     private final ExecutorService executor;
 
     /**
@@ -67,7 +60,6 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
         this.server = server;
         this.input = null;
         this.output = null;
-        this.scanner = new Scanner(System.in);
         this.isSetupOver = false;
         this.eventSerializer = EventSerializer.getInstance();
         this.executor = Executors.newSingleThreadExecutor();
@@ -92,7 +84,7 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
     }
 
     /**
-     * Method that sends a view-controller event to the server
+     * Method that sends a view-controller events to the server
      * @param vcEvent view-controller event
      */
     public void sendVCEvent(VCEvent vcEvent) {
@@ -105,7 +97,7 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
     }
 
     /**
-     * Method that receives model-view events from server
+     * Method that receives model-view events from the server
      */
     public void receiveMVEvent() {
         while (true) {
@@ -139,6 +131,10 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
         }
     }
 
+    /**
+     * Method that sends a server-connection events to the server
+     * @param scEvent server-connection event
+     */
     public void sendSCEvent(SCEvent scEvent) {
         String scJson = eventSerializer.serializeSC(scEvent);
         try {
@@ -148,6 +144,9 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
         }
     }
 
+    /**
+     * Method that receives client-connection events from the server
+     */
     public void receiveCCEvent() {
         while (true) {
             String ccJson;
@@ -182,23 +181,27 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
         executor.execute(this::receiveCCEvent);
     }
 
+    /**
+     * Method to get the socket's input stream
+     * @return socket's input stream
+     */
     public DataInputStream getInput() {
         return input;
     }
 
+    /**
+     * Method to get the socket's output stream
+     * @return socket's output stream
+     */
     public DataOutputStream getOutput() {
         return output;
     }
 
-    public Scanner getScanner() {
-        return scanner;
-    }
-
+    /**
+     * Method to set setupOver
+     * @param setupOver true if setup is over
+     */
     public void setSetupOver(boolean setupOver) {
         isSetupOver = setupOver;
-    }
-
-    public Object getLock() {
-        return lock;
     }
 }

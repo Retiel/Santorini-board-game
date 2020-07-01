@@ -6,9 +6,19 @@ import it.polimi.ingsw.PSP33.model.God;
 
 import java.util.List;
 
+/**
+ * Gods selection event
+ */
 public class SelectGods implements MVEvent {
 
+    /**
+     * List of available gods
+     */
     private final List<God> gods;
+
+    /**
+     * Number of gods to select
+     */
     private final int numberOfGods;
 
     public SelectGods(List<God> gods, int numberOfGods) {

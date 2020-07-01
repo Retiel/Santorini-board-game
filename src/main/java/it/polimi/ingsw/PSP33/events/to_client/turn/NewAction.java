@@ -5,21 +5,29 @@ import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
 
 
 /**
- * First Message received by the client
+ * New action event
  */
 public class NewAction implements MVEvent {
 
+    /**
+     * Boolean for possible move
+     */
     private final boolean move;
+
+    /**
+     * Boolean for possible build
+     */
     private final boolean build;
+
+    /**
+     * Boolean for possible extra action
+     */
     private final boolean extra;
 
-    private final boolean endTurn;
-
-    public NewAction(boolean move, boolean build, boolean extra, boolean endTurn) {
+    public NewAction(boolean move, boolean build, boolean extra) {
         this.move = move;
         this.build = build;
         this.extra = extra;
-        this.endTurn = endTurn;
     }
 
     public boolean isMove() {
@@ -32,10 +40,6 @@ public class NewAction implements MVEvent {
 
     public boolean isExtra() {
         return extra;
-    }
-
-    public boolean isEndTurn() {
-        return endTurn;
     }
 
     @Override

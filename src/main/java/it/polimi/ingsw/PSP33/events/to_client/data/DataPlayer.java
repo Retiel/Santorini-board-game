@@ -6,10 +6,19 @@ import it.polimi.ingsw.PSP33.model.light_version.LightPlayer;
 
 import java.util.List;
 
+/**
+ * Data event holding player data
+ */
 public class DataPlayer implements MVEvent {
 
+    /**
+     * List of lightplayers
+     */
     private final List<LightPlayer> players;
 
+    /**
+     * Name of the client that receives the event
+     */
     private String name;
 
     public DataPlayer(List<LightPlayer> players) {

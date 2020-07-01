@@ -35,7 +35,7 @@ public class Demeter implements Build, ExtraAction {
         LightCell lightCellNew = LightConversion.getLightVersion(cell);
 
         model.notifyObservers(new DataCell(lightCellNew, null));
-        model.notifyObservers(new NewAction(false, false, false, false));
+        model.notifyObservers(new NewAction(false, false, false));
     }
 
     @Override
@@ -51,6 +51,6 @@ public class Demeter implements Build, ExtraAction {
 
         model.notifyObservers(new DataCell(lightCellNew, null));
 
-        model.notifyObservers(new NewAction(false, false, true, true));
+        model.notifyObservers(new NewAction(false, false, true));
     }
 }

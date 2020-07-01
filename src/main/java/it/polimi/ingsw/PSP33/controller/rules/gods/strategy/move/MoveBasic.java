@@ -34,6 +34,6 @@ public class MoveBasic implements Move {
         LightCell lightCellOld = LightConversion.getLightVersion(oldCell);
 
         model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
-        model.notifyObservers(new NewAction(false, true, false, false));
+        model.notifyObservers(new NewAction(false, true, false));
     }
 }

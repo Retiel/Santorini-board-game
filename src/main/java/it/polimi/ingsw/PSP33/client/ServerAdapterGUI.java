@@ -10,8 +10,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+/**
+ * Server adapter for GUI
+ */
 public class ServerAdapterGUI extends ServerAdapter {
 
+    /**
+     * Frame used for the setup
+     */
     private SetupFrame setupFrame;
 
     /**

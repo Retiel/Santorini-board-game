@@ -6,8 +6,14 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.List;
 
+/**
+ * Possible placement event
+ */
 public class PossiblePlacement implements MVEvent{
 
+    /**
+     * List of available placement coordinates
+     */
     private final List<Coord> coordList;
 
     public PossiblePlacement(List<Coord> coordList) {

@@ -1,12 +1,12 @@
 package it.polimi.ingsw.PSP33.client;
 
-import it.polimi.ingsw.PSP33.events.to_client.CCEventVisitor;
 import it.polimi.ingsw.PSP33.events.to_client.connection.*;
 import it.polimi.ingsw.PSP33.events.to_server.connection.*;
 
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.Set;
 
 /**
@@ -15,12 +15,18 @@ import java.util.Set;
 public class ServerAdapterCLI extends ServerAdapter {
 
     /**
+     * Scanner used to get the client's input
+     */
+    private Scanner scanner;
+
+    /**
      * Constructor of the class
      *
      * @param server server's socket
      */
     public ServerAdapterCLI(Socket server) {
         super(server);
+        scanner = new Scanner(System.in);
     }
 
 
@@ -56,7 +62,7 @@ public class ServerAdapterCLI extends ServerAdapter {
     @Override
     public void visit(SelectName selectName) {
         System.out.println("Type your name:");
-        String name = getScanner().next();
+        String name = scanner.next();
 
         sendSCEvent(new NameSelected(name));
     }
@@ -91,8 +97,8 @@ public class ServerAdapterCLI extends ServerAdapter {
      * @return integer input
      */
     private int readInput(int size){
-        if(getScanner().hasNextInt()){
-            int i = getScanner().nextInt();
+        if(scanner.hasNextInt()){
+            int i = scanner.nextInt();
             if(i <= size && i > 0) {
                 return i;
             } else {
@@ -101,7 +107,7 @@ public class ServerAdapterCLI extends ServerAdapter {
         }
         else {
             System.out.println("Invalid Choice (mismatch input type), please select again:");
-            getScanner().next();
+            scanner.next();
             return readInput(size);
         }
     }

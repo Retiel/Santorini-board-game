@@ -6,9 +6,19 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.List;
 
+/**
+ * Possible move event
+ */
 public class PossibleMove implements MVEvent {
 
+    /**
+     * List of available default move coordinates
+     */
     private final List<Coord> coordList;
+
+    /**
+     * List of available god move coordinates
+     */
     private final List<Coord> godsList;
 
     public PossibleMove(List<Coord> coordList, List<Coord> godsList) {

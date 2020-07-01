@@ -3,8 +3,14 @@ package it.polimi.ingsw.PSP33.events.to_client.turn;
 import it.polimi.ingsw.PSP33.events.to_client.MVEventVisitor;
 import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
 
+/**
+ * Win event
+ */
 public class YouWin implements MVEvent {
 
+    /**
+     * Winner's name
+     */
     private final String name;
 
     public YouWin(String name) {

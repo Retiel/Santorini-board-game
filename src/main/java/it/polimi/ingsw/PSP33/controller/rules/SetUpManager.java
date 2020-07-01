@@ -23,8 +23,19 @@ import java.util.Random;
  */
 public class SetUpManager extends AbstractManager {
 
+    /**
+     * List of selected gods for the game
+     */
     private List<God> gods;
+
+    /**
+     * List of all available gods
+     */
     private List<God> allGods;
+
+    /**
+     * Int used to check how many pawns have been placed
+     */
     private int pawn;
 
     public SetUpManager(Model model) {

@@ -6,10 +6,24 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.List;
 
+/**
+ * Possible build event
+ */
 public class PossibleBuild implements MVEvent {
 
+    /**
+     * List of available default build coordinates
+     */
     private final List<Coord> coordList;
+
+    /**
+     * List of available god build coordinates
+     */
     private final List<Coord> godsList;
+
+    /**
+     * Boolean for possible roof build
+     */
     private final boolean roofAvailable;
 
     public PossibleBuild(List<Coord> coordList, List<Coord> godsList, boolean roofAvailable) {

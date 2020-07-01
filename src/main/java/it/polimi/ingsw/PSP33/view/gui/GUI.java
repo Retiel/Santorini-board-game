@@ -23,20 +23,37 @@ import javax.swing.SwingUtilities;
 import java.io.IOException;
 import java.util.List;
 
+/**
+ * Graphical user interface class
+ */
 public class GUI extends AbstractView implements ButtonListener {
 
+    //FIXME
     private LightModel lightModel;
-    private GameFrame gameFrame;
 
+    /**
+     * GUI main frame
+     */
+    private MainFrame mainFrame;
+
+    /**
+     * Events to send to server
+     */
     private enum Event {
         PLACE_PAWN,
         BUILD_ACTION,
         MOVE_ACTION,
         EXTRA_ACTION
     }
+
+    /**
+     * Next event to send to server
+     */
     private Event nextEvent;
 
-    //TODO: MainFrame
+    /**
+     * Boolean used for build action
+     */
     private boolean trigger;
 
 
@@ -45,7 +62,7 @@ public class GUI extends AbstractView implements ButtonListener {
             lightModel = new LightModel();
 
             try {
-                gameFrame = new GameFrame();
+                mainFrame = new MainFrame();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -56,7 +73,7 @@ public class GUI extends AbstractView implements ButtonListener {
     @Override
     public void visit(DataBoard dataBoard) {
         SwingUtilities.invokeLater(() -> {
-            gameFrame.setVisible(true);
+            mainFrame.setVisible(true);
             lightModel.setLightGrid(dataBoard.getGrid().getGrid());
         });
 
@@ -70,14 +87,14 @@ public class GUI extends AbstractView implements ButtonListener {
                 int oldy = dataCell.getOldCell().getCoord().getY();
                 lightModel.getLightGrid()[oldx][oldy] = dataCell.getOldCell();
 
-                gameFrame.setButton(dataCell.getOldCell());
+                mainFrame.setButton(dataCell.getOldCell());
             }
 
             int newx = dataCell.getNewCell().getCoord().getX();
             int newy = dataCell.getNewCell().getCoord().getY();
             lightModel.getLightGrid()[newx][newy] = dataCell.getNewCell();
 
-            gameFrame.setButton(dataCell.getNewCell());
+            mainFrame.setButton(dataCell.getNewCell());
         });
 
     }
@@ -94,7 +111,7 @@ public class GUI extends AbstractView implements ButtonListener {
     @Override
     public void visit(YourGod yourGod) {
         SwingUtilities.invokeLater(() -> {
-            God chosenGod = gameFrame.selectGod(yourGod.getGods());
+            God chosenGod = mainFrame.selectGod(yourGod.getGods());
 
             ChoosenGod choosenGod = new ChoosenGod(chosenGod);
             notifyObservers(choosenGod);
@@ -103,23 +120,23 @@ public class GUI extends AbstractView implements ButtonListener {
 
     @Override
     public void visit(CurrentPlayer currentPlayer) {
-        SwingUtilities.invokeLater(() -> gameFrame.setText(currentPlayer.getName() + "'s turn"));
+        SwingUtilities.invokeLater(() -> mainFrame.setText(currentPlayer.getName() + "'s turn"));
     }
 
     @Override
     public void visit(PossiblePlacement possiblePlacement) {
         SwingUtilities.invokeLater(() -> {
             nextEvent = Event.PLACE_PAWN;
-            gameFrame.setText("Where do you want to place your worker?");
+            mainFrame.setText("Where do you want to place your worker?");
 
-            gameFrame.enableButtons(possiblePlacement.getCoordList(), null);
+            mainFrame.enableButtons(possiblePlacement.getCoordList(), null);
         });
     }
 
     @Override
     public void visit(SelectGods selectGods) {
         SwingUtilities.invokeLater(() -> {
-            List<God> chosenGods = gameFrame.selectGods(selectGods.getGods(), selectGods.getNumberOfGods());
+            List<God> chosenGods = mainFrame.selectGods(selectGods.getGods(), selectGods.getNumberOfGods());
             SelectedGods selectedGods = new SelectedGods(chosenGods);
 
             notifyObservers(selectedGods);
@@ -129,12 +146,12 @@ public class GUI extends AbstractView implements ButtonListener {
 
     @Override
     public void visit(YouLose youLose) {
-        SwingUtilities.invokeLater(() -> gameFrame.showLose(youLose.getName()));
+        SwingUtilities.invokeLater(() -> mainFrame.showLose(youLose.getName()));
     }
 
     @Override
     public void visit(YouWin youWin) {
-        SwingUtilities.invokeLater(() -> gameFrame.showWin());
+        SwingUtilities.invokeLater(() -> mainFrame.showWin());
     }
 
     @Override
@@ -142,17 +159,17 @@ public class GUI extends AbstractView implements ButtonListener {
         SwingUtilities.invokeLater(() -> {
             switch (selectPawn.getValue()) {
                 default:
-                    int i = gameFrame.selectWorker();
+                    int i = mainFrame.selectWorker();
                     notifyObservers(new SelectedPawn(i));
                     break;
 
                 case 1:
-                    gameFrame.setText("You can move only the worker number 1");
+                    mainFrame.setText("You can move only the worker number 1");
                     notifyObservers(new SelectedPawn(1));
                     break;
 
                 case 2:
-                    gameFrame.setText("You can move only the worker number 2");
+                    mainFrame.setText("You can move only the worker number 2");
                     notifyObservers(new SelectedPawn(2));
                     break;
             }
@@ -172,7 +189,7 @@ public class GUI extends AbstractView implements ButtonListener {
                 NewTurn newTurn = new NewTurn();
                 notifyObservers(newTurn);
 
-                gameFrame.setText("End of the turn");
+                mainFrame.setText("End of the turn");
                 lightModel.setYourTurn(false);
             } else {
 
@@ -185,7 +202,7 @@ public class GUI extends AbstractView implements ButtonListener {
                         notifyObservers(rpm);
                     } else {
                         //choose and create possible move or extra message to notify to the controller
-                        j = gameFrame.selectMove();
+                        j = mainFrame.selectMove();
 
                         if (j == 1){
                             rpm = new RequestPossibleMove();
@@ -204,7 +221,7 @@ public class GUI extends AbstractView implements ButtonListener {
                         notifyObservers(rpb);
                     } else{
                         //choose your action and send proper message to server
-                        j = gameFrame.selectBuild();
+                        j = mainFrame.selectBuild();
 
                         if (j == 1){
                             rpb = new RequestPossibleBuild();
@@ -232,9 +249,9 @@ public class GUI extends AbstractView implements ButtonListener {
             trigger = possibleBuild.isRoofAvailable();
 
             nextEvent = Event.BUILD_ACTION;
-            gameFrame.setText("Where do you want to build your Block?");
+            mainFrame.setText("Where do you want to build your Block?");
 
-            gameFrame.enableButtons(possibleBuild.getCoordList(), possibleBuild.getGodsList());
+            mainFrame.enableButtons(possibleBuild.getCoordList(), possibleBuild.getGodsList());
         });
 
     }
@@ -243,9 +260,9 @@ public class GUI extends AbstractView implements ButtonListener {
     public void visit(PossibleMove possibleMove) {
         SwingUtilities.invokeLater(() -> {
             nextEvent = Event.MOVE_ACTION;
-            gameFrame.setText("Where do you want to move your worker?");
+            mainFrame.setText("Where do you want to move your worker?");
 
-            gameFrame.enableButtons(possibleMove.getCoordList(), possibleMove.getGodsList());
+            mainFrame.enableButtons(possibleMove.getCoordList(), possibleMove.getGodsList());
         });
 
     }
@@ -254,9 +271,9 @@ public class GUI extends AbstractView implements ButtonListener {
     public void visit(PossibleExtraAction possibleExtraAction) {
         SwingUtilities.invokeLater(() -> {
             nextEvent = Event.EXTRA_ACTION;
-            gameFrame.setText("Where do you want to use Your God Action?");
+            mainFrame.setText("Where do you want to use Your God Action?");
 
-            gameFrame.enableButtons(possibleExtraAction.getCoordList(), null);
+            mainFrame.enableButtons(possibleExtraAction.getCoordList(), null);
         });
     }
 
@@ -264,7 +281,7 @@ public class GUI extends AbstractView implements ButtonListener {
     @Override
     public void update(Coord coord) {
         SwingUtilities.invokeLater(() -> {
-            gameFrame.disableButtons();
+            mainFrame.disableButtons();
             switch (nextEvent) {
                 case PLACE_PAWN:
                     notifyObservers(new PlacePawn(coord));
@@ -273,7 +290,7 @@ public class GUI extends AbstractView implements ButtonListener {
                 case BUILD_ACTION:
                     boolean b = false;
                     if(trigger) {
-                        int i = gameFrame.selectRoof();
+                        int i = mainFrame.selectRoof();
 
                         if(i == 0) {
                             b = true;
@@ -293,8 +310,11 @@ public class GUI extends AbstractView implements ButtonListener {
         });
     }
 
+    /**
+     * Method used to add the GUI to each button's listeners of the grid panel
+     */
     private void setButtonListener() {
-        for(CellButton[] buttonsRow : gameFrame.getButtons()) {
+        for(CellButton[] buttonsRow : mainFrame.getButtons()) {
             for(CellButton button :buttonsRow) {
                 button.addButtonListener(this);
             }

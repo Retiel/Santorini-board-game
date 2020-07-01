@@ -38,7 +38,7 @@ public class Hephaestus implements Build, ExtraAction {
         LightCell lightCellNew = LightConversion.getLightVersion(cell);
 
         model.notifyObservers(new DataCell(lightCellNew, null));
-        model.notifyObservers(new NewAction(false, false, false, false));
+        model.notifyObservers(new NewAction(false, false, false));
 
     }
 
@@ -54,7 +54,7 @@ public class Hephaestus implements Build, ExtraAction {
         LightCell lightCellNew = LightConversion.getLightVersion(cellToBuild);
 
         model.notifyObservers(new DataCell(lightCellNew, null));
-        if (cellToBuild.getFloor() < 3) model.notifyObservers(new NewAction(false, false, true, true));
-        else model.notifyObservers(new NewAction(false, false, false, false));
+        if (cellToBuild.getFloor() < 3) model.notifyObservers(new NewAction(false, false, true));
+        else model.notifyObservers(new NewAction(false, false, false));
     }
 }

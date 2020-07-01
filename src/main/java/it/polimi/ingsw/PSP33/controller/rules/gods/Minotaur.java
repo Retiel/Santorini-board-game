@@ -111,6 +111,6 @@ public class Minotaur implements Move {
         LightCell lightCellNew = LightConversion.getLightVersion(newCell);
 
         model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
-        model.notifyObservers(new NewAction(false, true, false, false));
+        model.notifyObservers(new NewAction(false, true, false));
     }
 }

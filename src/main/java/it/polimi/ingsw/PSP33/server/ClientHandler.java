@@ -228,6 +228,7 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
             output.writeUTF(ccJson);
         } catch (IOException e) {
             if(lobby != null) {
+                //lobby.removeClient(this);
                 System.out.println("Lobby_" + lobby.getLobbyID() + ": "
                         + client.getInetAddress() + " [cc_dropped]");
             } else {
@@ -257,6 +258,7 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
      */
     public void setReady() {
         sendCCEvent(new AllPlayersReady());
+        setSetupOver(true);
 
         //Starts listening to game events on a dedicated thread
         listenToGameEvents();
@@ -332,7 +334,6 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
             clientColor = color;
 
             lobby.setClientReady(this);
-            setSetupOver(true);
 
             sendCCEvent(new RequestWait());
         } else {

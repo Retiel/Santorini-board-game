@@ -63,7 +63,7 @@ public class TurnManager extends AbstractManager {
      * Method send message ne action
      */
     public void newAction(){
-        notifyView(new NewAction(true, false, DataControl.checkStart(getModel().getCurrentGodName()), false));
+        notifyView(new NewAction(true, false, DataControl.checkStart(getModel().getCurrentGodName())));
     }
 
     /**

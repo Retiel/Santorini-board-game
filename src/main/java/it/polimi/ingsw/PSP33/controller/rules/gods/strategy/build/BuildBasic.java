@@ -31,6 +31,6 @@ public class BuildBasic implements Build {
         LightCell lightCellNew = LightConversion.getLightVersion(cellToBuild);
 
         model.notifyObservers(new DataCell(lightCellNew, null));
-        model.notifyObservers(new NewAction(false, false, false, false));
+        model.notifyObservers(new NewAction(false, false, false));
     }
 }

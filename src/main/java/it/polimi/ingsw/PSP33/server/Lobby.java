@@ -110,11 +110,11 @@ public class Lobby implements Runnable {
         clientHandlers.remove(clientHandler);
 
         if(clientHandler.getClientColor() != null) {
-            clientNames.remove(clientHandler.getClientName());
+            colorList.add(clientHandler.getClientColor());
         }
 
         if(!clientHandler.getClientName().equals("")) {
-            colorList.add(clientHandler.getClientColor());
+            clientNames.remove(clientHandler.getClientName());
         }
 
         if(clientHandlers.size() == numberOfPlayers - 1) {
@@ -141,8 +141,7 @@ public class Lobby implements Runnable {
      * @return number of players
      */
     public int getNumberOfPlayers() {
-        int n = numberOfPlayers;
-        return n;
+        return numberOfPlayers;
     }
 
     /**

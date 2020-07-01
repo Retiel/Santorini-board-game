@@ -6,8 +6,14 @@ import it.polimi.ingsw.PSP33.model.God;
 
 import java.util.List;
 
+/**
+ * Selected gods event
+ */
 public class SelectedGods implements VCEvent {
 
+    /**
+     * List of seleted gods for the game
+     */
     private final List<God> gods;
 
     public SelectedGods(List<God> gods) {

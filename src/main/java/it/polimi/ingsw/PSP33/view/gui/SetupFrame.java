@@ -5,6 +5,9 @@ import it.polimi.ingsw.PSP33.utils.enums.Color;
 import javax.swing.*;
 import java.util.List;
 
+/**
+ * Frame used in the setup phase before the game starts
+ */
 public class SetupFrame extends JFrame {
 
     public SetupFrame() {
@@ -17,6 +20,10 @@ public class SetupFrame extends JFrame {
         setVisible(true);
     }
 
+    /**
+     * Method used to show a dialog to make the client select the type of connection
+     * @return selection (1. Create Lobby 2. Join Lobby)
+     */
     public int selectConnection() {
         String[] options = {"Create Lobby", "Join Lobby"};
 
@@ -27,6 +34,10 @@ public class SetupFrame extends JFrame {
         return k;
     }
 
+    /**
+     * Method used to show a dialog to make the client select the number of players for the new lobby
+     * @return selection (1. 2 players 2. 3 players)
+     */
     public int selectNumberOfPlayers() {
         String[] options = {"2 players", "3 players"};
 
@@ -37,6 +48,11 @@ public class SetupFrame extends JFrame {
         return k;
     }
 
+    /**
+     * Method used to show a dialog to make the client select the lobby
+     * @param lobbyList list of available lobbies
+     * @return selection (lobby's index of the list of available lobbies)
+     */
     public int selectLobby(List<String> lobbyList) {
         String[] lobbies;
         String[] options = {"OK"};
@@ -53,6 +69,10 @@ public class SetupFrame extends JFrame {
         return comboBox.getSelectedIndex();
     }
 
+    /**
+     * Method used to show a dialog to make the client select his name
+     * @return selected name
+     */
     public String selectName() {
         String name = JOptionPane.showInputDialog(this, "Type your name",
                 "");
@@ -64,6 +84,11 @@ public class SetupFrame extends JFrame {
         return name;
     }
 
+    /**
+     * Method used to show a dialog to make the client select his color
+     * @param colorList list of available colors
+     * @return selection (color's index of list of available colors)
+     */
     public int selectColor(List<Color> colorList) {
         String[] colors;
         String[] options = {"OK"};
@@ -80,6 +105,9 @@ public class SetupFrame extends JFrame {
         return comboBox.getSelectedIndex();
     }
 
+    /**
+     * Method used to show a dialog telling the client to wait for players
+     */
     public void requestWait() {
         JOptionPane.showMessageDialog(this, "Waiting for players..");
     }

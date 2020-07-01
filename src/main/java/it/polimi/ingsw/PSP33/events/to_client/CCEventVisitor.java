@@ -7,10 +7,6 @@ import it.polimi.ingsw.PSP33.events.to_client.connection.*;
  */
 public interface CCEventVisitor {
 
-    /**
-     *
-     * @param selectConnection
-     */
     void visit(SelectConnection selectConnection);
 
     void visit(SelectNumberOfPlayers selectNumberOfPlayers);

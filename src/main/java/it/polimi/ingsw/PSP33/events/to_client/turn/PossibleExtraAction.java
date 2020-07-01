@@ -6,8 +6,14 @@ import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.List;
 
+/**
+ * Possible extra action event
+ */
 public class PossibleExtraAction implements MVEvent {
 
+    /**
+     * List of available coordinates for extra action
+     */
     private final List<Coord> coordList;
 
     public PossibleExtraAction(List<Coord> coordList) {
