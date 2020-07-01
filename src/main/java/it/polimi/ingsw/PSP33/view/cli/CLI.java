@@ -304,7 +304,6 @@ public class CLI extends AbstractView {
             //send info to controller
             Coord choiceCoord;
             BuildAction ba;
-            //TODO: test
             if(i <= possibleBuild.getCoordList().size()){
                 choiceCoord = possibleBuild.getCoordList().get(i-1);
                 if(possibleBuild.isRoofAvailable()) {
@@ -319,7 +318,6 @@ public class CLI extends AbstractView {
                 else ba = new BuildAction(choiceCoord, false);
 
             }
-            //TODO: test
             else{
                 choiceCoord = possibleBuild.getGodsList().get(i-possibleBuild.getCoordList().size()-1);
                 if(possibleBuild.isRoofAvailable()) {

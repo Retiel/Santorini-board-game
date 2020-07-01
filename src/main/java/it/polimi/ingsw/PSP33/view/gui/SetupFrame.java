@@ -3,6 +3,11 @@ package it.polimi.ingsw.PSP33.view.gui;
 import it.polimi.ingsw.PSP33.utils.enums.Color;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -27,11 +32,14 @@ public class SetupFrame extends JFrame {
     public int selectConnection() {
         String[] options = {"Create Lobby", "Join Lobby"};
 
-        int k = JOptionPane.showOptionDialog(this, "How do you want to connect?",
-                "Select connection", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+        JOptionPane optionPane = new JOptionPane("How do you want to connect?", JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_CANCEL_OPTION,
                 null, options, options[0]);
+        lockClosure(this, optionPane);
+        String res = (String) optionPane.getValue();
+        int k = Arrays.asList(options).indexOf(res);
         k++;
         return k;
+
     }
 
     /**
@@ -39,11 +47,13 @@ public class SetupFrame extends JFrame {
      * @return selection (1. 2 players 2. 3 players)
      */
     public int selectNumberOfPlayers() {
-        String[] options = {"2 players", "3 players"};
-
-        int k = JOptionPane.showOptionDialog(this, "How many players?",
-                "Select number of players", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
+        String[] options = {"2 player", "3 player"};
+        JOptionPane optionPane = new JOptionPane("How many players?",
+                JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION,
                 null, options, options[0]);
+        lockClosure(this, optionPane);
+        String res = (String) optionPane.getValue();
+        int k = Arrays.asList(options).indexOf(res);
         k++;
         return k;
     }
@@ -76,11 +86,9 @@ public class SetupFrame extends JFrame {
     public String selectName() {
         String name = JOptionPane.showInputDialog(this, "Type your name",
                 "");
-
         if(name == null) {
             name = "";
         }
-
         return name;
     }
 
@@ -91,24 +99,49 @@ public class SetupFrame extends JFrame {
      */
     public int selectColor(List<Color> colorList) {
         String[] colors;
-        String[] options = {"OK"};
 
         colors = new String[colorList.size()];
         for(Color color : colorList) {
             colors[colorList.indexOf(color)] = color.name();
         }
 
-        JComboBox<String> comboBox = new JComboBox<>(colors);
-        JOptionPane.showOptionDialog(this, comboBox, "Color selection",
-                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
-
-        return comboBox.getSelectedIndex();
+        JOptionPane optionPane = new JOptionPane("Color selection",
+                JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION,null, colors);
+        lockClosure(this, optionPane);
+        String res = (String) optionPane.getValue();
+        int k = Arrays.asList(colors).indexOf(res);
+        System.out.println(k);
+        return k;
     }
 
     /**
      * Method used to show a dialog telling the client to wait for players
      */
     public void requestWait() {
-        JOptionPane.showMessageDialog(this, "Waiting for players..");
+        JOptionPane optionPane = new JOptionPane("Waiting for players..");
+        lockClosure(this, optionPane);
+    }
+
+    public static void lockClosure(JFrame owner, JOptionPane optionPane){
+
+        JDialog dialog = new JDialog(owner,
+                "Click a button",
+                true);
+        dialog.setContentPane(optionPane);
+        dialog.setDefaultCloseOperation(
+                JDialog.DO_NOTHING_ON_CLOSE);
+        optionPane.addPropertyChangeListener(e ->
+        {
+            String prop = e.getPropertyName();
+            if (dialog.isVisible()
+                    && (e.getSource() == optionPane)
+                    && (JOptionPane.VALUE_PROPERTY.equals(prop))) {
+                dialog.setVisible(false);
+            }
+        });
+        dialog.pack();
+        dialog.setLocationRelativeTo(owner);
+        dialog.setResizable(false);
+        dialog.setVisible(true);
     }
 }
