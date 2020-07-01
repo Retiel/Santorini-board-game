@@ -2,6 +2,7 @@ package it.polimi.ingsw.PSP33.controller;
 
 import it.polimi.ingsw.PSP33.controller.rules.SetUpManager;
 import it.polimi.ingsw.PSP33.controller.rules.TurnManager;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.to_server.VCEventVisitor;
 import it.polimi.ingsw.PSP33.events.to_server.setup.*;
 import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
@@ -44,6 +45,7 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
         setUpManager.nextTurn();
 
         if (setUpManager.CheckCardSetUp()){
+            setUpManager.sendDataPlayers();
             turnManager.newTurnContext();
         }else{
             setUpManager.playersChooseGod();

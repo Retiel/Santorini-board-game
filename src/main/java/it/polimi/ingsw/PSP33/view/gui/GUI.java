@@ -14,6 +14,7 @@ import it.polimi.ingsw.PSP33.events.to_server.setup.SelectedGods;
 import it.polimi.ingsw.PSP33.events.to_server.turn.*;
 import it.polimi.ingsw.PSP33.model.God;
 import it.polimi.ingsw.PSP33.model.light_version.LightModel;
+import it.polimi.ingsw.PSP33.model.light_version.LightPlayer;
 import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 import it.polimi.ingsw.PSP33.view.gui.components.ButtonListener;
@@ -27,9 +28,6 @@ import java.util.List;
  * Graphical user interface class
  */
 public class GUI extends AbstractView implements ButtonListener {
-
-    //FIXME
-    private LightModel lightModel;
 
     /**
      * GUI main frame
@@ -59,8 +57,6 @@ public class GUI extends AbstractView implements ButtonListener {
 
     public GUI() {
         SwingUtilities.invokeLater(() -> {
-            lightModel = new LightModel();
-
             try {
                 mainFrame = new MainFrame();
             } catch (IOException e) {
@@ -74,7 +70,6 @@ public class GUI extends AbstractView implements ButtonListener {
     public void visit(DataBoard dataBoard) {
         SwingUtilities.invokeLater(() -> {
             mainFrame.setVisible(true);
-            lightModel.setLightGrid(dataBoard.getGrid().getGrid());
         });
 
     }
@@ -83,17 +78,8 @@ public class GUI extends AbstractView implements ButtonListener {
     public void visit(DataCell dataCell) {
         SwingUtilities.invokeLater(() -> {
             if (dataCell.getOldCell() != null){
-                int oldx = dataCell.getOldCell().getCoord().getX();
-                int oldy = dataCell.getOldCell().getCoord().getY();
-                lightModel.getLightGrid()[oldx][oldy] = dataCell.getOldCell();
-
                 mainFrame.setButton(dataCell.getOldCell());
             }
-
-            int newx = dataCell.getNewCell().getCoord().getX();
-            int newy = dataCell.getNewCell().getCoord().getY();
-            lightModel.getLightGrid()[newx][newy] = dataCell.getNewCell();
-
             mainFrame.setButton(dataCell.getNewCell());
         });
 
@@ -102,8 +88,7 @@ public class GUI extends AbstractView implements ButtonListener {
     @Override
     public void visit(DataPlayer dataPlayer) {
         SwingUtilities.invokeLater(() -> {
-            lightModel.setPlayers(dataPlayer.getPlayer());
-            lightModel.setPlayerName(dataPlayer.getName());
+            mainFrame.setLeftText(FIlipCulo(dataPlayer.getPlayer(), dataPlayer.getName()));
         });
 
     }
@@ -120,14 +105,14 @@ public class GUI extends AbstractView implements ButtonListener {
 
     @Override
     public void visit(CurrentPlayer currentPlayer) {
-        SwingUtilities.invokeLater(() -> mainFrame.setText(currentPlayer.getName() + "'s turn"));
+        SwingUtilities.invokeLater(() -> mainFrame.setRightText(currentPlayer.getName() + "'s turn"));
     }
 
     @Override
     public void visit(PossiblePlacement possiblePlacement) {
         SwingUtilities.invokeLater(() -> {
             nextEvent = Event.PLACE_PAWN;
-            mainFrame.setText("Where do you want to place your worker?");
+            mainFrame.setRightText("Where do you want to place your worker?");
 
             mainFrame.enableButtons(possiblePlacement.getCoordList(), null);
         });
@@ -164,12 +149,12 @@ public class GUI extends AbstractView implements ButtonListener {
                     break;
 
                 case 1:
-                    mainFrame.setText("You can move only the worker number 1");
+                    mainFrame.setRightText("You can move only the worker number 1");
                     notifyObservers(new SelectedPawn(1));
                     break;
 
                 case 2:
-                    mainFrame.setText("You can move only the worker number 2");
+                    mainFrame.setRightText("You can move only the worker number 2");
                     notifyObservers(new SelectedPawn(2));
                     break;
             }
@@ -189,11 +174,9 @@ public class GUI extends AbstractView implements ButtonListener {
                 NewTurn newTurn = new NewTurn();
                 notifyObservers(newTurn);
 
-                mainFrame.setText("End of the turn");
-                lightModel.setYourTurn(false);
+                mainFrame.setRightText("End of the turn");
             } else {
 
-                lightModel.setYourTurn(true);
                 //decide action with the Boolean and send input to controller (switch case)
                 if (newAction.isMove()){
                     if (!newAction.isExtra()){
@@ -249,7 +232,7 @@ public class GUI extends AbstractView implements ButtonListener {
             trigger = possibleBuild.isRoofAvailable();
 
             nextEvent = Event.BUILD_ACTION;
-            mainFrame.setText("Where do you want to build your Block?");
+            mainFrame.setRightText("Where do you want to build your Block?");
 
             mainFrame.enableButtons(possibleBuild.getCoordList(), possibleBuild.getGodsList());
         });
@@ -260,7 +243,7 @@ public class GUI extends AbstractView implements ButtonListener {
     public void visit(PossibleMove possibleMove) {
         SwingUtilities.invokeLater(() -> {
             nextEvent = Event.MOVE_ACTION;
-            mainFrame.setText("Where do you want to move your worker?");
+            mainFrame.setRightText("Where do you want to move your worker?");
 
             mainFrame.enableButtons(possibleMove.getCoordList(), possibleMove.getGodsList());
         });
@@ -271,7 +254,7 @@ public class GUI extends AbstractView implements ButtonListener {
     public void visit(PossibleExtraAction possibleExtraAction) {
         SwingUtilities.invokeLater(() -> {
             nextEvent = Event.EXTRA_ACTION;
-            mainFrame.setText("Where do you want to use Your God Action?");
+            mainFrame.setRightText("Where do you want to use Your God Action?");
 
             mainFrame.enableButtons(possibleExtraAction.getCoordList(), null);
         });
@@ -319,5 +302,28 @@ public class GUI extends AbstractView implements ButtonListener {
                 button.addButtonListener(this);
             }
         }
+    }
+
+    private String FIlipCulo(List<LightPlayer> players, String name){
+
+        StringBuilder stringBuilder = new StringBuilder();
+        for (LightPlayer player : players){
+            stringBuilder.append(player.getName());
+            if (player.getName().equals(name)) {
+                stringBuilder.append("   (you)");
+            }
+
+            stringBuilder.append("\n")
+                    .append(player.getColor().name() + " ")
+                    .append("[" + player.getColor().name().toCharArray()[0] + "]")
+                    .append("\n");
+
+            if (player.getCard() != null) {
+                stringBuilder.append(player.getCard().getName().name());
+            }
+
+            stringBuilder.append("\n\n\n");
+        }
+        return stringBuilder.toString();
     }
 }

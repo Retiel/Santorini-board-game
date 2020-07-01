@@ -58,11 +58,7 @@ public class SetUpManager extends AbstractManager {
         getModel().setCurrentPlayer(getModel().getPlayers().get(randomInteger));
         getModel().notifyObservers( new DataBoard( LightConversion.getLightVersion( getBoard() ) ) );
 
-        List<LightPlayer> players = new ArrayList<>();
-        for (Player player : getModel().getPlayers()){
-            players.add(LightConversion.getLightVersion(player));
-        }
-        getModel().notifyObservers(new DataPlayer(players));
+        sendDataPlayers();
     }
 
     /**
@@ -156,6 +152,17 @@ public class SetUpManager extends AbstractManager {
      */
     public void askPlayers(){
         getModel().notifyObservers(new PossiblePlacement(GetAvailablePlacement()));
+    }
+
+    /**
+     * Method to send Data about the players
+     */
+    public void sendDataPlayers(){
+        List<LightPlayer> players = new ArrayList<>();
+        for (Player player : getModel().getPlayers()){
+            players.add(LightConversion.getLightVersion(player));
+        }
+        getModel().notifyObservers(new DataPlayer(players));
     }
 
     /**

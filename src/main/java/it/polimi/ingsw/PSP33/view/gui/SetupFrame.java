@@ -1,11 +1,15 @@
 package it.polimi.ingsw.PSP33.view.gui;
 
 import it.polimi.ingsw.PSP33.utils.enums.Color;
+import it.polimi.ingsw.PSP33.view.gui.components.ImagePanel;
+import it.polimi.ingsw.PSP33.view.gui.components.TextPanel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
+import java.io.InputStream;
 import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
@@ -15,12 +19,17 @@ import java.util.List;
  */
 public class SetupFrame extends JFrame {
 
-    public SetupFrame() {
+    private TextPanel textPanel;
+
+    public SetupFrame() throws IOException {
         super("Santorini_Setup");
         setSize(300, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
+
+        ImagePanel imagePanel = new ImagePanel(getImageInputStream(""));
+        textPanel = new TextPanel("",200,100,16);
 
         setVisible(true);
     }
@@ -118,8 +127,16 @@ public class SetupFrame extends JFrame {
      * Method used to show a dialog telling the client to wait for players
      */
     public void requestWait() {
-        JOptionPane optionPane = new JOptionPane("Waiting for players..");
-        lockClosure(this, optionPane);
+        textPanel.setLabelText("Waiting for player...");
+    }
+
+    /**
+     * Method used to get input stream for an image
+     * @param path path of the image in resources
+     * @return input stream of the image
+     */
+    private InputStream getImageInputStream(String path) {
+        return getClass().getResourceAsStream(path);
     }
 
     public static void lockClosure(JFrame owner, JOptionPane optionPane){

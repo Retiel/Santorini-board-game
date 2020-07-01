@@ -25,7 +25,17 @@ public class MainFrame extends JFrame {
     /**
      * Panel used to show the client some text
      */
-    private TextPanel textPanel;
+    private TextPanel rightTextPanel;
+
+    /**
+     * Panel used to show the client some text
+     */
+    private TextPanel leftTextPanel;
+
+    /**
+     * Panel used to show the client some text
+     */
+    private GodButton infoButton;
 
     public MainFrame() throws IOException {
         //Main frame
@@ -37,13 +47,18 @@ public class MainFrame extends JFrame {
         setLayout(new GridBagLayout());
         setAlwaysOnTop(true);
 
+        //String text = "Player 1\nRED [R]\nATHENA\n\n\nPlayer 2\nGREEN [G]\nPROMETHEUS\n\n\nPlayer 3\nBLUE [B]\nHEPHAESTUS\n\n\n";
 
         //Text panel
-        textPanel = new TextPanel();
+        rightTextPanel = new TextPanel("Welcome to Santorini", 150, 90, 16);
+        leftTextPanel = new TextPanel("text", 200, 160, 16);
 
         //Housing panel of the grid
         BorderPanel borderPanel = new BorderPanel();
         gridPanel = new GridPanel();
+
+        infoButton = new GodButton();
+        infoButton.setSize(500, 300);
 
         /* Board panel components */
         //right board part
@@ -72,39 +87,48 @@ public class MainFrame extends JFrame {
 
         /* List of constrains used */
 
-        //text constrain
-        GridBagConstraints textCon = new GridBagConstraints();
-        textCon.gridx = 0;
-        textCon.gridy = 0;
-        textCon.insets = new Insets(0,5,225,25);
-        textCon.anchor = GridBagConstraints.PAGE_START;
-        textCon.gridwidth = 2;
-        textCon.fill = GridBagConstraints.BOTH;
+        //text right constraint
+        GridBagConstraints rightTextCon = new GridBagConstraints();
+        rightTextCon.gridx = 0;
+        rightTextCon.gridy = 0;
+        rightTextCon.insets = new Insets(0,5,100,25);
+        rightTextCon.anchor = GridBagConstraints.PAGE_START;
+        rightTextCon.gridwidth = 2;
+        rightTextCon.fill = GridBagConstraints.BOTH;
 
-        //top component constrain
+        //text left constraint
+        GridBagConstraints leftTextCon = new GridBagConstraints();
+        leftTextCon.gridx = 0;
+        leftTextCon.gridy = 0;
+        leftTextCon.insets = new Insets(150,20,200,25);
+        leftTextCon.anchor = GridBagConstraints.CENTER;
+        leftTextCon.gridwidth = 2;
+        leftTextCon.fill = GridBagConstraints.BOTH;
+
+        //top component constraint
         GridBagConstraints topPad = new GridBagConstraints();
         topPad.gridx = 0;
         topPad.gridy = 0;
         topPad.fill = GridBagConstraints.HORIZONTAL;
 
-        //bot component constrain
+        //bot component constraint
         GridBagConstraints botPad = new GridBagConstraints();
         botPad.gridx = 0;
         botPad.gridy = 2;
         botPad.fill = GridBagConstraints.HORIZONTAL;
 
-        //left component constrain
+        //left component constraint
         GridBagConstraints lxPad = new GridBagConstraints();
         lxPad.gridx = 0;
         lxPad.gridy = 0;
         lxPad.fill = GridBagConstraints.VERTICAL;
 
-        //center component constrain
+        //center component constraint
         GridBagConstraints midPad = new GridBagConstraints();
         midPad.gridx = 1;
         midPad.gridy = 0;
 
-        //right component constrain
+        //right component constraint
         GridBagConstraints rxPad = new GridBagConstraints();
         rxPad.gridx = 2;
         rxPad.gridy = 0;
@@ -112,14 +136,27 @@ public class MainFrame extends JFrame {
         borderPanel.add(gridPanel);
         mid.add(borderPanel);
 
-        //text constrain
+        //central component constraint
         GridBagConstraints centralPanelCon = new GridBagConstraints();
         centralPanelCon.gridx = 0;
         centralPanelCon.gridy = 1;
         centralPanelCon.fill = GridBagConstraints.BOTH;
 
+        //button constraint
+        GridBagConstraints buttonCon = new GridBagConstraints();
+        buttonCon.gridx = 0;
+        buttonCon.gridy = 1;
+        buttonCon.ipadx = 130;
+        buttonCon.ipady = 25;
+        buttonCon.insets = new Insets(0,0,20,30);
+        buttonCon.anchor = GridBagConstraints.PAGE_END;
+
         // text added in the right panel with his constrains
-        rx.add(textPanel, textCon);
+        rx.add(rightTextPanel, rightTextCon);
+        rx.add(infoButton, buttonCon);
+
+        // text added in the left panel with his constrains
+        lx.add(leftTextPanel, leftTextCon);
 
         // central row components added with their own constrains
         centralPanel.add(rx, rxPad);
@@ -132,7 +169,7 @@ public class MainFrame extends JFrame {
         add(bot, botPad);
 
         pack();
-        //setVisible(true);
+        setVisible(true);
     }
 
     /**
@@ -167,11 +204,19 @@ public class MainFrame extends JFrame {
     }
 
     /**
-     * Method used to set text to the text panel
+     * Method used to set text to the right text panel
      * @param string text
      */
-    public void setText(String string) {
-        textPanel.setLabelText(string);
+    public void setRightText(String string) {
+        rightTextPanel.setLabelText(string);
+    }
+
+    /**
+     * Method used to set text to the left text panel
+     * @param string text
+     */
+    public void setLeftText(String string) {
+        leftTextPanel.setLabelText(string);
     }
 
     /**
@@ -221,7 +266,7 @@ public class MainFrame extends JFrame {
         JOptionPane.showOptionDialog(this, comboBox, "Gods selection",
                 JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
         int k = comboBox.getSelectedIndex();
-
+        infoButton.setPlayerGod(availableGods.get(k));
         return availableGods.get(k);
     }
 
@@ -350,5 +395,15 @@ public class MainFrame extends JFrame {
      */
     private InputStream getImageInputStream(String path) {
         return getClass().getResourceAsStream(path);
+    }
+
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(() -> {
+            try {
+                new MainFrame();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 }
