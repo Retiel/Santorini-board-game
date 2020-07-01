@@ -3,7 +3,6 @@ package it.polimi.ingsw.PSP33.view.gui.components;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 

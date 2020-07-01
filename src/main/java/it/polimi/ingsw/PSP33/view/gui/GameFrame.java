@@ -28,7 +28,6 @@ public class GameFrame extends JFrame {
         setLayout(new GridBagLayout());
         setAlwaysOnTop(true);
 
-        InputStream imageStream;
 
         //Text panel
         textPanel = new TextPanel();
@@ -39,23 +38,23 @@ public class GameFrame extends JFrame {
 
         /* Board panel components */
         //right board part
-        ImagePanel rx = new ImagePanel("src/main/resources/rx.png");
+        ImagePanel rx = new ImagePanel(getImageInputStream("/rx.png"));
         rx.setLayout(new GridBagLayout());
 
         //left board part
-        ImagePanel lx = new ImagePanel("src/main/resources/lx.png");
+        ImagePanel lx = new ImagePanel(getImageInputStream("/lx.png"));
         lx.setLayout(new GridBagLayout());
 
         //top board part
-        ImagePanel top = new ImagePanel("src/main/resources/top.png");
+        ImagePanel top = new ImagePanel(getImageInputStream("/top.png"));
         top.setLayout(new GridBagLayout());
 
         //bot board part
-        ImagePanel bot = new ImagePanel("src/main/resources/bottom.png");
+        ImagePanel bot = new ImagePanel(getImageInputStream("/bottom.png"));
         bot.setLayout(new GridBagLayout());
 
         //center board part
-        ImagePanel mid = new ImagePanel("src/main/resources/center.png");
+        ImagePanel mid = new ImagePanel(getImageInputStream("/center.png"));
         mid.setLayout(new GridBagLayout());
 
         // central component which houses rx, lx and center components
@@ -269,5 +268,9 @@ public class GameFrame extends JFrame {
         button.setFloor(cell.getFloor());
         button.setRoof(cell.isRoof());
         button.setPawn(cell.getOccupied());
+    }
+
+    private InputStream getImageInputStream(String path) {
+        return getClass().getResourceAsStream(path);
     }
 }
