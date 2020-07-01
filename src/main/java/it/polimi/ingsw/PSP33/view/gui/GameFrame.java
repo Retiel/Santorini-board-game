@@ -5,8 +5,11 @@ import it.polimi.ingsw.PSP33.model.light_version.LightCell;
 import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.view.gui.components.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +18,7 @@ public class GameFrame extends JFrame {
     private GridPanel gridPanel;
     private TextPanel textPanel;
 
-    public GameFrame() {
+    public GameFrame() throws IOException {
         //Main frame
         super("Santorini");
         setSize(600, 600);
@@ -25,8 +28,11 @@ public class GameFrame extends JFrame {
         setLayout(new GridBagLayout());
         setAlwaysOnTop(true);
 
+        InputStream imageStream;
+
         //Text panel
-        ImagePanel textImagePanel = new ImagePanel("src/main/resources/SantoriniPanelMidResized.png");
+        imageStream = getClass().getResourceAsStream("/SantoriniPanelMidResized.png");
+        ImagePanel textImagePanel = new ImagePanel(imageStream);
         textPanel = new TextPanel();
 
         GridBagConstraints textCon = new GridBagConstraints();
@@ -36,7 +42,8 @@ public class GameFrame extends JFrame {
         add(textImagePanel, textCon);
 
         //Board panel
-        ImagePanel boardImagePanel = new ImagePanel("src/main/resources/SantoriniBoardResized.png");
+        imageStream = getClass().getResourceAsStream("/SantoriniBoardResized.png");
+        ImagePanel boardImagePanel = new ImagePanel(imageStream);
         BorderPanel borderPanel = new BorderPanel();
         gridPanel = new GridPanel();
 
@@ -48,7 +55,6 @@ public class GameFrame extends JFrame {
         add(boardImagePanel, imageCon);
 
         pack();
-        //setVisible(true);
     }
 
     public GridPanel getGridPanel() {
@@ -144,7 +150,7 @@ public class GameFrame extends JFrame {
     }
 
     public int selectRoof() {
-        int k = JOptionPane.showConfirmDialog(null, "Do you want to build a roof?",
+        int k = JOptionPane.showConfirmDialog(this, "Do you want to build a roof?",
                 "Atlas", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         return k;
     }

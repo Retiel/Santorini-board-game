@@ -3,7 +3,7 @@
 TODO: in ordine di priorità
 - getClass().getResource(): fetching dei file [DONE]
 - GUI per setup [DONE]
-- getClass().getResource(): fetching di immagini
+- getClass().getResource(): fetching di immagini [DONE]
 - GUI dettagli grafici:
     > legenda
     > carte

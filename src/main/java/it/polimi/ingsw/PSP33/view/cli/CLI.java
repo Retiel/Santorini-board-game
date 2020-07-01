@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * the rapppresentation of the View Class for the CLI mode
+ * The reppresentation of the View Class for the CLI mode
  */
 public class CLI extends AbstractView {
 

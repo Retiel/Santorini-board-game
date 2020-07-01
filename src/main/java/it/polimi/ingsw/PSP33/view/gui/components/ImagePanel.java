@@ -1,14 +1,18 @@
 package it.polimi.ingsw.PSP33.view.gui.components;
 
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.io.InputStream;
 
 public class ImagePanel extends JPanel {
 
     private Image img;
 
-    public ImagePanel(String img) {
-        this(new ImageIcon(img).getImage());
+    public ImagePanel(InputStream in) throws IOException {
+        this(new ImageIcon(ImageIO.read(in)).getImage());
     }
 
     public ImagePanel(Image img) {

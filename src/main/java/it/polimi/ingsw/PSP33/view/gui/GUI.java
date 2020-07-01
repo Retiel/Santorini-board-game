@@ -20,6 +20,7 @@ import it.polimi.ingsw.PSP33.view.gui.components.ButtonListener;
 import it.polimi.ingsw.PSP33.view.gui.components.CellButton;
 
 import javax.swing.SwingUtilities;
+import java.io.IOException;
 import java.util.List;
 
 public class GUI extends AbstractView implements ButtonListener {
@@ -43,7 +44,11 @@ public class GUI extends AbstractView implements ButtonListener {
         SwingUtilities.invokeLater(() -> {
             lightModel = new LightModel();
 
-            gameFrame = new GameFrame();
+            try {
+                gameFrame = new GameFrame();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             setButtonListener();
         });
     }
