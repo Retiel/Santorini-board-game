@@ -13,7 +13,6 @@ import it.polimi.ingsw.PSP33.utils.observable.Observer;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -107,7 +106,7 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
                 mvJson = input.readUTF();
             } catch (IOException e) {
                 System.out.println("Disconnected from game - Unable to receive event");
-                System.exit(0);
+                //System.exit(0);
                 break;
             }
 
@@ -156,7 +155,7 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
                 ccJson = input.readUTF();
             } catch (IOException e) {
                 System.out.println("Disconnected from setup - Unable to receive event");
-                System.exit(0);
+                //System.exit(0);
                 break;
             }
 

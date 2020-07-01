@@ -14,6 +14,9 @@ public class Lobby implements Runnable {
      */
     private final int lobbyID;
 
+    /**
+     * Boolean to check if the game has started
+     */
     private boolean isGameStarted;
 
     /**
@@ -82,8 +85,8 @@ public class Lobby implements Runnable {
         return lobbyID;
     }
 
-    public void setGameStarted(boolean gameStarted) {
-        isGameStarted = gameStarted;
+    public boolean isGameStarted() {
+        return isGameStarted;
     }
 
     /**
@@ -124,7 +127,7 @@ public class Lobby implements Runnable {
             clientNames.remove(clientHandler.getClientName());
         }
 
-        if(clientHandlers.size() == numberOfPlayers - 1 && !isGameStarted) {
+        if(clientHandlers.size() > 0 && clientHandlers.size() < numberOfPlayers && !isGameStarted) {
             LobbyManager.addLobby(this);
         }
 

@@ -160,8 +160,12 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
             try {
                 vcJson = input.readUTF();
             } catch (IOException e) {
+                if(!lobby.isGameStarted()) {
+                    lobby.removeClient(this);
+                } else {
+                    notifyListener(new PlayerDisconnected(getClientName()));
+                }
                 System.out.println("Lobby_" + lobby.getLobbyID() + ": client_" + clientName + " disconnected");
-                notifyListener(new PlayerDisconnected(getClientName()));
                 break;
             }
 
@@ -231,7 +235,6 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
             output.writeUTF(ccJson);
         } catch (IOException e) {
             if(lobby != null) {
-                //lobby.removeClient(this);
                 System.out.println("Lobby_" + lobby.getLobbyID() + ": "
                         + client.getInetAddress() + " [cc_dropped]");
             } else {
@@ -275,7 +278,11 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
                 break;
 
             case 2:
-                sendCCEvent(new SelectLobby(LobbyManager.getLobbyMap()));
+                if(LobbyManager.getLobbies().values().size() > 0) {
+                    sendCCEvent(new SelectLobby(LobbyManager.getLobbyMap()));
+                } else {
+                    sendCCEvent(new SelectNumberOfPlayers());
+                }
                 break;
 
             default:
@@ -308,7 +315,11 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
             setLobby(LobbyManager.getLobbyByID(lobbySelected.getLobbyID()));
             sendCCEvent(new SelectName());
         } else {
-            sendCCEvent(new SelectLobby(LobbyManager.getLobbyMap()));
+            if(LobbyManager.getLobbies().values().size() > 0) {
+                sendCCEvent(new SelectLobby(LobbyManager.getLobbyMap()));
+            } else {
+                sendCCEvent(new SelectNumberOfPlayers());
+            }
         }
     }
 
