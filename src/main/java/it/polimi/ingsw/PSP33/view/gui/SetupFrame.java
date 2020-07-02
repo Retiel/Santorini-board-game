@@ -18,7 +18,7 @@ public class SetupFrame extends JFrame {
 
     private TextPanel textPanel;
 
-    public SetupFrame() throws IOException {
+    public SetupFrame(){
         super("Santorini_Setup");
         setSize(610, 635);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

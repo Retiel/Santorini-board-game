@@ -30,11 +30,7 @@ public class ServerAdapterGUI extends ServerAdapter {
         super(server);
 
         SwingUtilities.invokeLater(() -> {
-            try {
-                setupFrame = new SetupFrame();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            setupFrame = new SetupFrame();
         });
     }
 
