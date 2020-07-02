@@ -14,7 +14,7 @@ Requisiti implementati:
 - Socket
 - FA: Partite multiple
 
-Istruzioni
+Istruzioni configurazione:
 -
 - Server:
 Configura port forward utilizzando come porta di interna la *7777* e come porta esterna la *42069*, assicurarsi che il server abbia ip statico.

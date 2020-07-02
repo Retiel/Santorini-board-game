@@ -40,6 +40,7 @@ public class Model extends Observable<MVEvent> {
 
     /**
      * Constructor of the class
+     * @param players list of players
      */
     public Model(List<Player> players) {
         this.board = new Board();

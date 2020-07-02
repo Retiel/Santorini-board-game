@@ -132,6 +132,7 @@ public class SetUpManager extends AbstractManager {
 
     /**
      * Method to set a god for the current player
+     * @param god god selected
      */
     public void setGodforPlayer(God god){
         gods.removeIf(god1 -> god.getName().equals(god1.getName()));

@@ -50,6 +50,7 @@ public abstract class AbstractManager {
 
     /**
      * Method to set the current pawn
+     * @param pawn number of pawn
      */
     public void setCurrentPawn(int pawn){
         getModel().setCurrentPawn(getModel().getCurrentPlayer().getPawnByNumber(pawn));

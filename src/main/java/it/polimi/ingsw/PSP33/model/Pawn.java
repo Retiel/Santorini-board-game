@@ -33,6 +33,7 @@ public class Pawn {
     /**
      * Constructor of the class
      * @param color color of the related player
+     * @param number pawn number
      */
     public Pawn(Color color, int number) {
         this.color = color;

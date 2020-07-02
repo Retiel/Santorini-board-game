@@ -36,6 +36,7 @@ public class TurnManager extends AbstractManager {
 
     /**
      * Constructor
+     * @param model model of the game
      */
     public TurnManager(Model model) {
         super(model);
@@ -140,6 +141,7 @@ public class TurnManager extends AbstractManager {
     /**
      * Method to apply the build change
      * @param coord coordinates of the build position
+     * @param roof true if a roof has to be built
      */
     public void execBuild(Coord coord, boolean roof) {
 
@@ -182,6 +184,7 @@ public class TurnManager extends AbstractManager {
 
     /**
      * Method to remove a player form the game
+     * @param name name of the diconnected player
      */
     public void removePlayer(String name){
 

@@ -29,6 +29,8 @@ public class Cell {
 
     /**
      * Constructor of the class
+     * @param coordX X coord
+     * @param coordY Y coord
      */
     public Cell(int coordX, int coordY) {
         this.floor = 0;

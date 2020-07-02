@@ -31,7 +31,6 @@ public class Client {
         }
         System.out.println("Connected");
 
-        //TODO: args.length > 0 with parameter --cli from jar
         if(args.length > 0) {
             //CLI
             view = new CLI();
@@ -62,7 +61,6 @@ public class Client {
      * @return reader used by Gson
      */
     private static Reader getConnectionReader() {
-        //TODO: get connection info from user instead of connection.json
         InputStream input = Client.class.getResourceAsStream("/connection.json");
 
         return new BufferedReader(new InputStreamReader(input));

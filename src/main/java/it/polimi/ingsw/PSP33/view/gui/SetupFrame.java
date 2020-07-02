@@ -6,8 +6,6 @@ import it.polimi.ingsw.PSP33.view.gui.components.TextPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 
@@ -18,7 +16,7 @@ public class SetupFrame extends JFrame {
 
     private TextPanel textPanel;
 
-    public SetupFrame(){
+    public SetupFrame() {
         super("Santorini_Setup");
         setSize(610, 635);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

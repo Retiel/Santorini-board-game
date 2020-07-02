@@ -17,7 +17,7 @@ public class Server {
     /**
      * Server's socket port
      */
-    public final static int SOCKET_PORT = 50000;
+    public final static int SOCKET_PORT = 7777;
 
     public static void main(String[] args) {
         try {
