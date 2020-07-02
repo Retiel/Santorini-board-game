@@ -32,7 +32,7 @@ public class Client {
         System.out.println("Connected");
 
         //TODO: args.length > 0 with parameter --cli from jar
-        if(args.length > 0) {
+        if(args.length == 0) {
             //CLI
             view = new CLI();
             serverAdapter = new ServerAdapterCLI(server);
