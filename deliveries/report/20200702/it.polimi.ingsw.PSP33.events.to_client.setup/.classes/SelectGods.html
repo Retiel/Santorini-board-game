@@ -1,0 +1,124 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SelectGods</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.events.to_client.setup</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SelectGods (it.polimi.ingsw.PSP33.events.to_client.setup)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SelectGods</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (2/ 4)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    75%
+  </span>
+  <span class="absValue">
+    (6/ 8)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.events.to_client.setup;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.MVEventVisitor;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.model.God;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.util.List;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;/**
+<i>10</i>&nbsp; * Gods selection event
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;public class SelectGods implements MVEvent {
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    /**
+<i>15</i>&nbsp;     * List of available gods
+<i>16</i>&nbsp;     */
+<i>17</i>&nbsp;    private final List&lt;God&gt; gods;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    /**
+<i>20</i>&nbsp;     * Number of gods to select
+<i>21</i>&nbsp;     */
+<i>22</i>&nbsp;    private final int numberOfGods;
+<i>23</i>&nbsp;
+<b class="fc"><i>24</i>&nbsp;    public SelectGods(List&lt;God&gt; gods, int numberOfGods) {</b>
+<b class="fc"><i>25</i>&nbsp;        this.gods = gods;</b>
+<b class="fc"><i>26</i>&nbsp;        this.numberOfGods = numberOfGods;</b>
+<b class="fc"><i>27</i>&nbsp;    }</b>
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;    public List&lt;God&gt; getGods() {
+<b class="nc"><i>30</i>&nbsp;        return gods;</b>
+<i>31</i>&nbsp;    }
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    public int getNumberOfGods() {
+<b class="nc"><i>34</i>&nbsp;        return numberOfGods;</b>
+<i>35</i>&nbsp;    }
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;    @Override
+<i>38</i>&nbsp;    public void accept(MVEventVisitor MVEventVisitor) {
+<b class="fc"><i>39</i>&nbsp;        MVEventVisitor.visit(this);</b>
+<b class="fc"><i>40</i>&nbsp;    }</b>
+<i>41</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 16:08</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,448 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: CLI</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.view.cli</a> ]
+</div>
+
+<h1>Coverage Summary for Class: CLI (it.polimi.ingsw.PSP33.view.cli)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">CLI</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 24)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 154)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.view.cli;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.data.DataBoard;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.data.DataCell;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.data.DataPlayer;
+<i>6</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.setup.CurrentPlayer;
+<i>7</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.setup.PossiblePlacement;
+<i>8</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.setup.SelectGods;
+<i>9</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.setup.YourGod;
+<i>10</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.turn.*;
+<i>11</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.setup.ChoosenGod;
+<i>12</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.setup.PlacePawn;
+<i>13</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.setup.SelectedGods;
+<i>14</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.turn.*;
+<i>15</i>&nbsp;import it.polimi.ingsw.PSP33.model.God;
+<i>16</i>&nbsp;import it.polimi.ingsw.PSP33.model.light_version.LightModel;
+<i>17</i>&nbsp;import it.polimi.ingsw.PSP33.utils.Coord;
+<i>18</i>&nbsp;import it.polimi.ingsw.PSP33.view.AbstractView;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;import java.util.ArrayList;
+<i>21</i>&nbsp;import java.util.List;
+<i>22</i>&nbsp;import java.util.Scanner;
+<i>23</i>&nbsp;import java.util.concurrent.ExecutorService;
+<i>24</i>&nbsp;import java.util.concurrent.Executors;
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;/**
+<i>27</i>&nbsp; * The representation of the View Class for the CLI mode
+<i>28</i>&nbsp; */
+<i>29</i>&nbsp;public class CLI extends AbstractView {
+<i>30</i>&nbsp;
+<i>31</i>&nbsp;    /**
+<i>32</i>&nbsp;     * Light model used by CLI to save changes
+<i>33</i>&nbsp;     */
+<i>34</i>&nbsp;    private LightModel lightModel;
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    /**
+<i>37</i>&nbsp;     * CLI printer
+<i>38</i>&nbsp;     */
+<i>39</i>&nbsp;    private CLIPrinter cliPrinter;
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    /**
+<i>42</i>&nbsp;     * ExecutorService used to run each visit on a dedicated thread
+<i>43</i>&nbsp;     */
+<i>44</i>&nbsp;    private ExecutorService executor;
+<i>45</i>&nbsp;
+<b class="nc"><i>46</i>&nbsp;    public CLI() {</b>
+<b class="nc"><i>47</i>&nbsp;        cliPrinter = new CLIPrinter();</b>
+<b class="nc"><i>48</i>&nbsp;        lightModel = new LightModel();</b>
+<i>49</i>&nbsp;
+<b class="nc"><i>50</i>&nbsp;        executor = Executors.newSingleThreadExecutor();</b>
+<i>51</i>&nbsp;    }
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    @Override
+<i>54</i>&nbsp;    public void visit(DataBoard dataBoard) {
+<i>55</i>&nbsp;        //set up client board
+<b class="nc"><i>56</i>&nbsp;        lightModel.setLightGrid(dataBoard.getGrid().getGrid());</b>
+<i>57</i>&nbsp;    }
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;    @Override
+<i>60</i>&nbsp;    public void visit(DataCell dataCell) {
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;        //change old cell with new
+<b class="nc"><i>63</i>&nbsp;        if (dataCell.getOldCell() != null){</b>
+<b class="nc"><i>64</i>&nbsp;            int oldx = dataCell.getOldCell().getCoord().getX();</b>
+<b class="nc"><i>65</i>&nbsp;            int oldy = dataCell.getOldCell().getCoord().getY();</b>
+<b class="nc"><i>66</i>&nbsp;            lightModel.getLightGrid()[oldx][oldy] = dataCell.getOldCell();</b>
+<i>67</i>&nbsp;        }
+<i>68</i>&nbsp;
+<b class="nc"><i>69</i>&nbsp;        int newx = dataCell.getNewCell().getCoord().getX();</b>
+<b class="nc"><i>70</i>&nbsp;        int newy = dataCell.getNewCell().getCoord().getY();</b>
+<b class="nc"><i>71</i>&nbsp;        lightModel.getLightGrid()[newx][newy] = dataCell.getNewCell();</b>
+<i>72</i>&nbsp;
+<b class="nc"><i>73</i>&nbsp;        if(!lightModel.isYourTurn()) {</b>
+<b class="nc"><i>74</i>&nbsp;            System.out.println(&quot;\nAn opponent made a move and changed the Board:&quot;);</b>
+<b class="nc"><i>75</i>&nbsp;            cliPrinter.printBoard(lightModel);</b>
+<i>76</i>&nbsp;        }
+<i>77</i>&nbsp;    }
+<i>78</i>&nbsp;
+<i>79</i>&nbsp;    @Override
+<i>80</i>&nbsp;    public void visit(DataPlayer dataPlayer) {
+<i>81</i>&nbsp;        //update player info at the beginning
+<b class="nc"><i>82</i>&nbsp;        lightModel.setPlayers(dataPlayer.getPlayer());</b>
+<b class="nc"><i>83</i>&nbsp;        lightModel.setPlayerName(dataPlayer.getName());</b>
+<i>84</i>&nbsp;    }
+<i>85</i>&nbsp;
+<i>86</i>&nbsp;    @Override
+<i>87</i>&nbsp;    public void visit(YourGod yourGod) {
+<i>88</i>&nbsp;
+<b class="nc"><i>89</i>&nbsp;        executor.execute(() -&gt; {</b>
+<b class="nc"><i>90</i>&nbsp;            System.out.println(&quot;\nWhich God Card do you want?\n&quot;);</b>
+<b class="nc"><i>91</i>&nbsp;            cliPrinter.printGodList(yourGod.getGods());</b>
+<i>92</i>&nbsp;
+<b class="nc"><i>93</i>&nbsp;            ChoosenGod cg = new ChoosenGod(yourGod.getGods().get(readInput(yourGod.getGods().size()) - 1));</b>
+<b class="nc"><i>94</i>&nbsp;            notifyObservers(cg);</b>
+<b class="nc"><i>95</i>&nbsp;            lightModel.setYourTurn(false);</b>
+<i>96</i>&nbsp;        });
+<i>97</i>&nbsp;    }
+<i>98</i>&nbsp;
+<i>99</i>&nbsp;    @Override
+<i>100</i>&nbsp;    public void visit(CurrentPlayer currentPlayer) {
+<b class="nc"><i>101</i>&nbsp;        System.out.println(currentPlayer.getName() + &quot;&#39;s turn&quot;);</b>
+<i>102</i>&nbsp;    }
+<i>103</i>&nbsp;
+<i>104</i>&nbsp;    @Override
+<i>105</i>&nbsp;    public void visit(PossiblePlacement possiblePlacement) {
+<i>106</i>&nbsp;
+<b class="nc"><i>107</i>&nbsp;        executor.execute(() -&gt; {</b>
+<b class="nc"><i>108</i>&nbsp;            cliPrinter.printBoard(lightModel);</b>
+<i>109</i>&nbsp;            //print 2 times the placement for the pawn (setup phase)
+<b class="nc"><i>110</i>&nbsp;            System.out.println(&quot;\nWhere do you want to place your worker?&quot;);</b>
+<b class="nc"><i>111</i>&nbsp;            cliPrinter.printList(possiblePlacement.getCoordList());</b>
+<b class="nc"><i>112</i>&nbsp;            PlacePawn pp = new PlacePawn(possiblePlacement.getCoordList().get(readInput(possiblePlacement.getCoordList().size()) - 1));</b>
+<b class="nc"><i>113</i>&nbsp;            notifyObservers(pp);</b>
+<i>114</i>&nbsp;        });
+<i>115</i>&nbsp;    }
+<i>116</i>&nbsp;
+<i>117</i>&nbsp;    @Override
+<i>118</i>&nbsp;    public void visit(SelectGods selectGods) {
+<i>119</i>&nbsp;
+<b class="nc"><i>120</i>&nbsp;        executor.execute(() -&gt; {</b>
+<b class="nc"><i>121</i>&nbsp;            List&lt;God&gt; allGods = new ArrayList&lt;&gt;(selectGods.getGods());</b>
+<b class="nc"><i>122</i>&nbsp;            List&lt;God&gt; chosenGods = new ArrayList&lt;&gt;();</b>
+<i>123</i>&nbsp;
+<b class="nc"><i>124</i>&nbsp;            for(int c=1;c&lt;selectGods.getNumberOfGods()+1;c++){</b>
+<b class="nc"><i>125</i>&nbsp;                System.out.println(&quot;Choose the &quot;+c+&quot;° God:\n&quot;);</b>
+<b class="nc"><i>126</i>&nbsp;                cliPrinter.printGodList(allGods);</b>
+<b class="nc"><i>127</i>&nbsp;                int i = readInput(allGods.size());</b>
+<b class="nc"><i>128</i>&nbsp;                chosenGods.add(allGods.get(i-1));</b>
+<b class="nc"><i>129</i>&nbsp;                allGods.remove(allGods.get(i-1));</b>
+<i>130</i>&nbsp;            }
+<i>131</i>&nbsp;
+<b class="nc"><i>132</i>&nbsp;            SelectedGods sg = new SelectedGods(chosenGods);</b>
+<b class="nc"><i>133</i>&nbsp;            notifyObservers(sg);</b>
+<i>134</i>&nbsp;        });
+<i>135</i>&nbsp;    }
+<i>136</i>&nbsp;
+<i>137</i>&nbsp;    @Override
+<i>138</i>&nbsp;    public void visit(YouLose youLose) {
+<b class="nc"><i>139</i>&nbsp;        System.out.println(&quot;Player &quot; + youLose.getName() + &quot;has won!&quot;);</b>
+<i>140</i>&nbsp;    }
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;    @Override
+<i>143</i>&nbsp;    public void visit(YouWin youWin) {
+<b class="nc"><i>144</i>&nbsp;        System.out.println(&quot;You win!&quot;);</b>
+<i>145</i>&nbsp;    }
+<i>146</i>&nbsp;
+<i>147</i>&nbsp;    @Override
+<i>148</i>&nbsp;    public void visit(SelectPawn selectPawn) {
+<i>149</i>&nbsp;
+<b class="nc"><i>150</i>&nbsp;        executor.execute(() -&gt; {</b>
+<b class="nc"><i>151</i>&nbsp;            int c = selectPawn.getValue();</b>
+<b class="nc"><i>152</i>&nbsp;            switch (c) {</b>
+<i>153</i>&nbsp;                default:
+<b class="nc"><i>154</i>&nbsp;                    cliPrinter.printBoard(lightModel);</b>
+<b class="nc"><i>155</i>&nbsp;                    System.out.println(&quot;\nWhich worker you want to use? (1 or 2)&quot;);</b>
+<b class="nc"><i>156</i>&nbsp;                    SelectedPawn sp1 = new SelectedPawn(readInput(2));</b>
+<b class="nc"><i>157</i>&nbsp;                    notifyObservers(sp1);</b>
+<b class="nc"><i>158</i>&nbsp;                    break;</b>
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;                case 1:
+<b class="nc"><i>161</i>&nbsp;                    System.out.println(&quot;You can move only the worker number 1\n&quot;);</b>
+<b class="nc"><i>162</i>&nbsp;                    SelectedPawn sp2 = new SelectedPawn(c);</b>
+<b class="nc"><i>163</i>&nbsp;                    notifyObservers(sp2);</b>
+<b class="nc"><i>164</i>&nbsp;                    break;</b>
+<i>165</i>&nbsp;
+<i>166</i>&nbsp;                case 2:
+<b class="nc"><i>167</i>&nbsp;                    System.out.println(&quot;You can move only the worker number 2\n&quot;);</b>
+<b class="nc"><i>168</i>&nbsp;                    SelectedPawn sp3 = new SelectedPawn(c);</b>
+<b class="nc"><i>169</i>&nbsp;                    notifyObservers(sp3);</b>
+<i>170</i>&nbsp;                    break;
+<i>171</i>&nbsp;            }
+<i>172</i>&nbsp;        });
+<i>173</i>&nbsp;    }
+<i>174</i>&nbsp;
+<i>175</i>&nbsp;    @Override
+<i>176</i>&nbsp;    public void visit(NewAction newAction) {
+<b class="nc"><i>177</i>&nbsp;        executor.execute(() -&gt; {</b>
+<i>178</i>&nbsp;            int j;
+<i>179</i>&nbsp;
+<i>180</i>&nbsp;            RequestPossibleBuild rpb;
+<i>181</i>&nbsp;            RequestPossibleMove rpm;
+<i>182</i>&nbsp;            RequestExtraAction rea;
+<i>183</i>&nbsp;
+<b class="nc"><i>184</i>&nbsp;            if (!newAction.isExtra() &amp;&amp; !newAction.isBuild() &amp;&amp; !newAction.isMove()){</b>
+<b class="nc"><i>185</i>&nbsp;                NewTurn newTurn = new NewTurn();</b>
+<b class="nc"><i>186</i>&nbsp;                notifyObservers(newTurn);</b>
+<i>187</i>&nbsp;
+<b class="nc"><i>188</i>&nbsp;                cliPrinter.printBoard(lightModel);</b>
+<b class="nc"><i>189</i>&nbsp;                System.out.println(&quot;End of the turn:&quot;);</b>
+<b class="nc"><i>190</i>&nbsp;                lightModel.setYourTurn(false);</b>
+<b class="nc"><i>191</i>&nbsp;            } else{</b>
+<i>192</i>&nbsp;
+<b class="nc"><i>193</i>&nbsp;                lightModel.setYourTurn(true);</b>
+<i>194</i>&nbsp;                //decide action with the Boolean and send input to controller (switch case)
+<b class="nc"><i>195</i>&nbsp;                if (newAction.isMove()){</b>
+<b class="nc"><i>196</i>&nbsp;                    if (!newAction.isExtra()){</b>
+<i>197</i>&nbsp;                        //send move action to controller
+<b class="nc"><i>198</i>&nbsp;                        rpm = new RequestPossibleMove();</b>
+<b class="nc"><i>199</i>&nbsp;                        notifyObservers(rpm);</b>
+<i>200</i>&nbsp;                    }
+<i>201</i>&nbsp;                    else {
+<i>202</i>&nbsp;                        //choose and create possible move or extra message to notify to the controller
+<b class="nc"><i>203</i>&nbsp;                        cliPrinter.printBoard(lightModel);</b>
+<b class="nc"><i>204</i>&nbsp;                        System.out.println(&quot;What type of action do you want to do?\n1) Move\n2) God Effect&quot;);</b>
+<i>205</i>&nbsp;                        //System.out.println(lightModel.getPlayers().get(playerID).getCard().getDescription());
+<b class="nc"><i>206</i>&nbsp;                        j = readInput(2);</b>
+<b class="nc"><i>207</i>&nbsp;                        if (j==1){</b>
+<b class="nc"><i>208</i>&nbsp;                            rpm = new RequestPossibleMove();</b>
+<b class="nc"><i>209</i>&nbsp;                            notifyObservers(rpm);</b>
+<b class="nc"><i>210</i>&nbsp;                        } else if (j == 2){</b>
+<b class="nc"><i>211</i>&nbsp;                            rea = new RequestExtraAction();</b>
+<b class="nc"><i>212</i>&nbsp;                            notifyObservers(rea);</b>
+<i>213</i>&nbsp;                        }
+<i>214</i>&nbsp;                    }
+<i>215</i>&nbsp;                }
+<i>216</i>&nbsp;
+<b class="nc"><i>217</i>&nbsp;                if (newAction.isBuild()){</b>
+<i>218</i>&nbsp;
+<b class="nc"><i>219</i>&nbsp;                    if (!newAction.isExtra()){</b>
+<b class="nc"><i>220</i>&nbsp;                        rpb = new RequestPossibleBuild();</b>
+<b class="nc"><i>221</i>&nbsp;                        notifyObservers(rpb);</b>
+<i>222</i>&nbsp;                    }
+<i>223</i>&nbsp;                    else{
+<i>224</i>&nbsp;                        //choose your action and send proper message to server
+<b class="nc"><i>225</i>&nbsp;                        cliPrinter.printBoard(lightModel);</b>
+<b class="nc"><i>226</i>&nbsp;                        System.out.print(&quot;What type of action do you want to do?\n1) Build\n2) God Effect&quot;);</b>
+<i>227</i>&nbsp;                        //System.out.println(lightModel.getPlayers().get(playerID).getCard().getDescription());
+<b class="nc"><i>228</i>&nbsp;                        j = readInput(2);</b>
+<i>229</i>&nbsp;
+<b class="nc"><i>230</i>&nbsp;                        if (j == 1){</b>
+<b class="nc"><i>231</i>&nbsp;                            rpb = new RequestPossibleBuild();</b>
+<b class="nc"><i>232</i>&nbsp;                            notifyObservers(rpb);</b>
+<b class="nc"><i>233</i>&nbsp;                        } else if (j == 2){</b>
+<b class="nc"><i>234</i>&nbsp;                            rea = new RequestExtraAction();</b>
+<b class="nc"><i>235</i>&nbsp;                            notifyObservers(rea);</b>
+<i>236</i>&nbsp;                        }
+<i>237</i>&nbsp;                    }
+<i>238</i>&nbsp;                }
+<i>239</i>&nbsp;
+<b class="nc"><i>240</i>&nbsp;                if (newAction.isExtra()){</b>
+<b class="nc"><i>241</i>&nbsp;                    if (!newAction.isBuild()&amp;&amp;!newAction.isMove()){</b>
+<b class="nc"><i>242</i>&nbsp;                        rea = new RequestExtraAction();</b>
+<b class="nc"><i>243</i>&nbsp;                        notifyObservers(rea);</b>
+<i>244</i>&nbsp;                    }
+<i>245</i>&nbsp;                }
+<i>246</i>&nbsp;            }
+<i>247</i>&nbsp;        });
+<i>248</i>&nbsp;    }
+<i>249</i>&nbsp;
+<i>250</i>&nbsp;    @Override
+<i>251</i>&nbsp;    public void visit(PossibleBuild possibleBuild) {
+<b class="nc"><i>252</i>&nbsp;        executor.execute(() -&gt; {</b>
+<i>253</i>&nbsp;            //print board
+<b class="nc"><i>254</i>&nbsp;            cliPrinter.printBoard(lightModel);</b>
+<i>255</i>&nbsp;            //print choices and read player&#39;s intentions
+<b class="nc"><i>256</i>&nbsp;            System.out.println(&quot;Where do you want to build your Block?\n&quot;);</b>
+<b class="nc"><i>257</i>&nbsp;            cliPrinter.printList(possibleBuild.getCoordList());</b>
+<b class="nc"><i>258</i>&nbsp;            cliPrinter.printSecondList(possibleBuild.getGodsList(),possibleBuild.getCoordList().size());</b>
+<b class="nc"><i>259</i>&nbsp;            int i = readInput(possibleBuild.getCoordList().size() + possibleBuild.getGodsList().size());</b>
+<i>260</i>&nbsp;
+<i>261</i>&nbsp;            //send info to controller
+<i>262</i>&nbsp;            Coord choiceCoord;
+<i>263</i>&nbsp;            BuildAction ba;
+<b class="nc"><i>264</i>&nbsp;            if(i &lt;= possibleBuild.getCoordList().size()){</b>
+<b class="nc"><i>265</i>&nbsp;                choiceCoord = possibleBuild.getCoordList().get(i-1);</b>
+<b class="nc"><i>266</i>&nbsp;                if(possibleBuild.isRoofAvailable()) {</b>
+<b class="nc"><i>267</i>&nbsp;                    System.out.println(&quot;Do you want to build a roof?\n1. Yes\n2. No&quot;);</b>
+<b class="nc"><i>268</i>&nbsp;                    int k = readInput(2);</b>
+<b class="nc"><i>269</i>&nbsp;                    if(k == 1) {</b>
+<b class="nc"><i>270</i>&nbsp;                        ba = new BuildAction(choiceCoord, true);</b>
+<i>271</i>&nbsp;                    } else {
+<b class="nc"><i>272</i>&nbsp;                        ba = new BuildAction(choiceCoord, false);</b>
+<i>273</i>&nbsp;                    }
+<b class="nc"><i>274</i>&nbsp;                }</b>
+<b class="nc"><i>275</i>&nbsp;                else ba = new BuildAction(choiceCoord, false);</b>
+<i>276</i>&nbsp;
+<i>277</i>&nbsp;            }
+<i>278</i>&nbsp;            else{
+<b class="nc"><i>279</i>&nbsp;                choiceCoord = possibleBuild.getGodsList().get(i-possibleBuild.getCoordList().size()-1);</b>
+<b class="nc"><i>280</i>&nbsp;                if(possibleBuild.isRoofAvailable()) {</b>
+<b class="nc"><i>281</i>&nbsp;                    System.out.println(&quot;Do you want to build a roof?\n1. Yes\n2. No&quot;);</b>
+<b class="nc"><i>282</i>&nbsp;                    int k = readInput(2);</b>
+<b class="nc"><i>283</i>&nbsp;                    if(k == 1) {</b>
+<b class="nc"><i>284</i>&nbsp;                        ba = new BuildAction(choiceCoord, true);</b>
+<i>285</i>&nbsp;                    } else {
+<b class="nc"><i>286</i>&nbsp;                        ba = new BuildAction(choiceCoord, false);</b>
+<i>287</i>&nbsp;                    }
+<b class="nc"><i>288</i>&nbsp;                } else ba = new BuildAction(choiceCoord,false);</b>
+<i>289</i>&nbsp;            }
+<b class="nc"><i>290</i>&nbsp;            notifyObservers(ba);</b>
+<i>291</i>&nbsp;        });
+<i>292</i>&nbsp;    }
+<i>293</i>&nbsp;
+<i>294</i>&nbsp;    @Override
+<i>295</i>&nbsp;    public void visit(PossibleMove possibleMove) {
+<b class="nc"><i>296</i>&nbsp;        executor.execute(() -&gt; {</b>
+<i>297</i>&nbsp;            //print board
+<b class="nc"><i>298</i>&nbsp;            cliPrinter.printBoard(lightModel);</b>
+<i>299</i>&nbsp;            //print choices and read player&#39;s intentions
+<b class="nc"><i>300</i>&nbsp;            System.out.println(&quot;Where do you want to move your worker?\n&quot;);</b>
+<b class="nc"><i>301</i>&nbsp;            cliPrinter.printList(possibleMove.getCoordList());</b>
+<b class="nc"><i>302</i>&nbsp;            cliPrinter.printSecondList(possibleMove.getGodsList(),possibleMove.getCoordList().size());</b>
+<b class="nc"><i>303</i>&nbsp;            int i = readInput(possibleMove.getCoordList().size() + possibleMove.getGodsList().size());</b>
+<i>304</i>&nbsp;
+<i>305</i>&nbsp;            //send info to controller
+<i>306</i>&nbsp;            MoveAction ma;
+<b class="nc"><i>307</i>&nbsp;            if(i &lt;= possibleMove.getCoordList().size()){</b>
+<b class="nc"><i>308</i>&nbsp;                ma = new MoveAction(possibleMove.getCoordList().get(i - 1));</b>
+<i>309</i>&nbsp;            } else {
+<b class="nc"><i>310</i>&nbsp;                ma = new MoveAction(possibleMove.getGodsList().get(i - possibleMove.getCoordList().size() - 1));</b>
+<i>311</i>&nbsp;            }
+<b class="nc"><i>312</i>&nbsp;            notifyObservers(ma);</b>
+<i>313</i>&nbsp;        });
+<i>314</i>&nbsp;    }
+<i>315</i>&nbsp;
+<i>316</i>&nbsp;    @Override
+<i>317</i>&nbsp;    public void visit(PossibleExtraAction possibleExtraAction) {
+<b class="nc"><i>318</i>&nbsp;        executor.execute(() -&gt; {</b>
+<i>319</i>&nbsp;            //print board
+<b class="nc"><i>320</i>&nbsp;            cliPrinter.printBoard(lightModel);</b>
+<i>321</i>&nbsp;            ExtraAction ea;
+<i>322</i>&nbsp;
+<b class="nc"><i>323</i>&nbsp;            System.out.println(&quot;Do you want to use Your God Action?\n1. Yes\n2. No&quot;);</b>
+<b class="nc"><i>324</i>&nbsp;            int k = readInput(2);</b>
+<b class="nc"><i>325</i>&nbsp;            if(k == 1) {</b>
+<b class="nc"><i>326</i>&nbsp;                System.out.println(&quot;Where do you want to use Your God Action?&quot;);</b>
+<b class="nc"><i>327</i>&nbsp;                cliPrinter.printSecondList(possibleExtraAction.getCoordList(),0);</b>
+<i>328</i>&nbsp;
+<i>329</i>&nbsp;                //send info to controller
+<i>330</i>&nbsp;
+<b class="nc"><i>331</i>&nbsp;                Coord choiceCoord = possibleExtraAction.getCoordList().get(readInput(possibleExtraAction.getCoordList().size()) - 1);</b>
+<b class="nc"><i>332</i>&nbsp;                ea = new ExtraAction(choiceCoord, true);</b>
+<b class="nc"><i>333</i>&nbsp;            } else {</b>
+<b class="nc"><i>334</i>&nbsp;                ea = new ExtraAction(null, false);</b>
+<i>335</i>&nbsp;            }
+<i>336</i>&nbsp;            //print choices and read player&#39;s intentions
+<i>337</i>&nbsp;
+<b class="nc"><i>338</i>&nbsp;            notifyObservers(ea);</b>
+<i>339</i>&nbsp;        });
+<i>340</i>&nbsp;
+<i>341</i>&nbsp;    }
+<i>342</i>&nbsp;
+<i>343</i>&nbsp;    /**
+<i>344</i>&nbsp;     * Method used to limit and read input from client
+<i>345</i>&nbsp;     * @param size range of integers accepted (0, size]
+<i>346</i>&nbsp;     * @return client&#39;s input
+<i>347</i>&nbsp;     */
+<i>348</i>&nbsp;    private int readInput(int size){
+<i>349</i>&nbsp;
+<b class="nc"><i>350</i>&nbsp;        Scanner scanner = new Scanner(System.in);</b>
+<b class="nc"><i>351</i>&nbsp;        if(scanner.hasNextInt()){</b>
+<b class="nc"><i>352</i>&nbsp;            int i = scanner.nextInt();</b>
+<b class="nc"><i>353</i>&nbsp;            if(i &lt;= size &amp;&amp; i &gt; 0) {</b>
+<b class="nc"><i>354</i>&nbsp;                return i;</b>
+<i>355</i>&nbsp;            } else {
+<b class="nc"><i>356</i>&nbsp;                System.out.println(&quot;Invalid Choice (integer out of bound), please select again:&quot;);</b>
+<b class="nc"><i>357</i>&nbsp;                return readInput(size);}</b>
+<i>358</i>&nbsp;        }
+<i>359</i>&nbsp;        else {
+<b class="nc"><i>360</i>&nbsp;            System.out.println(&quot;Invalid Choice (mismatch input type), please select again:&quot;);</b>
+<b class="nc"><i>361</i>&nbsp;            scanner.next();</b>
+<b class="nc"><i>362</i>&nbsp;            return readInput(size);</b>
+<i>363</i>&nbsp;        }
+<i>364</i>&nbsp;    }
+<i>365</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 16:08</div>
+</div>
+</body>
+</html>
