@@ -106,9 +106,6 @@ public class Model extends Observable<MVEvent> {
      * @param currentPawn current pawn
      */
     public void setCurrentPawn(Pawn currentPawn) {
-        currentPawn.setOldMove(null);
-        currentPawn.setOldBuild(null);
-        currentPawn.setOldExtra(null);
         this.currentPawn = currentPawn;
     }
 

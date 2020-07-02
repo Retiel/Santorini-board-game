@@ -67,6 +67,9 @@ public class TurnManager extends AbstractManager {
      * Method send message ne action
      */
     public void newAction(){
+        getModel().getCurrentPawn().setOldMove(null);
+        getModel().getCurrentPawn().setOldBuild(null);
+        getModel().getCurrentPawn().setOldExtra(null);
         notifyView(new NewAction(true, false, DataControl.checkStart(getModel().getCurrentGodName())));
     }
 
