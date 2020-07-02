@@ -19,4 +19,7 @@ Istruzioni configurazione:
 - Server:
 Configura port forward utilizzando come porta di interna la *7777* e come porta esterna la *42069*, assicurarsi che il server abbia ip statico.
 - Client:
-Configura il file connection.json cambiando il valore dell'attributo *server* con l'ip pubblico del router in cui é connesso il server.
+Aprire archivio jar, modificare il file connection.json cambiando il valore dell'attributo *server* con:
+  - IP pubblico del router in cui é connesso il server (caso client remoto).
+  - IP locale e *porta* la 7777 (caso client locale).
+- Il client apre automaticamente in modalità GUI, per aprire il client in modalità CLI aggiugere a terminale il parametro *--cli*

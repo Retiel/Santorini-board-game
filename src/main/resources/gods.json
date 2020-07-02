@@ -1,39 +1,39 @@
 [
     {
       "name": "APOLLO",
-      "description": "Movimento: I tuoi Lavoratori possono muoversi in uno spazio occupato da un Lavoratore avversario spostandolo nello spazio appena lasciato libero."
+      "description": "I tuoi Lavoratori possono muoversi in uno spazio occupato da un Lavoratore avversario spostandolo nello spazio appena lasciato libero."
     },
     {
       "name": "ARTEMIS",
-      "description": "Movimento: I tuoi Lavoratori possono muoversi una volta in più, ma non tornare nello spazio iniziale."
+      "description": "I tuoi Lavoratori possono muoversi una volta in più, ma non tornare nello spazio iniziale."
     },
     {
       "name": "ATHENA",
-      "description": "Nel Turno Avversario: Se uno dei tuoi Lavoratori sale nel tuo turnO, i Lavoratori dell’avversario non possono salire nel suo prossimo turno."
+      "description": "Se uno dei tuoi Lavoratori sale nel tuo turnO, i Lavoratori dell’avversario non possono salire nel suo prossimo turno."
     },
     {
       "name": "ATLAS",
-      "description": "Costruire: I tuoi Lavoratori possono costruire una cupola su qualunque livello."
+      "description": "I tuoi Lavoratori possono costruire una cupola su qualunque livello."
     },
     {
       "name": "DEMETER",
-      "description": "Costruire: I tuoi Lavortori possono costruire una volta in più, ma non nello stesso spazio."
+      "description": "I tuoi Lavortori possono costruire una volta in piu, ma non nello stesso spazio."
     },
     {
       "name": "HEPHAESTUS",
-      "description": "Costruire: I tuoi Lavortori possono costruire un blocco addizionale (non una cupola) sopra al primo costruito."
+      "description": "I tuoi Lavortori possono costruire un blocco addizionale (non una cupola) sopra al primo costruito."
     },
     {
       "name": "MINOTAUR",
-      "description": "Movimento: Il tuo Lavoratore può muoversi nello spazio di un Lavoratore dell’avversario se quel Lavoratore può essere spostato uno spazio non occupato di qualsiasi livello nella stessa direzione del movimento."
+      "description": "Il tuo Lavoratore può muoversi nello spazio di un Lavoratore dell’avversario se quel Lavoratore puo essere spostato uno spazio non occupato di qualsiasi livello nella stessa direzione del movimento."
     },
     {
       "name": "PAN",
-      "description": "Condizioni di Vittoria: Vinci anche se un tuo Lavoratore scende due o più livelli."
+      "description": "Vinci anche se un tuo Lavoratore scende due o più livelli."
     },
     {
       "name": "PROMETHEUS",
-      "description": "Nel Tuo Turno: Se il tuo Lavoratore non sale, può costruire sia prima che dopo aver mosso."
+      "description": "Se il tuo Lavoratore non sale, puo costruire sia prima che dopo aver mosso."
     }
 ]
 
