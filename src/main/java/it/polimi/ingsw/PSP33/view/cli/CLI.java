@@ -318,14 +318,23 @@ public class CLI extends AbstractView {
         executor.execute(() -> {
             //print board
             cliPrinter.printBoard(lightModel);
-            //print choices and read player's intentions
-            System.out.println("Where do you want to use Your God Action?");
-            cliPrinter.printSecondList(possibleExtraAction.getCoordList(),0);
-
-            //send info to controller
             ExtraAction ea;
-            Coord choiceCoord = possibleExtraAction.getCoordList().get(readInput(possibleExtraAction.getCoordList().size()) - 1);
-            ea = new ExtraAction(choiceCoord);
+
+            System.out.println("Do you want to use Your God Action?\n1. Yes\n2. No");
+            int k = readInput(2);
+            if(k == 1) {
+                System.out.println("Where do you want to use Your God Action?");
+                cliPrinter.printSecondList(possibleExtraAction.getCoordList(),0);
+
+                //send info to controller
+
+                Coord choiceCoord = possibleExtraAction.getCoordList().get(readInput(possibleExtraAction.getCoordList().size()) - 1);
+                ea = new ExtraAction(choiceCoord, true);
+            } else {
+                ea = new ExtraAction(null, false);
+            }
+            //print choices and read player's intentions
+
             notifyObservers(ea);
         });
 

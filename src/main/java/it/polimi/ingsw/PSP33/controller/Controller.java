@@ -102,7 +102,7 @@ public class Controller implements Observer<VCEvent>, VCEventVisitor {
 
     @Override
     public void visit(ExtraAction extraAction) {
-        turnManager.execExtra(extraAction.getCoord());
+        turnManager.execExtra(extraAction.getCoord(), extraAction.isUse());
     }
 
     @Override

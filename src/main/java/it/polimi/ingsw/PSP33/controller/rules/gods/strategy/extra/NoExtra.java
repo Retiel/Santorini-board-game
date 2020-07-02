@@ -20,7 +20,7 @@ public class NoExtra implements ExtraAction {
     }
 
     @Override
-    public void applyAction(Cell cell, Pawn pawn, Model model) {
+    public void applyAction(Cell cell, Pawn pawn, Model model, boolean trigger) {
 
     }
 }

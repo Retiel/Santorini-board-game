@@ -47,9 +47,11 @@ public class ExtraContext {
      * @param coord coordinates
      * @param pawn pawn involved
      * @param model model used also for notify
+     * @param toggle enable the use of the god effwct
      */
-    public void execAction(Coord coord, Pawn pawn, Model model){
-        Cell cell =  model.getBoard().getGrid()[coord.getX()][coord.getY()];
-        extraAction.applyAction(cell, pawn, model);
+    public void execAction(Coord coord, Pawn pawn, Model model, boolean toggle){
+        Cell cell = null;
+        if (coord != null) cell =  model.getBoard().getGrid()[coord.getX()][coord.getY()];
+        extraAction.applyAction(cell, pawn, model, toggle);
     }
 }

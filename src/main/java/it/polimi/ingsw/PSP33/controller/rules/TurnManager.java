@@ -153,12 +153,15 @@ public class TurnManager extends AbstractManager {
     /**
      * Method to apply the extra action change
      * @param coord coordinates where to apply the extra action
+     * @param toggle enable god effect
      */
-    public void execExtra(Coord coord){
+    public void execExtra(Coord coord, boolean toggle){
 
-        if (DataControl.controlInput(coord,dataBuffer)) {
-            setData(Actions.EXTRA, coord);
-            extraContext.execAction(coord, getModel().getCurrentPawn(), getModel());
+        if (DataControl.controlInput(coord,dataBuffer) || !toggle) {
+            if (coord != null){
+                setData(Actions.EXTRA, coord);
+            }
+            extraContext.execAction(coord, getModel().getCurrentPawn(), getModel(), toggle);
         }
         else notifyView(new PossibleExtraAction(dataBuffer.getCoordList()));
     }

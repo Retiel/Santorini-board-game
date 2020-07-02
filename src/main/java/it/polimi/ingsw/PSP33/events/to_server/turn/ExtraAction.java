@@ -14,12 +14,19 @@ public class ExtraAction implements VCEvent {
      */
     private final Coord coord;
 
-    public ExtraAction(Coord coord) {
+    private final boolean use;
+
+    public ExtraAction(Coord coord, boolean use) {
         this.coord = coord;
+        this.use = use;
     }
 
     public Coord getCoord() {
         return coord;
+    }
+
+    public boolean isUse() {
+        return use;
     }
 
     @Override

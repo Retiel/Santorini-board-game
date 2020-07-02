@@ -243,9 +243,13 @@ public class GUI extends AbstractView implements ButtonListener {
     public void visit(PossibleExtraAction possibleExtraAction) {
         SwingUtilities.invokeLater(() -> {
             nextEvent = Event.EXTRA_ACTION;
-            mainFrame.setRightText("Where do you want to use Your God Action?");
+            if (mainFrame.useGodPower() == 0){
+                mainFrame.setRightText("Where do you want to use Your God Action?");
 
-            mainFrame.enableButtons(possibleExtraAction.getCoordList(), null);
+                mainFrame.enableButtons(possibleExtraAction.getCoordList(), null);
+            }else{
+                notifyObservers(new ExtraAction(null, false));
+            }
         });
     }
 
@@ -276,7 +280,7 @@ public class GUI extends AbstractView implements ButtonListener {
                     break;
 
                 case EXTRA_ACTION:
-                    notifyObservers(new ExtraAction(coord));
+                    notifyObservers(new ExtraAction(coord, true));
                     break;
             }
         });

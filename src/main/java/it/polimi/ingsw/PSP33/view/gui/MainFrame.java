@@ -300,6 +300,22 @@ public class MainFrame extends JFrame {
     }
 
     /**
+     * Method used to show a dialog to make the client select whether use the God effect or not
+     * @return selection (1. Yes 2. No)
+     */
+    public int useGodPower() {
+        String[] options = {"Yes", "No"};
+
+        JOptionPane optionPane = new JOptionPane("Do you want to use the God power?",
+                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.YES_NO_OPTION,
+                null, options);
+        SetupFrame.lockClosure(this, optionPane);
+        String res = (String) optionPane.getValue();
+        return Arrays.asList(options).indexOf(res);
+    }
+
+    /**
      * Method used to show a dialog to make the client select the type of move
      * @return selection (1. Move 2. God Effect)
      */

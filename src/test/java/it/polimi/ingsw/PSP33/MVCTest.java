@@ -87,7 +87,7 @@ public class MVCTest {
         view.notifyObservers(new BuildAction(new Coord(0,0), false));
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
         view.notifyObservers(new RequestExtraAction()); /* test Extra Action branch message */
-        view.notifyObservers(new ExtraAction(new Coord(1,1)));
+        view.notifyObservers(new ExtraAction(new Coord(1,1), true));
         System.out.print("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------\n");
 
     }
