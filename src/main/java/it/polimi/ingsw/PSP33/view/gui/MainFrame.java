@@ -9,6 +9,7 @@ import it.polimi.ingsw.PSP33.view.gui.components.*;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -287,9 +288,13 @@ public class MainFrame extends JFrame {
     public int selectWorker() {
         String[] options = {"Worker 1", "Worker 2"};
 
-        int k = JOptionPane.showOptionDialog(this, "Which worker do you want to use?",
-                "Worker selection", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-                null, options, options[0]);
+        JOptionPane optionPane = new JOptionPane("Which worker do you want to use?",
+                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.YES_NO_OPTION,
+                null, options);
+        SetupFrame.lockClosure(this, optionPane);
+        String res = (String) optionPane.getValue();
+        int k = Arrays.asList(options).indexOf(res);
         k++;
         return k;
     }
@@ -301,9 +306,13 @@ public class MainFrame extends JFrame {
     public int selectMove() {
         String[] options = {"Move", "God Effect"};
 
-        int k = JOptionPane.showOptionDialog(this, "What type of action do you want to do?",
-                "Move selection", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-                null, options, options[0]);
+        JOptionPane optionPane = new JOptionPane("What type of action do you want to do?",
+                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.YES_NO_OPTION,
+                null, options);
+        SetupFrame.lockClosure(this, optionPane);
+        String res = (String) optionPane.getValue();
+        int k = Arrays.asList(options).indexOf(res);
         k++;
         return k;
     }
@@ -316,9 +325,13 @@ public class MainFrame extends JFrame {
     public int selectBuild() {
         String[] options = {"Build", "God Effect"};
 
-        int k = JOptionPane.showOptionDialog(this, "What type of action do you want to do?",
-                "Build selection", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-                null, options, options[1]);
+        JOptionPane optionPane = new JOptionPane("What type of action do you want to do?",
+                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.YES_NO_OPTION,
+                null, options);
+        SetupFrame.lockClosure(this, optionPane);
+        String res = (String) optionPane.getValue();
+        int k = Arrays.asList(options).indexOf(res);
         k++;
         return k;
     }
@@ -328,8 +341,12 @@ public class MainFrame extends JFrame {
      * @return selection (0. Yes 1. No)
      */
     public int selectRoof() {
-        return JOptionPane.showConfirmDialog(this, "Do you want to build a roof?",
-                "Atlas", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        JOptionPane optionPane = new JOptionPane("What type of action do you want to do?",
+                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.YES_NO_OPTION);
+        SetupFrame.lockClosure(this, optionPane);
+        return (int) optionPane.getValue();
     }
 
     /**
