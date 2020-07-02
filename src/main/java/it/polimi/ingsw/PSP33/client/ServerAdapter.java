@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Abstract class that handles all client's communication with the server
@@ -108,7 +109,12 @@ public abstract class ServerAdapter extends Observable<MVEvent> implements Runna
                 mvJson = input.readUTF();
             } catch (IOException e) {
                 System.out.println("Disconnected from game - Unable to receive event");
-                //System.exit(0);
+                try {
+                    TimeUnit.SECONDS.sleep(5);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                System.exit(0);
                 break;
             }
 
