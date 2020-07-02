@@ -48,14 +48,13 @@ public class MainFrame extends JFrame {
 
         //Text panel
         rightTextPanel = new TextPanel("Welcome to Santorini", 150, 160, 16);
-        leftTextPanel = new TextPanel("text", 200, 160, 16);
+        leftTextPanel = new TextPanel("", 200, 160, 16);
 
         //Housing panel of the grid
         BorderPanel borderPanel = new BorderPanel();
         gridPanel = new GridPanel();
 
         infoButton = new GodButton();
-        infoButton.setPlayerGod(new God(Gods.ATHENA, "description"));
 
         /* Board panel components */
         //right board part
@@ -357,7 +356,7 @@ public class MainFrame extends JFrame {
      */
     public int selectRoof() {
 
-        JOptionPane optionPane = new JOptionPane("What type of action do you want to do?",
+        JOptionPane optionPane = new JOptionPane("Do you want to build a roof?",
                 JOptionPane.QUESTION_MESSAGE,
                 JOptionPane.YES_NO_OPTION);
         SetupFrame.lockClosure(this, optionPane);
