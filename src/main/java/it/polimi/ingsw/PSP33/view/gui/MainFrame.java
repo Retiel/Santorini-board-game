@@ -45,7 +45,6 @@ public class MainFrame extends JFrame {
         setLocationRelativeTo(null);
         setResizable(false);
         setLayout(new GridBagLayout());
-        setAlwaysOnTop(false);
 
         //Text panel
         rightTextPanel = new TextPanel("Welcome to Santorini", 150, 160, 16);
