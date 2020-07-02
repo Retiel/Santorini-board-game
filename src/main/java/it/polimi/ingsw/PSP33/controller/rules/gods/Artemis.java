@@ -29,14 +29,16 @@ public class Artemis implements Move, ExtraAction {
     }
 
     @Override
-    public void applyAction(Cell cell, Pawn pawn, Model model) {
-        Cell oldCell = model.getBoard().getGrid()[pawn.getCoordX()][pawn.getCoordY()];
-        BasicAction.movePawn(oldCell, cell, pawn);
+    public void applyAction(Cell cell, Pawn pawn, Model model, boolean trigger) {
+        if (trigger){
+            Cell oldCell = model.getBoard().getGrid()[pawn.getCoordX()][pawn.getCoordY()];
+            BasicAction.movePawn(oldCell, cell, pawn);
 
-        LightCell lightCellOld = LightConversion.getLightVersion(oldCell);
-        LightCell lightCellNew = LightConversion.getLightVersion(cell);
+            LightCell lightCellOld = LightConversion.getLightVersion(oldCell);
+            LightCell lightCellNew = LightConversion.getLightVersion(cell);
 
-        model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
+            model.notifyObservers(new DataCell(lightCellNew, lightCellOld));
+        }
         model.notifyObservers(new NewAction(false, true, false));
     }
 

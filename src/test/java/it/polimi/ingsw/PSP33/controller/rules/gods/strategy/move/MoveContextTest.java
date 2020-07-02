@@ -119,7 +119,7 @@ public class MoveContextTest {
         testExecMethod(testSampleMove,3,1, testPawn);
         testBoard.getGrid()[4][1].setFloor(3);
 
-        extraContext.execAction(new Coord(2,2), testPawn, testModel);
+        extraContext.execAction(new Coord(2,2), testPawn, testModel, true);
 
         List<Cell> sample2 = new ArrayList<>();
         sample2.add(testBoard.getGrid()[2][2]);

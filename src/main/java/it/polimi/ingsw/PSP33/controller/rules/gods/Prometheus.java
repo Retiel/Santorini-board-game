@@ -54,13 +54,15 @@ public class Prometheus implements Move, ExtraAction {
     }
 
     @Override
-    public void applyAction(Cell cell, Pawn pawn, Model model) {
-        BasicAction.buildBlock(cell);
-        pawn.setOldExtra(cell.getCoord());
+    public void applyAction(Cell cell, Pawn pawn, Model model, boolean trigger) {
+        if(trigger){
+            BasicAction.buildBlock(cell);
+            pawn.setOldExtra(cell.getCoord());
 
-        LightCell lightCellNew = LightConversion.getLightVersion(cell);
+            LightCell lightCellNew = LightConversion.getLightVersion(cell);
 
-        model.notifyObservers(new DataCell(lightCellNew, null));
+            model.notifyObservers(new DataCell(lightCellNew, null));
+        }
         model.notifyObservers(new NewAction(true, false, false));
 
     }

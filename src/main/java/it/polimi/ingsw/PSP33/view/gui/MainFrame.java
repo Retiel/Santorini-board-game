@@ -3,11 +3,13 @@ package it.polimi.ingsw.PSP33.view.gui;
 import it.polimi.ingsw.PSP33.model.God;
 import it.polimi.ingsw.PSP33.model.light_version.LightCell;
 import it.polimi.ingsw.PSP33.utils.Coord;
+import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import it.polimi.ingsw.PSP33.view.gui.components.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -46,7 +48,7 @@ public class MainFrame extends JFrame {
         setAlwaysOnTop(true);
 
         //Text panel
-        rightTextPanel = new TextPanel("Welcome to Santorini", 150, 90, 16);
+        rightTextPanel = new TextPanel("Welcome to Santorini", 150, 160, 16);
         leftTextPanel = new TextPanel("text", 200, 160, 16);
 
         //Housing panel of the grid
@@ -54,12 +56,12 @@ public class MainFrame extends JFrame {
         gridPanel = new GridPanel();
 
         infoButton = new GodButton();
-        infoButton.setSize(500, 300);
+        infoButton.setPlayerGod(new God(Gods.ATHENA, "description"));
 
         /* Board panel components */
         //right board part
         ImagePanel rx = new ImagePanel("/santorini_right.png");
-        rx.setLayout(new GridBagLayout());
+        rx.setLayout(new GridLayout(2,1,0,10));
 
         //left board part
         ImagePanel lx = new ImagePanel("/santorini_left.png");
@@ -81,16 +83,20 @@ public class MainFrame extends JFrame {
         JPanel centralPanel = new JPanel();
         centralPanel.setLayout(new GridBagLayout());
 
+        // Components for rx component
+        JPanel rxTopPanel = new JPanel();
+        rxTopPanel.setLayout(new GridBagLayout());
+        rxTopPanel.setOpaque(false);
+
+        JPanel rxBotPanel = new JPanel();
+        rxBotPanel.setLayout(new GridBagLayout());
+        rxBotPanel.setOpaque(false);
+
         /* List of constrains used */
 
         //text right constraint
         GridBagConstraints rightTextCon = new GridBagConstraints();
-        rightTextCon.gridx = 0;
-        rightTextCon.gridy = 0;
-        rightTextCon.insets = new Insets(0,5,100,25);
-        rightTextCon.anchor = GridBagConstraints.PAGE_START;
-        rightTextCon.gridwidth = 2;
-        rightTextCon.fill = GridBagConstraints.BOTH;
+        rightTextCon.insets = new Insets(69,0,0,30);
 
         //text left constraint
         GridBagConstraints leftTextCon = new GridBagConstraints();
@@ -98,7 +104,6 @@ public class MainFrame extends JFrame {
         leftTextCon.gridy = 0;
         leftTextCon.insets = new Insets(150,20,200,25);
         leftTextCon.anchor = GridBagConstraints.CENTER;
-        leftTextCon.gridwidth = 2;
         leftTextCon.fill = GridBagConstraints.BOTH;
 
         //top component constraint
@@ -138,18 +143,28 @@ public class MainFrame extends JFrame {
         centralPanelCon.gridy = 1;
         centralPanelCon.fill = GridBagConstraints.BOTH;
 
+        //rxTopPanel component constraint
+        GridBagConstraints rxTopPanelCon = new GridBagConstraints();
+        rxTopPanelCon.gridx = 0;
+        rxTopPanelCon.gridy = 0;
+
+        //rxBotPanel component constraint
+        GridBagConstraints rxBotPanelCon = new GridBagConstraints();
+        rxBotPanelCon.gridx = 0;
+        rxBotPanelCon.gridy = 2;
+
         //button constraint
         GridBagConstraints buttonCon = new GridBagConstraints();
-        buttonCon.gridx = 0;
-        buttonCon.gridy = 1;
-        buttonCon.ipadx = 130;
-        buttonCon.ipady = 25;
-        buttonCon.insets = new Insets(0,0,20,30);
-        buttonCon.anchor = GridBagConstraints.PAGE_END;
+        buttonCon.ipadx = 130; //130
+        buttonCon.ipady = 25; //25
+        buttonCon.insets = new Insets(0,0,158,30);
 
         // text added in the right panel with his constrains
-        rx.add(rightTextPanel, rightTextCon);
-        rx.add(infoButton, buttonCon);
+        rxTopPanel.add(rightTextPanel, rightTextCon);
+        rxBotPanel.add(infoButton, buttonCon);
+
+        rx.add(rxTopPanel, rxTopPanelCon);
+        rx.add(rxBotPanel, rxBotPanelCon);
 
         // text added in the left panel with his constrains
         lx.add(leftTextPanel, leftTextCon);
@@ -273,11 +288,31 @@ public class MainFrame extends JFrame {
     public int selectWorker() {
         String[] options = {"Worker 1", "Worker 2"};
 
-        int k = JOptionPane.showOptionDialog(this, "Which worker do you want to use?",
-                "Worker selection", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-                null, options, options[0]);
+        JOptionPane optionPane = new JOptionPane("Which worker do you want to use?",
+                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.YES_NO_OPTION,
+                null, options);
+        SetupFrame.lockClosure(this, optionPane);
+        String res = (String) optionPane.getValue();
+        int k = Arrays.asList(options).indexOf(res);
         k++;
         return k;
+    }
+
+    /**
+     * Method used to show a dialog to make the client select whether use the God effect or not
+     * @return selection (1. Yes 2. No)
+     */
+    public int useGodPower() {
+        String[] options = {"Yes", "No"};
+
+        JOptionPane optionPane = new JOptionPane("Do you want to use the God power?",
+                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.YES_NO_OPTION,
+                null, options);
+        SetupFrame.lockClosure(this, optionPane);
+        String res = (String) optionPane.getValue();
+        return Arrays.asList(options).indexOf(res);
     }
 
     /**
@@ -287,9 +322,13 @@ public class MainFrame extends JFrame {
     public int selectMove() {
         String[] options = {"Move", "God Effect"};
 
-        int k = JOptionPane.showOptionDialog(this, "What type of action do you want to do?",
-                "Move selection", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-                null, options, options[0]);
+        JOptionPane optionPane = new JOptionPane("What type of action do you want to do?",
+                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.YES_NO_OPTION,
+                null, options);
+        SetupFrame.lockClosure(this, optionPane);
+        String res = (String) optionPane.getValue();
+        int k = Arrays.asList(options).indexOf(res);
         k++;
         return k;
     }
@@ -302,9 +341,13 @@ public class MainFrame extends JFrame {
     public int selectBuild() {
         String[] options = {"Build", "God Effect"};
 
-        int k = JOptionPane.showOptionDialog(this, "What type of action do you want to do?",
-                "Build selection", JOptionPane.YES_NO_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE,
-                null, options, options[1]);
+        JOptionPane optionPane = new JOptionPane("What type of action do you want to do?",
+                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.YES_NO_OPTION,
+                null, options);
+        SetupFrame.lockClosure(this, optionPane);
+        String res = (String) optionPane.getValue();
+        int k = Arrays.asList(options).indexOf(res);
         k++;
         return k;
     }
@@ -314,8 +357,12 @@ public class MainFrame extends JFrame {
      * @return selection (0. Yes 1. No)
      */
     public int selectRoof() {
-        return JOptionPane.showConfirmDialog(this, "Do you want to build a roof?",
-                "Atlas", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+
+        JOptionPane optionPane = new JOptionPane("What type of action do you want to do?",
+                JOptionPane.QUESTION_MESSAGE,
+                JOptionPane.YES_NO_OPTION);
+        SetupFrame.lockClosure(this, optionPane);
+        return (int) optionPane.getValue();
     }
 
     /**

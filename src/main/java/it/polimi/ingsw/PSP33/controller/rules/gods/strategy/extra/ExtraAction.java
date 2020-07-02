@@ -24,10 +24,11 @@ public interface ExtraAction {
 
     /**
      * Method to apply the extra action
-     * @param pawn the pawn selected for the action
      * @param cell cell selected for the extra action
+     * @param pawn the pawn selected for the action
      * @param model Model from folder model
+     * @param trigger enable use of the god effect
      *
      */
-    void applyAction(Cell cell, Pawn pawn, Model model);
+    void applyAction(Cell cell, Pawn pawn, Model model, boolean trigger);
 }

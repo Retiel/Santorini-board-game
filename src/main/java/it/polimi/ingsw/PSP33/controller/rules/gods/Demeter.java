@@ -29,12 +29,14 @@ public class Demeter implements Build, ExtraAction {
     }
 
     @Override
-    public void applyAction(Cell cell, Pawn pawn, Model model) {
-        BasicAction.buildBlock(cell);
+    public void applyAction(Cell cell, Pawn pawn, Model model, boolean trigger) {
+        if (trigger){
+            BasicAction.buildBlock(cell);
 
-        LightCell lightCellNew = LightConversion.getLightVersion(cell);
+            LightCell lightCellNew = LightConversion.getLightVersion(cell);
 
-        model.notifyObservers(new DataCell(lightCellNew, null));
+            model.notifyObservers(new DataCell(lightCellNew, null));
+        }
         model.notifyObservers(new NewAction(false, false, false));
     }
 
