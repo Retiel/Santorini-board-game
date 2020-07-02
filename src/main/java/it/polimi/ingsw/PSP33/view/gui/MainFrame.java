@@ -3,6 +3,7 @@ package it.polimi.ingsw.PSP33.view.gui;
 import it.polimi.ingsw.PSP33.model.God;
 import it.polimi.ingsw.PSP33.model.light_version.LightCell;
 import it.polimi.ingsw.PSP33.utils.Coord;
+import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import it.polimi.ingsw.PSP33.view.gui.components.*;
 
 import javax.swing.*;
@@ -46,7 +47,7 @@ public class MainFrame extends JFrame {
         setAlwaysOnTop(true);
 
         //Text panel
-        rightTextPanel = new TextPanel("Welcome to Santorini", 150, 90, 16);
+        rightTextPanel = new TextPanel("Welcome to Santorini", 150, 160, 16);
         leftTextPanel = new TextPanel("text", 200, 160, 16);
 
         //Housing panel of the grid
@@ -54,12 +55,12 @@ public class MainFrame extends JFrame {
         gridPanel = new GridPanel();
 
         infoButton = new GodButton();
-        infoButton.setSize(500, 300);
+        infoButton.setPlayerGod(new God(Gods.ATHENA, "description"));
 
         /* Board panel components */
         //right board part
         ImagePanel rx = new ImagePanel("/santorini_right.png");
-        rx.setLayout(new GridBagLayout());
+        rx.setLayout(new GridLayout(2,1,0,10));
 
         //left board part
         ImagePanel lx = new ImagePanel("/santorini_left.png");
@@ -81,16 +82,20 @@ public class MainFrame extends JFrame {
         JPanel centralPanel = new JPanel();
         centralPanel.setLayout(new GridBagLayout());
 
+        // Components for rx component
+        JPanel rxTopPanel = new JPanel();
+        rxTopPanel.setLayout(new GridBagLayout());
+        rxTopPanel.setOpaque(false);
+
+        JPanel rxBotPanel = new JPanel();
+        rxBotPanel.setLayout(new GridBagLayout());
+        rxBotPanel.setOpaque(false);
+
         /* List of constrains used */
 
         //text right constraint
         GridBagConstraints rightTextCon = new GridBagConstraints();
-        rightTextCon.gridx = 0;
-        rightTextCon.gridy = 0;
-        rightTextCon.insets = new Insets(0,5,100,25);
-        rightTextCon.anchor = GridBagConstraints.PAGE_START;
-        rightTextCon.gridwidth = 2;
-        rightTextCon.fill = GridBagConstraints.BOTH;
+        rightTextCon.insets = new Insets(69,0,0,30);
 
         //text left constraint
         GridBagConstraints leftTextCon = new GridBagConstraints();
@@ -98,7 +103,6 @@ public class MainFrame extends JFrame {
         leftTextCon.gridy = 0;
         leftTextCon.insets = new Insets(150,20,200,25);
         leftTextCon.anchor = GridBagConstraints.CENTER;
-        leftTextCon.gridwidth = 2;
         leftTextCon.fill = GridBagConstraints.BOTH;
 
         //top component constraint
@@ -138,18 +142,28 @@ public class MainFrame extends JFrame {
         centralPanelCon.gridy = 1;
         centralPanelCon.fill = GridBagConstraints.BOTH;
 
+        //rxTopPanel component constraint
+        GridBagConstraints rxTopPanelCon = new GridBagConstraints();
+        rxTopPanelCon.gridx = 0;
+        rxTopPanelCon.gridy = 0;
+
+        //rxBotPanel component constraint
+        GridBagConstraints rxBotPanelCon = new GridBagConstraints();
+        rxBotPanelCon.gridx = 0;
+        rxBotPanelCon.gridy = 2;
+
         //button constraint
         GridBagConstraints buttonCon = new GridBagConstraints();
-        buttonCon.gridx = 0;
-        buttonCon.gridy = 1;
-        buttonCon.ipadx = 130;
-        buttonCon.ipady = 25;
-        buttonCon.insets = new Insets(0,0,20,30);
-        buttonCon.anchor = GridBagConstraints.PAGE_END;
+        buttonCon.ipadx = 130; //130
+        buttonCon.ipady = 25; //25
+        buttonCon.insets = new Insets(0,0,158,30);
 
         // text added in the right panel with his constrains
-        rx.add(rightTextPanel, rightTextCon);
-        rx.add(infoButton, buttonCon);
+        rxTopPanel.add(rightTextPanel, rightTextCon);
+        rxBotPanel.add(infoButton, buttonCon);
+
+        rx.add(rxTopPanel, rxTopPanelCon);
+        rx.add(rxBotPanel, rxBotPanelCon);
 
         // text added in the left panel with his constrains
         lx.add(leftTextPanel, leftTextCon);

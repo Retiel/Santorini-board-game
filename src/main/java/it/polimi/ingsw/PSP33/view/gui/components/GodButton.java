@@ -16,6 +16,7 @@ public class GodButton extends JButton implements ActionListener {
      * Panel for card informations
      */
     private ImagePanel infoPanel;
+    private JDialog dialog;
 
     public GodButton() {
         setContentAreaFilled(false);
@@ -57,15 +58,16 @@ public class GodButton extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-            //Show dialog
-            JDialog dialog = new JDialog();
-            dialog.setLayout(new GridBagLayout());
-            dialog.setSize(410, 635);
-            dialog.setResizable(false);
-            dialog.setAlwaysOnTop(true);
+        //Show dialog
+        if(dialog != null) dialog.dispose();
+        dialog = new JDialog();
+        dialog.setLayout(new GridBagLayout());
+        dialog.setSize(410, 635);
+        dialog.setResizable(false);
+        dialog.setAlwaysOnTop(true);
 
-            dialog.add(infoPanel);
+        dialog.add(infoPanel);
 
-            dialog.setVisible(true);
+        dialog.setVisible(true);
     }
 }

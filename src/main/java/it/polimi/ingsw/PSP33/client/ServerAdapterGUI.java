@@ -5,6 +5,7 @@ import it.polimi.ingsw.PSP33.events.to_server.connection.*;
 import it.polimi.ingsw.PSP33.view.gui.SetupFrame;
 
 import javax.swing.*;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +29,13 @@ public class ServerAdapterGUI extends ServerAdapter {
     public ServerAdapterGUI(Socket server) {
         super(server);
 
-        SwingUtilities.invokeLater(() -> setupFrame = new SetupFrame());
+        SwingUtilities.invokeLater(() -> {
+            try {
+                setupFrame = new SetupFrame();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
 

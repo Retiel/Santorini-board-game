@@ -1,9 +1,12 @@
 package it.polimi.ingsw.PSP33.view.gui;
 
 import it.polimi.ingsw.PSP33.utils.enums.Color;
+import it.polimi.ingsw.PSP33.view.gui.components.ImagePanel;
 import it.polimi.ingsw.PSP33.view.gui.components.TextPanel;
 
 import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
@@ -15,15 +18,24 @@ public class SetupFrame extends JFrame {
 
     private TextPanel textPanel;
 
-    public SetupFrame() {
+    public SetupFrame() throws IOException {
         super("Santorini_Setup");
-        setSize(300, 300);
+        setSize(610, 635);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
 
-        //ImagePanel imagePanel = new ImagePanel(getImageInputStream(""));
-        textPanel = new TextPanel("",200,100,16);
+        ImagePanel background = new ImagePanel("/setup_background.png");
+        background.setLayout(new GridBagLayout());
+
+        textPanel = new TextPanel("Welcome to Santorini",250,100,20);
+
+        GridBagConstraints con = new GridBagConstraints();
+        con.insets = new Insets(450,50,0,0);
+        con.anchor = GridBagConstraints.PAGE_END;
+        background.add(textPanel, con);
+
+        add(background);
 
         setVisible(true);
     }
@@ -120,15 +132,6 @@ public class SetupFrame extends JFrame {
      */
     public void requestWait() {
         textPanel.setLabelText("Waiting for player...");
-    }
-
-    /**
-     * Method used to get input stream for an image
-     * @param path path of the image in resources
-     * @return input stream of the image
-     */
-    private InputStream getImageInputStream(String path) {
-        return getClass().getResourceAsStream(path);
     }
 
     /**
