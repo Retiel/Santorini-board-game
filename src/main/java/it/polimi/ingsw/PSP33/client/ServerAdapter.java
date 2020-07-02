@@ -1,17 +1,19 @@
 package it.polimi.ingsw.PSP33.client;
 
 import it.polimi.ingsw.PSP33.events.EventSerializer;
-import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
 import it.polimi.ingsw.PSP33.events.to_client.CCEvent;
 import it.polimi.ingsw.PSP33.events.to_client.CCEventVisitor;
+import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
 import it.polimi.ingsw.PSP33.events.to_client.turn.YouLose;
 import it.polimi.ingsw.PSP33.events.to_client.turn.YouWin;
-import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
 import it.polimi.ingsw.PSP33.events.to_server.SCEvent;
+import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
 import it.polimi.ingsw.PSP33.utils.observable.Observable;
 import it.polimi.ingsw.PSP33.utils.observable.Observer;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

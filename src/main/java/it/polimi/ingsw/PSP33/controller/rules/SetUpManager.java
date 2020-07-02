@@ -2,7 +2,10 @@ package it.polimi.ingsw.PSP33.controller.rules;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import it.polimi.ingsw.PSP33.controller.rules.tools.*;
+import it.polimi.ingsw.PSP33.controller.rules.tools.AbstractManager;
+import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
+import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
+import it.polimi.ingsw.PSP33.controller.rules.tools.LightConversion;
 import it.polimi.ingsw.PSP33.events.to_client.data.DataBoard;
 import it.polimi.ingsw.PSP33.events.to_client.data.DataCell;
 import it.polimi.ingsw.PSP33.events.to_client.data.DataPlayer;
@@ -13,7 +16,9 @@ import it.polimi.ingsw.PSP33.model.*;
 import it.polimi.ingsw.PSP33.model.light_version.LightPlayer;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;

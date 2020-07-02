@@ -6,12 +6,16 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.io.InputStream;
 
+/**
+ * JButton used to get the god card informations
+ */
 public class GodButton extends JButton implements ActionListener {
 
-    private God playerGod;
+    /**
+     * Panel for card informations
+     */
+    private ImagePanel infoPanel;
 
     public GodButton() {
         setContentAreaFilled(false);
@@ -20,54 +24,48 @@ public class GodButton extends JButton implements ActionListener {
         setVisible(false);
     }
 
+    /**
+     * Method used to set the god of the player to the button
+     * @param playerGod god of the player
+     */
     public void setPlayerGod(God playerGod) {
-        this.playerGod = playerGod;
+
+        infoPanel = new ImagePanel("/santorini_info.png");
+        infoPanel.setLayout(new GridBagLayout());
+
+        TextPanel descriptionPanel = new TextPanel(playerGod.getDescription(), 250, 90, 14);
+        descriptionPanel.setBackground(null);
+
+        ImagePanel cardPanel = new ImagePanel("/gods/" + playerGod.getName().name() + ".png");
+
+        GridBagConstraints cardCon = new GridBagConstraints();
+        cardCon.gridx = 0;
+        cardCon.gridy = 0;
+        cardCon.insets = new Insets(0, 0, 69, 0);
+        cardCon.anchor = GridBagConstraints.PAGE_START;
+        infoPanel.add(cardPanel, cardCon);
+
+        GridBagConstraints descriptionCon = new GridBagConstraints();
+        descriptionCon.gridx = 0;
+        descriptionCon.gridy = 1;
+        descriptionCon.insets = new Insets(30, 0, 40, 0);
+        infoPanel.add(descriptionPanel, descriptionCon);
+
         setEnabled(true);
         setVisible(true);
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        try {
-
-            TextPanel description = new TextPanel(playerGod.getDescription(),250, 90, 14);
-            description.setBackground(null);
-
-            ImagePanel panel1 = new ImagePanel(getImageInputStream("/info.png"));
-            panel1.setLayout(new GridBagLayout());
-
-            ImagePanel athena = new ImagePanel(getImageInputStream("/godCards/zeus.png"));
-
-            GridBagConstraints c = new GridBagConstraints();
-            c.gridx = 0;
-            c.gridy = 0;
-            c.insets = new Insets(0,0,69,0);
-            c.anchor = GridBagConstraints.PAGE_START;
-            panel1.add(athena, c);
-
-            c.gridx = 0;
-            c.gridy = 1;
-            c.insets = new Insets(30,0,40,0);
-            panel1.add(description, c);
-
-            //Add the components.
+            //Show dialog
             JDialog dialog = new JDialog();
             dialog.setLayout(new GridBagLayout());
             dialog.setSize(410, 635);
             dialog.setResizable(false);
             dialog.setAlwaysOnTop(true);
 
-            dialog.add(panel1);
+            dialog.add(infoPanel);
 
             dialog.setVisible(true);
-
-        } catch (IOException ioException) {
-            ioException.printStackTrace();
-        }
     }
-
-    private InputStream getImageInputStream(String path) {
-        return getClass().getResourceAsStream(path);
-    }
-
 }

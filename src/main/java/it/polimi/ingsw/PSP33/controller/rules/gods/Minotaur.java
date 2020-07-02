@@ -1,7 +1,7 @@
 package it.polimi.ingsw.PSP33.controller.rules.gods;
 
-import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.move.Move;
+import it.polimi.ingsw.PSP33.controller.rules.tools.BasicAction;
 import it.polimi.ingsw.PSP33.controller.rules.tools.GetCell;
 import it.polimi.ingsw.PSP33.controller.rules.tools.LightConversion;
 import it.polimi.ingsw.PSP33.events.to_client.data.DataCell;

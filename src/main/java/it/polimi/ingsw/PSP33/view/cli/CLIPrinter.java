@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Class which permit to print all the necessary information for the player
- * (Map and lists that contain the possible choices)
+ * (Map and lists that contains the possible choices)
  */
 public class CLIPrinter {
 
@@ -28,7 +28,7 @@ public class CLIPrinter {
         String separatorDx = " |";
 
         for(LightPlayer lp : board.getPlayers()){
-            playersInfo.append(lp.getColor().toString()).append(" = ").append(lp.getName()+"  ");
+            playersInfo.append(lp.getColor().toString()).append(" = ").append(lp.getName()).append("  ");
         }
         System.out.println(playersInfo);
         playersInfo.setLength(0);
@@ -40,17 +40,21 @@ public class CLIPrinter {
                     floorInfo.append("* ").append(board.getLightGrid()[j][i].getFloor()).append(" | ");
                 } else floorInfo.append("  ").append(board.getLightGrid()[j][i].getFloor()).append(" | ");
                 if (board.getLightGrid()[j][i].getOccupied() == null) {
-                    pawnInfo.append("  " + centralSep);
+                    pawnInfo.append("  ").append(centralSep);
                 } else
-                    pawnInfo.append(board.getLightGrid()[j][i].getOccupied().toString() + board.getLightGrid()[j][i].getOccupied().getNumber() + centralSep);
+                    pawnInfo.append(board.getLightGrid()[j][i].getOccupied().toString())
+                            .append(board.getLightGrid()[j][i].getOccupied().getNumber())
+                            .append(centralSep);
             }
             if (board.getLightGrid()[j][4].isRoof()) {
                 floorInfo.append("* ").append(board.getLightGrid()[j][4].getFloor()).append(separatorDx);
             } else floorInfo.append("  ").append(board.getLightGrid()[j][4].getFloor()).append(separatorDx);
             if (board.getLightGrid()[j][4].getOccupied() == null) {
-                pawnInfo.append("  " + separatorDx);
+                pawnInfo.append("  ").append(separatorDx);
             } else
-                pawnInfo.append(board.getLightGrid()[j][4].getOccupied().toString() + board.getLightGrid()[j][4].getOccupied().getNumber() + separatorDx);
+                pawnInfo.append(board.getLightGrid()[j][4].getOccupied().toString())
+                        .append(board.getLightGrid()[j][4].getOccupied().getNumber())
+                        .append(separatorDx);
             System.out.println("+ - - + - - + - - + - - + - - +");
             System.out.println(floorInfo.toString());
             System.out.println(pawnInfo.toString());

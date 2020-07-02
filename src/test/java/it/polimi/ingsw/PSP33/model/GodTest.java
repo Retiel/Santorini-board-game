@@ -1,7 +1,10 @@
 package it.polimi.ingsw.PSP33.model;
 
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 
 public class GodTest {

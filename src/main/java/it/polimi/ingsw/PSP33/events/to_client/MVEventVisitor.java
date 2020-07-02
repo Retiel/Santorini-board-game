@@ -1,7 +1,7 @@
 package it.polimi.ingsw.PSP33.events.to_client;
 
-import it.polimi.ingsw.PSP33.events.to_client.data.DataCell;
 import it.polimi.ingsw.PSP33.events.to_client.data.DataBoard;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataCell;
 import it.polimi.ingsw.PSP33.events.to_client.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.to_client.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.to_client.setup.PossiblePlacement;

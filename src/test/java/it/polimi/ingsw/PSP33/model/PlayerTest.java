@@ -3,9 +3,11 @@ package it.polimi.ingsw.PSP33.model;
 import it.polimi.ingsw.PSP33.utils.enums.Color;
 import it.polimi.ingsw.PSP33.utils.enums.Gods;
 import org.junit.After;
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 
 public class PlayerTest {

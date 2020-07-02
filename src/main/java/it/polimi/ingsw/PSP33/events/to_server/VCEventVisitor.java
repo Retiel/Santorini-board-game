@@ -1,9 +1,9 @@
 package it.polimi.ingsw.PSP33.events.to_server;
 
 import it.polimi.ingsw.PSP33.events.to_server.setup.ChoosenGod;
-import it.polimi.ingsw.PSP33.events.to_server.setup.SelectedGods;
 import it.polimi.ingsw.PSP33.events.to_server.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.to_server.setup.PlayerDisconnected;
+import it.polimi.ingsw.PSP33.events.to_server.setup.SelectedGods;
 import it.polimi.ingsw.PSP33.events.to_server.turn.*;
 
 /**

@@ -1,7 +1,7 @@
 package it.polimi.ingsw.PSP33.view.cli;
 
-import it.polimi.ingsw.PSP33.events.to_client.data.DataCell;
 import it.polimi.ingsw.PSP33.events.to_client.data.DataBoard;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataCell;
 import it.polimi.ingsw.PSP33.events.to_client.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.to_client.setup.CurrentPlayer;
 import it.polimi.ingsw.PSP33.events.to_client.setup.PossiblePlacement;
@@ -13,7 +13,7 @@ import it.polimi.ingsw.PSP33.events.to_server.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.to_server.setup.SelectedGods;
 import it.polimi.ingsw.PSP33.events.to_server.turn.*;
 import it.polimi.ingsw.PSP33.model.God;
-import it.polimi.ingsw.PSP33.model.light_version.*;
+import it.polimi.ingsw.PSP33.model.light_version.LightModel;
 import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 
@@ -24,7 +24,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * The reppresentation of the View Class for the CLI mode
+ * The representation of the View Class for the CLI mode
  */
 public class CLI extends AbstractView {
 
@@ -43,9 +43,6 @@ public class CLI extends AbstractView {
      */
     private ExecutorService executor;
 
-    /**
-     * the constructor of the CLI class
-     */
     public CLI() {
         cliPrinter = new CLIPrinter();
         lightModel = new LightModel();
@@ -53,20 +50,12 @@ public class CLI extends AbstractView {
         executor = Executors.newSingleThreadExecutor();
     }
 
-    /**
-     * visit implementation method that configure the board of the client
-     * @param dataBoard
-     */
     @Override
     public void visit(DataBoard dataBoard) {
         //set up client board
         lightModel.setLightGrid(dataBoard.getGrid().getGrid());
     }
 
-    /**
-     * visit implementation method that configure one single Cell of the client
-     * @param dataCell
-     */
     @Override
     public void visit(DataCell dataCell) {
 
@@ -87,10 +76,6 @@ public class CLI extends AbstractView {
         }
     }
 
-    /**
-     * method for the players data setup
-     * @param dataPlayer
-     */
     @Override
     public void visit(DataPlayer dataPlayer) {
         //update player info at the beginning
@@ -98,10 +83,6 @@ public class CLI extends AbstractView {
         lightModel.setPlayerName(dataPlayer.getName());
     }
 
-    /**
-     * method for the choice of the God used in the game
-     * @param yourGod
-     */
     @Override
     public void visit(YourGod yourGod) {
 
@@ -115,19 +96,11 @@ public class CLI extends AbstractView {
         });
     }
 
-    /**
-     * visit method for the current player
-     * @param currentPlayer
-     */
     @Override
     public void visit(CurrentPlayer currentPlayer) {
         System.out.println(currentPlayer.getName() + "'s turn");
     }
 
-    /**
-     * visit method for the initial placement of the workers
-     * @param possiblePlacement
-     */
     @Override
     public void visit(PossiblePlacement possiblePlacement) {
 
@@ -141,10 +114,6 @@ public class CLI extends AbstractView {
         });
     }
 
-    /**
-     * visit method which display the available god cards to the player
-     * @param selectGods
-     */
     @Override
     public void visit(SelectGods selectGods) {
 
@@ -165,28 +134,16 @@ public class CLI extends AbstractView {
         });
     }
 
-    /**
-     * method that notify the player the outcome of the game
-     * @param youLose message to communicate the lose
-     */
     @Override
     public void visit(YouLose youLose) {
         System.out.println("Player " + youLose.getName() + "has won!");
     }
 
-    /**
-     * method that notify the player the outcome of the game
-     * @param youWin message to communicate the Win
-     */
     @Override
     public void visit(YouWin youWin) {
         System.out.println("You win!");
     }
 
-    /**
-     * visit method that permit the player to select the main worker
-     * @param selectPawn message to communicate the necessity to select pawn
-     */
     @Override
     public void visit(SelectPawn selectPawn) {
 
@@ -374,6 +331,11 @@ public class CLI extends AbstractView {
 
     }
 
+    /**
+     * Method used to limit and read input from client
+     * @param size range of integers accepted (0, size]
+     * @return client's input
+     */
     private int readInput(int size){
 
         Scanner scanner = new Scanner(System.in);

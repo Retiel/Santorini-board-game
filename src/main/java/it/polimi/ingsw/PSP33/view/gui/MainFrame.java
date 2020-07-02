@@ -7,8 +7,6 @@ import it.polimi.ingsw.PSP33.view.gui.components.*;
 
 import javax.swing.*;
 import java.awt.*;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,7 +35,7 @@ public class MainFrame extends JFrame {
      */
     private GodButton infoButton;
 
-    public MainFrame() throws IOException {
+    public MainFrame() {
         //Main frame
         super("Santorini");
         setSize(1100, 668);
@@ -46,8 +44,6 @@ public class MainFrame extends JFrame {
         setResizable(false);
         setLayout(new GridBagLayout());
         setAlwaysOnTop(true);
-
-        //String text = "Player 1\nRED [R]\nATHENA\n\n\nPlayer 2\nGREEN [G]\nPROMETHEUS\n\n\nPlayer 3\nBLUE [B]\nHEPHAESTUS\n\n\n";
 
         //Text panel
         rightTextPanel = new TextPanel("Welcome to Santorini", 150, 90, 16);
@@ -62,23 +58,23 @@ public class MainFrame extends JFrame {
 
         /* Board panel components */
         //right board part
-        ImagePanel rx = new ImagePanel(getImageInputStream("/santorini_right.png"));
+        ImagePanel rx = new ImagePanel("/santorini_right.png");
         rx.setLayout(new GridBagLayout());
 
         //left board part
-        ImagePanel lx = new ImagePanel(getImageInputStream("/santorini_left.png"));
+        ImagePanel lx = new ImagePanel("/santorini_left.png");
         lx.setLayout(new GridBagLayout());
 
         //top board part
-        ImagePanel top = new ImagePanel(getImageInputStream("/santorini_top.png"));
+        ImagePanel top = new ImagePanel("/santorini_top.png");
         top.setLayout(new GridBagLayout());
 
         //bot board part
-        ImagePanel bot = new ImagePanel(getImageInputStream("/santorini_bottom.png"));
+        ImagePanel bot = new ImagePanel("/santorini_bottom.png");
         bot.setLayout(new GridBagLayout());
 
         //center board part
-        ImagePanel mid = new ImagePanel(getImageInputStream("/santorini_center.png"));
+        ImagePanel mid = new ImagePanel("/santorini_center.png");
         mid.setLayout(new GridBagLayout());
 
         // central component which houses rx, lx and center components
@@ -169,7 +165,7 @@ public class MainFrame extends JFrame {
         add(bot, botPad);
 
         pack();
-        setVisible(true);
+        //setVisible(true);
     }
 
     /**
@@ -318,9 +314,8 @@ public class MainFrame extends JFrame {
      * @return selection (0. Yes 1. No)
      */
     public int selectRoof() {
-        int k = JOptionPane.showConfirmDialog(this, "Do you want to build a roof?",
+        return JOptionPane.showConfirmDialog(this, "Do you want to build a roof?",
                 "Atlas", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        return k;
     }
 
     /**
@@ -386,24 +381,5 @@ public class MainFrame extends JFrame {
         button.setFloor(cell.getFloor());
         button.setRoof(cell.isRoof());
         button.setPawn(cell.getOccupied());
-    }
-
-    /**
-     * Method used to get input stream for an image
-     * @param path path of the image in resources
-     * @return input stream of the image
-     */
-    private InputStream getImageInputStream(String path) {
-        return getClass().getResourceAsStream(path);
-    }
-
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            try {
-                new MainFrame();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
     }
 }

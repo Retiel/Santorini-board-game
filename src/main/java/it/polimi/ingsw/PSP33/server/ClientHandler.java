@@ -12,7 +12,9 @@ import it.polimi.ingsw.PSP33.events.to_server.setup.PlayerDisconnected;
 import it.polimi.ingsw.PSP33.utils.enums.Color;
 import it.polimi.ingsw.PSP33.utils.observable.Listened;
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -47,8 +49,6 @@ public class ClientHandler extends Listened implements Runnable, SCEventVisitor 
      * Client's color
      */
     private Color clientColor;
-
-    private String next;
 
     /**
      * Boolean used to check if setup is over

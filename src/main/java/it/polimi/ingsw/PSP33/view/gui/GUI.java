@@ -13,15 +13,13 @@ import it.polimi.ingsw.PSP33.events.to_server.setup.PlacePawn;
 import it.polimi.ingsw.PSP33.events.to_server.setup.SelectedGods;
 import it.polimi.ingsw.PSP33.events.to_server.turn.*;
 import it.polimi.ingsw.PSP33.model.God;
-import it.polimi.ingsw.PSP33.model.light_version.LightModel;
 import it.polimi.ingsw.PSP33.model.light_version.LightPlayer;
 import it.polimi.ingsw.PSP33.utils.Coord;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 import it.polimi.ingsw.PSP33.view.gui.components.ButtonListener;
 import it.polimi.ingsw.PSP33.view.gui.components.CellButton;
 
-import javax.swing.SwingUtilities;
-import java.io.IOException;
+import javax.swing.*;
 import java.util.List;
 
 /**
@@ -54,23 +52,16 @@ public class GUI extends AbstractView implements ButtonListener {
      */
     private boolean trigger;
 
-
     public GUI() {
         SwingUtilities.invokeLater(() -> {
-            try {
-                mainFrame = new MainFrame();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            mainFrame = new MainFrame();
             setButtonListener();
         });
     }
 
     @Override
     public void visit(DataBoard dataBoard) {
-        SwingUtilities.invokeLater(() -> {
-            mainFrame.setVisible(true);
-        });
+        SwingUtilities.invokeLater(() -> mainFrame.setVisible(true));
 
     }
 
@@ -87,9 +78,7 @@ public class GUI extends AbstractView implements ButtonListener {
 
     @Override
     public void visit(DataPlayer dataPlayer) {
-        SwingUtilities.invokeLater(() -> {
-            mainFrame.setLeftText(FIlipCulo(dataPlayer.getPlayer(), dataPlayer.getName()));
-        });
+        SwingUtilities.invokeLater(() -> mainFrame.setLeftText(getPlayersInfo(dataPlayer.getPlayer(), dataPlayer.getName())));
 
     }
 
@@ -304,8 +293,13 @@ public class GUI extends AbstractView implements ButtonListener {
         }
     }
 
-    private String FIlipCulo(List<LightPlayer> players, String name){
-
+    /**
+     * Method used to get a formatted string holding players informations
+     * @param players list of players
+     * @param name name of the client
+     * @return formatted string
+     */
+    private String getPlayersInfo(List<LightPlayer> players, String name){
         StringBuilder stringBuilder = new StringBuilder();
         for (LightPlayer player : players){
             stringBuilder.append(player.getName());
@@ -313,9 +307,13 @@ public class GUI extends AbstractView implements ButtonListener {
                 stringBuilder.append("   (you)");
             }
 
-            stringBuilder.append("\n")
-                    .append(player.getColor().name() + " ")
-                    .append("[" + player.getColor().name().toCharArray()[0] + "]")
+            stringBuilder
+                    .append("\n")
+                    .append(player.getColor().name())
+                    .append(" ")
+                    .append("[")
+                    .append(player.getColor().name().toCharArray()[0])
+                    .append("]")
                     .append("\n");
 
             if (player.getCard() != null) {
@@ -324,6 +322,7 @@ public class GUI extends AbstractView implements ButtonListener {
 
             stringBuilder.append("\n\n\n");
         }
+
         return stringBuilder.toString();
     }
 }

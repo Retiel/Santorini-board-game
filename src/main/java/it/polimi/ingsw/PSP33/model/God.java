@@ -49,7 +49,6 @@ public class God {
 
     @Override
     public String toString(){
-        String printer = name.toString() + "\n"+ description;
-        return printer;
+        return name.toString() + "\n"+ description;
     }
 }

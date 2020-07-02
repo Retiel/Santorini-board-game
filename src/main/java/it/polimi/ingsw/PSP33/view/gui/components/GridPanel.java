@@ -1,12 +1,23 @@
 package it.polimi.ingsw.PSP33.view.gui.components;
+
 import it.polimi.ingsw.PSP33.utils.Coord;
 
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * JPanel used to show the game's grid
+ */
 public class GridPanel extends JPanel {
 
+    /**
+     * Grid of CellButtons
+     */
     private CellButton[][] buttons;
+
+    /**
+     * Size of the grid
+     */
     private final static int DIM = 5;
 
     public GridPanel() {

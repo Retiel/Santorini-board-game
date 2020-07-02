@@ -5,13 +5,14 @@ import it.polimi.ingsw.PSP33.model.Cell;
 import it.polimi.ingsw.PSP33.model.Pawn;
 import it.polimi.ingsw.PSP33.model.Player;
 import it.polimi.ingsw.PSP33.utils.Coord;
-import static org.junit.Assert.*;
-
 import it.polimi.ingsw.PSP33.utils.enums.Color;
-import org.junit.*;
+import org.junit.BeforeClass;
+import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static org.junit.Assert.*;
 
 public class GetCellTest {
 

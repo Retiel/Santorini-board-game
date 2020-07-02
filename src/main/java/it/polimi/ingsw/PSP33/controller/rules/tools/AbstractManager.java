@@ -1,7 +1,10 @@
 package it.polimi.ingsw.PSP33.controller.rules.tools;
 
 import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
-import it.polimi.ingsw.PSP33.model.*;
+import it.polimi.ingsw.PSP33.model.Board;
+import it.polimi.ingsw.PSP33.model.God;
+import it.polimi.ingsw.PSP33.model.Model;
+import it.polimi.ingsw.PSP33.model.Player;
 
 import java.util.List;
 

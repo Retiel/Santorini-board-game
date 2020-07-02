@@ -1,7 +1,7 @@
 package it.polimi.ingsw.PSP33.events.to_client.setup;
 
-import it.polimi.ingsw.PSP33.events.to_client.MVEventVisitor;
 import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
+import it.polimi.ingsw.PSP33.events.to_client.MVEventVisitor;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
 import java.util.List;

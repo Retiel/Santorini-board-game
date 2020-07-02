@@ -5,6 +5,9 @@ import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Observable of the pattern observable-observer, used by ClientHandlers
+ */
 public class Listened {
 
     private final List<Listener> listeners = new ArrayList<>();

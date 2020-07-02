@@ -1,16 +1,10 @@
 package it.polimi.ingsw.PSP33.view.gui;
 
 import it.polimi.ingsw.PSP33.utils.enums.Color;
-import it.polimi.ingsw.PSP33.view.gui.components.ImagePanel;
 import it.polimi.ingsw.PSP33.view.gui.components.TextPanel;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Array;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,14 +15,14 @@ public class SetupFrame extends JFrame {
 
     private TextPanel textPanel;
 
-    public SetupFrame() throws IOException {
+    public SetupFrame() {
         super("Santorini_Setup");
         setSize(300, 300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
 
-        ImagePanel imagePanel = new ImagePanel(getImageInputStream(""));
+        //ImagePanel imagePanel = new ImagePanel(getImageInputStream(""));
         textPanel = new TextPanel("",200,100,16);
 
         setVisible(true);
@@ -118,9 +112,7 @@ public class SetupFrame extends JFrame {
                 JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION,null, colors);
         lockClosure(this, optionPane);
         String res = (String) optionPane.getValue();
-        int k = Arrays.asList(colors).indexOf(res);
-        System.out.println(k);
-        return k;
+        return Arrays.asList(colors).indexOf(res);
     }
 
     /**
@@ -139,6 +131,11 @@ public class SetupFrame extends JFrame {
         return getClass().getResourceAsStream(path);
     }
 
+    /**
+     * Method used to remove the option to close a JOptionPane by clicking "X"
+     * @param owner parent frame
+     * @param optionPane option pane
+     */
     public static void lockClosure(JFrame owner, JOptionPane optionPane){
 
         JDialog dialog = new JDialog(owner,

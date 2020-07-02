@@ -1,4 +1,5 @@
 package it.polimi.ingsw.PSP33.view.gui.components;
+
 import it.polimi.ingsw.PSP33.model.light_version.LightPawn;
 import it.polimi.ingsw.PSP33.utils.Coord;
 
@@ -10,16 +11,39 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * JButton representing a single cell of the game's grid
+ */
 public class CellButton extends JButton implements ActionListener {
 
+    /**
+     * Label for floor information
+     */
     private JLabel floorLabel;
+
+    /**
+     * Label for pawn information
+     */
     private JLabel pawnLabel;
+
+    /**
+     * Label for roof information
+     */
     private JLabel roofLabel;
 
+    /**
+     * Default JButton border
+     */
     private Border defaultBorder;
 
+    /**
+     * Coordinates of the cell
+     */
     private final Coord coord;
 
+    /**
+     * List of ButtonListener
+     */
     private final List<ButtonListener> listeners = new ArrayList<>();
 
     public CellButton(Coord coord) {
@@ -72,12 +96,20 @@ public class CellButton extends JButton implements ActionListener {
         notifyButtonListener(coord);
     }
 
+    /**
+     * Method used to add a ButtonListener
+     * @param listener ButtonListener
+     */
     public void addButtonListener(ButtonListener listener) {
         synchronized (listeners) {
             listeners.add(listener);
         }
     }
 
+    /**
+     * Method used to notify ButtonListeners with coordinates
+     * @param coord coordinates
+     */
     public void notifyButtonListener(Coord coord) {
         synchronized (listeners) {
             for (ButtonListener listener : listeners) {
@@ -86,10 +118,18 @@ public class CellButton extends JButton implements ActionListener {
         }
     }
 
+    /**
+     * Method used to set the floor label
+     * @param floor number of floor
+     */
     public void setFloor(int floor) {
         floorLabel.setText("" + floor);
     }
 
+    /**
+     * Method used to set the roof label
+     * @param roof true if there is a roof
+     */
     public void setRoof(boolean roof) {
         if(roof) {
             roofLabel.setText("R");
@@ -98,6 +138,10 @@ public class CellButton extends JButton implements ActionListener {
         }
     }
 
+    /**
+     * Method used to set the pawn label
+     * @param pawn LightPawn holding information of the pawn
+     */
     public void setPawn(LightPawn pawn) {
         if(pawn != null) {
             pawnLabel.setText(pawn.getColor().name().substring(0, 1) + pawn.getNumber());
@@ -106,10 +150,17 @@ public class CellButton extends JButton implements ActionListener {
         }
     }
 
+    /**
+     * Method used to set a border with a custom color
+     * @param color color of the border
+     */
     public void setColorBorder(Color color) {
         setBorder(BorderFactory.createLineBorder(color, 2));
     }
 
+    /**
+     * Method used to set the default border
+     */
     public void setDefaultBorder() {
         setBorder(defaultBorder);
     }

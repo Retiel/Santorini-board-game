@@ -1,8 +1,8 @@
 package it.polimi.ingsw.PSP33.controller.rules.gods.strategy.extra;
 
+import it.polimi.ingsw.PSP33.controller.rules.gods.Artemis;
 import it.polimi.ingsw.PSP33.controller.rules.gods.Demeter;
 import it.polimi.ingsw.PSP33.controller.rules.gods.Hephaestus;
-import it.polimi.ingsw.PSP33.controller.rules.gods.Artemis;
 import it.polimi.ingsw.PSP33.controller.rules.gods.Prometheus;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.Cell;

@@ -1,18 +1,19 @@
 package it.polimi.ingsw.PSP33.utils;
 
+/**
+ * Custom two dimensional coordinates class
+ */
 public class Coord {
 
+    /**
+     * X coordinate
+     */
     private final int x;
 
+    /**
+     * Y coordinate
+     */
     private final int y;
-
-    public Coord() {
-        this(-1, -1);
-    }
-
-    public Coord(Coord coord) {
-        this(coord.x, coord.y);
-    }
 
     public Coord(int x, int y) {
         this.x = x;

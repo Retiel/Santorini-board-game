@@ -84,16 +84,12 @@ public class ServerAdapterGUI extends ServerAdapter {
 
     @Override
     public void visit(RequestWait requestWait) {
-        SwingUtilities.invokeLater(() -> {
-            setupFrame.requestWait();
-        });
+        SwingUtilities.invokeLater(() -> setupFrame.requestWait());
     }
 
     @Override
     public void visit(AllPlayersReady allPlayersReady) {
-        SwingUtilities.invokeLater(() -> {
-            setupFrame.dispose();
-        });
+        SwingUtilities.invokeLater(() -> setupFrame.dispose());
 
         setSetupOver(true);
 

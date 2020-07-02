@@ -18,7 +18,6 @@ import it.polimi.ingsw.PSP33.utils.CustomDebugger;
 import it.polimi.ingsw.PSP33.utils.observable.Listener;
 import it.polimi.ingsw.PSP33.view.AbstractView;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
