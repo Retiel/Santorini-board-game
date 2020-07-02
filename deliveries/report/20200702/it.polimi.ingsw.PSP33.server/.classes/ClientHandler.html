@@ -1,0 +1,441 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ClientHandler</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.server</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ClientHandler (it.polimi.ingsw.PSP33.server)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ClientHandler</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 20)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 105)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.server;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.events.EventSerializer;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.CCEvent;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
+<i>6</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.connection.*;
+<i>7</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.SCEvent;
+<i>8</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.SCEventVisitor;
+<i>9</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
+<i>10</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.connection.*;
+<i>11</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.setup.PlayerDisconnected;
+<i>12</i>&nbsp;import it.polimi.ingsw.PSP33.utils.enums.Color;
+<i>13</i>&nbsp;import it.polimi.ingsw.PSP33.utils.observable.Listened;
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;import java.io.DataInputStream;
+<i>16</i>&nbsp;import java.io.DataOutputStream;
+<i>17</i>&nbsp;import java.io.IOException;
+<i>18</i>&nbsp;import java.net.Socket;
+<i>19</i>&nbsp;import java.util.concurrent.ExecutorService;
+<i>20</i>&nbsp;import java.util.concurrent.Executors;
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;/**
+<i>24</i>&nbsp; * Class that holds client&#39;s socket and all client&#39;s data
+<i>25</i>&nbsp; */
+<i>26</i>&nbsp;public class ClientHandler extends Listened implements Runnable, SCEventVisitor {
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    /**
+<i>29</i>&nbsp;     * Client&#39;s socket
+<i>30</i>&nbsp;     */
+<i>31</i>&nbsp;    private final Socket client;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;    /**
+<i>34</i>&nbsp;     * Socket&#39;s input stream
+<i>35</i>&nbsp;     */
+<i>36</i>&nbsp;    private DataInputStream input;
+<i>37</i>&nbsp;
+<i>38</i>&nbsp;    /**
+<i>39</i>&nbsp;     * Socket&#39;s output stream
+<i>40</i>&nbsp;     */
+<i>41</i>&nbsp;    private DataOutputStream output;
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;    /**
+<i>44</i>&nbsp;     * Client&#39;s name
+<i>45</i>&nbsp;     */
+<i>46</i>&nbsp;    private String clientName;
+<i>47</i>&nbsp;
+<i>48</i>&nbsp;    /**
+<i>49</i>&nbsp;     * Client&#39;s color
+<i>50</i>&nbsp;     */
+<i>51</i>&nbsp;    private Color clientColor;
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;    /**
+<i>54</i>&nbsp;     * Boolean used to check if setup is over
+<i>55</i>&nbsp;     */
+<i>56</i>&nbsp;    private boolean isSetupOver;
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    /**
+<i>59</i>&nbsp;     * Client&#39;s lobby
+<i>60</i>&nbsp;     */
+<i>61</i>&nbsp;    private Lobby lobby;
+<i>62</i>&nbsp;
+<i>63</i>&nbsp;    /**
+<i>64</i>&nbsp;     * Event serializer
+<i>65</i>&nbsp;     */
+<i>66</i>&nbsp;    private final EventSerializer eventSerializer;
+<i>67</i>&nbsp;
+<i>68</i>&nbsp;    /**
+<i>69</i>&nbsp;     * ExecutorService to execute one task on a dedicated thread
+<i>70</i>&nbsp;     */
+<i>71</i>&nbsp;    private final ExecutorService executor;
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    /**
+<i>74</i>&nbsp;     * Constructor of the class
+<i>75</i>&nbsp;     * @param client client&#39;s socket
+<i>76</i>&nbsp;     */
+<b class="nc"><i>77</i>&nbsp;    public ClientHandler(Socket client){</b>
+<b class="nc"><i>78</i>&nbsp;        this.client = client;</b>
+<b class="nc"><i>79</i>&nbsp;        this.input = null;</b>
+<b class="nc"><i>80</i>&nbsp;        this.output = null;</b>
+<b class="nc"><i>81</i>&nbsp;        this.clientName = &quot;&quot;;</b>
+<b class="nc"><i>82</i>&nbsp;        this.clientColor = null;</b>
+<b class="nc"><i>83</i>&nbsp;        this.isSetupOver = false;</b>
+<b class="nc"><i>84</i>&nbsp;        this.lobby = null;</b>
+<b class="nc"><i>85</i>&nbsp;        this.eventSerializer = EventSerializer.getInstance();</b>
+<b class="nc"><i>86</i>&nbsp;        this.executor = Executors.newSingleThreadExecutor();</b>
+<i>87</i>&nbsp;    }
+<i>88</i>&nbsp;
+<i>89</i>&nbsp;    @Override
+<i>90</i>&nbsp;    public void run() {
+<i>91</i>&nbsp;        try {
+<b class="nc"><i>92</i>&nbsp;            input = new DataInputStream(client.getInputStream());</b>
+<b class="nc"><i>93</i>&nbsp;            output = new DataOutputStream(client.getOutputStream());</b>
+<b class="nc"><i>94</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i>95</i>&nbsp;            System.out.println(&quot;Lobby_0: &quot; + client.getInetAddress() + &quot; unable to open client&#39;s socket streams&quot;);</b>
+<b class="nc"><i>96</i>&nbsp;        }</b>
+<i>97</i>&nbsp;
+<b class="nc"><i>98</i>&nbsp;        handleClientSetup();</b>
+<i>99</i>&nbsp;    }
+<i>100</i>&nbsp;
+<i>101</i>&nbsp;    /**
+<i>102</i>&nbsp;     * Method to get the client&#39;s name
+<i>103</i>&nbsp;     *
+<i>104</i>&nbsp;     * @return client&#39;s name
+<i>105</i>&nbsp;     */
+<i>106</i>&nbsp;    public String getClientName() {
+<b class="nc"><i>107</i>&nbsp;        return clientName;</b>
+<i>108</i>&nbsp;    }
+<i>109</i>&nbsp;
+<i>110</i>&nbsp;    /**
+<i>111</i>&nbsp;     * Method to get the client&#39;s color
+<i>112</i>&nbsp;     *
+<i>113</i>&nbsp;     * @return client&#39;s color
+<i>114</i>&nbsp;     */
+<i>115</i>&nbsp;    public Color getClientColor() {
+<b class="nc"><i>116</i>&nbsp;        return clientColor;</b>
+<i>117</i>&nbsp;    }
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;    /**
+<i>120</i>&nbsp;     * Method to set setupOver
+<i>121</i>&nbsp;     * @param setupOver true if setup is over
+<i>122</i>&nbsp;     */
+<i>123</i>&nbsp;    public void setSetupOver(boolean setupOver) {
+<b class="nc"><i>124</i>&nbsp;        isSetupOver = setupOver;</b>
+<i>125</i>&nbsp;    }
+<i>126</i>&nbsp;
+<i>127</i>&nbsp;    /**
+<i>128</i>&nbsp;     * Method to get the lobby
+<i>129</i>&nbsp;     *
+<i>130</i>&nbsp;     * @return lobby
+<i>131</i>&nbsp;     */
+<i>132</i>&nbsp;    public Lobby getLobby() {
+<b class="nc"><i>133</i>&nbsp;        return lobby;</b>
+<i>134</i>&nbsp;    }
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;    /**
+<i>137</i>&nbsp;     * Method to set the lobby
+<i>138</i>&nbsp;     * @param lobby lobby
+<i>139</i>&nbsp;     */
+<i>140</i>&nbsp;    public void setLobby(Lobby lobby) {
+<b class="nc"><i>141</i>&nbsp;        this.lobby = lobby;</b>
+<b class="nc"><i>142</i>&nbsp;        lobby.addClient(this);</b>
+<i>143</i>&nbsp;    }
+<i>144</i>&nbsp;
+<i>145</i>&nbsp;    /**
+<i>146</i>&nbsp;     * Method that makes the method to receive game&#39;s events run on a dedicated thread
+<i>147</i>&nbsp;     */
+<i>148</i>&nbsp;    public void listenToGameEvents() {
+<i>149</i>&nbsp;        //New thread to keep listening from socket
+<b class="nc"><i>150</i>&nbsp;        executor.execute(this::receiveVCEvent);</b>
+<i>151</i>&nbsp;    }
+<i>152</i>&nbsp;
+<i>153</i>&nbsp;    /**
+<i>154</i>&nbsp;     * Method that keeps receiving game&#39;s events to notify game handler
+<i>155</i>&nbsp;     */
+<i>156</i>&nbsp;    public void receiveVCEvent() {
+<i>157</i>&nbsp;        while (true) {
+<i>158</i>&nbsp;            String vcJson;
+<i>159</i>&nbsp;
+<i>160</i>&nbsp;            try {
+<b class="nc"><i>161</i>&nbsp;                vcJson = input.readUTF();</b>
+<b class="nc"><i>162</i>&nbsp;            } catch (IOException e) {</b>
+<b class="nc"><i>163</i>&nbsp;                if(!lobby.isGameStarted()) {</b>
+<b class="nc"><i>164</i>&nbsp;                    lobby.removeClient(this);</b>
+<i>165</i>&nbsp;                } else {
+<b class="nc"><i>166</i>&nbsp;                    notifyListener(new PlayerDisconnected(getClientName()));</b>
+<i>167</i>&nbsp;                }
+<b class="nc"><i>168</i>&nbsp;                System.out.println(&quot;Lobby_&quot; + lobby.getLobbyID() + &quot;: client_&quot; + clientName + &quot; disconnected&quot;);</b>
+<b class="nc"><i>169</i>&nbsp;                break;</b>
+<b class="nc"><i>170</i>&nbsp;            }</b>
+<i>171</i>&nbsp;
+<b class="nc"><i>172</i>&nbsp;            VCEvent vcEvent = eventSerializer.deserializeVC(vcJson);</b>
+<b class="nc"><i>173</i>&nbsp;            notifyListener(vcEvent);</b>
+<b class="nc"><i>174</i>&nbsp;        }</b>
+<i>175</i>&nbsp;    }
+<i>176</i>&nbsp;
+<i>177</i>&nbsp;    /**
+<i>178</i>&nbsp;     * Method to send a game event to the client
+<i>179</i>&nbsp;     * @param mvEvent model-view event
+<i>180</i>&nbsp;     */
+<i>181</i>&nbsp;    public void sendMVEvent(MVEvent mvEvent) {
+<b class="nc"><i>182</i>&nbsp;        String mvJson = eventSerializer.serializeMV(mvEvent);</b>
+<i>183</i>&nbsp;        try {
+<b class="nc"><i>184</i>&nbsp;            output.writeUTF(mvJson);</b>
+<b class="nc"><i>185</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i>186</i>&nbsp;            System.out.println(&quot;Lobby_&quot; + lobby.getLobbyID() + &quot;: &quot; + getClientName() + &quot; [mv_dropped]&quot;);</b>
+<b class="nc"><i>187</i>&nbsp;        }</b>
+<i>188</i>&nbsp;    }
+<i>189</i>&nbsp;
+<i>190</i>&nbsp;    /**
+<i>191</i>&nbsp;     * Method that makes the method to receive setup&#39;s events run on a dedicated thread
+<i>192</i>&nbsp;     */
+<i>193</i>&nbsp;    public void listenToSetupEvents() {
+<i>194</i>&nbsp;        //New thread to keep listening from socket
+<b class="nc"><i>195</i>&nbsp;        executor.execute(this::receiveSCEvent);</b>
+<i>196</i>&nbsp;    }
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;    /**
+<i>199</i>&nbsp;     * Method that keeps receiving setup&#39;s events until setup is over
+<i>200</i>&nbsp;     */
+<i>201</i>&nbsp;    public void receiveSCEvent() {
+<i>202</i>&nbsp;        while (true) {
+<i>203</i>&nbsp;            String scJson;
+<i>204</i>&nbsp;
+<i>205</i>&nbsp;            try{
+<b class="nc"><i>206</i>&nbsp;                scJson = input.readUTF();</b>
+<b class="nc"><i>207</i>&nbsp;            } catch (IOException e) {</b>
+<b class="nc"><i>208</i>&nbsp;                if(lobby != null) {</b>
+<b class="nc"><i>209</i>&nbsp;                    lobby.removeClient(this);</b>
+<b class="nc"><i>210</i>&nbsp;                    System.out.println(&quot;Lobby_&quot; + lobby.getLobbyID() + &quot;: &quot;</b>
+<b class="nc"><i>211</i>&nbsp;                            + client.getInetAddress() + &quot; disconnected and removed from lobby&quot;);</b>
+<i>212</i>&nbsp;                } else {
+<b class="nc"><i>213</i>&nbsp;                    System.out.println(&quot;Lobby_0: &quot; + client.getInetAddress() + &quot; disconnected before joining a lobby&quot;);</b>
+<i>214</i>&nbsp;                }
+<b class="nc"><i>215</i>&nbsp;                break;</b>
+<b class="nc"><i>216</i>&nbsp;            }</b>
+<i>217</i>&nbsp;
+<b class="nc"><i>218</i>&nbsp;            SCEvent scEvent = eventSerializer.deserializeSC(scJson);</b>
+<b class="nc"><i>219</i>&nbsp;            scEvent.accept(this);</b>
+<i>220</i>&nbsp;
+<b class="nc"><i>221</i>&nbsp;            if(isSetupOver) {</b>
+<b class="nc"><i>222</i>&nbsp;                listenToGameEvents();</b>
+<b class="nc"><i>223</i>&nbsp;                break;</b>
+<i>224</i>&nbsp;            }
+<b class="nc"><i>225</i>&nbsp;        }</b>
+<i>226</i>&nbsp;    }
+<i>227</i>&nbsp;
+<i>228</i>&nbsp;    /**
+<i>229</i>&nbsp;     * Method to send a setup event to the client
+<i>230</i>&nbsp;     * @param ccEvent client connection message
+<i>231</i>&nbsp;     */
+<i>232</i>&nbsp;    public void sendCCEvent(CCEvent ccEvent) {
+<b class="nc"><i>233</i>&nbsp;        String ccJson = eventSerializer.serializeCC(ccEvent);</b>
+<i>234</i>&nbsp;        try {
+<b class="nc"><i>235</i>&nbsp;            output.writeUTF(ccJson);</b>
+<b class="nc"><i>236</i>&nbsp;        } catch (IOException e) {</b>
+<b class="nc"><i>237</i>&nbsp;            if(lobby != null) {</b>
+<b class="nc"><i>238</i>&nbsp;                System.out.println(&quot;Lobby_&quot; + lobby.getLobbyID() + &quot;: &quot;</b>
+<b class="nc"><i>239</i>&nbsp;                        + client.getInetAddress() + &quot; [cc_dropped]&quot;);</b>
+<i>240</i>&nbsp;            } else {
+<b class="nc"><i>241</i>&nbsp;                System.out.println(&quot;Lobby_0: &quot; + client.getInetAddress() + &quot; [cc_dropped]&quot;);</b>
+<i>242</i>&nbsp;            }
+<b class="nc"><i>243</i>&nbsp;        }</b>
+<i>244</i>&nbsp;    }
+<i>245</i>&nbsp;
+<i>246</i>&nbsp;    /**
+<i>247</i>&nbsp;     * Method to handle the client connection for the lobby setup
+<i>248</i>&nbsp;     */
+<i>249</i>&nbsp;    public void handleClientSetup() {
+<b class="nc"><i>250</i>&nbsp;        System.out.println(&quot;Connected to &quot; + client.getInetAddress());</b>
+<i>251</i>&nbsp;
+<i>252</i>&nbsp;        //Starts listening to setup events on a dedicated thread
+<b class="nc"><i>253</i>&nbsp;        listenToSetupEvents();</b>
+<i>254</i>&nbsp;
+<b class="nc"><i>255</i>&nbsp;        if(LobbyManager.getLobbies().values().size() == 0) {</b>
+<b class="nc"><i>256</i>&nbsp;            sendCCEvent(new SelectNumberOfPlayers());</b>
+<i>257</i>&nbsp;        } else {
+<b class="nc"><i>258</i>&nbsp;            sendCCEvent(new SelectConnection());</b>
+<i>259</i>&nbsp;        }
+<i>260</i>&nbsp;    }
+<i>261</i>&nbsp;
+<i>262</i>&nbsp;    /**
+<i>263</i>&nbsp;     * Method used by the Lobby to notify the client that setup is over
+<i>264</i>&nbsp;     */
+<i>265</i>&nbsp;    public void setReady() {
+<i>266</i>&nbsp;
+<b class="nc"><i>267</i>&nbsp;        sendCCEvent(new AllPlayersReady());</b>
+<i>268</i>&nbsp;
+<i>269</i>&nbsp;        //Starts listening to game events on a dedicated thread
+<i>270</i>&nbsp;        //listenToGameEvents();
+<i>271</i>&nbsp;    }
+<i>272</i>&nbsp;
+<i>273</i>&nbsp;    @Override
+<i>274</i>&nbsp;    public void visit(ConnectionSelected connectionSelected) {
+<b class="nc"><i>275</i>&nbsp;        switch (connectionSelected.getSelection()) {</b>
+<i>276</i>&nbsp;            case 1:
+<b class="nc"><i>277</i>&nbsp;                sendCCEvent(new SelectNumberOfPlayers());</b>
+<b class="nc"><i>278</i>&nbsp;                break;</b>
+<i>279</i>&nbsp;
+<i>280</i>&nbsp;            case 2:
+<b class="nc"><i>281</i>&nbsp;                if(LobbyManager.getLobbies().values().size() &gt; 0) {</b>
+<b class="nc"><i>282</i>&nbsp;                    sendCCEvent(new SelectLobby(LobbyManager.getLobbyMap()));</b>
+<i>283</i>&nbsp;                } else {
+<b class="nc"><i>284</i>&nbsp;                    sendCCEvent(new SelectNumberOfPlayers());</b>
+<i>285</i>&nbsp;                }
+<b class="nc"><i>286</i>&nbsp;                break;</b>
+<i>287</i>&nbsp;
+<i>288</i>&nbsp;            default:
+<b class="nc"><i>289</i>&nbsp;                sendCCEvent(new SelectConnection());</b>
+<i>290</i>&nbsp;        }
+<i>291</i>&nbsp;    }
+<i>292</i>&nbsp;
+<i>293</i>&nbsp;    @Override
+<i>294</i>&nbsp;    public void visit(NumberOfPlayersSelected numberOfPlayersSelected) {
+<b class="nc"><i>295</i>&nbsp;        switch (numberOfPlayersSelected.getSelection()) {</b>
+<i>296</i>&nbsp;            case 1:
+<b class="nc"><i>297</i>&nbsp;                setLobby(LobbyManager.newLobby(2));</b>
+<b class="nc"><i>298</i>&nbsp;                sendCCEvent(new SelectName());</b>
+<b class="nc"><i>299</i>&nbsp;                break;</b>
+<i>300</i>&nbsp;
+<i>301</i>&nbsp;            case 2:
+<b class="nc"><i>302</i>&nbsp;                setLobby(LobbyManager.newLobby(3));</b>
+<b class="nc"><i>303</i>&nbsp;                sendCCEvent(new SelectName());</b>
+<b class="nc"><i>304</i>&nbsp;                break;</b>
+<i>305</i>&nbsp;
+<i>306</i>&nbsp;            default:
+<b class="nc"><i>307</i>&nbsp;                sendCCEvent(new SelectNumberOfPlayers());</b>
+<i>308</i>&nbsp;        }
+<i>309</i>&nbsp;    }
+<i>310</i>&nbsp;
+<i>311</i>&nbsp;    @Override
+<i>312</i>&nbsp;    public void visit(LobbySelected lobbySelected) {
+<i>313</i>&nbsp;        //Check lobby selection
+<b class="nc"><i>314</i>&nbsp;        if(LobbyManager.checkLobbyList(lobbySelected.getLobbyID())) {</b>
+<b class="nc"><i>315</i>&nbsp;            setLobby(LobbyManager.getLobbyByID(lobbySelected.getLobbyID()));</b>
+<b class="nc"><i>316</i>&nbsp;            sendCCEvent(new SelectName());</b>
+<i>317</i>&nbsp;        } else {
+<b class="nc"><i>318</i>&nbsp;            if(LobbyManager.getLobbies().values().size() &gt; 0) {</b>
+<b class="nc"><i>319</i>&nbsp;                sendCCEvent(new SelectLobby(LobbyManager.getLobbyMap()));</b>
+<i>320</i>&nbsp;            } else {
+<b class="nc"><i>321</i>&nbsp;                sendCCEvent(new SelectNumberOfPlayers());</b>
+<i>322</i>&nbsp;            }
+<i>323</i>&nbsp;        }
+<i>324</i>&nbsp;    }
+<i>325</i>&nbsp;
+<i>326</i>&nbsp;    @Override
+<i>327</i>&nbsp;    public void visit(NameSelected nameSelected) {
+<b class="nc"><i>328</i>&nbsp;        String name = nameSelected.getName();</b>
+<i>329</i>&nbsp;
+<i>330</i>&nbsp;        //Check name&#39;s uniqueness
+<b class="nc"><i>331</i>&nbsp;        if(!name.equals(&quot;&quot;) &amp;&amp; !lobby.checkName(name)) {</b>
+<b class="nc"><i>332</i>&nbsp;            lobby.addName(name);</b>
+<b class="nc"><i>333</i>&nbsp;            clientName = name;</b>
+<i>334</i>&nbsp;
+<b class="nc"><i>335</i>&nbsp;            sendCCEvent(new SelectColor(lobby.getColorList()));</b>
+<i>336</i>&nbsp;        } else {
+<b class="nc"><i>337</i>&nbsp;            sendCCEvent(new SelectName());</b>
+<i>338</i>&nbsp;        }
+<i>339</i>&nbsp;    }
+<i>340</i>&nbsp;
+<i>341</i>&nbsp;    @Override
+<i>342</i>&nbsp;    public void visit(ColorSelected colorSelected) {
+<b class="nc"><i>343</i>&nbsp;        Color color = colorSelected.getColor();</b>
+<i>344</i>&nbsp;
+<i>345</i>&nbsp;        //Check color uniqueness
+<b class="nc"><i>346</i>&nbsp;        if(lobby.checkColor(color)) {</b>
+<b class="nc"><i>347</i>&nbsp;            lobby.removeColor(color);</b>
+<b class="nc"><i>348</i>&nbsp;            clientColor = color;</b>
+<i>349</i>&nbsp;
+<b class="nc"><i>350</i>&nbsp;            setSetupOver(true);</b>
+<b class="nc"><i>351</i>&nbsp;            lobby.setClientReady(this);</b>
+<i>352</i>&nbsp;
+<b class="nc"><i>353</i>&nbsp;            sendCCEvent(new RequestWait());</b>
+<i>354</i>&nbsp;        } else {
+<b class="nc"><i>355</i>&nbsp;            sendCCEvent(new SelectColor(lobby.getColorList()));</b>
+<i>356</i>&nbsp;        }
+<i>357</i>&nbsp;    }
+<i>358</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 16:08</div>
+</div>
+</body>
+</html>

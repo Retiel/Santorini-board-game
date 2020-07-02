@@ -1,0 +1,81 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: Limiter</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.controller.rules.gods.strategy.enemy</a> ]
+</div>
+
+<h1>Coverage Summary for Class: Limiter (it.polimi.ingsw.PSP33.controller.rules.gods.strategy.enemy)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">Limiter</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.controller.rules.gods.strategy.enemy;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.model.Board;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.model.Cell;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.model.Pawn;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import java.util.List;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;/**
+<i>10</i>&nbsp; * Interface that define the god effect over other players pawns, it uses pattern strategy to differentiate gods effect
+<i>11</i>&nbsp; *
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;public interface Limiter {
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    /**
+<i>16</i>&nbsp;     * Method to verify the activation of a limit imposed by a gos
+<i>17</i>&nbsp;     * @param pawn the pawn selected for the action
+<i>18</i>&nbsp;     * @param board board from model folder
+<i>19</i>&nbsp;     * @param cell cell related to the limit effect
+<i>20</i>&nbsp;     *
+<i>21</i>&nbsp;     * @return Boolean
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    boolean activation(Pawn pawn, Cell cell, Board board);
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    /**
+<i>26</i>&nbsp;     * Method to apply the active limit
+<i>27</i>&nbsp;     * @param cellList list of possible move of the pawn
+<i>28</i>&nbsp;     * @param board board from model folder
+<i>29</i>&nbsp;     * @param enemyPawn pawn who plans to take action
+<i>30</i>&nbsp;     *
+<i>31</i>&nbsp;     * @return new List of Cell with the restriction applied
+<i>32</i>&nbsp;     */
+<i>33</i>&nbsp;    List&lt;Cell&gt; limit(List&lt;Cell&gt; cellList, Pawn enemyPawn, Board board);
+<i>34</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-02 16:08</div>
+</div>
+</body>
+</html>
