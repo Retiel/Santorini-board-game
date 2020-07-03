@@ -1,0 +1,245 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: SetupFrame</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.view.gui</a> ]
+</div>
+
+<h1>Coverage Summary for Class: SetupFrame (it.polimi.ingsw.PSP33.view.gui)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">SetupFrame</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 62)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.view.gui;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.utils.enums.Color;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.view.gui.components.ImagePanel;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.view.gui.components.TextPanel;
+<i>6</i>&nbsp;
+<i>7</i>&nbsp;import javax.swing.*;
+<i>8</i>&nbsp;import java.awt.*;
+<i>9</i>&nbsp;import java.util.Arrays;
+<i>10</i>&nbsp;import java.util.List;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;/**
+<i>13</i>&nbsp; * Frame used in the setup phase before the game starts
+<i>14</i>&nbsp; */
+<i>15</i>&nbsp;public class SetupFrame extends JFrame {
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;    private TextPanel textPanel;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;    public SetupFrame() {
+<b class="nc"><i>20</i>&nbsp;        super(&quot;Santorini_Setup&quot;);</b>
+<b class="nc"><i>21</i>&nbsp;        setSize(610, 635);</b>
+<b class="nc"><i>22</i>&nbsp;        setDefaultCloseOperation(EXIT_ON_CLOSE);</b>
+<b class="nc"><i>23</i>&nbsp;        setLocationRelativeTo(null);</b>
+<b class="nc"><i>24</i>&nbsp;        setResizable(false);</b>
+<i>25</i>&nbsp;
+<b class="nc"><i>26</i>&nbsp;        ImagePanel background = new ImagePanel(&quot;/setup_background.png&quot;);</b>
+<b class="nc"><i>27</i>&nbsp;        background.setLayout(new GridBagLayout());</b>
+<i>28</i>&nbsp;
+<b class="nc"><i>29</i>&nbsp;        textPanel = new TextPanel(&quot;Welcome to Santorini&quot;,250,100,20);</b>
+<i>30</i>&nbsp;
+<b class="nc"><i>31</i>&nbsp;        GridBagConstraints con = new GridBagConstraints();</b>
+<b class="nc"><i>32</i>&nbsp;        con.insets = new Insets(450,50,0,0);</b>
+<b class="nc"><i>33</i>&nbsp;        con.anchor = GridBagConstraints.PAGE_END;</b>
+<b class="nc"><i>34</i>&nbsp;        background.add(textPanel, con);</b>
+<i>35</i>&nbsp;
+<b class="nc"><i>36</i>&nbsp;        add(background);</b>
+<i>37</i>&nbsp;
+<b class="nc"><i>38</i>&nbsp;        setVisible(true);</b>
+<i>39</i>&nbsp;    }
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;    /**
+<i>42</i>&nbsp;     * Method used to show a dialog to make the client select the type of connection
+<i>43</i>&nbsp;     * @return selection (1. Create Lobby 2. Join Lobby)
+<i>44</i>&nbsp;     */
+<i>45</i>&nbsp;    public int selectConnection() {
+<b class="nc"><i>46</i>&nbsp;        String[] options = {&quot;Create Lobby&quot;, &quot;Join Lobby&quot;};</b>
+<i>47</i>&nbsp;
+<b class="nc"><i>48</i>&nbsp;        JOptionPane optionPane = new JOptionPane(&quot;How do you want to connect?&quot;, JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_CANCEL_OPTION,</b>
+<i>49</i>&nbsp;                null, options, options[0]);
+<b class="nc"><i>50</i>&nbsp;        lockClosure(this, optionPane);</b>
+<b class="nc"><i>51</i>&nbsp;        String res = (String) optionPane.getValue();</b>
+<b class="nc"><i>52</i>&nbsp;        int k = Arrays.asList(options).indexOf(res);</b>
+<b class="nc"><i>53</i>&nbsp;        k++;</b>
+<b class="nc"><i>54</i>&nbsp;        return k;</b>
+<i>55</i>&nbsp;
+<i>56</i>&nbsp;    }
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;    /**
+<i>59</i>&nbsp;     * Method used to show a dialog to make the client select the number of players for the new lobby
+<i>60</i>&nbsp;     * @return selection (1. 2 players 2. 3 players)
+<i>61</i>&nbsp;     */
+<i>62</i>&nbsp;    public int selectNumberOfPlayers() {
+<b class="nc"><i>63</i>&nbsp;        String[] options = {&quot;2 player&quot;, &quot;3 player&quot;};</b>
+<b class="nc"><i>64</i>&nbsp;        JOptionPane optionPane = new JOptionPane(&quot;How many players?&quot;,</b>
+<i>65</i>&nbsp;                JOptionPane.QUESTION_MESSAGE, JOptionPane.YES_NO_OPTION,
+<i>66</i>&nbsp;                null, options, options[0]);
+<b class="nc"><i>67</i>&nbsp;        lockClosure(this, optionPane);</b>
+<b class="nc"><i>68</i>&nbsp;        String res = (String) optionPane.getValue();</b>
+<b class="nc"><i>69</i>&nbsp;        int k = Arrays.asList(options).indexOf(res);</b>
+<b class="nc"><i>70</i>&nbsp;        k++;</b>
+<b class="nc"><i>71</i>&nbsp;        return k;</b>
+<i>72</i>&nbsp;    }
+<i>73</i>&nbsp;
+<i>74</i>&nbsp;    /**
+<i>75</i>&nbsp;     * Method used to show a dialog to make the client select the lobby
+<i>76</i>&nbsp;     * @param lobbyList list of available lobbies
+<i>77</i>&nbsp;     * @return selection (lobby&#39;s index of the list of available lobbies)
+<i>78</i>&nbsp;     */
+<i>79</i>&nbsp;    public int selectLobby(List&lt;String&gt; lobbyList) {
+<i>80</i>&nbsp;        String[] lobbies;
+<b class="nc"><i>81</i>&nbsp;        String[] options = {&quot;OK&quot;};</b>
+<i>82</i>&nbsp;
+<b class="nc"><i>83</i>&nbsp;        lobbies = new String[lobbyList.size()];</b>
+<b class="nc"><i>84</i>&nbsp;        for(String s : lobbyList) {</b>
+<b class="nc"><i>85</i>&nbsp;            lobbies[lobbyList.indexOf(s)] = s;</b>
+<b class="nc"><i>86</i>&nbsp;        }</b>
+<i>87</i>&nbsp;
+<b class="nc"><i>88</i>&nbsp;        JComboBox&lt;String&gt; comboBox = new JComboBox&lt;&gt;(lobbies);</b>
+<b class="nc"><i>89</i>&nbsp;        JOptionPane.showOptionDialog(this, comboBox, &quot;Lobby selection&quot;,</b>
+<i>90</i>&nbsp;                JOptionPane.DEFAULT_OPTION, JOptionPane.PLAIN_MESSAGE, null, options, options[0]);
+<i>91</i>&nbsp;
+<b class="nc"><i>92</i>&nbsp;        return comboBox.getSelectedIndex();</b>
+<i>93</i>&nbsp;    }
+<i>94</i>&nbsp;
+<i>95</i>&nbsp;    /**
+<i>96</i>&nbsp;     * Method used to show a dialog to make the client select his name
+<i>97</i>&nbsp;     * @return selected name
+<i>98</i>&nbsp;     */
+<i>99</i>&nbsp;    public String selectName() {
+<b class="nc"><i>100</i>&nbsp;        String name = JOptionPane.showInputDialog(this, &quot;Type your name&quot;,</b>
+<i>101</i>&nbsp;                &quot;&quot;);
+<b class="nc"><i>102</i>&nbsp;        if(name == null) {</b>
+<b class="nc"><i>103</i>&nbsp;            name = &quot;&quot;;</b>
+<i>104</i>&nbsp;        }
+<b class="nc"><i>105</i>&nbsp;        return name;</b>
+<i>106</i>&nbsp;    }
+<i>107</i>&nbsp;
+<i>108</i>&nbsp;    /**
+<i>109</i>&nbsp;     * Method used to show a dialog to make the client select his color
+<i>110</i>&nbsp;     * @param colorList list of available colors
+<i>111</i>&nbsp;     * @return selection (color&#39;s index of list of available colors)
+<i>112</i>&nbsp;     */
+<i>113</i>&nbsp;    public int selectColor(List&lt;Color&gt; colorList) {
+<i>114</i>&nbsp;        String[] colors;
+<i>115</i>&nbsp;
+<b class="nc"><i>116</i>&nbsp;        colors = new String[colorList.size()];</b>
+<b class="nc"><i>117</i>&nbsp;        for(Color color : colorList) {</b>
+<b class="nc"><i>118</i>&nbsp;            colors[colorList.indexOf(color)] = color.name();</b>
+<b class="nc"><i>119</i>&nbsp;        }</b>
+<i>120</i>&nbsp;
+<b class="nc"><i>121</i>&nbsp;        JOptionPane optionPane = new JOptionPane(&quot;Color selection&quot;,</b>
+<i>122</i>&nbsp;                JOptionPane.PLAIN_MESSAGE, JOptionPane.DEFAULT_OPTION,null, colors);
+<b class="nc"><i>123</i>&nbsp;        lockClosure(this, optionPane);</b>
+<b class="nc"><i>124</i>&nbsp;        String res = (String) optionPane.getValue();</b>
+<b class="nc"><i>125</i>&nbsp;        return Arrays.asList(colors).indexOf(res);</b>
+<i>126</i>&nbsp;    }
+<i>127</i>&nbsp;
+<i>128</i>&nbsp;    /**
+<i>129</i>&nbsp;     * Method used to show a dialog telling the client to wait for players
+<i>130</i>&nbsp;     */
+<i>131</i>&nbsp;    public void requestWait() {
+<b class="nc"><i>132</i>&nbsp;        textPanel.setLabelText(&quot;Waiting for player...&quot;);</b>
+<i>133</i>&nbsp;    }
+<i>134</i>&nbsp;
+<i>135</i>&nbsp;    /**
+<i>136</i>&nbsp;     * Method used to remove the option to close a JOptionPane by clicking &quot;X&quot;
+<i>137</i>&nbsp;     * @param owner parent frame
+<i>138</i>&nbsp;     * @param optionPane option pane
+<i>139</i>&nbsp;     */
+<i>140</i>&nbsp;    public static void lockClosure(JFrame owner, JOptionPane optionPane){
+<i>141</i>&nbsp;
+<b class="nc"><i>142</i>&nbsp;        JDialog dialog = new JDialog(owner,</b>
+<i>143</i>&nbsp;                &quot;Click a button&quot;,
+<i>144</i>&nbsp;                true);
+<b class="nc"><i>145</i>&nbsp;        dialog.setContentPane(optionPane);</b>
+<b class="nc"><i>146</i>&nbsp;        dialog.setDefaultCloseOperation(</b>
+<i>147</i>&nbsp;                JDialog.DO_NOTHING_ON_CLOSE);
+<b class="nc"><i>148</i>&nbsp;        optionPane.addPropertyChangeListener(e -&gt;</b>
+<i>149</i>&nbsp;        {
+<b class="nc"><i>150</i>&nbsp;            String prop = e.getPropertyName();</b>
+<b class="nc"><i>151</i>&nbsp;            if (dialog.isVisible()</b>
+<b class="nc"><i>152</i>&nbsp;                    &amp;&amp; (e.getSource() == optionPane)</b>
+<b class="nc"><i>153</i>&nbsp;                    &amp;&amp; (JOptionPane.VALUE_PROPERTY.equals(prop))) {</b>
+<b class="nc"><i>154</i>&nbsp;                dialog.setVisible(false);</b>
+<i>155</i>&nbsp;            }
+<i>156</i>&nbsp;        });
+<b class="nc"><i>157</i>&nbsp;        dialog.pack();</b>
+<b class="nc"><i>158</i>&nbsp;        dialog.setLocationRelativeTo(owner);</b>
+<b class="nc"><i>159</i>&nbsp;        dialog.setResizable(false);</b>
+<b class="nc"><i>160</i>&nbsp;        dialog.setVisible(true);</b>
+<i>161</i>&nbsp;    }
+<i>162</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-03 18:53</div>
+</div>
+</body>
+</html>
