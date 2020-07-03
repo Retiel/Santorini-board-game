@@ -1,0 +1,209 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: EventSerializer</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.events</a> ]
+</div>
+
+<h1>Coverage Summary for Class: EventSerializer (it.polimi.ingsw.PSP33.events)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">EventSerializer</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 15)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.events;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import com.google.gson.Gson;
+<i>4</i>&nbsp;import com.google.gson.GsonBuilder;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.CCEvent;
+<i>6</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
+<i>7</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.SCEvent;
+<i>8</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
+<i>9</i>&nbsp;
+<i>10</i>&nbsp;/**
+<i>11</i>&nbsp; * Custom serializer used for all kind of events
+<i>12</i>&nbsp; */
+<i>13</i>&nbsp;public class EventSerializer {
+<i>14</i>&nbsp;
+<i>15</i>&nbsp;    /**
+<i>16</i>&nbsp;     * Singleton instance
+<i>17</i>&nbsp;     */
+<b class="nc"><i>18</i>&nbsp;    private static final EventSerializer instance = new EventSerializer();</b>
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    /**
+<i>21</i>&nbsp;     * GsonBuilder for model-view events
+<i>22</i>&nbsp;     */
+<i>23</i>&nbsp;    private final Gson mvGson;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;    /**
+<i>26</i>&nbsp;     * GsonBuilder for view-controller events
+<i>27</i>&nbsp;     */
+<i>28</i>&nbsp;    private final Gson vcGson;
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    /**
+<i>31</i>&nbsp;     * GsonBuilder for client-connection events
+<i>32</i>&nbsp;     */
+<i>33</i>&nbsp;    private final Gson ccGson;
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;    /**
+<i>36</i>&nbsp;     * GsonBuilder for server-connection events
+<i>37</i>&nbsp;     */
+<i>38</i>&nbsp;    private final Gson scGson;
+<i>39</i>&nbsp;
+<b class="nc"><i>40</i>&nbsp;    private EventSerializer() {</b>
+<b class="nc"><i>41</i>&nbsp;        mvGson = new GsonBuilder().registerTypeAdapter(MVEvent.class, new EventAdapter&lt;MVEvent&gt;()).create();</b>
+<b class="nc"><i>42</i>&nbsp;        vcGson = new GsonBuilder().registerTypeAdapter(VCEvent.class, new EventAdapter&lt;VCEvent&gt;()).create();</b>
+<b class="nc"><i>43</i>&nbsp;        ccGson = new GsonBuilder().registerTypeAdapter(CCEvent.class, new EventAdapter&lt;CCEvent&gt;()).create();</b>
+<b class="nc"><i>44</i>&nbsp;        scGson = new GsonBuilder().registerTypeAdapter(SCEvent.class, new EventAdapter&lt;SCEvent&gt;()).create();</b>
+<i>45</i>&nbsp;    }
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;    /**
+<i>48</i>&nbsp;     * Method to get the singleton instance
+<i>49</i>&nbsp;     * @return EventSerializer unique instance
+<i>50</i>&nbsp;     */
+<i>51</i>&nbsp;    public static EventSerializer getInstance() {
+<b class="nc"><i>52</i>&nbsp;        return instance;</b>
+<i>53</i>&nbsp;    }
+<i>54</i>&nbsp;
+<i>55</i>&nbsp;    /**
+<i>56</i>&nbsp;     * Method used to serialize a model-view event
+<i>57</i>&nbsp;     * @param mvEvent model-view event
+<i>58</i>&nbsp;     * @return model-view event&#39;s json
+<i>59</i>&nbsp;     */
+<i>60</i>&nbsp;    public String serializeMV(MVEvent mvEvent) {
+<b class="nc"><i>61</i>&nbsp;        return mvGson.toJson(mvEvent, MVEvent.class);</b>
+<i>62</i>&nbsp;    }
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;    /**
+<i>65</i>&nbsp;     * Method used to deserialize a model-view event&#39;s json
+<i>66</i>&nbsp;     * @param mvJson model-view event&#39;s json
+<i>67</i>&nbsp;     * @return model-view event
+<i>68</i>&nbsp;     */
+<i>69</i>&nbsp;    public MVEvent deserializeMV(String mvJson) {
+<b class="nc"><i>70</i>&nbsp;        return mvGson.fromJson(mvJson, MVEvent.class);</b>
+<i>71</i>&nbsp;    }
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;    /**
+<i>74</i>&nbsp;     * Method used to serialize a view-controller event
+<i>75</i>&nbsp;     * @param vcEvent view-controller event
+<i>76</i>&nbsp;     * @return view-controller event&#39;s json
+<i>77</i>&nbsp;     */
+<i>78</i>&nbsp;    public String serializeVC(VCEvent vcEvent) {
+<b class="nc"><i>79</i>&nbsp;        return vcGson.toJson(vcEvent, VCEvent.class);</b>
+<i>80</i>&nbsp;    }
+<i>81</i>&nbsp;
+<i>82</i>&nbsp;    /**
+<i>83</i>&nbsp;     * Method used to deserialize a view-controller event
+<i>84</i>&nbsp;     * @param vcJson view-controller event&#39;s json
+<i>85</i>&nbsp;     * @return view-controller event
+<i>86</i>&nbsp;     */
+<i>87</i>&nbsp;    public VCEvent deserializeVC(String vcJson) {
+<b class="nc"><i>88</i>&nbsp;        return vcGson.fromJson(vcJson, VCEvent.class);</b>
+<i>89</i>&nbsp;    }
+<i>90</i>&nbsp;
+<i>91</i>&nbsp;    /**
+<i>92</i>&nbsp;     * Method used to serialize a client-connection event
+<i>93</i>&nbsp;     * @param ccEvent client-connection event
+<i>94</i>&nbsp;     * @return client-connection event&#39;s json
+<i>95</i>&nbsp;     */
+<i>96</i>&nbsp;    public String serializeCC(CCEvent ccEvent) {
+<b class="nc"><i>97</i>&nbsp;        return ccGson.toJson(ccEvent, CCEvent.class);</b>
+<i>98</i>&nbsp;    }
+<i>99</i>&nbsp;
+<i>100</i>&nbsp;    /**
+<i>101</i>&nbsp;     * Method used to deserialize a client-connection event
+<i>102</i>&nbsp;     * @param ccJson client-connection event&#39;s json
+<i>103</i>&nbsp;     * @return client-connection event
+<i>104</i>&nbsp;     */
+<i>105</i>&nbsp;    public CCEvent deserializeCC(String ccJson) {
+<b class="nc"><i>106</i>&nbsp;        return ccGson.fromJson(ccJson, CCEvent.class);</b>
+<i>107</i>&nbsp;    }
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;    /**
+<i>110</i>&nbsp;     * Method used to serialize a server-connection event
+<i>111</i>&nbsp;     * @param scEvent server-connection event
+<i>112</i>&nbsp;     * @return server-connection event&#39;s json
+<i>113</i>&nbsp;     */
+<i>114</i>&nbsp;    public String serializeSC(SCEvent scEvent) {
+<b class="nc"><i>115</i>&nbsp;        return scGson.toJson(scEvent, SCEvent.class);</b>
+<i>116</i>&nbsp;    }
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;    /**
+<i>119</i>&nbsp;     * Method used to deserialize a server-connection event
+<i>120</i>&nbsp;     * @param scJson server-connection event&#39;s json
+<i>121</i>&nbsp;     * @return server-connection event
+<i>122</i>&nbsp;     */
+<i>123</i>&nbsp;    public SCEvent deserializeSC(String scJson) {
+<b class="nc"><i>124</i>&nbsp;        return scGson.fromJson(scJson, SCEvent.class);</b>
+<i>125</i>&nbsp;    }
+<i>126</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-03 18:53</div>
+</div>
+</body>
+</html>

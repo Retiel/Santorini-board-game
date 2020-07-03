@@ -1,0 +1,84 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: VCEventVisitor</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">it.polimi.ingsw.PSP33.events.to_server</a> ]
+</div>
+
+<h1>Coverage Summary for Class: VCEventVisitor (it.polimi.ingsw.PSP33.events.to_server)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+</tr>
+<tr>
+  <td class="name">VCEventVisitor</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;package it.polimi.ingsw.PSP33.events.to_server;
+<i>2</i>&nbsp;
+<i>3</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.setup.ChoosenGod;
+<i>4</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.setup.PlacePawn;
+<i>5</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.setup.PlayerDisconnected;
+<i>6</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.setup.SelectedGods;
+<i>7</i>&nbsp;import it.polimi.ingsw.PSP33.events.to_server.turn.*;
+<i>8</i>&nbsp;
+<i>9</i>&nbsp;/**
+<i>10</i>&nbsp; * Custom interface used to implement the visitor pattern for game events sent to the server
+<i>11</i>&nbsp; */
+<i>12</i>&nbsp;public interface VCEventVisitor {
+<i>13</i>&nbsp;
+<i>14</i>&nbsp;    void visit(ChoosenGod choosenGod);
+<i>15</i>&nbsp;
+<i>16</i>&nbsp;    void visit(PlacePawn placePawn);
+<i>17</i>&nbsp;
+<i>18</i>&nbsp;    void visit(PlayerDisconnected playerDisconnected);
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;    void visit(SelectedGods selectedGods);
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;    void visit(SelectedPawn selectedPawn);
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;    void visit(NewTurn newTurn);
+<i>25</i>&nbsp;
+<i>26</i>&nbsp;    void visit(ExtraAction extraAction);
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;    void visit(BuildAction buildAction);
+<i>29</i>&nbsp;
+<i>30</i>&nbsp;    void visit(MoveAction moveAction);
+<i>31</i>&nbsp;
+<i>32</i>&nbsp;    void visit(RequestExtraAction requestExtraAction);
+<i>33</i>&nbsp;
+<i>34</i>&nbsp;    void visit(RequestPossibleMove requestPossibleMove);
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;    void visit(RequestPossibleBuild requestPossibleBuild);
+<i>37</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2020-07-03 18:53</div>
+</div>
+</body>
+</html>
