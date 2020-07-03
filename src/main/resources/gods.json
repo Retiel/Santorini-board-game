@@ -5,11 +5,11 @@
     },
     {
       "name": "ARTEMIS",
-      "description": "I tuoi Lavoratori possono muoversi una volta in più, ma non tornare nello spazio iniziale."
+      "description": "I tuoi Lavoratori possono muoversi una volta in piu, ma non tornare nello spazio iniziale."
     },
     {
       "name": "ATHENA",
-      "description": "Se uno dei tuoi Lavoratori sale nel tuo turnO, i Lavoratori dell’avversario non possono salire nel suo prossimo turno."
+      "description": "Se uno dei tuoi Lavoratori sale nel tuo turno, i Lavoratori del avversario non possono salire nel suo prossimo turno."
     },
     {
       "name": "ATLAS",
@@ -25,11 +25,11 @@
     },
     {
       "name": "MINOTAUR",
-      "description": "Il tuo Lavoratore può muoversi nello spazio di un Lavoratore dell’avversario se quel Lavoratore puo essere spostato uno spazio non occupato di qualsiasi livello nella stessa direzione del movimento."
+      "description": "Il tuo Lavoratore puo muoversi nello spazio di un Lavoratore del avversario se quel Lavoratore puo essere spostato uno spazio non occupato di qualsiasi livello nella stessa direzione del movimento."
     },
     {
       "name": "PAN",
-      "description": "Vinci anche se un tuo Lavoratore scende due o più livelli."
+      "description": "Vinci anche se un tuo Lavoratore scende due o piu livelli."
     },
     {
       "name": "PROMETHEUS",

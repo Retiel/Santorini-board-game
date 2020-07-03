@@ -194,37 +194,38 @@ public class TurnManager extends AbstractManager {
         Player player = getModel().getPlayers().stream().filter(p -> name.equals(p.getName())).findAny().orElse(null);
 
         List<Player> players = getModel().getPlayers();
+
         if(player != null){
             removePawn(player.getPawns());
             players.remove(player);
-        }
 
-        nextTurn();
-        getModel().setPlayers(players);
+            nextTurn(player);
 
-        if (players.size() == 1) {
-            notifyView(new YouWin(players.get(0).getName()));
-        }
-        else if(players.size() > 1){
-            boolean flag = true;
+            getModel().setPlayers(players);
 
-            for (Player player1 : players){
-                if (player1.getPawnByNumber(1).getCoord() == null || player1.getPawnByNumber(2).getCoord() == null){
-                    flag = false;
-                    notifyView(new PossiblePlacement(GetCell.getListAdapter(GetCell.getPlaceCells(getBoard()))));
-                    break;
-                }
-
-                if (player1.getCard() == null){
-                    flag = false;
-                    if (getGods() == null) notifyView(new SelectGods(getAllgods(),players.size()));
-                    else notifyView(new YourGod(getGods()));
-                    break;
-                }
+            if (players.size() == 1) {
+                notifyView(new YouWin(players.get(0).getName()));
             }
-            if (flag) newTurnContext();
-        }
+            else if(players.size() > 1){
+                boolean flag = true;
 
+                for (Player player1 : players){
+                    if (player1.getPawnByNumber(1).getCoord() == null || player1.getPawnByNumber(2).getCoord() == null){
+                        flag = false;
+                        notifyView(new PossiblePlacement(GetCell.getListAdapter(GetCell.getPlaceCells(getBoard()))));
+                        break;
+                    }
+
+                    if (player1.getCard() == null){
+                        flag = false;
+                        if (getGods() == null) notifyView(new SelectGods(getAllgods(),players.size()));
+                        else notifyView(new YourGod(getGods()));
+                        break;
+                    }
+                }
+                if (flag) newTurnContext();
+            }
+        }
     }
 
     /**

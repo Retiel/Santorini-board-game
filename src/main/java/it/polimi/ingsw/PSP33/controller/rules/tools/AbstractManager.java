@@ -47,6 +47,14 @@ public abstract class AbstractManager {
         model.setCurrentPlayer(nextPlayer);
         model.setCurrentPawn(null);
     }
+    /**
+     * Method to move the game to the next player turn
+     */
+    public void nextTurn(Player player) {
+        if(player == model.getCurrentPlayer()){
+            nextTurn();
+        }
+    }
 
     /**
      * Method to set the current pawn
