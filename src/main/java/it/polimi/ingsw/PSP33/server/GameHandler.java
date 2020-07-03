@@ -12,6 +12,7 @@ import it.polimi.ingsw.PSP33.events.to_client.setup.SelectGods;
 import it.polimi.ingsw.PSP33.events.to_client.setup.YourGod;
 import it.polimi.ingsw.PSP33.events.to_client.turn.*;
 import it.polimi.ingsw.PSP33.events.to_server.VCEvent;
+import it.polimi.ingsw.PSP33.events.to_server.setup.PlayerDisconnected;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
 import it.polimi.ingsw.PSP33.utils.CustomDebugger;
@@ -93,6 +94,10 @@ public class GameHandler extends AbstractView implements Listener {
 
     @Override
     public synchronized void didReceiveMessage(VCEvent vcEvent) {
+        if(vcEvent instanceof PlayerDisconnected) {
+            clientHandlers.removeIf(clientHandler -> clientHandler.getClientName()
+                    .equals(((PlayerDisconnected) vcEvent).getName()));
+        }
         notifyObservers(vcEvent);
     }
 

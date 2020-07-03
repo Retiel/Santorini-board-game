@@ -160,16 +160,6 @@ public class SetUpManager extends AbstractManager {
         getModel().notifyObservers(new PossiblePlacement(GetAvailablePlacement()));
     }
 
-    /**
-     * Method to send Data about the players
-     */
-    public void sendDataPlayers(){
-        List<LightPlayer> players = new ArrayList<>();
-        for (Player player : getModel().getPlayers()){
-            players.add(LightConversion.getLightVersion(player));
-        }
-        getModel().notifyObservers(new DataPlayer(players));
-    }
 
     /**
      * Method to parse the gods name and description

@@ -1,11 +1,14 @@
 package it.polimi.ingsw.PSP33.controller.rules.tools;
 
 import it.polimi.ingsw.PSP33.events.to_client.MVEvent;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataPlayer;
 import it.polimi.ingsw.PSP33.model.Board;
 import it.polimi.ingsw.PSP33.model.God;
 import it.polimi.ingsw.PSP33.model.Model;
 import it.polimi.ingsw.PSP33.model.Player;
+import it.polimi.ingsw.PSP33.model.light_version.LightPlayer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -50,10 +53,12 @@ public abstract class AbstractManager {
     /**
      * Method to move the game to the next player turn
      */
-    public void nextTurn(Player player) {
+    public boolean nextTurn(Player player) {
         if(player == model.getCurrentPlayer()){
             nextTurn();
+            return true;
         }
+        return false;
     }
 
     /**
@@ -62,6 +67,17 @@ public abstract class AbstractManager {
      */
     public void setCurrentPawn(int pawn){
         getModel().setCurrentPawn(getModel().getCurrentPlayer().getPawnByNumber(pawn));
+    }
+
+    /**
+     * Method to send Data about the players
+     */
+    public void sendDataPlayers(){
+        List<LightPlayer> players = new ArrayList<>();
+        for (Player player : getModel().getPlayers()){
+            players.add(LightConversion.getLightVersion(player));
+        }
+        getModel().notifyObservers(new DataPlayer(players));
     }
 
     public List<God> getGods() {

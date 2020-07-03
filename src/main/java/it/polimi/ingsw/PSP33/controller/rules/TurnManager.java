@@ -7,6 +7,7 @@ import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.move.MoveContext;
 import it.polimi.ingsw.PSP33.controller.rules.gods.strategy.win.WinContext;
 import it.polimi.ingsw.PSP33.controller.rules.tools.*;
 import it.polimi.ingsw.PSP33.events.to_client.data.DataCell;
+import it.polimi.ingsw.PSP33.events.to_client.data.DataPlayer;
 import it.polimi.ingsw.PSP33.events.to_client.setup.PossiblePlacement;
 import it.polimi.ingsw.PSP33.events.to_client.setup.SelectGods;
 import it.polimi.ingsw.PSP33.events.to_client.setup.YourGod;
@@ -199,7 +200,7 @@ public class TurnManager extends AbstractManager {
             removePawn(player.getPawns());
             players.remove(player);
 
-            nextTurn(player);
+            boolean current = nextTurn(player);
 
             getModel().setPlayers(players);
 
@@ -223,7 +224,8 @@ public class TurnManager extends AbstractManager {
                         break;
                     }
                 }
-                if (flag) newTurnContext();
+                if (flag && current) newTurnContext();
+                sendDataPlayers();
             }
         }
     }
